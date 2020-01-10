@@ -1,13 +1,12 @@
 import React from 'react'
-import Logo from '../images/logo.png'
 import Food from '../images/food.png'
+import {Link} from 'react-router-dom'
+import LogoHeader from './LogoHeader'
 
 const LandingPage = () => {
   return (
     <div className='page-wrapper'>
-      <div className='logo-wrapper'>
-        <img src={Logo} className='logo' alt='logo' />
-      </div>
+      <LogoHeader />
       <div className='schedule-wrapper'>
         <h2>WEEKLY FOOD DISTRIBUTION</h2>
         Every Monday <br />
@@ -21,7 +20,7 @@ const LandingPage = () => {
       </div>
       <div className='create-order-wrapper'>
         <img src={Food} className='logo' alt='food' />
-        <button className='app-button'>Create Order</button>
+        <Link to='signin'><button className='app-button'>Create Order</button></Link>
       </div>
       <div className='about-us-wrapper'>
         <h2>What's Gator Groceries?</h2>
