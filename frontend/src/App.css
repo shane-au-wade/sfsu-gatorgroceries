@@ -57,3 +57,27 @@
   font-weight: 400;
   margin-bottom: 10px;
 }
+
+.signin-form {
+  padding-top: 47px;
+}
+
+.signin-form input[type='text'] {
+  margin-top: 22px;
+  font-size: 20px;
+  padding-left: 10px;
+  border-radius: 11px;
+  background-color: #CFC8C8;
+  color: #FFFFFF;
+  width: 70vw;
+  height: 48px;
+}
+
+.signin-form input::placeholder {
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+.signin-form input[type='submit'] {
+  margin-top: 37px;
+}
