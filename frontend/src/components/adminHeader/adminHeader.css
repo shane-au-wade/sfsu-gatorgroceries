@@ -1,0 +1,178 @@
+.Banner {
+    display: flex;
+    flex-direction: row;
+    background: #C4C4C4;
+    height: 50px;
+}
+
+.bannerSpacer{
+    margin-right:auto;
+}
+
+.settingIcon {
+    width: 24px;
+    margin-right: 15px;
+    /* height: 24px; */
+}
+
+.quickTools {
+    display: flex;
+    flex-direction: row;
+    background: #F3F3F3;
+    height: 40px;
+}
+
+.debug {
+    border: solid red 1px;
+}
+
+.quickToolSeperator {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.quickToolSpacer {
+    width: 0px;
+    margin-right: auto;
+}
+
+.tab {
+    margin: 0px;
+}
+
+.quickToolName {
+    display: inline-block;
+    position: relative;
+    bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.plusResize {
+    position: relative;
+    right: 10px;
+    top: 5px;
+    height: 15px;
+    background-color: #ffffff;
+    border-radius: 15px;
+}
+
+.centered {
+    margin-top: 6px;
+    /* margin-left: 7px; */
+}
+
+.leftMargin {
+    margin-left: 7px;
+}
+
+.selected {
+    position: relative;
+    background: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border:solid white 2px; */
+    box-shadow:0px -3px 3px rgba(0, 0, 0, 0.15);
+}
+
+.logoResize {
+    margin: 5px;
+    height: 40px;
+}
+
+.username {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 20px;
+    top: 15px;
+}
+
+.rotate90 {
+    transform: rotate(-90deg);
+}
+
+.dropDownIcon {
+    position: relative;
+    top: 13px;
+    height: 24px;
+}
+
+.settingsMenu {
+    position: absolute;
+    top: 45px;
+    left: calc(100% - 260px);
+    z-index: 2;
+    padding-bottom: 10px;
+    width: 240px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.settingsOption {
+    margin: 0px;
+    padding-left: 10px;
+}
+
+.topOption {
+    padding-top: 10px;
+}
+
+.hide {
+    z-index: -2;
+}
+
+#hidden {
+    visibility: hidden;
+    display: none;
+}
+
+
+#createEventFix {
+    right: 10px;
+    padding-right: 0px;
+}
+
+#endSpacer {
+    width: 0px;
+    margin-left: 15px;
+}
+
+
+button {
+    display: inline-block;
+    border: none;
+    width: calc(100% - 10px);
+    padding: 0px;
+    margin-right: 20px;
+    text-decoration: none;
+    background: #ffffff;
+    color: #000000;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+button:hover,
+button:focus {
+    background: lightblue;
+}
+
+button:focus {
+    
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+li {
+    list-style:none;
+}

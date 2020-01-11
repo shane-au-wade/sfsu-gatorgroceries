@@ -81,3 +81,8 @@
 .signin-form input[type='submit'] {
   margin-top: 37px;
 }
+
+.AdminContentArea {
+  background: #ffffff;
+  height: calc(100vh - 90px);
+}
