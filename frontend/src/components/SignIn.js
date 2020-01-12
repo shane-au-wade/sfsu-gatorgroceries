@@ -31,7 +31,7 @@ const SignIn = () => {
       <form className='signin-form' onSubmit={handleSignIn}>
         <input type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
         <input type='text' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />
-        <input type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required />
+        <input type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required /> <br />
         <input type='submit' value='Submit' className='app-button' />
       </form>
     </div>
