@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 
 import './adminHeader.css';
-
 import eventIcon from '../../icons/calendar_today-24px.svg';
 import plusIcon from '../../icons/add_circle_outline-24px.svg';
 import accountsIcon from '../../icons/people_outline-24px.svg';
@@ -54,58 +54,8 @@ class AdminHeader extends Component {
         this.state = initState;
       }
 
-    handleHover = () => {
-        console.log('hovering');
-    }
-
-    eventClick = () => {
-        this.setState({
-            event: 'selected',
-            createEvent: '',
-            accounts: '',
-            data: '',
-            spacer_1: 'hidden',
-            spacer_2: '',
-            spacer_3: '',
-            
-        })
-    }
-
-    createEventClick = () => {
-        // console.log('create event click')
-        this.setState({
-            event: '',
-            createEvent: 'selected',
-            accounts: '',
-            data: '',
-            spacer_1: 'hidden',
-            spacer_2: 'hidden',
-            spacer_3: '',
-        })
-    }
-
-    accountsClick = () => {
-        this.setState({
-            event: '',
-            createEvent: '',
-            accounts: 'selected',
-            data: '',
-            spacer_1: '',
-            spacer_2: 'hidden',
-            spacer_3: 'hidden',
-        })
-    }
-
-    dataClick = () => {
-        this.setState({
-            event: '',
-            createEvent: '',
-            accounts: '',
-            data: 'selected',
-            spacer_1: '',
-            spacer_2: '',
-            spacer_3: 'hidden',
-        })
+    componentDidMount(){
+        document.addEventListener("keydown", this.settingsClick, false);
     }
 
     settingsClick = () => {
@@ -123,14 +73,16 @@ class AdminHeader extends Component {
                 showSettings: 'settingsMenu'
              })
         }
-        
-        
+    }
+
+    handleHover = () => {
+        console.log('hovering');
     }
 
     render() { 
         return ( 
             <div>
-                <div className='Banner'>
+                <div className='Banner'  >
                     <img src={gg_logo} className='logoResize'></img>
                     <div className='bannerSpacer'></div>
                     <img src={dropDownIcon} ></img>
@@ -157,26 +109,34 @@ class AdminHeader extends Component {
                 
                 <div className='quickTools'>
                     <div className='quickToolSpacer '></div>
-                        <div className={this.state.event} onClickCapture={this.eventClick}>
-                            <img src={eventIcon} className='centered leftMargin '></img>
-                            <div className='quickToolName '>Events</div>
-                        </div>
+                        <Link to='/admin/events' className='none'>
+                            <div className={this.state.event} onClickCapture={this.eventClick}>
+                                <img src={eventIcon} className='centered leftMargin '></img>
+                                <div className='quickToolName '>Events</div>  
+                            </div>
+                        </Link>
                     <div id={this.state.spacer_1} className='quickToolSeperator centered'>|</div>
-                        <div className={this.state.createEvent} onClickCapture={this.createEventClick}>
-                            <img src={eventIcon} className='centered leftMargin'></img>
-                            <img src={plusIcon} className='plusResize centered'></img>
-                            <div id='createEventFix' className='quickToolName'>Create Event</div>
-                        </div>
+                        <Link to='/admin/create-event' className='none'>
+                            <div className={this.state.createEvent} onClickCapture={this.createEventClick}>
+                                <img src={eventIcon} id='mobileFix_1' className='centered leftMargin'></img>
+                                <img src={plusIcon} id='mobileFix_2' className='plusResize'></img>
+                                <div id='createEventFix' className='quickToolName'>Create Event</div>
+                            </div>
+                        </Link>
                     <div id={this.state.spacer_2} className='quickToolSeperator centered'>|</div>
-                        <div className={this.state.accounts} onClickCapture={this.accountsClick}>
-                            <img src={accountsIcon} className='centered leftMargin'></img>
-                            <div className='quickToolName'>Accounts</div>
-                        </div>
+                        <Link to='/admin/accounts' className='none'>
+                            <div className={this.state.accounts} onClickCapture={this.accountsClick}>
+                                <img src={accountsIcon}   className='centered leftMargin'></img>
+                                <div className='quickToolName'>Accounts</div>
+                            </div>
+                        </Link>
                     <div id={this.state.spacer_3} className='quickToolSeperator centered'>|</div>
-                        <div className={this.state.data} onClickCapture={this.dataClick}>
-                            <img src={dataIcon} className='centered leftMargin'></img>
-                            <div className='quickToolName'>Data</div>
-                        </div>
+                        <Link to='/admin/data' className='none'>
+                            <div className={this.state.data} onClickCapture={this.dataClick}>
+                                <img src={dataIcon} className='centered leftMargin'></img>
+                                <div className='quickToolName'>Data</div>
+                            </div>
+                        </Link>
                     <div id='endSpacer'></div>
                 </div>
                 
