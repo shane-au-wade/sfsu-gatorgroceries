@@ -68,6 +68,7 @@
 
 .selected {
     position: relative;
+    height: 100%;
     background: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -120,6 +121,11 @@
 
 .hide {
     z-index: -2;
+}
+
+.none {
+   padding: 0px;
+   margin: 0;
 }
 
 #hidden {
