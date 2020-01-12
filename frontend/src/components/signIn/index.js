@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import LogoHeader from './LogoHeader'
+import LogoHeader from '../LogoHeader'
 
 const SignIn = () => {
   const [firstName, setFirstName] = useState('')
