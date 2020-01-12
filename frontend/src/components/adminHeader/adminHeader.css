@@ -124,7 +124,6 @@
 
 #hidden {
     visibility: hidden;
-    display: none;
 }
 
 
@@ -176,3 +175,29 @@ button:active {
 li {
     list-style:none;
 }
+
+@media only screen and (max-width: 700px) {
+    .quickToolName{
+        visibility: hidden;
+        width: 0;
+    }
+
+   #mobileFix_1{
+       position: relative;
+        bottom: 8px;
+    }
+
+    .plusResize {
+        top: -4px;
+        right: 4px;
+    }
+
+    .centered {
+        margin-top: 6px;
+        position: relative;
+        left: 4px;
+
+        /* margin-left: 7px; */
+    }
+    
+  }
