@@ -130,8 +130,19 @@ span, .menuHeader {
 
 .editIcon {
     position: relative;
+    border: none;
     background-color: #FF6060;
     border-radius: 20px;
-    padding: 4px;
+    padding: 3px;
     float: right;
+    height: 30px;
+    width: 30px
+}
+
+.editIcon:hover {
+    background: #FF8080;
+}
+
+.editIcon:active {
+    transform: scale(0.98);
 }

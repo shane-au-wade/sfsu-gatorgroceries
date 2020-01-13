@@ -5,7 +5,7 @@ import '../../Admin-events-style.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
 
-const AdminEvent = () => {
+const AdminEvent = (props) => {
     
     const [showMenu, setShowMenu] = useState('no_menu');
 
@@ -23,7 +23,9 @@ const AdminEvent = () => {
     
     return (
         <div className='event-div '>
-            <img src={editIcon} className='editIcon'></img>
+            <button className='editIcon'>
+            <img src={editIcon}></img>
+            </button>
             <div className='date'>
                 <p className='text-left'>JAN</p>
                 <p className='text-left'>01</p>
