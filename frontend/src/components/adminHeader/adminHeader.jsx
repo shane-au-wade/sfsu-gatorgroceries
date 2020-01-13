@@ -55,7 +55,7 @@ class AdminHeader extends Component {
       }
 
     componentDidMount(){
-        document.addEventListener("keydown", this.settingsClick, false);
+        document.addEventListener("keydown", this.escClick, false);
     }
 
     settingsClick = () => {
@@ -71,6 +71,15 @@ class AdminHeader extends Component {
         {
             this.setState({
                 showSettings: 'settingsMenu'
+             })
+        }
+    }
+
+    escClick = () => {
+        if(this.state.showSettings === 'settingsMenu')
+        {
+            this.setState({
+                showSettings: 'settingsMenu hide'
              })
         }
     }
