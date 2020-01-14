@@ -4,6 +4,7 @@ import LandingPage from './components/landingPage'
 import SignIn from './components/signIn'
 import Survey from './components/survey'
 import PlaceOrder from './components/placeOrder'
+import Events from './components/events'
 
 import AdminEvents from './components/AdminEvents'
 import AdminCreateEvent from './components/AdminCreateEvent'
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/' exact component={LandingPage} />
         <Route path='/signin' component={SignIn} />
         <Route path='/survey' component={Survey} />
+        <Route path='/events' component={Events} />
         <Route path='/placeorder' component={PlaceOrder} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/events' component={AdminEvents} />
