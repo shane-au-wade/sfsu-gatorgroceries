@@ -41,13 +41,13 @@
   display: flex;
   width: 100vw;
   background-color: #C4C4C4;
-  height: 15vh;
+  height: 86px;
 }
 
 .adminLogin .image-size {
   /* border: 1px solid; */
-  width: 18%;
-  margin-top: 17px;
+  width: 171px;
+  padding: 8px;
   /* width: 25%;
     margin-left: -365px;
     margin-top: 32px; */
@@ -64,7 +64,7 @@
   border-radius: 11px;
   background-color: #CFC8C8;
   color: #FFFFFF;
-  width: 30vw;
+  width: 350px;
   height: 48px;
 }
 
@@ -89,6 +89,7 @@
 }
 
 .adminLogin .signin-form-2 input[type='submit'] {
+  width: 350px;
   margin-top: 37px;
 }
 /*# sourceMappingURL=adminLogin.css.map */
