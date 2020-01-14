@@ -1,19 +1,19 @@
 
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import AdminHeader from './adminHeader/adminHeader.jsx'
+import AdminHeader from '../adminHeader/adminHeader.jsx'
 
-// import '../styleSheets/Admin-events-style.css'
-import dropDownIcon from '../icons/arrow_drop_down-24px.svg';
+import './adminEvents.css'
+// import dropDownIcon from '../icons/arrow_drop_down-24px.svg';
 
-import AdminEvent from './adminEvent/adminEvent.jsx'
+import AdminEvent from '../adminEvent/adminEvent.jsx'
 
 const AdminEvents = () => {
 
     
 
 return (
-    <div>
+    <div className='adminEvents'>
         <AdminHeader selected='Events' username='Admin T.'></AdminHeader>
         <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Upcoming Events</h3> 
