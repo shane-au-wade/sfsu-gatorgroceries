@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 // import AdminHeader from './adminHeader/adminHeader.jsx'
-import '../Admin-log-in-style.css'
+import '../styleSheets/Admin-log-in-style.css'
 import logo from '../images/logo.png'
 
 

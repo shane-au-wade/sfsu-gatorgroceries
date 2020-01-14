@@ -1,9 +1,9 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import LandingPage from './components/LandingPage'
-import SignIn from './components/SignIn'
-import Survey from './components/Survey'
-import PlaceOrder from './components/PlaceOrder'
+import LandingPage from './components/landingPage'
+import SignIn from './components/signIn'
+import Survey from './components/survey'
+import PlaceOrder from './components/placeOrder'
 
 import AdminEvents from './components/AdminEvents'
 import AdminCreateEvent from './components/AdminCreateEvent'
@@ -11,7 +11,7 @@ import AdminAccounts from './components/AdminAccounts'
 import AdminData from './components/AdminData'
 import AdminLogin from './components/AdminLogin'
 
-import './App.css'
+import './styleSheets/App.css'
 
 const App = () => {
   return (

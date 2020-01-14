@@ -1,11 +1,22 @@
 import React from 'react'
-import Logo from '../images/logo.png'
+import logo from '../images/logo.png'
+import styled from 'styled-components'
+
+const LogoWrapper = styled.div`
+  background-color: #C4C4C4;
+  border-radius: 1%;
+`
+
+const Logo = styled.img`
+  width: 80%;
+  margin: 10% 10% 12%;
+`
 
 const LogoHeader = () => {
   return (
-    <div className='logo-wrapper'>
-        <img src={Logo} className='logo' alt='logo' />
-      </div>
+    <LogoWrapper>
+      <Logo src={logo} alt='Gator Groceries logo' />
+    </LogoWrapper>
   )
 }
 
