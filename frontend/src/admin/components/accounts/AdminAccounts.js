@@ -1,10 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-
 import './adminAccounts.css'
-
-import editIcon from '../../icons/edit-24px.svg';
+import TableRow from './TableRow.jsx'
 
 const AdminAccounts = () => {
 return (
@@ -17,152 +14,8 @@ return (
                 <th>Name</th>
                 <th>Type</th>
             </tr>
-            <tr>
-                <td>Horace T.</td>
-                <td>Sys Admin</td>
-               
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            <tr>
-                <td>Shane W.</td>
-                <td>Dev</td> 
-                <td>
-                <img src={editIcon} className='editIcon'></img>
-                </td>
-            </tr>
-            
+            <TableRow userName='Horace T.' userType='Sys Admin' editIcon='hidden'></TableRow>
+            <TableRow userName='Shane W.' userType='Dev' editIcon=''></TableRow>    
             </table>
 
             <p className='text-centered checkin'>
