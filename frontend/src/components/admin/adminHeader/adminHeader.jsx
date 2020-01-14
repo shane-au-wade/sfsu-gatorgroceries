@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
 import './adminHeader.css';
-import eventIcon from '../../icons/calendar_today-24px.svg';
-import plusIcon from '../../icons/add_circle_outline-24px.svg';
-import accountsIcon from '../../icons/people_outline-24px.svg';
-import dataIcon from '../../icons/dashboard-24px.svg';
-import gg_logo from '../../images/logo.png';
-import settingIcon from '../../icons/settings_applications-24px.svg';
-import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+import eventIcon from '../../../icons/calendar_today-24px.svg';
+import plusIcon from '../../../icons/add_circle_outline-24px.svg';
+import accountsIcon from '../../../icons/people_outline-24px.svg';
+import dataIcon from '../../../icons/dashboard-24px.svg';
+import gg_logo from '../../../images/logo.png';
+import settingIcon from '../../../icons/settings_applications-24px.svg';
+import dropDownIcon from '../../../icons/arrow_drop_down-24px.svg';
 
 class AdminHeader extends Component {
     

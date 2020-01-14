@@ -3,8 +3,8 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import AdminHeader from './adminHeader/adminHeader.jsx'
 
-import '../Admin-events-style.css'
-import dropDownIcon from '../icons/arrow_drop_down-24px.svg';
+import '../../Admin-events-style.css'
+import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 
 import AdminEvent from './adminEvent/adminEvent.jsx'
 
