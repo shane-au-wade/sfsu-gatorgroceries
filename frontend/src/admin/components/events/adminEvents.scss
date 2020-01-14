@@ -1,7 +1,10 @@
+
+$primary-color: #ffffff;
+
 .adminEvents {
 
     .date, p strong {
-        color: #ffffff;
+        color: $primary-color;
     }
     
     .date, p {
