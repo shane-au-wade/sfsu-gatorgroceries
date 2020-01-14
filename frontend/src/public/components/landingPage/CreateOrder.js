@@ -1,5 +1,5 @@
 import React from 'react'
-import Food from '../../../images/food.png'
+import Food from '../../images/food.png'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 

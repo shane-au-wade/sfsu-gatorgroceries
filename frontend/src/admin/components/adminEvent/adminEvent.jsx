@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
-import '../../../Admin-events-style.css'
-import dropDownIcon from '../../../icons/arrow_drop_down-24px.svg';
-import editIcon from '../../../icons/edit-24px.svg';
+import '../../styleSheets/Admin-events-style.css'
+import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+import editIcon from '../../icons/edit-24px.svg';
 
 const AdminEvent = (props) => {
     

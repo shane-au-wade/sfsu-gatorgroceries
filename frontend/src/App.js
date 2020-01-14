@@ -1,18 +1,18 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import LandingPage from './components/public/landingPage'
-import SignIn from './components/public/signIn'
-import Survey from './components/public/survey'
-import PlaceOrder from './components/public/placeOrder'
-import Events from './components/public/events'
+import LandingPage from './public/components/landingPage'
+import SignIn from './public/components/signIn'
+import Survey from './public/components/survey'
+import PlaceOrder from './public/components/placeOrder'
+import Events from './public/components/events'
 
-import AdminEvents from './components/admin/AdminEvents'
-import AdminCreateEvent from './components/admin/AdminCreateEvent'
-import AdminAccounts from './components/admin/AdminAccounts'
-import AdminData from './components/admin/AdminData'
-import AdminLogin from './components/admin/AdminLogin'
+import AdminEvents from './admin/components/AdminEvents'
+import AdminCreateEvent from './admin/components/AdminCreateEvent'
+import AdminAccounts from './admin/components/AdminAccounts'
+import AdminData from './admin/components/AdminData'
+import AdminLogin from './admin/components/AdminLogin'
 
-import './styleSheets/App.css'
+import './App.css'
 
 const App = () => {
   return (
