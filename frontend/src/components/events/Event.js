@@ -4,9 +4,9 @@ import styled from 'styled-components'
 const EventInfo = styled.div`
   text-align: left;
   background-color: #442D99;
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-bottom: 10%;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 12%;
 `
 
 const EventTile = styled.div`
