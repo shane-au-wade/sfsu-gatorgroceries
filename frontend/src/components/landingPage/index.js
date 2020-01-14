@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LogoHeader from '../LogoHeader'
 import Schedule from './Schedule'
-import CreateOrderButton from './CreateOrder'
+import CreateOrder from './CreateOrder'
 import AboutMe from './AboutMe'
 
 const PageWrapper = styled.div`
@@ -15,7 +15,7 @@ const LandingPage = () => {
     <PageWrapper>
       <LogoHeader />
       <Schedule />
-      <CreateOrderButton />
+      <CreateOrder />
       <AboutMe />
     </PageWrapper>
   )

@@ -22,7 +22,7 @@ const Button = styled.button`
   border-radius: 11px;
 `
 
-const CreateOrderButton = () => {
+const CreateOrder = () => {
   return (
     <CreateOrderWrapper>
       <FoodImage src={Food} alt='food' />
@@ -33,4 +33,4 @@ const CreateOrderButton = () => {
   )
 }
 
-export default CreateOrderButton
+export default CreateOrder
