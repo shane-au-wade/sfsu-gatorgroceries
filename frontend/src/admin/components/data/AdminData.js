@@ -1,16 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import AdminHeader from './adminHeader/adminHeader.jsx'
+import AdminHeader from '../adminHeader/adminHeader.jsx'
 
 
-const AdminAccounts = () => {
+const AdminData = () => {
 return (
     <div>
-    <AdminHeader selected='Accounts' username='Admin T.'></AdminHeader>
+    <AdminHeader selected='Data' username='Admin T.'></AdminHeader>
         <div className='AdminContentArea'>
         !!!code goes here!!!
         </div>
     </div>
+   
 )};
 
-export default AdminAccounts 
+export default AdminData 

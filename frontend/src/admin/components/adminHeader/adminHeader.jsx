@@ -90,7 +90,7 @@ class AdminHeader extends Component {
 
     render() { 
         return ( 
-            <div>
+            <div className='adminHeader'>
                 <div className='Banner'  >
                     <img src={gg_logo} className='logoResize'></img>
                     <div className='bannerSpacer'></div>

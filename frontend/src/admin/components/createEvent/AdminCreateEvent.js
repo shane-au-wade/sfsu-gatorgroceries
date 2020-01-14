@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import AdminHeader from './adminHeader/adminHeader.jsx'
-import '../styleSheets/Admin-create-event-style.css'
+import AdminHeader from '../adminHeader/adminHeader.jsx'
+import './Admin-create-event-style.css'
 
 const AdminCreateEvent = () => {
 return (

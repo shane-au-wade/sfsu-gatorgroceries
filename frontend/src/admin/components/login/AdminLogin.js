@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 // import AdminHeader from './adminHeader/adminHeader.jsx'
-import '../styleSheets/Admin-log-in-style.css'
-import logo from '../../public/images/logo.png'
+import './adminLogin.css'
+import logo from '../../../public/images/logo.png'
 
 
 const AdminLogin = () => {
@@ -27,7 +27,7 @@ const AdminLogin = () => {
 
     return (
        
-            <div>
+            <div className='adminLogin'>
                 <div className='top-banner'>
                     <div>
                     <header>

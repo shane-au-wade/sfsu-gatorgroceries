@@ -1,0 +1,147 @@
+.adminEvents .date, .adminEvents p strong {
+  color: #ffffff;
+}
+
+.adminEvents .date, .adminEvents p {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 122.69%;
+}
+
+.adminEvents .date-header {
+  font-size: 18px;
+  color: #c4c4c4;
+}
+
+.adminEvents .info {
+  font-size: 16px;
+}
+
+.adminEvents .dropDownIcon {
+  position: relative;
+  top: 4px;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 6px;
+}
+
+.adminEvents .dropDownIcon {
+  background: #ffffff;
+}
+
+.adminEvents .menu {
+  color: #fff999;
+}
+
+.adminEvents .menu:hover {
+  color: #ffffff;
+}
+
+.adminEvents .menuHeader {
+  margin-right: 180px;
+  margin-left: 30px;
+}
+
+.adminEvents .item {
+  display: inline-block;
+  margin-left: 30px;
+  width: 240px;
+}
+
+.adminEvents .text-centered {
+  text-align: center;
+}
+
+.adminEvents .text-left {
+  text-align: right;
+}
+
+.adminEvents .padded {
+  padding: 20px;
+}
+
+.adminEvents .event-div {
+  width: 400px;
+  background: #211061;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.adminEvents div .date {
+  width: 40px;
+}
+
+.adminEvents hr {
+  width: 75%;
+}
+
+.adminEvents .checkin {
+  margin-top: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.adminEvents .checkin button {
+  border: none;
+  border-radius: 6px;
+  background-color: #FF6060;
+  width: 120px;
+  height: 40px;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.adminEvents .checkin button:hover,
+.adminEvents .checkin button:focus {
+  background: #FF8080;
+}
+
+.adminEvents .checkin button:focus {
+  outline-offset: -6px;
+}
+
+.adminEvents .checkin button:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
+}
+
+.adminEvents .menuHeader, .adminEvents span u {
+  color: #c4c4c4;
+}
+
+.adminEvents span, .adminEvents .menuHeader {
+  color: #ffffff;
+}
+
+.adminEvents .no_menu {
+  display: none;
+}
+
+.adminEvents .editIcon {
+  position: relative;
+  border: none;
+  background-color: #FF6060;
+  border-radius: 20px;
+  padding: 3px;
+  float: right;
+  height: 30px;
+  width: 30px;
+}
+
+.adminEvents .editIcon:hover {
+  background: #FF8080;
+}
+
+.adminEvents .editIcon:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+/*# sourceMappingURL=adminEvents.css.map */

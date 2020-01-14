@@ -6,11 +6,11 @@ import Survey from './public/components/survey'
 import PlaceOrder from './public/components/placeOrder'
 import Events from './public/components/events'
 
-import AdminEvents from './admin/components/AdminEvents'
-import AdminCreateEvent from './admin/components/AdminCreateEvent'
-import AdminAccounts from './admin/components/AdminAccounts'
-import AdminData from './admin/components/AdminData'
-import AdminLogin from './admin/components/AdminLogin'
+import AdminEvents from './admin/components/events/AdminEvents'
+import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
+import AdminAccounts from './admin/components/accounts/AdminAccounts'
+import AdminData from './admin/components/data/AdminData'
+import AdminLogin from './admin/components/login/AdminLogin'
 
 import './App.css'
 
