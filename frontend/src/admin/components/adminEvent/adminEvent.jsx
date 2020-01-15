@@ -27,19 +27,19 @@ const AdminEvent = (props) => {
             <img src={editIcon}></img>
             </button>
             <div className='date'>
-                <p className='text-left'>JAN</p>
-                <p className='text-left'>01</p>
+                <p className='text-left'>{props.month}</p>
+                <p className='text-left'>{props.day}</p>
             </div>
-            <p><strong>Weekly Distribution</strong></p>
+            <p><strong>{props.title}</strong></p>
             <br></br>
             <hr></hr>
             <br></br>
             <p className='date-header'>Date And Time</p>
-            <p className='info'>Mon, January 1, 2020</p>
-            <p className='info'>1:30 PM - 3:30 PM PST</p>
+            <p className='info'>{props.date}</p>
+            <p className='info'>{props.time}</p>
             <br></br>
             <p className='date-header'>Location</p>
-            <p className='info'>SFSU Annex 1</p>
+            <p className='info'>{props.location}</p>
             <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
