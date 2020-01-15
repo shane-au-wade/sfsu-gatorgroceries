@@ -1,6 +1,7 @@
-.date, p strong {
-    color: #ffffff;
-}
+admin-create-events{
+
+
+
 
 .date, p {
     color: #ffffff;
@@ -145,4 +146,6 @@ span, .menuHeader {
 
 .editIcon:active {
     transform: scale(0.98);
+}
+
 }
