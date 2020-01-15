@@ -1,13 +1,22 @@
-.adminAccounts table {
-  background-color: #f3f3f3;
-  margin: 0 auto;
-  padding: 8px;
+.adminAccounts .table {
   width: 350px;
   border-radius: 10px;
+  background-color: #f3f3f3;
+  margin: 0px auto 30px;
+}
+
+.adminAccounts table {
+  background-color: #f3f3f3;
+  padding: 8px;
+  width: 100%;
+  border-radius: 10px;
   border-spacing: 10px;
+  font-size: 18px;
+}
+
+.adminAccounts .shadow {
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 18px;
 }
 
 .adminAccounts th {
@@ -29,7 +38,7 @@
 }
 
 .adminAccounts .checkin {
-  margin-top: 20px;
+  margin-top: 0px;
   font-style: normal;
   font-weight: 500;
 }
@@ -75,5 +84,28 @@
 
 .adminAccounts .hidden {
   visibility: hidden;
+}
+
+.adminAccounts .createUserDiv {
+  width: 400px;
+  background-color: #f3f3f3;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+.adminAccounts .createUserDiv div, .adminAccounts input {
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.adminAccounts .bottom-space {
+  margin-bottom: 10px;
+}
+
+.adminAccounts .very-bottom-space {
+  margin-bottom: 20px;
 }
 /*# sourceMappingURL=adminAccounts.css.map */

@@ -9,6 +9,7 @@ import Events from './public/components/events'
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
 import AdminAccounts from './admin/components/accounts/AdminAccounts'
+import AdminCreateUser from './admin/components/accounts/AdminCreateUser'; 
 import AdminData from './admin/components/data/AdminData'
 import AdminLogin from './admin/components/login/AdminLogin'
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
         <Route path='/admin/accounts' component={AdminAccounts} />
+        <Route path='/admin/create-user' component={AdminCreateUser} />
         <Route path='/admin/data' component={AdminData} />
       </Switch>
     </Router>
