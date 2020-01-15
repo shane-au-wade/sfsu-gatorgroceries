@@ -19,7 +19,23 @@ return (
             <h3 className='text-centered padded'>Upcoming Events</h3> 
             <div className='events-container'>
                
-                <AdminEvent></AdminEvent>
+                <AdminEvent
+                month='Jan'
+                day='01'
+                title='Weekly Distribution'
+                date='Mon, Jan 1, 2020'
+                time='1:30 PM - 3:30 PM PST'
+                location='SFSU | Annex 1'
+                ></AdminEvent>
+
+                <AdminEvent
+                month='Jan'
+                day='01'
+                title='Weekly Distribution'
+                date='Mon, Jan 1, 2020'
+                time='1:30 PM - 3:30 PM PST'
+                location='SFSU | Annex 1'
+                ></AdminEvent>
                 <AdminEvent></AdminEvent>
                 <AdminEvent></AdminEvent>
                 <AdminEvent></AdminEvent>
