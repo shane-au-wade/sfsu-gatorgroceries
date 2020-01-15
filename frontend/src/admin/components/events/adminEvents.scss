@@ -152,4 +152,16 @@ $primary-color: #ffffff;
         transform: scale(0.98);
     }
 
+    @media screen and (max-width:500px) {
+        .event-div {
+            width: 300px;   
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .event-div {
+            width: 250px;   
+        }
+    }
+
 }

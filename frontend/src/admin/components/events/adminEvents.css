@@ -144,4 +144,16 @@
   -webkit-transform: scale(0.98);
           transform: scale(0.98);
 }
+
+@media screen and (max-width: 500px) {
+  .adminEvents .event-div {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .adminEvents .event-div {
+    width: 250px;
+  }
+}
 /*# sourceMappingURL=adminEvents.css.map */
