@@ -1,109 +1,49 @@
-.AdminCreateEvents h2 {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 36px;
-  color: black;
-  line-height: 0px;
+.AdminCreateEvents .text-centered {
+  text-align: center;
 }
 
-.AdminCreateEvents .create-event-background {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  background-color: #F3F3F3;
-  margin: 0 auto;
-  width: 600px;
-  height: 600px;
-  border-radius: 4px;
+.AdminCreateEvents .text-left {
+  text-align: right;
+}
+
+.AdminCreateEvents .padded {
+  padding: 20px;
+}
+
+.AdminCreateEvents .centered-container {
+  width: 400px;
+  background: #f3f3f3;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.AdminCreateEvents .button-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-left: 1000px;
-  height: 80px;
-}
-
-.AdminCreateEvents button {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 4px;
-  width: 150px;
-  height: 80px;
-  /* 
-    
-    margin-right: 500px;*/
-}
-
-.AdminCreateEvents .title-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100px;
-}
-
-.AdminCreateEvents label {
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  color: black;
-  line-height: 0px;
-}
-
-.AdminCreateEvents input:focus,
-.AdminCreateEvents select:focus,
-.AdminCreateEvents textarea:focus,
-.AdminCreateEvents button:focus {
-  outline: none;
-}
-
-.AdminCreateEvents input {
-  display: block;
-  border-radius: 4px;
-  width: 430px;
-  height: 30px;
-  border: 1px solid black;
-  margin-bottom: 30px;
-}
-
-.AdminCreateEvents .debug {
-  border: 2px solid yellow;
-  background-color: red;
-}
-
-.AdminCreateEvents .start-end-time {
-  display: inline;
-}
-
-.AdminCreateEvents .start-end-time input {
-  border-radius: 4px;
-  width: 50px;
-  height: 30px;
-  border: 1px solid black;
-  margin-bottom: 30px;
-}
-
-.AdminCreateEvents .form-container {
+  border-radius: 10px;
   margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.AdminCreateEvents .formEntry {
+  margin-bottom: 20px;
+}
+
+.AdminCreateEvents .formEntry input {
+  width: 360px;
+}
+
+.AdminCreateEvents .timeSetup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.AdminCreateEvents .timeSetup input {
+  width: 60px;
+}
+
+.AdminCreateEvents .timeSetup div {
+  margin-right: 30px;
 }
 /*# sourceMappingURL=Admin-create-event-style.css.map */
