@@ -41,74 +41,124 @@ const AdminCreateEvent = () => {
       }
 
 return (
-    <div className='admin-create-events'>
+    <div className='AdminCreateEvents'>
         <AdminHeader selected='Create Event' username='Admin T.'></AdminHeader>
         <div className='AdminContentArea'>
-            <div className='title-container'>
+        <h3 className='text-centered padded'>Create Event</h3> 
+              <div className='centered-container'>
+                <form onSubmit={handleForm}>
+
+                    <div className='formEntry'>
+                      <p>Event Title </p>
+                      <input type='text' name="event title" value={eventTitle} onChange={handleEventTitleChange} data-check="{&quot;max_length&quot;:{&quot;args&quot;:[255],&quot;when&quot;:&quot;submit&quot;}}" id="id_group-details-name" maxlength="255" name="group-details-name" required />
+                    </div> 
+
+                    <div className='formEntry'>
+                      <p>Location</p> 
+                      <input type='text' name="location" value={location} onChange={handleLocationChange} required />
+                    </div>
+                      
+                    <div className='timeSetup'> 
+                        <div>
+                        <label for='startDate'>Start Date</label>
+                        <input type='text' name="start date" id='startDate' value={startDate} onChange={handleStartDateChange} placeholder='Start Date' required />
+                        </div>
+
+                        <div>
+                        <p>Start Time </p>
+                        <input type='text' name="start time" value={startTime} onChange={handleStartTimeChange} placeholder='Start Time' required />
+                        </div>
+
+                        <div>
+                        <p>End Date</p>
+                        <input type='text' name="end date" value={endDate} onChange={handleEndDateChange} placeholder='End Date' required />
+                        </div>
+
+                        <div>
+                        <p>End Time</p>
+                        <input type='text' name="end time" value={endTime} onChange={handleEndTimeChange} placeholder='End Time' required />
+                        </div>
+                    </div>
+  
+                </form>
+              </div>
+         </div>
+    </div>
+
+    
+)};
+
+export default AdminCreateEvent 
+
+
+/**
+ *   <header>
+
+                <div className='title-container'>
                 <h2>Create Event</h2>
-                <button type='text'>Preview</button>
-              <button type='text'>Publish</button>
-            </div>
+                </div>
+                
+    
+
+               </header>
+            
 
           
 
 
             <div className='create-event-background'>
             
-            <div>
+            <div className='form-container'>
 
                   <form onSubmit={handleForm}>
                             
 
-                              <div className='form-container'>
+                           
                               <label for="event title" >Event Title </label>
                              
                                 
                               <input type='text' name="event title" value={eventTitle} onChange={handleEventTitleChange} data-check="{&quot;max_length&quot;:{&quot;args&quot;:[255],&quot;when&quot;:&quot;submit&quot;}}" id="id_group-details-name" maxlength="255" name="group-details-name" required />
                              
-                              </div>
-
-                              <div className='form-container'>
+                            
                               <label for="location" >Location</label>
                                 
                               <input type='text' name="location" value={location} onChange={handleLocationChange} required />
-                              
-                              </div>
+                      
+            <div className='start-end-time debug'>
 
-                              <div className='form-container'>
-                              <label for="start date" >Start Date</label>
-                                
-                              <input type='text' name="start date" value={startDate} onChange={handleStartDateChange} required />
-                              
-                              </div>
-
-                              <div className='start-end-time'>
-                              <div className='form-container'>
+                                  
+                            <p>
+                              <label for="start date" >Starts</label>
+                                </p>
+                                <p>
+                              <input type='text' name="start date" value={startDate} onChange={handleStartDateChange} placeholder='Start Date' required />
+                                 </p>
+                    
+                                <p>
                               <label for="start time" >Start Time</label>
-                                
-                              <input type='text' name="start time" value={startTime} onChange={handleStartTimeChange} required />
+                                </p>
+                                <p>
+                              <input type='text' name="start time" value={startTime} onChange={handleStartTimeChange} placeholder=' Start Time' required />
+                              </p>
                               
-                              </div>
-                              <div className='form-container'>
-                              <label for="end date">End Date</label>
+                            <p>
+                              <label for="end date">Ends</label>
+                              </p>
+                              <p>
+                              <input type='text' name="end date" value={endDate} onChange={handleEndDateChange} placeholder='End Date' required />
+                              </p>
                               
-                              <input type='text' name="end date" value={endDate} onChange={handleEndDateChange} required />
-                              
-                              </div>
-                              <div className='form-container'>
+                            <p>
                               <label for="end time">End Time</label>
-                                
-                              <input type='text' name="end time" value={endTime} onChange={handleEndTimeChange} required />
-                              
+                               </p> 
+                               <p>
+                              <input type='text' name="end time" value={endTime} onChange={handleEndTimeChange} placeholder='End Time' required />
+                              </p>
+                             
+
                               </div>
-                              </div>
+                            
                   </form>
                 </div>
             </div>
-         </div>
-         </div>
-
-    
-)};
-
-export default AdminCreateEvent 
+ */
