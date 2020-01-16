@@ -83,9 +83,11 @@ const AdminEvent = (props) => {
             </div>
 
             <p className='text-centered checkin'>
-                <button>
-                    Checkin
-                </button>
+                <Link to='/admin/checkin'>
+                    <button>
+                        Checkin
+                    </button>
+                </Link>
             </p>  
     </div>
 

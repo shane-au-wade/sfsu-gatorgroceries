@@ -1,0 +1,23 @@
+.adminCheckin .checkin-div {
+  width: 400px;
+  background: #f3f3f3;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.adminCheckin .text-centered {
+  text-align: center;
+}
+
+.adminCheckin .text-left {
+  text-align: right;
+}
+
+.adminCheckin .padded {
+  padding: 20px;
+}
+/*# sourceMappingURL=AdminCheckin.css.map */

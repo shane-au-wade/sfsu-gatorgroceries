@@ -111,4 +111,20 @@ $primary-color-1: #f3f3f3;
     .very-bottom-space {
         margin-bottom: 20px;
     }
+
+    @media screen and (max-width:500px) {
+        .createUserDiv {
+            width: 300px;
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .createUserDiv {
+            width: 260px;
+        }
+
+        .table{
+            width:260px;
+        }
+    }
 }
