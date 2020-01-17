@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAEC,UAFS,CAET,mBAAmB,CAAC;EACjB,KAAK,EAAE,KAAK;EACZ,gBAAgB,EAAE,OAAO;EACzB,MAAM,EAAE,MAAM;EACd,YAAY,EAAE,IAAI;EAClB,aAAa,EAAE,IAAI;EACnB,WAAW,EAAE,IAAI;EACjB,aAAa,EAAE,IAAI;CACrB;;AAVF,AAYI,UAZM,CAYN,cAAc,CAAC;EACX,UAAU,EAAE,MAAM;CACrB;;AAdL,AAgBI,UAhBM,CAgBN,OAAO,CAAC;EACJ,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "AdminData.scss"
+    ],
+    "names": [],
+    "file": "AdminData.css"
+}

@@ -9,3 +9,7 @@
   background: #ffffff;
   height: calc(100vh - 90px);
 }
+
+:focus {
+  outline: none !important;
+}
