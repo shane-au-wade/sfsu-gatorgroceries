@@ -28,7 +28,30 @@
     }
 
     .formEntry input{
-        width: 360px;
+        width: 380px;
+        height: 30px;
+        border-radius: 4px;
+        border:1px solid black;
+    }
+
+    .preview-publish{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+        
+    }
+    .preview-publish button{
+        width: 100px;
+        height: 30px;
+        border-radius: 4px;
+        color: white;
+        background-color: #FF6060;
+        border:1px solid #FF6060;
+        margin-right: 30px;
+        margin-left: 30px;
+
     }
 
     .timeSetup {
@@ -38,11 +61,76 @@
     }
 
     .timeSetup input {
-        width: 60px;
+        width: 70px;
+        height: 30px;
+        border-radius: 4px;
+        border:1px solid black;
+        
     }
+
+    .center-placeholder  input[type="text"]::placeholder {
+        text-align: center; 
+    }
+
+    .buttonSetup{
+        margin-top: 42px;
+        
+    }
+
+    .buttonSetup button{
+        background-color: Transparent;
+        background-repeat:no-repeat;
+        border: none;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;
+
+    }
+
+    .itemSetup input{
+        width: 170px;
+        height: 30px;
+        border-radius: 4px;
+        border:1px solid black;
+    }
+    .itemSetup{
+        margin-top: 20px;
+    }
+
+    .itemSetup div{
+        margin-right: 30px;
+    }
+
+    .max{
+        margin-top: 20px;
+    }
+
 
     .timeSetup div {
         margin-right: 30px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+
+
+    .items-label label{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: black;
+    line-height: 0px;
+    }
+
+    .image-size{
+        width: 30px;
+        
+        
     }
 
 // h2{
