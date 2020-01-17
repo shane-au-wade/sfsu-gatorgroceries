@@ -83,7 +83,7 @@ const AdminEvent = (props) => {
             </div>
 
             <p className='text-centered checkin'>
-                <Link to='/admin/checkin' target='_blank'>
+                <Link to='/admin/checkin'>
                     <button>
                         Checkin
                     </button>

@@ -9,6 +9,56 @@
   padding: 20px;
 }
 
+.adminCheckin .order-div {
+  width: 350px;
+  margin: 0 auto;
+  background-color: #211061;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.adminCheckin .order-div p {
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.adminCheckin .order-div .info {
+  font-size: 16px;
+  color: #f3f3f3;
+}
+
+.adminCheckin .order-div .menu {
+  color: #fff999;
+}
+
+.adminCheckin .menu:hover {
+  color: #ffffff;
+}
+
+.adminCheckin .search-div {
+  width: 360px;
+  margin: 0 auto;
+}
+
+.adminCheckin .search {
+  width: 320px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+  padding-left: 40px;
+  font-size: 18px;
+}
+
+.adminCheckin #searchIcon {
+  position: absolute;
+  padding: 3px;
+  margin-left: 6px;
+}
+
 .adminCheckin .text-centered {
   text-align: center;
 }
@@ -19,6 +69,14 @@
 
 .adminCheckin .padded {
   padding: 20px;
+}
+
+.adminCheckin .dropDownIcon {
+  position: relative;
+  top: 4px;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 6px;
 }
 
 .adminCheckin .receipt {
@@ -51,5 +109,36 @@
 .adminCheckin .logo {
   height: calc(563px * 0.08);
   width: calc(1025px * 0.08);
+}
+
+.adminCheckin .checkin {
+  margin-top: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.adminCheckin .checkin button {
+  border: none;
+  border-radius: 6px;
+  background-color: #FF6060;
+  width: 120px;
+  height: 40px;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.adminCheckin .checkin button:hover,
+.adminCheckin .checkin button:focus {
+  background: #FF8080;
+}
+
+.adminCheckin .checkin button:focus {
+  outline-offset: -6px;
+}
+
+.adminCheckin .checkin button:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
 }
 /*# sourceMappingURL=AdminCheckin.css.map */
