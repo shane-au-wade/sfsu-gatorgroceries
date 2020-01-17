@@ -20,4 +20,36 @@
 .adminCheckin .padded {
   padding: 20px;
 }
+
+.adminCheckin .receipt {
+  width: 70mm;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.adminCheckin #receiptInfo {
+  margin: 0;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.adminCheckin #order {
+  font-family: sans-serif;
+}
+
+.adminCheckin #noteInfo {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.adminCheckin #item {
+  text-align: center;
+  font-size: 25px;
+  font-family: sans-serif;
+}
+
+.adminCheckin .logo {
+  height: calc(563px * 0.08);
+  width: calc(1025px * 0.08);
+}
 /*# sourceMappingURL=AdminCheckin.css.map */

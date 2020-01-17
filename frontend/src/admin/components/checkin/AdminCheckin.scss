@@ -22,4 +22,36 @@
         padding: 20px;
     }
 
+    
+    .receipt {
+        width: 70mm;
+        padding: 10px;
+        background: #ffffff;
+    }
+
+    #receiptInfo {
+        margin: 0;
+        font-size: 20px;
+        font-family: sans-serif;
+    }
+
+    #order {
+        font-family: sans-serif;
+    }
+    
+    #noteInfo {
+        margin: 0;
+        font-family: sans-serif;
+    }
+    
+    #item {
+        text-align: center;
+        font-size: 25px;
+        font-family: sans-serif;
+    }
+
+    .logo {
+        height: calc(563px * 0.08);
+        width: calc(1025px * 0.08);
+    }
 }
