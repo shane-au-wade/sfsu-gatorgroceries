@@ -26,7 +26,38 @@
 }
 
 .AdminCreateEvents .formEntry input {
-  width: 360px;
+  width: 380px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.AdminCreateEvents .preview-publish {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 25px;
+}
+
+.AdminCreateEvents .preview-publish button {
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  color: white;
+  background-color: #FF6060;
+  border: 1px solid #FF6060;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
 .AdminCreateEvents .timeSetup {
@@ -40,10 +71,81 @@
 }
 
 .AdminCreateEvents .timeSetup input {
-  width: 60px;
+  width: 70px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.AdminCreateEvents .center-placeholder input[type="text"]::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.AdminCreateEvents .center-placeholder input[type="text"]:-ms-input-placeholder {
+  text-align: center;
+}
+
+.AdminCreateEvents .center-placeholder input[type="text"]::-ms-input-placeholder {
+  text-align: center;
+}
+
+.AdminCreateEvents .center-placeholder input[type="text"]::placeholder {
+  text-align: center;
+}
+
+.AdminCreateEvents .buttonSetup {
+  margin-top: 42px;
+}
+
+.AdminCreateEvents .buttonSetup button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.AdminCreateEvents .itemSetup input {
+  width: 170px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.AdminCreateEvents .itemSetup {
+  margin-top: 20px;
+}
+
+.AdminCreateEvents .itemSetup div {
+  margin-right: 30px;
+}
+
+.AdminCreateEvents .max {
+  margin-top: 20px;
 }
 
 .AdminCreateEvents .timeSetup div {
   margin-right: 30px;
+}
+
+.AdminCreateEvents input:focus,
+.AdminCreateEvents select:focus,
+.AdminCreateEvents textarea:focus,
+.AdminCreateEvents button:focus {
+  outline: none;
+}
+
+.AdminCreateEvents .items-label label {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: black;
+  line-height: 0px;
+}
+
+.AdminCreateEvents .image-size {
+  width: 30px;
 }
 /*# sourceMappingURL=Admin-create-event-style.css.map */

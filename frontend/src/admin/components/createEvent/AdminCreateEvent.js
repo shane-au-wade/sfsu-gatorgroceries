@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './Admin-create-event-style.css'
+import addImage from '../../../public/images/add_image.png'
 
 const AdminCreateEvent = () => {
     const [eventTitle, setEventTitle] = useState('')
@@ -10,6 +11,8 @@ const AdminCreateEvent = () => {
     const [startTime, setStartTime] = useState('')
     const [endDate, setEndDate] = useState('')
     const [endTime, setEndTime] = useState('')
+    const [item, setItem] = useState('')
+    const [maxQty, setMaxQty] = useState('')
 
     const handleEventTitleChange = (event) => {
         setEventTitle(event.target.value)
@@ -31,13 +34,19 @@ const AdminCreateEvent = () => {
       const handleEndTimeChange = (event) => {
         setEndTime(event.target.value)
       }
+      const handleItem = (event) =>{
+          setItem(event.target.value)
+      }
+      const handleMaxQty = (event) =>{
+          setMaxQty(event.target.event)
+      }
 
     
       const handleForm = (event) => {
         event.preventDefault()
-        const LogInObject = {eventTitle, location,startDate,startTime,endDate,endTime}
+        const EventObject = {eventTitle, location,startDate,startTime,endDate,endTime,item,maxQty}
     
-        console.log(LogInObject)
+        console.log(EventObject)
       }
 
 return (
@@ -49,36 +58,68 @@ return (
                 <form onSubmit={handleForm}>
 
                     <div className='formEntry'>
-                      <p>Event Title </p>
-                      <input type='text' name="event title" value={eventTitle} onChange={handleEventTitleChange} data-check="{&quot;max_length&quot;:{&quot;args&quot;:[255],&quot;when&quot;:&quot;submit&quot;}}" id="id_group-details-name" maxlength="255" name="group-details-name" required />
+                      <label for='eventTitle'>Event Title </label>
+                      <input type='text' name="event title" id='eventTitle' value={eventTitle} onChange={handleEventTitleChange} data-check="{&quot;max_length&quot;:{&quot;args&quot;:[255],&quot;when&quot;:&quot;submit&quot;}}" id="id_group-details-name" maxlength="255" name="group-details-name" required />
                     </div> 
 
                     <div className='formEntry'>
-                      <p>Location</p> 
-                      <input type='text' name="location" value={location} onChange={handleLocationChange} required />
+                      <label for='location'>Location</label> 
+                      <input type='text' name="location" id ='location' value={location} onChange={handleLocationChange} required />
                     </div>
                       
-                    <div className='timeSetup'> 
+                    <div className='timeSetup center-placeholder'> 
                         <div>
                         <label for='startDate'>Start Date</label>
-                        <input type='text' name="start date" id='startDate' value={startDate} onChange={handleStartDateChange} placeholder='Start Date' required />
+                        <input type='text' name="start date" id='startDate' value={startDate} onChange={handleStartDateChange} placeholder='mm/dd/yr' required />
                         </div>
 
                         <div>
-                        <p>Start Time </p>
-                        <input type='text' name="start time" value={startTime} onChange={handleStartTimeChange} placeholder='Start Time' required />
+                        <label for='startTime'>Start Time </label>
+                        <input type='text' name="start time" id='startTime' value={startTime} onChange={handleStartTimeChange} placeholder='00:00 PM' required />
                         </div>
 
                         <div>
-                        <p>End Date</p>
-                        <input type='text' name="end date" value={endDate} onChange={handleEndDateChange} placeholder='End Date' required />
+                        <label for='endDate'>End Date</label>
+                        <input type='text' name="end date" id='endDate' value={endDate} onChange={handleEndDateChange} placeholder='mm/dd/yr' required />
                         </div>
 
                         <div>
-                        <p>End Time</p>
-                        <input type='text' name="end time" value={endTime} onChange={handleEndTimeChange} placeholder='End Time' required />
+                        <label for='endTime'>End Time</label>
+                        <input type='text' name="end time" id='endTime' value={endTime} onChange={handleEndTimeChange} placeholder='00:00 PM' required />
                         </div>
+
+                        
                     </div>
+                      <div className='timeSetup'>
+                        <div className='itemSetup'>
+                            <div className='items-label'>
+                              <label for='Item'>Item</label>
+                            </div>
+                              <input type='text' name="item" id='Item' value={item} onChange={handleItem}  required />
+                        </div>
+                          <div className='max'>
+                            <div className='items-label'>
+                            <label for='Max'>Max Qty</label>
+                            </div>
+                              <input type='text' name="item" id='Max' value={maxQty} onChange={handleMaxQty}  required />
+                          </div>
+                          <div className='buttonSetup'>
+                            <button>
+                            <img src={addImage} alt="Logo" className='image-size' />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className='preview-publish'>
+                          <div>
+                             <button type='text'>Preview</button>
+                          </div>
+                          
+                          <div>
+                            <button type='text'>Publish</button>
+                          </div>
+
+                        </div>
   
                 </form>
               </div>
