@@ -14,7 +14,8 @@ import AdminAccounts from './admin/components/accounts/AdminAccounts'
 import AdminCreateUser from './admin/components/accounts/AdminCreateUser'; 
 import AdminData from './admin/components/data/AdminData'
 import AdminLogin from './admin/components/login/AdminLogin'
-import ForgotPassword from'./admin/components/forgotPassword/forgotPassword';
+import ForgotPassword from './admin/components/forgotPassword/forgotPassword';
+import RequestNewPassword from './admin/components/request-new-password/request-new-password'
 import './App.css'
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/events' component={Events} />
         <Route path='/placeorder' component={PlaceOrder} />
         <Route path='/admin/login' component={AdminLogin}/>
+        <Route path='/admin/request-new-password' component={RequestNewPassword}/>
         <Route path='/admin/forgot-password' component={ForgotPassword}/>
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
