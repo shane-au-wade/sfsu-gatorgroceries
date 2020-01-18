@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-
+import eventServices from '../../services/events.js'
 import './adminEvents.css'
 // import dropDownIcon from '../icons/arrow_drop_down-24px.svg';
 
@@ -28,6 +28,11 @@ const AdminEvents = () => {
 
         //this is where an axios call could take place, and or useEffect() could take
         // care of the axis call and the rendering of the events objects. 
+
+        eventServices.getActiveEvents().then( events => {
+            console.log(events);
+        });
+
         return(
             <AdminEvent
                 id={id}
