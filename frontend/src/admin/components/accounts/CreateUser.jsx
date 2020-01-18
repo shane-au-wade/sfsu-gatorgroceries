@@ -10,15 +10,15 @@ const CreateUser = () => {
                     <form>
                         <div>Name</div>
                         <div>
-                            <input type='text' className='bottom-space'></input>
+                            <input type='text' className='bottom-space form-entry'></input>
                         </div>
                         <div>Email</div>
                         <div >
-                            <input type='text' className='bottom-space'></input>
+                            <input type='text' className='bottom-space form-entry'></input>
                         </div>
                         <div>Temporary Password</div>
                         <div>
-                            <input type='text' className='very-bottom-space'></input>
+                            <input type='text' className='very-bottom-space form-entry'></input>
                         </div>
 
                         <p className='text-centered checkin'>
