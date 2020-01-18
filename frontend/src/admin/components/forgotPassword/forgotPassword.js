@@ -61,7 +61,6 @@ const ForgotPassword = () => {
                               </div>  
                            
                             </div>
-                            <a href="#">Forgot Password?</a>
                         </form>
                         </div>
                      </div>
