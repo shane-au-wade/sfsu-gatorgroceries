@@ -1,33 +1,42 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 // import AdminHeader from './adminHeader/adminHeader.jsx'
-import './adminLogin.css'
+import './forgotPassword.css'
 import logo from '../../../public/images/logo.png'
 
 
-const AdminLogin = () => {
+const ForgotPassword = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value)
+    const[reenteredPassword,setReenteredPasswordChange] = useState('')
+
+    const handleNewPasswordChange = (event) => {
+        setNewPassword(event.target.value)
       }
     
-      const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
+      const handleReenteredPasswordChange = (event) =>{
+            setReenteredPasswordChange(event.target.value)
       }
     
-      const handleLogIn = (event) => {
+      
+      const handlePassword = (event) => {
         event.preventDefault()
-        const LogInObject = {email, password}
+        const newPasswordObject = {newPassword,reenteredPassword}
+        if(newPassword !== reenteredPassword){
+                alert("Passwords don't match");
+            } else {
+                // make API call
+                
+                console.log(newPasswordObject)
+            }
+        }
     
-        console.log(LogInObject)
-      }
+      
 
     return (
        
-            <div className='adminLogin'>
+            <div className='adminForgotPassword'>
                 <div className='top-banner'>
                     <div>
                     <header>
@@ -43,9 +52,9 @@ const AdminLogin = () => {
                      
                      <div className='log-in-container'>
                        
-                        <form className='signin-form-2' onSubmit={handleLogIn}>
-                            <input type='text' placeholder='Email' value={email} onChange={handleEmailChange} required />
-                            <input type='password' name='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
+                        <form className='signin-form-2' onSubmit={handlePassword}>
+                            <input type='password' name='password' placeholder='Enter New Password' value={newPassword} onChange={handleNewPasswordChange} required />
+                            <input type='password' name='Reenter-password' placeholder='Reenter Password' value={reenteredPassword} onChange={handleReenteredPasswordChange} required />
                             <div className='login-button'>
                             <div>
                             <input type='submit' value='Submit' className='app-button-2' />
@@ -61,4 +70,4 @@ const AdminLogin = () => {
              </div>
     )};
     
-    export default AdminLogin  
+    export default ForgotPassword
