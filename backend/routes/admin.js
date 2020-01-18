@@ -61,7 +61,19 @@ router.post('/login', function(req, res, next) {
      
   });
 
-  router.post('/create-event', function(req, res, next) {
+  router.post('/create-event', async (req, res, next) => {
+    
+    try{
+      
+      await db.events.createEvents(req.body)
+      
+      res.send("Created")
+
+    }catch(e){
+      
+      res.json({error: "Cannot be created"})
+    
+    }
   
     /**
      *   you will recieve
@@ -89,6 +101,8 @@ router.post('/login', function(req, res, next) {
      */
      
   });
+
+  
 
 
 module.exports = router;
