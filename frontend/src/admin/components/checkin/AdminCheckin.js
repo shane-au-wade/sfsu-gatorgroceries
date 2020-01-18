@@ -18,7 +18,7 @@ const AdminCheckin = () => {
     }
 
     const handleOrderClick = () => {
-
+       
     }
 
     const Order = (props) => {
