@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+
+const db = require("../db/index.js");
+
+
+
 router.post('/login', function(req, res, next) {
   
     /**
@@ -19,12 +24,19 @@ router.post('/login', function(req, res, next) {
      
   });
 
-  router.post('/get-active-events', function(req, res, next) {
+  router.get('/get-active-events', async (req, res, next) => {
   
     /**
      *  return all active events from the events table in the db
      *  json
      */
+    try{
+
+     const activeEvents = await db.events.getActiveEvents()
+     res.send(activeEvents)
+    }catch(e){
+      res.json({error: 'No Active Events'})
+    }
      
   });
 
