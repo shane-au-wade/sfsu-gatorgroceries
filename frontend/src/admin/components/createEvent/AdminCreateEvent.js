@@ -3,8 +3,42 @@ import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
+import addItem from '../../../public/images/add_item.png'
 
 const AdminCreateEvent = () => {
+    const handleAdd = () =>{
+      return(
+        <div className='timeSetup'>
+        <div className='itemSetup'>
+            <div className='items-label'>
+              <label for='Item'>Item</label>
+            </div>
+              <input type='text' name="item" id='Item' value={item} onChange={handleItem}  required />
+        </div>
+          <div className='max'>
+            <div className='items-label'>
+            <label for='Max'>Max Qty</label>
+            </div>
+              <input type='text' name="item" id='Max' value={maxQty} onChange={handleMaxQty}  required />
+          </div>
+          <div className='buttonSetup'>
+              <div>
+                <button>
+                <img src={addImage} alt="Logo" className='image-size' />
+                </button>
+              </div>
+
+              <div className='add-item-button'>
+                <button type="button" onClick={() => handleAdd()}>
+                <img src={addItem} alt="Logo" className='image-size' />
+                </button>
+              </div>
+          </div>
+        </div>
+
+      )
+    }
+
     const [eventTitle, setEventTitle] = useState('')
     const [location, setLocation] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -67,7 +101,7 @@ return (
                       <input type='text' name="location" id ='location' value={location} onChange={handleLocationChange} required />
                     </div>
                       
-                    <div className='timeSetup center-placeholder'> 
+                    <div className='timeSetup '> 
                         <div>
                         <label for='startDate'>Start Date</label>
                         <input type='text' name="start date" id='startDate' value={startDate} onChange={handleStartDateChange} placeholder='mm/dd/yr' required />
@@ -104,11 +138,19 @@ return (
                               <input type='text' name="item" id='Max' value={maxQty} onChange={handleMaxQty}  required />
                           </div>
                           <div className='buttonSetup'>
-                            <button>
-                            <img src={addImage} alt="Logo" className='image-size' />
-                            </button>
+                              <div>
+                                <button>
+                                <img src={addImage} alt="Logo" className='image-size' />
+                                </button>
+                              </div>
+
+                              <div className='add-item-button'>
+                                <button type="button" onClick={() => handleAdd()}>
+                                <img src={addItem} alt="Logo" className='image-size' />
+                                </button>
+                              </div>
                           </div>
-                        </div>
+                        </div>                        
 
                         <div className='preview-publish'>
                           <div>

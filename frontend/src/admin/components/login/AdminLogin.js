@@ -46,7 +46,10 @@ const AdminLogin = () => {
                         <form className='signin-form-2' onSubmit={handleLogIn}>
                             <input type='text' placeholder='Email' value={email} onChange={handleEmailChange} required />
                             <input type='text' placeholder='Password' value={password} onChange={handlePasswordChange} required />
-                            <input type='submit' value='Submit' className='app-button' /><br></br>
+                            <div className='login-button'>
+                              
+                            <input type='submit' value='Submit' className='app-button-2' /><br></br>
+                            </div>
                             <a href="#">Forgot Password?</a>
                         </form>
                         </div>

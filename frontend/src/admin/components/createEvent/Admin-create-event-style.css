@@ -30,6 +30,7 @@
   height: 30px;
   border-radius: 4px;
   border: 1px solid black;
+  padding-left: 10px;
 }
 
 .AdminCreateEvents .preview-publish {
@@ -75,6 +76,7 @@
   height: 30px;
   border-radius: 4px;
   border: 1px solid black;
+  padding-left: 10px;
 }
 
 .AdminCreateEvents .center-placeholder input[type="text"]::-webkit-input-placeholder {
@@ -93,7 +95,18 @@
   text-align: center;
 }
 
+.AdminCreateEvents .add-item button {
+  margin-top: 3px;
+}
+
 .AdminCreateEvents .buttonSetup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   margin-top: 42px;
 }
 
@@ -118,15 +131,19 @@
 }
 
 .AdminCreateEvents .itemSetup div {
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .AdminCreateEvents .max {
   margin-top: 20px;
 }
 
+.AdminCreateEvents .add-item-button {
+  margin-left: 5px;
+}
+
 .AdminCreateEvents .timeSetup div {
-  margin-right: 30px;
+  margin-right: 17px;
 }
 
 .AdminCreateEvents input:focus,

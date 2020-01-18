@@ -32,6 +32,7 @@
         height: 30px;
         border-radius: 4px;
         border:1px solid black;
+        padding-left: 10px;
     }
 
     .preview-publish{
@@ -65,14 +66,20 @@
         height: 30px;
         border-radius: 4px;
         border:1px solid black;
-        
+        padding-left: 10px;
     }
 
     .center-placeholder  input[type="text"]::placeholder {
         text-align: center; 
     }
 
+    .add-item button{
+       margin-top: 3px;
+    }
+
     .buttonSetup{
+        display: flex;
+        flex-direction: row;
         margin-top: 42px;
         
     }
@@ -84,6 +91,7 @@
         cursor:pointer;
         overflow: hidden;
         outline:none;
+        
 
     }
 
@@ -98,16 +106,21 @@
     }
 
     .itemSetup div{
-        margin-right: 30px;
+        margin-right: 20px;
     }
 
     .max{
-        margin-top: 20px;
+       margin-top: 20px;
+    }
+
+    .add-item-button{
+        margin-left: 5px;
+        
     }
 
 
     .timeSetup div {
-        margin-right: 30px;
+        margin-right: 17px;
     }
 
     input:focus,
