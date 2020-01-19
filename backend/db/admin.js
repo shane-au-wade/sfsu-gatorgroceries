@@ -4,11 +4,13 @@ const uuidv4 = db.uuidv4;
 
 
 
-class Student {
+class admin {
 
-    static submitSurvey(email) {
+    static createUser(userBody) {
+        let uuid = uuidv4()
+        console.log(uuid)
         return new Promise((resolve,reject) => {
-            connection.none('update users set survey_complete = true where student_email = $1;', [email])
+            connection.none('insert into users (id,type,first_name,student_email) values ($1,$2,$3,$4)', [uuid,userBody.type,userBody.name,userBody.email])
             .then(() => {
                 resolve("Survey completed")
             })
@@ -20,4 +22,4 @@ class Student {
     
 }
 
-module.exports = Student
+module.exports = admin
