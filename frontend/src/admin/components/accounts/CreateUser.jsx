@@ -1,20 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {withRouter} from 'react-router-dom'
 import './adminAccounts.css'
 import createUserService from '../../services/createUser'
 
 const CreateUser = (props) => {
     
-    let user = {
-                firstName: '', 
-                lastName: '', 
-                email: '', 
-                type: 'admin'
-                }
+    const [user, setUser] = useState({firstName: '', lastName: '', email: '', type: 'admin'})
 
     const handleChange = (event) => {
             console.log(event.target.name);
             user[event.target.name] = event.target.value; 
+            setUser(user);
     }
 
     const handleSubmit = (event) => {
@@ -24,7 +20,7 @@ const CreateUser = (props) => {
         event.target.email.value = '';
         console.log(user)
 
-        //axios api calls
+        // axios api calls
         createUserService.createUser(user).then(() => {
             props.history.push('/admin/accounts');
         }).catch(err => {
