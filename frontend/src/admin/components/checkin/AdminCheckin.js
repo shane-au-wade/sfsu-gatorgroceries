@@ -29,12 +29,10 @@ const AdminCheckin = () => {
                     <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
                     Order
                     </p>
-                    <div className='text-centered checkin'>
-                        <Link onClickCapture={handlePrint}>
-                            <button >
+                    <div className='text-centered checkin'> 
+                            <button onClickCapture={handlePrint}>
                                 Print
                             </button>
-                        </Link>
                     </div>
         </div>)
     };
@@ -58,7 +56,7 @@ return (
             {/* this will be the order tile that will pop up after an order is found
             it will also indicate if there is not order at all */}
            
-            <Order ordername='swade1' orderID='001'></Order>
+            {/* <Order ordername='swade1' orderID='001'></Order> */}
 
             </div>
         </div>
