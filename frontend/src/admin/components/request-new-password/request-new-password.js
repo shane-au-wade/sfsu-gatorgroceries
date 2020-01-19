@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
 // import AdminHeader from './adminHeader/adminHeader.jsx'
 import './request-new-password.css'
 import logo from '../../../public/images/logo.png'

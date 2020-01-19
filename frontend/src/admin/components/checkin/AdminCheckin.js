@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './AdminCheckin.css'
@@ -6,9 +6,6 @@ import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import searchIcon from '../../icons/search-24px.svg';
 
 const AdminCheckin = () => {
-
-    // const [showUsersTable, setUsersTable] = useState(true);
-    // const [showCreateUser, setCreateUser] = useState(false);
 
     const handlePrint = (event) => {
         console.log('printing')
@@ -18,7 +15,7 @@ const AdminCheckin = () => {
     }
 
     const handleOrderClick = () => {
-
+       
     }
 
     const Order = (props) => {
@@ -29,7 +26,7 @@ const AdminCheckin = () => {
                     <p className='info'>Order ID</p>
                     <p>&nbsp;{props.orderID}</p>
                     <p className='menu' onClickCapture={handleOrderClick}>
-                    <img src={dropDownIcon} className='dropDownIcon'></img>
+                    <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
                     Order
                     </p>
                     <div className='text-centered checkin'>
@@ -53,7 +50,7 @@ return (
             users will input gator groceries ID's that are associated with their order */}
             <div className='search-div'>
                 <form>
-                <img src={searchIcon} id='searchIcon'></img>
+                <img src={searchIcon} id='searchIcon' alt='searchIcon'></img>
                     <input type='text' autoComplete='off' className='search'></input> 
                 </form>
             </div>

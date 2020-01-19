@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
 import addItem from '../../../public/images/add_item.png'
 
 const AdminCreateEvent = () => {
-   
-    }
+    
+  let menuDivs = [];
+
 
     const [eventTitle, setEventTitle] = useState('')
     const [location, setLocation] = useState('')
@@ -17,6 +17,7 @@ const AdminCreateEvent = () => {
     const [endTime, setEndTime] = useState('')
     const [item, setItem] = useState('')
     const [maxQty, setMaxQty] = useState('')
+    // const [menuJson, setMenuJson] = useState([]);
 
     const handleEventTitleChange = (event) => {
         setEventTitle(event.target.value)
@@ -42,10 +43,23 @@ const AdminCreateEvent = () => {
           setItem(event.target.value)
       }
       const handleMaxQty = (event) =>{
-          setMaxQty(event.target.event)
+          setMaxQty(event.target.value)
       }
 
-    
+      const handleAdd = (event) => {
+          console.log('handling add');
+                  
+          menuDivs.push(
+            <div>
+              <span>testing</span>
+            </div>
+          )
+        
+          console.log(menuDivs)
+          setMaxQty('');
+          setItem('');   
+      }
+
       const handleForm = (event) => {
         event.preventDefault()
         const EventObject = {eventTitle, location,startDate,startTime,endDate,endTime,item,maxQty}
@@ -115,13 +129,19 @@ return (
                               </div>
 
                               <div className='add-item-button'>
-                                <button type="button">
+
+                                <button type="button" onClickCapture={handleAdd}>
+
                                 <img src={addItem} alt="Logo" className='image-size' />
                                 </button>
                               </div>
                           </div>
-                        </div>                        
+                        </div>
 
+
+                       {menuDivs}
+                       
+                       
                         <div className='preview-publish'>
                           <div>
                              <button type='text'>Preview</button>

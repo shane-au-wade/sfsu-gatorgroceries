@@ -1,9 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-
 import './AdminData.css';
-
 import Graph from './graph.jsx'
 
 const AdminData = () => {
@@ -15,10 +12,8 @@ return (
             <div className='centered-container'>
                 <Graph></Graph>
             </div>
-        
         </div>
-    </div>
-   
+    </div> 
 )};
 
 export default AdminData 
