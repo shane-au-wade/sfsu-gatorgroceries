@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
-// import AdminHeader from './adminHeader/adminHeader.jsx'
 import './adminLogin.css'
 import logo from '../../../public/images/logo.png'
-
 
 const AdminLogin = () => {
 
@@ -30,34 +27,27 @@ const AdminLogin = () => {
             <div className='adminLogin'>
                 <div className='top-banner'>
                     <div>
-                    <header>
-                        <img src={logo} alt="Logo" className='image-size' />
-                        
-                    </header>
-                    </div>
-
-                    
+                      <header>
+                          <img src={logo} alt="Logo" className='image-size' />   
+                      </header>
+                    </div>     
                 </div>
                 <div className='log-in-container'>
                      <div className='log-in-background'>
-                     
-                     <div className='log-in-container'>
-                       
-                        <form className='signin-form-2' onSubmit={handleLogIn}>
-                            <input type='text' placeholder='Email' value={email} onChange={handleEmailChange} required />
-                            <input type='password' name='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
-                            <div className='login-button'>
-                            <div>
-                            <input type='submit' value='Submit' className='app-button-2' />
-                              </div>  
-                           
-                            </div>
-                            <a href="#">Forgot Password?</a>
-                        </form>
+                        <div className='log-in-container'>
+                          <form className='signin-form-2' onSubmit={handleLogIn}>
+                              <input type='text' placeholder='Email' value={email} onChange={handleEmailChange} required />
+                              <input type='password' name='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
+                              <div className='login-button'>
+                                <div>
+                                  <input type='submit' value='Submit' className='app-button-2' />
+                                </div>  
+                              </div>
+                              <a href="#">Forgot Password?</a>
+                          </form>
                         </div>
                      </div>
-                    </div>
-
+                </div>
              </div>
     )};
     

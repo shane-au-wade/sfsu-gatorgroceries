@@ -14,12 +14,12 @@ const AdminEvent = (props) => {
     // event name, 
     // location
     // menu in json format. this will need to be sorted out. 
-    const [id, setID] = useState(props.id); 
-    const [date, setDate] = useState(new Date(props.date));
-    const [time, setTime] = useState(props.time);
-    const [name, setName] = useState(props.name);
-    const [location, setLocation] = useState(props.location);
-    const [menu, setMenu] = useState(props.menu);
+    const [id] = useState(props.id); 
+    const [date] = useState(new Date(props.date));
+    const [time] = useState(props.time);
+    const [name] = useState(props.name);
+    const [location] = useState(props.location);
+    const [menu] = useState(props.menu);
 
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
     // console.log(menu);
