@@ -1,11 +1,27 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+// import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './AdminCheckin.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import searchIcon from '../../icons/search-24px.svg';
 
 const AdminCheckin = () => {
+
+    const [searchKey, setSearchKey] = useState('')
+
+    const handleSumbit = (event) => {
+        event.preventDefault();
+        console.log(searchKey);
+        event.target.search.value = '';
+        setSearchKey('');
+        //axios call will go here
+    }
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setSearchKey(event.target.value);
+        // console.log(searchKey);
+    }
 
     const handlePrint = (event) => {
         console.log('printing')
@@ -47,9 +63,10 @@ return (
             {/* this div will contain the search feature of the checkin. 
             users will input gator groceries ID's that are associated with their order */}
             <div className='search-div'>
-                <form>
+                <form onSubmit={handleSumbit}>
                 <img src={searchIcon} id='searchIcon' alt='searchIcon'></img>
-                    <input type='text' autoComplete='off' className='search'></input> 
+                    <input name='search' type='text' autoComplete='off' className='search' onChange={handleChange}></input> 
+                    {/* <button></button> */}
                 </form>
             </div>
 
