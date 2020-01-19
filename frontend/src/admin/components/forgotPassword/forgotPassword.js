@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
-// import AdminHeader from './adminHeader/adminHeader.jsx'
 import './forgotPassword.css'
 import logo from '../../../public/images/logo.png'
-
 
 const ForgotPassword = () => {
 

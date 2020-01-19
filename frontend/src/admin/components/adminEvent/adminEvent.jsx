@@ -66,6 +66,8 @@ const AdminEvent = (props) => {
             case 11:
                 month = 'Dec'
                 break;
+            default:
+                console.log(new Error('Unable to parse month in adminEvent.jsx'))
         }
         return month;
     }
@@ -75,7 +77,7 @@ const AdminEvent = (props) => {
         menu.forEach((line) => {
             console.log(line);
             retElements.push(
-                <div className='menuLine '>
+                <div key={line.item} className='menuLine '>
                     <div className='item'>
                         <span>{line.item}</span>
                     </div> 
@@ -98,9 +100,9 @@ const AdminEvent = (props) => {
     }
     
     return (
-        <div id={id} className='event-div '>
+        <div key={id} id={id} className='event-div '>
             <button className='editIcon'>
-            <img src={editIcon}></img>
+            <img src={editIcon} alt='editIcon'></img>
             </button>
             <div className='date'>
                 <p className='text-left'>{getMonth()}</p>
@@ -119,7 +121,7 @@ const AdminEvent = (props) => {
             <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
-            <img src={dropDownIcon} className='dropDownIcon'></img>
+            <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
             Menu
             </p>
             
