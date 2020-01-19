@@ -6,37 +6,7 @@ import addImage from '../../../public/images/add_image.png'
 import addItem from '../../../public/images/add_item.png'
 
 const AdminCreateEvent = () => {
-    const handleAdd = () =>{
-      return(
-        <div className='timeSetup'>
-        <div className='itemSetup'>
-            <div className='items-label'>
-              <label for='Item'>Item</label>
-            </div>
-              <input type='text' name="item" id='Item' value={item} onChange={handleItem}  required />
-        </div>
-          <div className='max'>
-            <div className='items-label'>
-            <label for='Max'>Max Qty</label>
-            </div>
-              <input type='text' name="item" id='Max' value={maxQty} onChange={handleMaxQty}  required />
-          </div>
-          <div className='buttonSetup'>
-              <div>
-                <button>
-                <img src={addImage} alt="Logo" className='image-size' />
-                </button>
-              </div>
-
-              <div className='add-item-button'>
-                <button type="button" onClick={() => handleAdd()}>
-                <img src={addItem} alt="Logo" className='image-size' />
-                </button>
-              </div>
-          </div>
-        </div>
-
-      )
+   
     }
 
     const [eventTitle, setEventTitle] = useState('')
@@ -145,7 +115,7 @@ return (
                               </div>
 
                               <div className='add-item-button'>
-                                <button type="button" onClick={() => handleAdd()}>
+                                <button type="button">
                                 <img src={addItem} alt="Logo" className='image-size' />
                                 </button>
                               </div>
