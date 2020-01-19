@@ -20,6 +20,8 @@ const CreateUser = (props) => {
 
         createUserService.createUser(user).then(() => {
             props.history.push('/admin/accounts');
+        }).catch(err => {
+            console.log(err);
         })
     }
 
