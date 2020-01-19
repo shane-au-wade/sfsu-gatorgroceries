@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from 'react'
-import AdminHeader from '../adminHeader/adminHeader.jsx'
+import React, {useEffect} from 'react'
 import './AdminCheckin.css'
 
 const Receipt = () => {
-
-    // const [showUsersTable, setUsersTable] = useState(true);
-    // const [showCreateUser, setCreateUser] = useState(false);
 
     useEffect(() => {
         console.log('this function has been called')
@@ -20,7 +16,7 @@ const Receipt = () => {
 
 return (
             <div className="receipt" id='receipt'>
-                    <img src='Sitelogo.png' className="logo"></img>
+                    <img src='Sitelogo.png' className="logo" alt='GG Logo'></img>
                     <p id='receiptInfo'>ID: 918780686</p>
                     <p id='receiptInfo'><strong>Name: Shane</strong></p>
                     <p id='order'><strong>Order:</strong></p>

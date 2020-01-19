@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
@@ -17,7 +16,7 @@ const AdminCreateEvent = () => {
     const [endTime, setEndTime] = useState('')
     const [item, setItem] = useState('')
     const [maxQty, setMaxQty] = useState('')
-    const [menuJson, setMenuJson] = useState([]);
+    // const [menuJson, setMenuJson] = useState([]);
 
     const handleEventTitleChange = (event) => {
         setEventTitle(event.target.value)
