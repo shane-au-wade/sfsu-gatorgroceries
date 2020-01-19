@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const student = require('../db/student')
+const db = require('../db/index.js')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -44,7 +44,7 @@ router.post('/verify-student', function(req, res, next) {
 });
 
 
-router.post('/submit-survey', function(req, res, next) {
+router.post('/submit-survey', async(req, res, next) => {
   
   /**
    * using student email, first name, last name
@@ -52,6 +52,7 @@ router.post('/submit-survey', function(req, res, next) {
    *  update survey complete to true
    * 
    */
+  await db.student.submitSurvey(req.body.email)
    
    
 
