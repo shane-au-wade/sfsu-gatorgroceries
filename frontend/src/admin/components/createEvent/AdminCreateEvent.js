@@ -6,7 +6,6 @@ import addItem from '../../../public/images/add_item.png'
 
 const AdminCreateEvent = () => {
    
-    }
     
     const [event, setEvent] = useState({
       startDate: '',
@@ -109,11 +108,7 @@ return (
                               </div>
 
                               <div className='add-item-button'>
-<<<<<<< HEAD
-                                <button type="button">
-=======
                                 <button type="button" onClickCapture={handleAdd}>
->>>>>>> d91c548997aa62c4720458ee4b80049778de5cf4
                                 <img src={addItem} alt="Logo" className='image-size' />
                                 </button>
                               </div>
