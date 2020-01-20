@@ -165,4 +165,28 @@
 .AdminCreateEvents .image-size {
   width: 30px;
 }
+
+.AdminCreateEvents .menu {
+  -webkit-columns: #000000;
+          columns: #000000;
+}
+
+.AdminCreateEvents .dropDownIcon {
+  position: relative;
+  top: 4px;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 6px;
+}
+
+.AdminCreateEvents .menuHeader {
+  margin-right: 180px;
+  margin-left: 30px;
+}
+
+.AdminCreateEvents .item {
+  display: inline-block;
+  margin-left: 30px;
+  width: 240px;
+}
 /*# sourceMappingURL=Admin-create-event-style.css.map */
