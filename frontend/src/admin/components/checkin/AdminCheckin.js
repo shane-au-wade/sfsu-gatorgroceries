@@ -73,7 +73,7 @@ return (
             {/* this will be the order tile that will pop up after an order is found
             it will also indicate if there is not order at all */}
            
-            <Order ordername='swade1' orderID='001'></Order>
+            {/* <Order ordername='swade1' orderID='001'></Order> */}
 
             </div>
         </div>
