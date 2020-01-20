@@ -5,16 +5,6 @@ import logo from '../../images/logo.png'
 
 const PlaceOrder = () => {
 
-  const inputSpinner = (props) =>{
-    const [count, setCount] = useState(0);
-      <div>
-        
-      </div>
-
-
-    return <div />;
-  }
-
   return (
 
     <div className='place-order'>
