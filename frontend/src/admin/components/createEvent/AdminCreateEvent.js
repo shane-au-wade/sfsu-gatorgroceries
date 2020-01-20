@@ -5,9 +5,7 @@ import addImage from '../../../public/images/add_image.png'
 import addItem from '../../../public/images/add_item.png'
 
 const AdminCreateEvent = () => {
-<<<<<<< HEAD
    
-=======
     
   let menuDivs = [];
 
@@ -25,7 +23,6 @@ const AdminCreateEvent = () => {
     const handleEventTitleChange = (event) => {
         setEventTitle(event.target.value)
       }
->>>>>>> 3070148f74f5f8205c2531a7c9665f5861e58a66
     
     const [event, setEvent] = useState({
       startDate: '',
@@ -128,13 +125,10 @@ return (
                               </div>
 
                               <div className='add-item-button'>
-<<<<<<< HEAD
-                                <button type="button" onClickCapture={handleAdd}>
-=======
+                               
 
                                 <button type="button" onClickCapture={handleAdd}>
 
->>>>>>> 3070148f74f5f8205c2531a7c9665f5861e58a66
                                 <img src={addItem} alt="Logo" className='image-size' />
                                 </button>
                               </div>

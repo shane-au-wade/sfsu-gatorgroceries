@@ -1,0 +1,35 @@
+.inputSpinner{
+    .remove-outline{
+        border: none;
+        outline: none;
+
+    }
+
+    .display-number{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 4px;
+    }
+
+    .plus-button{
+        height: 18px;
+        
+    }
+
+    .minus-button{
+        height: 18px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+    .spinner-container{
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+}
