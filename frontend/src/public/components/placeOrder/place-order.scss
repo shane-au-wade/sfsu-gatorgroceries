@@ -30,15 +30,25 @@
         padding: 20px;
     }
 
+    .spinner-container{
+        margin-left: 80px;
+    }
+
     @media screen and (max-width:500px) {
         .centered-container {
             width: 290px;   
+        }
+        .spinner-container{
+            margin-left: 55px;
         }
     }
 
     @media screen and (max-width:350px) {
         .centered-container {
             width: 150px;   
+        }
+        .spinner-container{
+            margin-left: 22px;
         }
     }
 

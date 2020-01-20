@@ -1,0 +1,36 @@
+.inputSpinner .remove-outline {
+  border: none;
+  outline: none;
+}
+
+.inputSpinner .display-number {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 4px;
+}
+
+.inputSpinner .plus-button {
+  height: 18px;
+}
+
+.inputSpinner .minus-button {
+  height: 18px;
+}
+
+.inputSpinner input:focus,
+.inputSpinner select:focus,
+.inputSpinner textarea:focus,
+.inputSpinner button:focus {
+  outline: none;
+}
+
+.inputSpinner .spinner-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+/*# sourceMappingURL=inputSpinner.css.map */

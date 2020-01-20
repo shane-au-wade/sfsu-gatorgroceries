@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './place-order.css'
 import logo from '../../images/logo.png'
+import InputSpinner from '../inputSpinner/inputSpinner.jsx'
 
 
 const PlaceOrder = () => {
@@ -14,7 +15,10 @@ const PlaceOrder = () => {
       
          <h3 className='text-centered padding'>Choose from the following items</h3> 
       <div className='centered-container'>
-      
+        <div className='spinner-container'>
+           <InputSpinner></InputSpinner>
+        </div>
+       
       </div>
     
       </div>

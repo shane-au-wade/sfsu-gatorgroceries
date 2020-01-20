@@ -35,15 +35,25 @@
   padding: 20px;
 }
 
+.place-order .spinner-container {
+  margin-left: 80px;
+}
+
 @media screen and (max-width: 500px) {
   .place-order .centered-container {
     width: 290px;
+  }
+  .place-order .spinner-container {
+    margin-left: 55px;
   }
 }
 
 @media screen and (max-width: 350px) {
   .place-order .centered-container {
     width: 150px;
+  }
+  .place-order .spinner-container {
+    margin-left: 22px;
   }
 }
 /*# sourceMappingURL=place-order.css.map */
