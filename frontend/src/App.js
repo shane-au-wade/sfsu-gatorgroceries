@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/signin' component={SignIn} />
         <Route path='/survey' component={Survey} />
         <Route path='/events' component={Events} />
-        <Route path='/placeorder' component={PlaceOrder} />
+        <Route path='/place-order' component={PlaceOrder} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/request-new-password' component={RequestNewPassword}/>
         <Route path='/admin/forgot-password' component={ForgotPassword}/>

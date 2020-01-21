@@ -1,0 +1,166 @@
+$primary-color: #ffffff;
+
+.adminEvent {
+
+    .date, p strong {
+        color: $primary-color;
+    }
+    
+    .date, p {
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 122.69%;
+    }
+    
+    .date-header {
+        font-size: 18px;
+        color: #c4c4c4;
+    }
+    
+    .info {
+        font-size: 16px;
+    }
+    
+    .dropDownIcon{
+        position: relative;
+        top: 4px;
+        background: #ffffff;
+        border-radius: 15px;
+        margin-right: 6px;
+    }
+    
+    .dropDownIcon{
+        background: #ffffff;
+    }
+    
+    .menu {
+        color: #fff999;
+    }
+    
+    .menu:hover {
+        color: #ffffff;
+    }
+    
+    .menuHeader {
+        margin-right: 180px;
+        margin-left: 30px;
+    }
+    
+    .item {
+        display: inline-block;
+        margin-left: 30px;
+        width: 240px;
+    }
+    
+    .text-centered {
+        text-align: center;
+    }
+    
+    .text-left {
+        text-align: right;
+    }
+    
+    .padded {
+        padding: 20px;
+    }
+    
+    
+    .event-div {
+        width: 400px;
+        
+        background: #211061;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    
+    div .date {
+        width: 40px;
+    }
+    
+    hr {
+        width: 75%;
+    }
+    
+    .checkin{
+        margin-top: 20px;
+        font-style: normal;
+        font-weight: 500;
+    }
+    
+    .checkin button {
+        border: none;
+        border-radius: 6px;
+        background-color: #FF6060;
+        width: 120px;
+        height: 40px;
+        color: #000000;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+    }
+    
+    .checkin button:hover,
+    .checkin button:focus {
+        background: #FF8080;
+    }
+    
+    .checkin button:focus {
+        outline-offset: -6px;
+    }
+    
+    .checkin button:active {
+        transform: scale(0.99);
+    }
+    
+    .menuHeader, span u {
+        color: #c4c4c4;
+    }
+    
+    span, .menuHeader {
+        color: #ffffff;
+    } 
+    
+    .no_menu {
+        display: none;
+    }
+
+    .hide {
+        display: none;
+    }
+    
+    .editIcon {
+        position: relative;
+        border: none;
+        background-color: #FF6060;
+        border-radius: 20px;
+        padding: 3px;
+        float: right;
+        height: 30px;
+        width: 30px
+    }
+    
+    .editIcon:hover {
+        background: #FF8080;
+    }
+    
+    .editIcon:active {
+        transform: scale(0.98);
+    }
+
+    @media screen and (max-width:500px) {
+        .event-div {
+            width: 300px;   
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .event-div {
+            width: 250px;   
+        }
+    }
+}
