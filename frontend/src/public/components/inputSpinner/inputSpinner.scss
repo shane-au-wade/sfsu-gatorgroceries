@@ -2,13 +2,15 @@
     .remove-outline{
         border: none;
         outline: none;
-
+        background: none;
     }
 
     .display-number{
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
         margin-bottom: 4px;
+        
+        
     }
 
     .plus-button{
@@ -26,10 +28,59 @@
     button:focus {
         outline: none;
     }
+
     .spinner-container{
         display: flex;
-        flex-direction: row;
+        flex-direction: row;  
+        margin: 0 auto;
+        width: 390px;
         
+    }
+
+    h3, h4{
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-weight: normal;
+        font-size: 14px;
+        color: black;
+        line-height: 0px;
+    }
+
+    .item-display{
+        margin-top: 18px;
+        width: 150px;
+        text-align: center; 
+        
+    }
+
+    .max-qty-display{
+        margin: 0 auto;
+        margin-top: 15px;
+        padding-left: 5px
+
+    }
+
+    @media screen and (max-width:500px) {
+        .spinner-container{
+           width: 350px;
+          
+        }
+        .item-display{
+            
+            text-align: left;
+            padding-right: 0px;
+        }
+        .max-qty-display{
+            
+            padding-left: 0px;
+            padding-right: 5px;
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .spinner-container{
+            margin-left: 22px;
+        }
     }
 
 }
