@@ -10,7 +10,8 @@ class InputSpinner extends Component {
         item: props.item,
         maxQty: props.maxQty, 
         clicks: 0,
-        show: true
+        show: true,
+        update:props.update
     };
   }
 
@@ -18,7 +19,10 @@ class InputSpinner extends Component {
     if(this.state.clicks == this.state.maxQty){
       alert('Cannot Choose More than ' + this.state.maxQty);
     }else{
-      this.setState({ clicks: this.state.clicks + 1 });
+      let tempState = this.state;
+      tempState.clicks = tempState.clicks + 1;
+      this.state.update(tempState);
+      this.setState(tempState);
     }
     
   }
@@ -26,7 +30,10 @@ class InputSpinner extends Component {
     if(this.state.clicks == 0){
       alert('Cannot Choose Less than 0');
     }else{
-      this.setState({ clicks: this.state.clicks - 1 });
+      let tempState = this.state;
+      tempState.clicks = tempState.clicks - 1;
+      this.state.update(tempState);
+      this.setState(tempState);
     }
     
   }
