@@ -7,26 +7,42 @@ class InputSpinner extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicks: 0,
-      show: true
+        item: props.item,
+        maxQty: props.maxQty, 
+        clicks: 0,
+        show: true
     };
   }
 
   IncrementItem = () => {
-    this.setState({ clicks: this.state.clicks + 1 });
+    if(this.state.clicks == this.state.maxQty){
+      alert('Cannot Choose More than ' + this.state.maxQty);
+    }else{
+      this.setState({ clicks: this.state.clicks + 1 });
+    }
+    
   }
   DecreaseItem = () => {
-    this.setState({ clicks: this.state.clicks - 1 });
+    if(this.state.clicks == 0){
+      alert('Cannot Choose Less than 0');
+    }else{
+      this.setState({ clicks: this.state.clicks - 1 });
+    }
+    
   }
-  ToggleClick = () => {
-    this.setState({ show: !this.state.show });
-  }
+  
 
   render() {
     return (
+        
       <div className='inputSpinner'>
+          
+
           <div className='spinner-container'>
-            
+
+            <div className='item-display'>
+            {this.state.show ? <h3>{this.state.item}</h3> : ''}
+            </div>
            
             <button onClick={this.DecreaseItem} className='remove-outline'>
             <img src={minusButton} alt='minus' className='minus-button'></img>
@@ -40,7 +56,15 @@ class InputSpinner extends Component {
                 <img src={plusButton} alt='plus' className='plus-button'></img>
             </button>
 
+            <div className='max-qty-display'>
+            {this.state.show ? <h4>Max: {this.state.maxQty}</h4> : ''}
+            </div>
+
+            
+
         </div>
+
+        
         
       </div>
     );

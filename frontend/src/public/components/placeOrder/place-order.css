@@ -35,25 +35,31 @@
   padding: 20px;
 }
 
-.place-order .spinner-container {
-  margin-left: 80px;
+.place-order .submit-place-order {
+  margin-top: 15px;
+  padding: 1px;
+  text-align: center;
+}
+
+.place-order .submit-place-order button {
+  width: 120px;
+  height: 30px;
+  border-radius: 11px;
+  color: white;
+  font-size: 14px;
+  background-color: #211061;
+  border: none;
 }
 
 @media screen and (max-width: 500px) {
   .place-order .centered-container {
-    width: 290px;
-  }
-  .place-order .spinner-container {
-    margin-left: 55px;
+    width: 315px;
   }
 }
 
 @media screen and (max-width: 350px) {
   .place-order .centered-container {
     width: 150px;
-  }
-  .place-order .spinner-container {
-    margin-left: 22px;
   }
 }
 /*# sourceMappingURL=place-order.css.map */

@@ -30,26 +30,41 @@
         padding: 20px;
     }
 
-    .spinner-container{
-        margin-left: 80px;
+    .submit-place-order{
+        // margin-left: 128px;
+        margin-top: 15px;
+        padding: 1px;
+        text-align: center;
+
+    }
+
+    .submit-place-order button{
+        // border-radius: 4px;
+        // background-color: #211061;
+
+        width: 120px;
+        height: 30px;
+        border-radius: 11px;
+        color: white;
+        font-size: 14px;
+        background-color: #211061;
+        border: none;
+        
+      
     }
 
     @media screen and (max-width:500px) {
         .centered-container {
-            width: 290px;   
+            width: 315px;   
         }
-        .spinner-container{
-            margin-left: 55px;
-        }
+
     }
 
     @media screen and (max-width:350px) {
         .centered-container {
             width: 150px;   
         }
-        .spinner-container{
-            margin-left: 22px;
-        }
+        
     }
 
 }
