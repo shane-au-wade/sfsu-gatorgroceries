@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
-import '../events/adminEvents.css'
+import './event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
 
@@ -14,14 +14,15 @@ const AdminEvent = (props) => {
     // event name, 
     // location
     // menu in json format. this will need to be sorted out. 
-    const [id, setID] = useState(props.id); 
-    const [date, setDate] = useState(new Date(props.date));
-    const [time, setTime] = useState(props.time);
-    const [name, setName] = useState(props.name);
-    const [location, setLocation] = useState(props.location);
-    const [menu, setMenu] = useState(props.menu);
+    const [id] = useState(props.id); 
+    const [date] = useState(new Date(props.date));
+    const [time] = useState(props.time);
+    const [name] = useState(props.name);
+    const [location] = useState(props.location);
+    const [menu] = useState(props.menu);
+    const [preview] = useState(props.preview)
 
-    // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
+    console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
     // console.log(menu);
     
     const [showMenu, setShowMenu] = useState('no_menu');
@@ -66,6 +67,8 @@ const AdminEvent = (props) => {
             case 11:
                 month = 'Dec'
                 break;
+            default:
+                console.log(new Error('Unable to parse month in adminEvent.jsx'))
         }
         return month;
     }
@@ -75,7 +78,7 @@ const AdminEvent = (props) => {
         menu.forEach((line) => {
             console.log(line);
             retElements.push(
-                <div className='menuLine '>
+                <div key={line.item} className='menuLine '>
                     <div className='item'>
                         <span>{line.item}</span>
                     </div> 
@@ -96,11 +99,57 @@ const AdminEvent = (props) => {
             setShowMenu('no_menu')
         }
     }
+
+    const renderButton = () => {
+        console.log('props adminEvent', props)
+        let button = '';
+        if(preview === true)
+        {
+            button = (<button onClickCapture={handlePublish}>
+                Publish
+            </button>)
+        }
+        else if(props.order === true)
+        {
+            button = (
+                <Link to={{
+                    pathname: '/place-order',
+                    state: {
+                      eventID: id,
+                      menu:menu,
+                      student: props.student
+                    } 
+                }} >
+                    <button>
+                        Order
+                    </button>
+                </Link>
+            )
+        }
+        else
+        {
+            button = (
+                <Link to='/admin/checkin'>
+                    <button>
+                        Checkin
+                    </button>
+                </Link>
+            )
+        }
+        return button
+    }
+
+    const handlePublish = () => {
+        console.log('handling publish');
+
+        //axios call to /admin/createEvent
+    }
     
     return (
-        <div id={id} className='event-div '>
-            <button className='editIcon'>
-            <img src={editIcon}></img>
+        <div key={id} id={id} className='adminEvent'>
+                <div  className='event-div'>
+            <button className={'editIcon ' + props.editIcon}>
+            <img src={editIcon} alt='editIcon'></img>
             </button>
             <div className='date'>
                 <p className='text-left'>{getMonth()}</p>
@@ -119,7 +168,7 @@ const AdminEvent = (props) => {
             <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
-            <img src={dropDownIcon} className='dropDownIcon'></img>
+            <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
             Menu
             </p>
             
@@ -129,14 +178,14 @@ const AdminEvent = (props) => {
             </div>
 
             <p className='text-centered checkin'>
-                <Link to='/admin/checkin'>
-                    <button>
-                        Checkin
-                    </button>
-                </Link>
+
+                {renderButton()}
+                
             </p>  
     </div>
 
+</div>
+        
 )};
 
 export default AdminEvent;

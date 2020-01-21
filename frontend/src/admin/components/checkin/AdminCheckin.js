@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './AdminCheckin.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
@@ -7,8 +7,21 @@ import searchIcon from '../../icons/search-24px.svg';
 
 const AdminCheckin = () => {
 
-    // const [showUsersTable, setUsersTable] = useState(true);
-    // const [showCreateUser, setCreateUser] = useState(false);
+    const [searchKey, setSearchKey] = useState('')
+
+    const handleSumbit = (event) => {
+        event.preventDefault();
+        console.log(searchKey);
+        event.target.search.value = '';
+        setSearchKey('');
+        //axios call will go here
+    }
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setSearchKey(event.target.value);
+        // console.log(searchKey);
+    }
 
     const handlePrint = (event) => {
         console.log('printing')
@@ -29,15 +42,13 @@ const AdminCheckin = () => {
                     <p className='info'>Order ID</p>
                     <p>&nbsp;{props.orderID}</p>
                     <p className='menu' onClickCapture={handleOrderClick}>
-                    <img src={dropDownIcon} className='dropDownIcon'></img>
+                    <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
                     Order
                     </p>
-                    <div className='text-centered checkin'>
-                        <Link onClickCapture={handlePrint}>
-                            <button >
+                    <div className='text-centered checkin'> 
+                            <button onClickCapture={handlePrint}>
                                 Print
                             </button>
-                        </Link>
                     </div>
         </div>)
     };
@@ -52,16 +63,17 @@ return (
             {/* this div will contain the search feature of the checkin. 
             users will input gator groceries ID's that are associated with their order */}
             <div className='search-div'>
-                <form>
-                <img src={searchIcon} id='searchIcon'></img>
-                    <input type='text' autoComplete='off' className='search'></input> 
+                <form onSubmit={handleSumbit}>
+                <img src={searchIcon} id='searchIcon' alt='searchIcon'></img>
+                    <input name='search' type='text' autoComplete='off' className='search' onChange={handleChange}></input> 
+                    {/* <button></button> */}
                 </form>
             </div>
 
             {/* this will be the order tile that will pop up after an order is found
             it will also indicate if there is not order at all */}
            
-            <Order ordername='swade1' orderID='001'></Order>
+            {/* <Order ordername='swade1' orderID='001'></Order> */}
 
             </div>
         </div>

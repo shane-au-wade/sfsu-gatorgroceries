@@ -1,67 +1,59 @@
 import React, {useState, useEffect} from 'react'
 import LogoHeader from '../LogoHeader'
-import Event from './Event'
+import Event from '../../../admin/components/adminEvent/adminEvent'
 import styled from 'styled-components'
+import eventServices from '../../services/events'
 
 const PageWrapper = styled.div`
-  text-align: center;
+  
   max-width: 750px;
   margin-bottom: 10%;
 `
 
 const EventsWrapper = styled.div`
-  text-align: center;
   width:100%;
 `
 
-const dummyData = [
-  {
-    date: 'JAN 01',
-   type: 'Weekly Distribution',
-   time: '1:30 PM - 3:30 PST',
-   location: 'SFSU Annex1'
-  },
-  {
-    date: 'JAN 01',
-   type: 'Weekly Distribution',
-   time: '1:30 PM - 3:30 PST',
-   location: 'SFSU Annex1'
-  },
-  {
-    date: 'JAN 01',
-   type: 'Weekly Distribution',
-   time: '1:30 PM - 3:30 PST',
-   location: 'SFSU Annex1'
-  },
-  {
-    date: 'JAN 01',
-   type: 'Weekly Distribution',
-   time: '1:30 PM - 3:30 PST',
-   location: 'SFSU Annex1'
-  },
-  {
-    date: 'JAN 01',
-   type: 'Weekly Distribution',
-   time: '1:30 PM - 3:30 PST',
-   location: 'SFSU Annex1'
-  },
-  
-]
+const Title = styled.h3`
+  text-align: center;
+  padding: 20px;
+`
 
-const Events = () => {
+const Events = (props) => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    setEvents(dummyData)
+
+      console.log('props student events ',props)
+      eventServices.getActiveEvents().then(events => {
+      setEvents(events)
+
+    }).catch(err => {
+      console.error('Student/Events Error: ', err)
+    })
   }, [])
 
   const DisplayEvents = () => {
-    return events.map((event, eventIndex) => <Event key={eventIndex} event={event} />)
+    return events.map((event) =>  
+        <Event
+        key={event.id}
+        id={event.id}
+        date={event.date}
+        time={event.time}
+        name={event.name}
+        location={event.location}
+        menu={event.menu}
+        editIcon='hide'
+        order={true}
+        student={props.location.state[0]}
+        ></Event>
+    )
   }
 
   return (
     <PageWrapper>
       <LogoHeader />
+      <Title>Events</Title>
       <EventsWrapper>
         {DisplayEvents()}
       </EventsWrapper>

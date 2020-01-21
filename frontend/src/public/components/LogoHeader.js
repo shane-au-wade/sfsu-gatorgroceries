@@ -3,13 +3,16 @@ import logo from '../images/logo.png'
 import styled from 'styled-components'
 
 const LogoWrapper = styled.div`
-  background-color: #C4C4C4;
-  border-radius: 1%;
+    display: flex;
+    flex-direction: row;
+    background: #C4C4C4;
+    height: 200px;
 `
 
 const Logo = styled.img`
-  width: 80%;
-  margin: 10% 10% 12%;
+  margin: 0 auto;
+  height: 117px;
+  margin-top: 40px;
 `
 
 const LogoHeader = () => {

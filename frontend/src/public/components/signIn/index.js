@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
 import LogoHeader from '../LogoHeader'
 import styled from 'styled-components'
+import signInServices from '../../services/signin'
+import {withRouter} from 'react-router-dom'
 
 const PageWrapper = styled.div`
   text-align: center;
-  max-width: 750px;
 `
 
 const SignInForm = styled.form`
   padding-top: 47px;
+  max-width: 750px;
+  margin: 0 auto
 `
 
 const TextInput = styled.input`
@@ -35,7 +38,7 @@ const SubmitButton = styled.input`
   border-radius: 11px;
 `
 
-const SignIn = () => {
+const SignIn = (props) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [studentEmail, setStudentEmail] = useState('')
@@ -54,9 +57,27 @@ const SignIn = () => {
 
   const handleSignIn = (event) => {
     event.preventDefault()
-    const signInObject = {firstName, lastName, studentEmail}
+    const student = {first_name:firstName, last_name:lastName, student_email:studentEmail}
 
-    console.log(signInObject)
+    console.log(student)
+
+    signInServices.verifyStudent(student).then((surveyComplete) => {
+      // console.log(surveyComplete)
+      // depending on the value of survey_complete,
+      // we will redirect to either 
+      // the survey or placeorder
+      if(surveyComplete)
+      {
+        props.history.push('/events', [student]);
+      }
+      else
+      {
+        props.history.push('/survey', [student]);
+      }
+
+    }).catch(err => {
+      console.error('Error in student Verification: ', err)
+    })
   }
 
   return (
@@ -72,4 +93,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default withRouter(SignIn)

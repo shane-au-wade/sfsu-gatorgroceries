@@ -8,6 +8,7 @@ import Events from './public/components/events'
 
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
+import AdminPreviewEvent from './admin/components/createEvent/AdminPreviewEvent'
 import AdminCheckin from './admin/components/checkin/AdminCheckin'
 import Receipt from './admin/components/checkin/Receipt'
 import AdminAccounts from './admin/components/accounts/AdminAccounts'
@@ -19,6 +20,7 @@ import RequestNewPassword from './admin/components/request-new-password/request-
 import './App.css'
 
 const App = () => {
+  
   return (
     <Router>
       <Switch>
@@ -26,12 +28,13 @@ const App = () => {
         <Route path='/signin' component={SignIn} />
         <Route path='/survey' component={Survey} />
         <Route path='/events' component={Events} />
-        <Route path='/placeorder' component={PlaceOrder} />
+        <Route path='/place-order' component={PlaceOrder} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/request-new-password' component={RequestNewPassword}/>
         <Route path='/admin/forgot-password' component={ForgotPassword}/>
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
+        <Route path='/admin/preview-event' component={AdminPreviewEvent} />
         <Route path='/admin/checkin' component={AdminCheckin} />
         <Route path='/admin/receipt' component={Receipt} />
         <Route path='/admin/accounts' component={AdminAccounts} />

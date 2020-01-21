@@ -26,11 +26,21 @@
 }
 
 .AdminCreateEvents .formEntry input {
-  width: 380px;
+  width: calc(100% - 10px);
   height: 30px;
   border-radius: 4px;
   border: 1px solid black;
   padding-left: 10px;
+}
+
+.AdminCreateEvents .flexRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .AdminCreateEvents .preview-publish {
@@ -71,12 +81,36 @@
           flex-direction: row;
 }
 
+.AdminCreateEvents .itemDivs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.AdminCreateEvents .itemDivs input {
+  width: 70px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding-left: 10px;
+  margin-right: 20px;
+}
+
 .AdminCreateEvents .timeSetup input {
   width: 70px;
   height: 30px;
   border-radius: 4px;
   border: 1px solid black;
   padding-left: 10px;
+}
+
+.AdminCreateEvents .timeSetup, .AdminCreateEvents div select {
+  border-radius: 4px;
+  color: black;
 }
 
 .AdminCreateEvents .center-placeholder input[type="text"]::-webkit-input-placeholder {
@@ -164,5 +198,54 @@
 
 .AdminCreateEvents .image-size {
   width: 30px;
+  margin-left: 6px;
+}
+
+.AdminCreateEvents .menu {
+  -webkit-columns: #000000;
+          columns: #000000;
+}
+
+.AdminCreateEvents .dropDownIcon {
+  position: relative;
+  top: 4px;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 6px;
+}
+
+.AdminCreateEvents .menuHeader {
+  margin-right: 180px;
+  margin-left: 30px;
+}
+
+.AdminCreateEvents .item {
+  display: inline-block;
+  margin-left: 30px;
+  width: 240px;
+}
+
+@media screen and (max-width: 500px) {
+  .AdminCreateEvents .centered-container {
+    width: 300px;
+  }
+  .AdminCreateEvents .menuHeader {
+    margin-left: 20px;
+  }
+  .AdminCreateEvents .item {
+    margin-left: 20px;
+  }
+  .AdminCreateEvents .itemDivs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .AdminCreateEvents .centered-container {
+    width: 250px;
+  }
 }
 /*# sourceMappingURL=Admin-create-event-style.css.map */

@@ -38,6 +38,7 @@ const AdminEvents = () => {
             events.forEach((event) => {
                 
                     tempArr.push(<AdminEvent
+                        key={event.id}
                         id={event.id}
                         date={event.date}
                         time={event.time}
