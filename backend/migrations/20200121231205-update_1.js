@@ -27,7 +27,6 @@ module.exports = {
     }, { transaction: t }),
 
    
-
       queryInterface.addColumn('events', 'id', {
         
           type: Sequelize.UUID,
@@ -45,7 +44,13 @@ module.exports = {
           primaryKey: true
     }, { transaction: t }),
 
-  
+    
+      queryInterface.addColumn('users', 'email', {
+        
+          type: Sequelize.STRING,
+          unique: true
+      
+    }, { transaction: t }),
 
       
     ])
