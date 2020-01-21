@@ -16,8 +16,9 @@ class AdminCreateEvent extends Component {
             event: {
               startDate: '',
               startTime: '',
-              endDate: '',
+              startTP: 'PM',
               endTime: '',
+              endTP: 'PM',
               name: '',
               location: '',
               menu: [{}],
@@ -36,11 +37,12 @@ class AdminCreateEvent extends Component {
       
       handleChange = (evt) => {
         evt.preventDefault();
+        console.log('EVENT NAME: ', evt.target.name);
         if(evt.target.name === 'item') 
         {
           this.state.event.menu[this.state.counter].item = evt.target.value;
         }
-        else if( evt.target.name === 'qty')
+        else if(evt.target.name === 'qty')
         {
           this.state.event.menu[this.state.counter].qty = evt.target.value;
         }
@@ -48,7 +50,7 @@ class AdminCreateEvent extends Component {
         {
           this.state.event[evt.target.name] = evt.target.value;
         }
-        // console.log(this.state.event)
+         console.log(this.state.event)
       }
   
       handleAdd = (evt) => {
@@ -82,7 +84,7 @@ class AdminCreateEvent extends Component {
       <div className='AdminContentArea'>
       <h3 className='text-centered padded'>Create Event</h3> 
             <div className='centered-container'>
-              <form  onChange={this.handleChange} onSubmit={this.handleForm}>
+              <form  id='eventForm' onChange={this.handleChange} onSubmit={this.handleForm}>
 
                   <div className='formEntry'>
                     <label for='eventTitle'>Event Title </label>
@@ -96,34 +98,49 @@ class AdminCreateEvent extends Component {
                     
                   <div className='timeSetup '> 
                       <div>
-                      <label for='startDate'>Start Date</label>
+                      <label for='startDate'>Date</label>
                       <input type='text' name="startDate" id='startDate' placeholder='mm/dd/yr' autoComplete='off' required />
                       </div>
 
                       <div>
-                      <label for='startTime'>Start Time </label>
-                      <input type='text' name="startTime" id='startTime' placeholder='00:00 PM' autoComplete='off' required />
+                        <p>
+                          <label for='startTime'>Start</label>
+                        </p>
+                      
+                        <input type='text' name="startTime" id='startTime' placeholder='00:00' autoComplete='off' required />
+                        <select form='eventForm' name='startTP'>
+                          <option value='PM'>PM</option>
+                          <option value='AM'>AM</option>
+                        </select>
                       </div>
 
-                      <div>
+                      {/* <div>
                       <label for='endDate'>End Date</label>
                       <input type='text' name="endDate" id='endDate' placeholder='mm/dd/yr' autoComplete='off' required />
-                      </div>
+                      </div> */}
 
                       <div>
-                      <label for='endTime'>End Time</label>
-                      <input type='text' name="endTime" id='endTime' placeholder='00:00 PM' autoComplete='off' required />
+                        <p>
+                          <label for='endTime'>End</label>
+                        </p>
+                        <input type='text' name="endTime" id='endTime' placeholder='00:00' autoComplete='off' required />
+                        <select form='eventForm' name='endTP'>
+                          <option  value='PM'>PM</option>
+                          <option  value='AM'>AM</option>
+                        </select>
                       </div>
 
                       
                   </div>
-                    <div className='timeSetup'>
+                    <div className='itemDivs'>
                       <div className='itemSetup'>
                           <div className='items-label'>
                             <label for='Item'>Item</label>
                           </div>
                             <input type='text' name='item' id='Item' autoComplete='off' />
                       </div>
+
+                     <div className='flexRow'>
                         <div className='max'>
                           <div className='items-label'>
                           <label for='Max'>Max Qty</label>
@@ -143,6 +160,9 @@ class AdminCreateEvent extends Component {
                               </button>
                             </div>
                         </div>
+
+                      </div>
+                       
                       </div>
 
                       <p className='menu'>
@@ -164,19 +184,11 @@ class AdminCreateEvent extends Component {
                           }
                       </div>
 
-                        <div className='menu'>
-                         
-                        </div>
-
                       <div className='preview-publish'>
                         <div>
                            <button type='text'>Preview</button>
                         </div>
                         
-                        <div>
-                          <button type='text'>Publish</button>
-                        </div>
-
                       </div>
 
               </form>
