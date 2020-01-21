@@ -79,17 +79,19 @@ router.post('/login', function(req, res, next) {
 
   router.post('/create-event', async (req, res, next) => {
 
-    try{
+    console.log(req.body)
+    res.send("Created")
+    // try{
       
-      await db.events.createEvents(req.body)
+    //   await db.events.createEvents(req.body)
       
-      res.send("Created")
+    //   res.send("Created")
 
-    }catch(e){
+    // }catch(e){
       
-      res.json({error: "Cannot be created"})
+    //   res.json({error: "Cannot be created"})
     
-    }
+    // }
   
     /**
      *   you will recieve

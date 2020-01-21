@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const postEventData = (data) => {
-  const request =  axios.post('admin/create-event', data)
+const createEvent = (event) => {
+  const request =  axios.post('/admin/create-event', event)
 
   return request.then(response => response.data)
 }
 
-export default {getActiveEvents}
+export default {createEvent}
