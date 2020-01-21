@@ -8,6 +8,7 @@ import Events from './public/components/events'
 
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
+import AdminPreviewEvent from './admin/components/createEvent/AdminPreviewEvent'
 import AdminCheckin from './admin/components/checkin/AdminCheckin'
 import Receipt from './admin/components/checkin/Receipt'
 import AdminAccounts from './admin/components/accounts/AdminAccounts'
@@ -33,6 +34,7 @@ const App = () => {
         <Route path='/admin/forgot-password' component={ForgotPassword}/>
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
+        <Route path='/admin/preview-event' component={AdminPreviewEvent} />
         <Route path='/admin/checkin' component={AdminCheckin} />
         <Route path='/admin/receipt' component={Receipt} />
         <Route path='/admin/accounts' component={AdminAccounts} />
