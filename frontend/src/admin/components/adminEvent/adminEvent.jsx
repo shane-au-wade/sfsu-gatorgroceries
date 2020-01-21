@@ -20,8 +20,9 @@ const AdminEvent = (props) => {
     const [name] = useState(props.name);
     const [location] = useState(props.location);
     const [menu] = useState(props.menu);
+    const [preview] = useState(props.preview)
 
-    // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
+    console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
     // console.log(menu);
     
     const [showMenu, setShowMenu] = useState('no_menu');
@@ -98,6 +99,33 @@ const AdminEvent = (props) => {
             setShowMenu('no_menu')
         }
     }
+
+    const renderButton = () => {
+        let button = '';
+        if(preview === true)
+        {
+            button = (<button onClickCapture={handlePublish}>
+                Publish
+            </button>)
+        }
+        else
+        {
+            button = (
+                <Link to='/admin/checkin'>
+                    <button>
+                        Checkin
+                    </button>
+                </Link>
+            )
+        }
+        return button
+    }
+
+    const handlePublish = () => {
+        console.log('handling publish');
+
+        //axios call to /admin/createEvent
+    }
     
     return (
         <div key={id} id={id} className='event-div '>
@@ -131,11 +159,9 @@ const AdminEvent = (props) => {
             </div>
 
             <p className='text-centered checkin'>
-                <Link to='/admin/checkin'>
-                    <button>
-                        Checkin
-                    </button>
-                </Link>
+
+                {renderButton()}
+                
             </p>  
     </div>
 

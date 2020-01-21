@@ -4,6 +4,7 @@ import './Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
 import addItem from '../../../public/images/add_item.png'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+import {Link} from 'react-router-dom'
 
 
 class AdminCreateEvent extends Component {
@@ -185,8 +186,20 @@ class AdminCreateEvent extends Component {
                       </div>
 
                       <div className='preview-publish'>
+
                         <div>
-                           <button type='text'>Preview</button>
+                          <Link to={{
+                              pathname: '/admin/preview-event',
+                              state: {
+                                date: this.state.event.startDate,
+                                time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
+                                name: this.state.event.name,
+                                location: this.state.event.location,
+                                menu:this.state.event.menu
+                              } 
+                          }} >
+                            <button type='text'>Preview</button>
+                           </Link>
                         </div>
                         
                       </div>
