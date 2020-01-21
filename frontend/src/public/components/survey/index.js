@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
+import {withRouter} from 'react-router-dom'
 import logo from '../../images/logo.png'
 import './survey.css'
 
 
-const Survey = () => {
+const Survey = (props) => {
 
   let initPageLoad = true;
 
@@ -12,7 +13,7 @@ const Survey = () => {
     if(!initPageLoad)
     {
       console.log('the google survery is complete: redirect');
-      window.scrollTo(0,0);
+      props.history.push('/placeorder');
     }
     else
     {
@@ -35,4 +36,4 @@ const Survey = () => {
   )
 }
 
-export default Survey
+export default withRouter(Survey)
