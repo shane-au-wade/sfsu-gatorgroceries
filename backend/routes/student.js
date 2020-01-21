@@ -38,8 +38,14 @@ router.post('/verify-student', function(req, res, next) {
     *   order making process or to the survey.
     * 
     */
+   
     
-    
+    console.log('verifying student: ', req.body)
+    let surveryComplete = true;
+
+    // TODO: Amir
+
+    res.status(200).send(surveryComplete);
 
 });
 
@@ -52,22 +58,10 @@ router.post('/submit-survey', async(req, res, next) => {
    *  update survey complete to true
    * 
    */
-  await db.student.submitSurvey(req.body.email)
-   
-   
-
-});
-
-router.post('/get-active-events', function(req, res, next) {
-  
-  /**
-   *  query the db events table
-   *  find all where active = true
-   *  return them as and array of json objects
-   */
-   
-   
-
+  success = true;
+  console.log('student:', req.body)
+  // await db.student.submitSurvey(req.body.email)
+    res.status(200).send(success)
 });
 
 router.post('/place-order', function(req, res, next) {
@@ -76,6 +70,13 @@ router.post('/place-order', function(req, res, next) {
    *  insert into db orders table the order   
    */
    
+  let orderSuccess = false;
+  console.log('order: ', req.body)
+
+
+  orderSuccess = true;
+  res.status(200).send(orderSuccess)
+
 });
 
 router.post('/submit-feedback', function(req, res, next) {
