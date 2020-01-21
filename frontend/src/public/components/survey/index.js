@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {withRouter} from 'react-router-dom'
 import logo from '../../images/logo.png'
 import './survey.css'
-
+import surveyServices from '../../services/survey'
 
 const Survey = (props) => {
 
@@ -13,7 +13,11 @@ const Survey = (props) => {
     if(!initPageLoad)
     {
       console.log('the google survery is complete: redirect');
-      props.history.push('/placeorder');
+      surveyServices.submitSurvey(props.location.state.student).then(() => {
+        props.history.push('/events', [props.location.state.student]);
+      }).catch(err => {
+        console.error('Error in submitSurvey: ', err);
+      }) 
     }
     else
     {
