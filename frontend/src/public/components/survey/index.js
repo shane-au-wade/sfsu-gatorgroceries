@@ -10,11 +10,12 @@ const Survey = (props) => {
 
   const handleSumbit = () => {
     
+    console.log('survey props', props)
     if(!initPageLoad)
     {
       console.log('the google survery is complete: redirect');
-      surveyServices.submitSurvey(props.location.state.student).then(() => {
-        props.history.push('/events', [props.location.state.student]);
+      surveyServices.submitSurvey(props.location.state[0]).then(() => {
+        props.history.push('/events', [props.location.state[0]]);
       }).catch(err => {
         console.error('Error in submitSurvey: ', err);
       }) 
