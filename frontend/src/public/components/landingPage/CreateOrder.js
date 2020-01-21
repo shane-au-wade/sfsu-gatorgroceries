@@ -7,6 +7,8 @@ const CreateOrderWrapper = styled.div`
   text-align: center;
   background-color: #f7f7f7;
   padding-bottom: 25px;
+  max-width: 750px;
+  margin: 0 auto
 `
 
 const FoodImage = styled.img`

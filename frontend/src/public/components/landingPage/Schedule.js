@@ -6,6 +6,8 @@ const SheduleWrapper = styled.div`
   background-color: #F3F3F3;
   text-align: center;
   padding-bottom: 15px;
+  max-width: 750px;
+  margin: 0 auto
 `
 
 const Header = styled.h2`

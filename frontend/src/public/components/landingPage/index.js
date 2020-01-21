@@ -7,7 +7,7 @@ import AboutMe from './AboutMe'
 
 const PageWrapper = styled.div`
   text-align: center;
-  max-width: 750px;
+  margin: 0 auto;
 `
 
 const LandingPage = () => {
