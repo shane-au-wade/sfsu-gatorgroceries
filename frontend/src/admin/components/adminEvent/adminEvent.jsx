@@ -101,7 +101,7 @@ const AdminEvent = (props) => {
     }
 
     const renderButton = () => {
-        console.log('props', props)
+        console.log('props adminEvent', props)
         let button = '';
         if(preview === true)
         {
