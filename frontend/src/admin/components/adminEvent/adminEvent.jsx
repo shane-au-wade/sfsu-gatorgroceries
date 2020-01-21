@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
-import '../events/adminEvents.css'
+import './event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
 
@@ -101,12 +101,30 @@ const AdminEvent = (props) => {
     }
 
     const renderButton = () => {
+        console.log('props', props)
         let button = '';
         if(preview === true)
         {
             button = (<button onClickCapture={handlePublish}>
                 Publish
             </button>)
+        }
+        else if(props.order === true)
+        {
+            button = (
+                <Link to={{
+                    pathname: '/place-order',
+                    state: {
+                      eventID: id,
+                      menu:menu,
+                      student: props.student
+                    } 
+                }} >
+                    <button>
+                        Order
+                    </button>
+                </Link>
+            )
         }
         else
         {
@@ -128,8 +146,9 @@ const AdminEvent = (props) => {
     }
     
     return (
-        <div key={id} id={id} className='event-div '>
-            <button className='editIcon'>
+        <div key={id} id={id} className='adminEvent'>
+                <div  className='event-div'>
+            <button className={'editIcon ' + props.editIcon}>
             <img src={editIcon} alt='editIcon'></img>
             </button>
             <div className='date'>
@@ -165,6 +184,8 @@ const AdminEvent = (props) => {
             </p>  
     </div>
 
+</div>
+        
 )};
 
 export default AdminEvent;
