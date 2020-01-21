@@ -4,11 +4,12 @@ import styled from 'styled-components'
 
 const PageWrapper = styled.div`
   text-align: center;
-  max-width: 750px;
 `
 
 const SignInForm = styled.form`
   padding-top: 47px;
+  max-width: 750px;
+  margin: 0 auto
 `
 
 const TextInput = styled.input`

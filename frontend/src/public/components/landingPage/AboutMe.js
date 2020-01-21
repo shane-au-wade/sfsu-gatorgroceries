@@ -4,6 +4,8 @@ import styled from 'styled-components'
 const AboutUs = styled.div`
   font-size: 18px;
   padding: 30px 15px;
+  max-width: 750px;
+  margin: 0 auto
 `
 
 const Header = styled.h2`
