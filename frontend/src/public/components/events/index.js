@@ -24,7 +24,7 @@ const Events = (props) => {
 
   useEffect(() => {
 
-      console.log(props)
+      console.log('props student events ',props)
       eventServices.getActiveEvents().then(events => {
       setEvents(events)
 
@@ -45,7 +45,7 @@ const Events = (props) => {
         menu={event.menu}
         editIcon='hide'
         order={true}
-        student={props.location.state.student}
+        student={props.location.state[0]}
         ></Event>
     )
   }

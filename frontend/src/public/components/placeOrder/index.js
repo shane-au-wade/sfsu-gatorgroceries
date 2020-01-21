@@ -6,7 +6,7 @@ import InputSpinner from '../inputSpinner/inputSpinner.jsx'
 import orderServices from '../../services/placeOrder.js'
 
 
-const PlaceOrder = () => {
+const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
   // const clicks = InputSpinner.clicks;
@@ -14,14 +14,9 @@ const PlaceOrder = () => {
 
   useEffect(() => {
 
-    orderServices.getActiveEvents().then((events) => {
-      console.log(events)
-      console.log(events[0].menu)
+    console.log('props placeorder', props)
 
-    setMenu(events[0].menu)
-    })
-
-
+    setMenu(props.location.state.menu)
 
   }, []); 
 
@@ -33,15 +28,22 @@ const PlaceOrder = () => {
   const redirect = () =>{
         console.log(order);
 
+        let orderData = {}
         let finalOrder = []
-
         let lineItems = Object.entries(order);
 
         lineItems.forEach( lineItem => {
           finalOrder.push({item:lineItem[0],qty:lineItem[1]})
         })
-
         console.log('finalOrder: ', finalOrder)
+
+        orderData.student_id = props.location.state.student.student_email;
+        orderData.event_id = props.location.state.eventID;
+        orderData.order = finalOrder;
+
+        orderServices.placeOrder(orderData).then(data => {
+
+        })
 
         //make an axios call
   }
