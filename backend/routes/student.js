@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/verify-student', function(req, res, next) {
+router.post('/verify-student', async (req, res, next) => {
   
    /**
     * two options
@@ -41,12 +41,14 @@ router.post('/verify-student', function(req, res, next) {
    
     
     console.log('verifying student: ', req.body)
-    let surveryComplete = true;
+    //let surveryComplete = true;
 
     // TODO: Amir
-
-    res.status(200).send(surveryComplete);
-
+    try{  
+    res.status(200).send(await db.student.firstTimeUser(req.body));
+    }catch(e){
+      res.status(200).send(e);
+    }
 });
 
 
@@ -58,24 +60,36 @@ router.post('/submit-survey', async(req, res, next) => {
    *  update survey complete to true
    * 
    */
-  success = true;
-  console.log('student:', req.body)
-  // await db.student.submitSurvey(req.body.email)
-    res.status(200).send(success)
+  // success = true;
+  // console.log('student:', req.body)
+    try{
+      
+      res.status(200).send( await db.student.submitSurvey(req.body.student_email))
+    }catch(e){
+      res.status(200).send(e)
+    }
 });
 
-router.post('/place-order', function(req, res, next) {
+router.post('/place-order', async (req, res, next) => {
   
   /**
    *  insert into db orders table the order   
    */
    
-  let orderSuccess = false;
-  console.log('order: ', req.body)
+  // let orderSuccess = false;
+  // console.log('order: ', req.body)
 
 
-  orderSuccess = true;
-  res.status(200).send(orderSuccess)
+  // orderSuccess = true;
+  
+  try{
+    res.status(200).send(await db.student.placeOrder(req.body))
+
+  }catch(e){
+    res.send("error")
+  }
+
+
 
 });
 
