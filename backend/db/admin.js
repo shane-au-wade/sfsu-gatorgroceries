@@ -3,7 +3,6 @@ const connection = db.connection;
 const uuidv4 = db.uuidv4;
 
 
-
 class admin {
 
     static createUser(userBody) {

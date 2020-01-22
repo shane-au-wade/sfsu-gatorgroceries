@@ -35,4 +35,4 @@ const admin = require('../db/index.js').admin;
       })      
     }));
 
-module.exports = {passport}
+module.exports = {passport:passport}
