@@ -41,8 +41,11 @@ const PlaceOrder = (props) => {
         orderData.event_id = props.location.state.eventID;
         orderData.order = finalOrder;
 
-        orderServices.placeOrder(orderData).then(data => {
-
+        orderServices.placeOrder(orderData).then(success => {
+            if(success)
+            {
+              props.history.push('/completed-order')
+            }
         })
 
         //make an axios call
