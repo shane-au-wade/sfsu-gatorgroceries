@@ -24,12 +24,16 @@ class events {
     static createEvents (eventBody) {
 
       return new Promise((resolve,reject) => {
+        let uuid = uuidv4()
+        //Admin Id: 03fea3c8-87d0-4409-a0ca-cf2aa57e766a
 
-
-        connection.none('insert into events(id, created_by, active, date, time, name, location, menu, created_at, updated_at) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',[])
+        connection.none('insert into events(id, created_by, active, date, time, name, ' +
+          'location, menu) values ($1,$2,$3,$4,$5,$6,$7,$8)',[uuid, '03fea3c8-87d0-4409-a0ca-cf2aa57e766a', true, eventBody.date
+          , eventBody.time, eventBody.name, eventBody.location, JSON.stringify(eventBody.menu) ])
         .then(() => {
           console.log("Success")
         }).catch(e => {
+          console.log(e)
           console.log("error")
         })
       })
