@@ -1,0 +1,95 @@
+.completed-order .centered-container {
+  width: 400px;
+  background: #f3f3f3;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.completed-order .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #C4C4C4;
+  height: 200px;
+}
+
+.completed-order .main-logo {
+  margin: 0 auto;
+  height: 117px;
+  margin-top: 40px;
+}
+
+.completed-order .submit-place-order {
+  margin-top: 15px;
+  padding: 1px;
+  text-align: center;
+}
+
+.completed-order .submit-place-order button {
+  width: 120px;
+  height: 30px;
+  border-radius: 11px;
+  color: white;
+  font-size: 14px;
+  background-color: #211061;
+  border: none;
+}
+
+.completed-order p {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  line-height: 0px;
+  color: #4D924B;
+}
+
+.completed-order .check-in {
+  padding-top: 20px;
+}
+
+.completed-order .order-completed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.completed-order .completed-msg {
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 25px;
+}
+
+.completed-order .spacer {
+  height: 30px;
+}
+
+.completed-order .completed-order {
+  width: 100px;
+}
+
+@media screen and (max-width: 500px) {
+  .completed-order .centered-container {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .completed-order .centered-container {
+    width: 150px;
+  }
+}
+/*# sourceMappingURL=completedOrder.css.map */
