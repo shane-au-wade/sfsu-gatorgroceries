@@ -1,27 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+const passport = require('../auth/passport');
 
 const db = require("../db/index.js");
 
-
-
-router.post('/login', function(req, res, next) {
-  
-    /**
-     *  setup passport authenication 
-     *  bycrpt    
-     */
-     
-  });
-
-  router.post('/register', function(req, res, next) {
-  
-    /**
-     *  registering a new user/admin/volunteer 
-     *  only an admin will be able to create a new user
-     */
-     
+  router.post('/login',  passport.authenticate('local'), function(req, res, next) {
+  // console.log('User Authenicated');
+  res.status(200).send('OK');
   });
 
   router.get('/get-active-events', async (req, res, next) => {
