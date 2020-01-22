@@ -80,43 +80,12 @@ router.post('/login', function(req, res, next) {
   router.post('/create-event', async (req, res, next) => {
 
     console.log(req.body)
-    res.send("Created")
-    // try{
-      
-    //   await db.events.createEvents(req.body)
-      
-    //   res.send("Created")
-
-    // }catch(e){
-      
-    //   res.json({error: "Cannot be created"})
+    try{
+      res.status(200).send(await db.events.createEvents(req.body))
+    }catch(e){
+      console.log(e)
+    }
     
-    // }
-  
-    /**
-     *   you will recieve
-     *      title,
-     *      location,
-     *      start_date,
-     *      start time,
-     *      end date,
-     *      end time, 
-     *      array of json objects that have items and qty
-     * 
-     * example data that we want for frontend 
-     * let id = '7533a62d-270d-4dee-8be6-4e5d24a5b6e0';
-        let date = '2020-01-02';
-        let time = '1:30 PM - 3:30 PM';
-        let name = 'Weekly Distribution';
-        let location = 'SFSU | Annex 1'
-        let menu = [
-                    {item: 'Tuna, Canned', qty: '2'},
-                    {item: 'beans, Canned', qty: '4'},
-                    {item: 'chips', qty: '3'},
-                    {item: 'celery', qty: '0'},
-                    {item: 'chicken, Canned', qty: '0'},
-                ]
-     */
      
   });
 
