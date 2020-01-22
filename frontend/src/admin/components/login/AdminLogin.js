@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import './adminLogin.css'
 import logo from '../../../public/images/logo.png'
+import loginService from '../../services/login'
 
-const AdminLogin = () => {
+const AdminLogin = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,9 +18,16 @@ const AdminLogin = () => {
     
       const handleLogIn = (event) => {
         event.preventDefault()
-        const LogInObject = {email, password}
+        const user = {email:email, password:password}
     
-        console.log(LogInObject)
+        console.log(user)
+
+        loginService.login(user).then(success => {
+          if(success)
+          {
+            props.history.push('/admin/events')
+          }
+        })
       }
 
     return (
