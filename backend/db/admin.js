@@ -20,6 +20,22 @@ class admin {
         })
     }
     
+    static getUserByEmail(email) {
+        return new Promise((resolve, reject) => {
+            connection.one('select * from users where email = $1', [email])
+            .then((data) => {
+                // success;
+                //console.log(data)
+                resolve(data);
+            })
+            .catch(error => {
+                // error;
+                console.error(error);
+                reject(error)
+            });
+        });        
+    }
+
 }
 
 module.exports = admin
