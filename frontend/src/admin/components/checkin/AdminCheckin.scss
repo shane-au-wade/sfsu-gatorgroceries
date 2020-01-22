@@ -41,13 +41,13 @@ $primary-color: #ffffff;
     }
 
     .search-div {
-        width: 360px;
+        width: calc(100% -20px);
         margin: 0 auto;
        
     }
     
     .search {
-        width: 320px;
+        width: calc(100% - 40px);
         height: 30px;
         border-radius: 15px;
         border: none;
@@ -144,4 +144,18 @@ $primary-color: #ffffff;
     .checkin button:active {
         transform: scale(0.99);
     }
+
+    @media screen and (max-width:500px) {
+        .checkin-div {
+            width: 300px;   
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .checkin-div {
+            width: 250px;   
+        }
+    }
+
+
 }
