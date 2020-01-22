@@ -35,8 +35,7 @@ module.exports = {
       
     }, { transaction: t }),
 
-   
-
+  
       queryInterface.addColumn('orders', 'id', {
         
           type: Sequelize.UUID,

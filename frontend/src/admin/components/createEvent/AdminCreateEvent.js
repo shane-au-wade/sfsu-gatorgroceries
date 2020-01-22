@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
-import addItem from '../../../public/images/add_item.png'
+import addItem from '../../icons/add_circle_outline-24px.svg'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import {Link} from 'react-router-dom'
 
@@ -57,7 +57,10 @@ class AdminCreateEvent extends Component {
       handleAdd = (evt) => {
             console.log('handling add')
             evt.preventDefault();    
-           let updatedState = this.state;
+
+          if( this.state.lineItem.item.value !== '' && this.state.lineItem.qty.value !== '')
+          {
+            let updatedState = this.state;
            updatedState.menu.push(
               {item:this.state.lineItem.item.value, qty:this.state.lineItem.qty.value}
             )
@@ -67,6 +70,7 @@ class AdminCreateEvent extends Component {
             updatedState.event.menu.push({});
             this.setState(updatedState);
             console.log('state: ', this.state)
+          }
         }
   
     
@@ -109,10 +113,11 @@ class AdminCreateEvent extends Component {
                         </p>
                       
                         <input type='text' name="startTime" id='startTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='startTP'>
+                        <select form='eventForm' name='startTP' className='formLocation'>
                           <option value='PM'>PM</option>
                           <option value='AM'>AM</option>
                         </select>
+                        
                       </div>
 
                       {/* <div>
@@ -125,7 +130,7 @@ class AdminCreateEvent extends Component {
                           <label for='endTime'>End</label>
                         </p>
                         <input type='text' name="endTime" id='endTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='endTP'>
+                        <select form='eventForm' name='endTP' className='formLocation'>
                           <option  value='PM'>PM</option>
                           <option  value='AM'>AM</option>
                         </select>
@@ -149,11 +154,12 @@ class AdminCreateEvent extends Component {
                             <input type='text' name='qty' id='Max'autoComplete='off'/>
                         </div>
                         <div className='buttonSetup'>
-                            <div>
+                          {/* this code is for the add and image feature */}
+                            {/* <div>
                               <button>
                               <img src={addImage} alt="Logo" className='image-size' />
                               </button>
-                            </div>
+                            </div> */}
 
                             <div className='add-item-button'>
                               <button type="button" onClickCapture={this.handleAdd}>

@@ -100,8 +100,9 @@ $primary-color-1: #f3f3f3;
     }
 
     .createUserDiv div, input {        
-        width: 100%;
+        width: calc(100% - 20px);
         margin-bottom: 0px;
+        padding-left: 10px
     }
 
     .form-entry {

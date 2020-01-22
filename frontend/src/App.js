@@ -4,6 +4,7 @@ import LandingPage from './public/components/landingPage'
 import SignIn from './public/components/signIn'
 import Survey from './public/components/survey'
 import PlaceOrder from './public/components/placeOrder'
+import CompletedOrder from './public/components/completedOrder/completedOrder'
 import Events from './public/components/events'
 
 import AdminEvents from './admin/components/events/AdminEvents'
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/survey' component={Survey} />
         <Route path='/events' component={Events} />
         <Route path='/place-order' component={PlaceOrder} />
+        <Route path='/completed-order' component={CompletedOrder} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/request-new-password' component={RequestNewPassword}/>
         <Route path='/admin/forgot-password' component={ForgotPassword}/>

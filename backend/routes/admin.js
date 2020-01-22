@@ -1,27 +1,12 @@
 var express = require('express');
 var router = express.Router();
-
+const passport = require('../auth/passport');
 
 const db = require("../db/index.js");
 
-
-
-router.post('/login', function(req, res, next) {
-  
-    /**
-     *  setup passport authenication 
-     *  bycrpt    
-     */
-     
-  });
-
-  router.post('/register', function(req, res, next) {
-  
-    /**
-     *  registering a new user/admin/volunteer 
-     *  only an admin will be able to create a new user
-     */
-     
+  router.post('/login',  passport.authenticate('local'), function(req, res, next) {
+  // console.log('User Authenicated');
+  res.status(200).send('OK');
   });
 
   router.get('/get-active-events', async (req, res, next) => {
@@ -50,7 +35,7 @@ router.post('/login', function(req, res, next) {
      
   });
 
-  router.get('/search-order/:eventID/:studentEmail', function(req, res, next) {
+  router.get('/search-order/:eventID/:studentID', function(req, res, next) {
   
     /**
      *  query the Orders table in the db for an order where
@@ -58,7 +43,26 @@ router.post('/login', function(req, res, next) {
      *  
      *  return json of the order
      */
-     
+     console.log('search params: ', req.params)
+
+  });
+
+  router.get('/get-admin-users', function(req, res, next) {
+  
+    /**
+     *  Query the users table and return all users that are of type admin or dev
+     *  
+     *  return the users
+     */
+     console.log('get-admin-users called from admin/accounts/adminAccounts.js')
+
+     let tempUsers = [
+      {name: 'Shane W.', type:'Dev'},
+      {name: 'Jon K.', type:'Dev'},
+      {name: 'Eduardo R.', type:'Dev'},
+      ]
+
+     res.status(200).send(tempUsers)
   });
 
 
@@ -79,12 +83,23 @@ router.post('/login', function(req, res, next) {
 
   router.post('/create-event', async (req, res, next) => {
 
-    console.log(req.body)
+    
     try{
       res.status(200).send(await db.events.createEvents(req.body))
     }catch(e){
       console.log(e)
     }
+
+    // try{
+      
+    //   await db.events.createEvents(req.body)
+      
+    //   res.send("Created")
+
+    // }catch(e){
+      
+    //   res.json({error: "Cannot be created"})
+
     
      
   });

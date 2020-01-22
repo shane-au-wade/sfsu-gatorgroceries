@@ -1,16 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './adminAccounts.css'
-
 import UserTable from './UserTable.jsx';
+import accountServices from '../../services/accounts'
 
 const AdminAccounts = () => {
 
-    let users = [
+    let tempUsers = [
         {name: 'Shane W.', type:'Dev'},
         {name: 'Jon K.', type:'Dev'},
         {name: 'Eduardo R.', type:'Dev'},
     ]
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        accountServices.getAdminUsers().then((admins) => {
+            setUsers(admins)
+        }).catch(err => {
+            console.log(err)
+        })    
+    }, [])
 
 return (
     <div className='adminAccounts'>
