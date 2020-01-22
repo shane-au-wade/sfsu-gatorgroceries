@@ -57,8 +57,13 @@
         border:1px solid #FF6060;
         margin-right: 30px;
         margin-left: 30px;
-
+        cursor: pointer;
     }
+
+    .preview-publish button:hover{
+        background: #FF8080;
+    }
+
 
     .timeSetup {
         display: flex;
@@ -119,6 +124,7 @@
 
     }
 
+
     .itemSetup input{
         width: 170px;
         height: 30px;
@@ -139,22 +145,42 @@
     }
 
     .add-item-button{
-        margin-left: 5px;
-        
+        // margin-left:20px;
+        background: #FF6060;
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .add-item-button:hover,
+    .add-item-button:focus,
+    {
+        background: #FF8080;
     }
 
 
     .timeSetup div {
-        margin-right: 17px;
+    padding-left: 10px;
+    padding-right: 10px
     }
 
-    input:focus,
-    select:focus,
-    textarea:focus,
-    button:focus {
-        outline: none;
+    .timeSetup input {
+        width: 80%
     }
 
+    // input:focus,
+    // select:focus,
+    // textarea:focus,
+    // button:focus {
+    //     outline: none;
+    // }
+
+    .formLocation{
+        position: relative;
+        left: 55px;
+        bottom: 28px;
+    }
 
     .items-label label{
     font-family: 'Roboto', sans-serif;
@@ -167,9 +193,11 @@
 
     .image-size{
         width: 30px;
-        margin-left: 6px;
+        // margin-left: 6px;
         
     }
+
+    
 
     .menu {
         columns: #000000;;
@@ -211,7 +239,17 @@
             flex-direction: column;
     
         }
+
+        .timeSetup div {
+           padding: 0;
+            }
     
+            .formLocation{
+                position: relative;
+                left: 45px;
+                bottom: 28px;
+            }
+        
         
     }
 

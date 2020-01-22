@@ -37,12 +37,12 @@
 }
 
 .adminCheckin .search-div {
-  width: 360px;
+  width: calc(100% -20px);
   margin: 0 auto;
 }
 
 .adminCheckin .search {
-  width: 320px;
+  width: calc(100% - 40px);
   height: 30px;
   border-radius: 15px;
   border: none;
@@ -140,5 +140,17 @@
 .adminCheckin .checkin button:active {
   -webkit-transform: scale(0.99);
           transform: scale(0.99);
+}
+
+@media screen and (max-width: 500px) {
+  .adminCheckin .checkin-div {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .adminCheckin .checkin-div {
+    width: 250px;
+  }
 }
 /*# sourceMappingURL=AdminCheckin.css.map */

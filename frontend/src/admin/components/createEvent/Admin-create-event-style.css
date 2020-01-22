@@ -69,6 +69,11 @@
   border: 1px solid #FF6060;
   margin-right: 30px;
   margin-left: 30px;
+  cursor: pointer;
+}
+
+.AdminCreateEvents .preview-publish button:hover {
+  background: #FF8080;
 }
 
 .AdminCreateEvents .timeSetup {
@@ -173,18 +178,31 @@
 }
 
 .AdminCreateEvents .add-item-button {
-  margin-left: 5px;
+  background: #FF6060;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.AdminCreateEvents .add-item-button:hover,
+.AdminCreateEvents .add-item-button:focus {
+  background: #FF8080;
 }
 
 .AdminCreateEvents .timeSetup div {
-  margin-right: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.AdminCreateEvents input:focus,
-.AdminCreateEvents select:focus,
-.AdminCreateEvents textarea:focus,
-.AdminCreateEvents button:focus {
-  outline: none;
+.AdminCreateEvents .timeSetup input {
+  width: 80%;
+}
+
+.AdminCreateEvents .formLocation {
+  position: relative;
+  left: 55px;
+  bottom: 28px;
 }
 
 .AdminCreateEvents .items-label label {
@@ -198,7 +216,6 @@
 
 .AdminCreateEvents .image-size {
   width: 30px;
-  margin-left: 6px;
 }
 
 .AdminCreateEvents .menu {
@@ -240,6 +257,14 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+  .AdminCreateEvents .timeSetup div {
+    padding: 0;
+  }
+  .AdminCreateEvents .formLocation {
+    position: relative;
+    left: 45px;
+    bottom: 28px;
   }
 }
 
