@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('../auth/passport');
+const passport = require('../auth/passport').passport;
 
 const db = require("../db/index.js");
 
   router.post('/login',  passport.authenticate('local'), function(req, res, next) {
   // console.log('User Authenicated');
-  res.status(200).send('OK');
+  res.status(200).send(true);
   });
 
   router.get('/get-active-events', async (req, res, next) => {
