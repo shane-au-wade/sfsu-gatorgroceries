@@ -58,7 +58,7 @@ class AdminCreateEvent extends Component {
             console.log('handling add')
             evt.preventDefault();    
 
-          if( this.state.lineItem.item.value != '' && this.state.lineItem.qty.value != '')
+          if( this.state.lineItem.item.value !== '' && this.state.lineItem.qty.value !== '')
           {
             let updatedState = this.state;
            updatedState.menu.push(
