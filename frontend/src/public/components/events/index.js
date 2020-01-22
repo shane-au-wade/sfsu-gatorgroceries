@@ -6,7 +6,6 @@ import eventServices from '../../services/events'
 
 const PageWrapper = styled.div`
   
-  max-width: 750px;
   margin-bottom: 10%;
 `
 
