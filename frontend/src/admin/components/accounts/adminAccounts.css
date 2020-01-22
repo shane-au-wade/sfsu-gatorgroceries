@@ -97,8 +97,9 @@
 }
 
 .adminAccounts .createUserDiv div, .adminAccounts input {
-  width: 100%;
+  width: calc(100% - 20px);
   margin-bottom: 0px;
+  padding-left: 10px;
 }
 
 .adminAccounts .form-entry {

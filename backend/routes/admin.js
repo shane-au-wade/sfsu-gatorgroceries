@@ -59,7 +59,25 @@ router.post('/login', function(req, res, next) {
      *  return json of the order
      */
      console.log('search params: ', req.params)
-     
+
+  });
+
+  router.get('/get-admin-users', function(req, res, next) {
+  
+    /**
+     *  Query the users table and return all users that are of type admin or dev
+     *  
+     *  return the users
+     */
+     console.log('get-admin-users called from admin/accounts/adminAccounts.js')
+
+     let tempUsers = [
+      {name: 'Shane W.', type:'Dev'},
+      {name: 'Jon K.', type:'Dev'},
+      {name: 'Eduardo R.', type:'Dev'},
+      ]
+
+     res.status(200).send(tempUsers)
   });
 
 
