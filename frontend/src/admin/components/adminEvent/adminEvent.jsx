@@ -130,7 +130,12 @@ const AdminEvent = (props) => {
         else
         {
             button = (
-                <Link to='/admin/checkin'>
+                <Link to={{
+                    pathname: '/admin/checkin',
+                    state: {
+                      eventID: id,
+                    } 
+                }} >
                     <button>
                         Checkin
                     </button>

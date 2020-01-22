@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
      
   });
 
-  router.get('/search-order/:eventID/:studentEmail', function(req, res, next) {
+  router.get('/search-order/:eventID/:studentID', function(req, res, next) {
   
     /**
      *  query the Orders table in the db for an order where
@@ -58,6 +58,7 @@ router.post('/login', function(req, res, next) {
      *  
      *  return json of the order
      */
+     console.log('search params: ', req.params)
      
   });
 
@@ -80,7 +81,7 @@ router.post('/login', function(req, res, next) {
   router.post('/create-event', async (req, res, next) => {
 
     console.log(req.body)
-    res.send("Created")
+res.send("Created")
     // try{
       
     //   await db.events.createEvents(req.body)

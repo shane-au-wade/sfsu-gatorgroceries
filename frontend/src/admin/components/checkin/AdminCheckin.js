@@ -4,17 +4,28 @@ import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './AdminCheckin.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import searchIcon from '../../icons/search-24px.svg';
+import checkinServices from '../../services/checkin'
 
-const AdminCheckin = () => {
+const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
+    const [order, setOrder] = useState('')
 
     const handleSumbit = (event) => {
         event.preventDefault();
         console.log(searchKey);
-        event.target.search.value = '';
-        setSearchKey('');
+        let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
+        
         //axios call will go here
+        console.log(searchParams)
+        checkinServices.searchOrder(searchParams).then((foundOrder) => {
+            console.log('Order: ', foundOrder)
+            // setOrder(foundOrder);
+            event.target.search.value = '';
+            setSearchKey('');
+        }).catch(err => {
+            
+        })
     }
 
     const handleChange = (event) => {
