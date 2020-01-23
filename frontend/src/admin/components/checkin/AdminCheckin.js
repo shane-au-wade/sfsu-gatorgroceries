@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 // import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import './AdminCheckin.css'
+import './style/AdminCheckin.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import searchIcon from '../../icons/search-24px.svg';
 import checkinServices from '../../services/checkin'

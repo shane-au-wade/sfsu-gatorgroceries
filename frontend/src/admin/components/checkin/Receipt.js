@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import './AdminCheckin.css'
+import './style/AdminCheckin.css'
 
 const Receipt = () => {
 

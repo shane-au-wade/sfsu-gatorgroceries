@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './forgotPassword.css'
+import './style/forgotPassword.css'
 import logo from '../../../public/images/logo.png'
 
 const ForgotPassword = () => {

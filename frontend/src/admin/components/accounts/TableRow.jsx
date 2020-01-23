@@ -1,5 +1,5 @@
 import React from 'react'
-import './adminAccounts.css'
+import './style/adminAccounts.css'
 import editIcon from '../../icons/edit-24px.svg';
 
 const TableRow = (props) => {

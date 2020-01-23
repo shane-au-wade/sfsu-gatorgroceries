@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 // import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import eventServices from '../../services/events.js'
-import './adminEvents.css'
+import './style/adminEvents.css'
 // import dropDownIcon from '../icons/arrow_drop_down-24px.svg';
 
 import AdminEvent from '../adminEvent/adminEvent.jsx'

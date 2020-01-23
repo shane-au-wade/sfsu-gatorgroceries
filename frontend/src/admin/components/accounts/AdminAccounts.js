@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import './adminAccounts.css'
+import './style/adminAccounts.css'
 import UserTable from './UserTable.jsx';
 import accountServices from '../../services/accounts'
 

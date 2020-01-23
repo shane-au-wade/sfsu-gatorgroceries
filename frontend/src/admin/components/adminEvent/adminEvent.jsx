@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 
-import './event.css'
+import './style/event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
 import createEventServices from '../../services/createEvent'

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './adminLogin.css'
+import './style/adminLogin.css'
 import logo from '../../../public/images/logo.png'
 import loginService from '../../services/login'
 

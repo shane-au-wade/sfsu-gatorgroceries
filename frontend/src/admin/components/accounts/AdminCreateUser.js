@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import './adminAccounts.css'
+import './style/adminAccounts.css'
 
 import CreateUser from './CreateUser.jsx';
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {withRouter} from 'react-router-dom'
-import './adminAccounts.css'
+import './style/adminAccounts.css'
 import createUserService from '../../services/createUser'
 
 const CreateUser = (props) => {

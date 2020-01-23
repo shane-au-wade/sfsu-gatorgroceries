@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import './AdminData.css';
+import './style/AdminData.css';
 import Graph from './graph.jsx'
 
 const AdminData = () => {
