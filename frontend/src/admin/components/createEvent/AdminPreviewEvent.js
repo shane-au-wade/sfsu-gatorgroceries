@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 // import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import '../events/adminEvents.css'
+import '../events/style/adminEvents.css'
 
 import AdminEvent from '../adminEvent/adminEvent.jsx'
 

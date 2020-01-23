@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
-import './Admin-create-event-style.css'
+import './style/Admin-create-event-style.css'
 import addImage from '../../../public/images/add_image.png'
 import addItem from '../../icons/add_circle_outline-24px.svg'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';

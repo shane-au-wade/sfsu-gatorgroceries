@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
-import './adminHeader.css';
+import './style/adminHeader.css';
 import eventIcon from '../../icons/calendar_today-24px.svg';
 import plusIcon from '../../icons/add_circle_outline-24px.svg';
 import accountsIcon from '../../icons/people_outline-24px.svg';
