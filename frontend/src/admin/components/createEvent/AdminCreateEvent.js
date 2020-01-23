@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/Admin-create-event-style.css'
-import addImage from '../../../public/images/add_image.png'
 import addItem from '../../icons/add_circle_outline-24px.svg'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import {Link} from 'react-router-dom'
-
 
 class AdminCreateEvent extends Component {
 
@@ -30,28 +28,31 @@ class AdminCreateEvent extends Component {
         this.state = initState;
       }
 
-
       componentDidMount() {
-        this.state.lineItem.item = document.getElementById('Item');
-        this.state.lineItem.qty = document.getElementById('Max')
+        let updatedState = this.state;
+        updatedState.lineItem.item = document.getElementById('Item');
+        updatedState.lineItem.qty = document.getElementById('Max');
+        this.setState(updatedState);
       }
       
       handleChange = (evt) => {
         evt.preventDefault();
         console.log('EVENT NAME: ', evt.target.name);
+        let updatedState = this.state;
         if(evt.target.name === 'item') 
         {
-          this.state.event.menu[this.state.counter].item = evt.target.value;
+          updatedState.event.menu[updatedState.counter].item = evt.target.value;
         }
         else if(evt.target.name === 'qty')
         {
-          this.state.event.menu[this.state.counter].qty = evt.target.value;
+          updatedState.event.menu[updatedState.counter].qty = evt.target.value;
         }
         else
         {
-          this.state.event[evt.target.name] = evt.target.value;
+          updatedState.event[evt.target.name] = evt.target.value;
         }
-         console.log(this.state.event)
+         console.log(updatedState.event)
+         this.setState(updatedState)
       }
   
       handleAdd = (evt) => {
@@ -64,8 +65,8 @@ class AdminCreateEvent extends Component {
            updatedState.menu.push(
               {item:this.state.lineItem.item.value, qty:this.state.lineItem.qty.value}
             )
-            this.state.lineItem.item.value = '';
-            this.state.lineItem.qty.value = '';
+            updatedState.lineItem.item.value = '';
+            updatedState.lineItem.qty.value = '';
             updatedState.counter = updatedState.counter + 1;
             updatedState.event.menu.push({});
             this.setState(updatedState);
@@ -73,14 +74,12 @@ class AdminCreateEvent extends Component {
           }
         }
   
-    
         handleForm = (evt) => {
           evt.preventDefault()
           // const EventObject = {eventTitle, location,startDate,startTime,endDate,endTime,item,maxQty}
           
           console.log(this.state.event)
         }
-
 
   render() { 
     return (  

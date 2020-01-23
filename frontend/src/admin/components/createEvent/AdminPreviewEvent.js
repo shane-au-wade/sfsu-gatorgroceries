@@ -1,12 +1,9 @@
-import React, {useState} from 'react'
-// import {Link} from 'react-router-dom'
+import React from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import '../events/style/adminEvents.css'
-
 import AdminEvent from '../adminEvent/adminEvent.jsx'
 
 const AdminPreviewEvent = (props) => {
-
 
     const renderEvent = () => {
         if(props.location.state != null)
@@ -23,7 +20,6 @@ const AdminPreviewEvent = (props) => {
             )
         }
     }
-
 
 return (
     <div className='adminEvents'>

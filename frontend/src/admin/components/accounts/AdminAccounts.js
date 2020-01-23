@@ -6,11 +6,11 @@ import accountServices from '../../services/accounts'
 
 const AdminAccounts = () => {
 
-    let tempUsers = [
-        {name: 'Shane W.', type:'Dev'},
-        {name: 'Jon K.', type:'Dev'},
-        {name: 'Eduardo R.', type:'Dev'},
-    ]
+    // let tempUsers = [
+    //     {name: 'Shane W.', type:'Dev'},
+    //     {name: 'Jon K.', type:'Dev'},
+    //     {name: 'Eduardo R.', type:'Dev'},
+    // ]
 
     const [users, setUsers] = useState([])
 

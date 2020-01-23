@@ -57,7 +57,7 @@ const AdminLogin = (props) => {
                                   <input type='submit' value='Submit' className='app-button-2' />
                                 </div>  
                               </div>
-                              <a href="#">Forgot Password?</a>
+                              <a>Forgot Password?</a>
                           </form>
                         </div>
                      </div>
