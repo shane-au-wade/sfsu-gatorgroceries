@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import plusButton from '../../images/plusButton.png'
 import minusButton from '../../images/minusButton.png'
-import './inputSpinner.css'
+import './style/inputSpinner.css'
 
 class InputSpinner extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class InputSpinner extends Component {
   }
 
   IncrementItem = () => {
-    if(this.state.clicks == this.state.maxQty){
+    if(this.state.clicks === this.state.maxQty){
       alert('Cannot Choose More than ' + this.state.maxQty);
     }else{
       let tempState = this.state;
@@ -27,7 +27,7 @@ class InputSpinner extends Component {
     
   }
   DecreaseItem = () => {
-    if(this.state.clicks == 0){
+    if(this.state.clicks === 0){
       alert('Cannot Choose Less than 0');
     }else{
       let tempState = this.state;

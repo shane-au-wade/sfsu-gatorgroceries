@@ -22,39 +22,34 @@ const Events = (props) => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-
-      console.log('props student events ',props)
+      // console.log('props student events ',props)
       eventServices.getActiveEvents().then(events => {
       setEvents(events)
-
     }).catch(err => {
       console.error('Student/Events Error: ', err)
     })
-  }, [])
-
-  const DisplayEvents = () => {
-    return events.map((event) =>  
-        <Event
-        key={event.id}
-        id={event.id}
-        date={event.date}
-        time={event.time}
-        name={event.name}
-        location={event.location}
-        menu={event.menu}
-        editIcon='hide'
-        order={true}
-        student={props.location.state[0]}
-        ></Event>
-    )
-  }
+  }, [props])
 
   return (
     <PageWrapper>
       <LogoHeader />
       <Title>Events</Title>
       <EventsWrapper>
-        {DisplayEvents()}
+        {events.map((event) =>  
+                    <Event
+                    key={event.id}
+                    id={event.id}
+                    date={event.date}
+                    time={event.time}
+                    name={event.name}
+                    location={event.location}
+                    menu={event.menu}
+                    editIcon='hide'
+                    order={true}
+                    student={props.location.state[0]}
+                    ></Event>
+                    )
+        }
       </EventsWrapper>
     </PageWrapper>
   )

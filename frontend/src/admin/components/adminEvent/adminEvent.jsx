@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import {Link, withRouter} from 'react-router-dom'
-
+import {Link} from 'react-router-dom'
 import './style/event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
@@ -8,13 +7,6 @@ import createEventServices from '../../services/createEvent'
 
 const AdminEvent = (props) => {
 
-    // State
-    // ID will be used to uniquely identify each event div
-    // date 
-    // time
-    // event name, 
-    // location
-    // menu in json format. this will need to be sorted out. 
     const [id] = useState(props.id); 
     const [date] = useState(new Date(props.date));
     const [time] = useState(props.time);
@@ -23,8 +15,7 @@ const AdminEvent = (props) => {
     const [menu] = useState(props.menu);
     const [preview] = useState(props.preview)
 
-    console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
-    // console.log(menu);
+    // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
     
     const [showMenu, setShowMenu] = useState('no_menu');
 
@@ -74,21 +65,6 @@ const AdminEvent = (props) => {
         return month;
     }
 
-    const renderMenu = () => {
-        let retElements = [];
-        menu.forEach((line) => {
-            console.log(line);
-            retElements.push(
-                <div key={line.item} className='menuLine '>
-                    <div className='item'>
-                        <span>{line.item}</span>
-                    </div> 
-                    <span>{line.qty}</span>
-                </div>)
-        })
-        return retElements;
-    }
-
     const handleMenuClick = () =>
     {
         if(showMenu === 'no_menu')
@@ -102,7 +78,7 @@ const AdminEvent = (props) => {
     }
 
     const renderButton = () => {
-        console.log('props adminEvent', props)
+        // console.log('props adminEvent', props)
         let button = '';
         if(preview === true)
         {
@@ -191,7 +167,17 @@ const AdminEvent = (props) => {
             
             <div id='menu' className={showMenu}>
                 <span className='menuHeader'><u>Item</u></span> <span><u>Max Qty</u></span>
-                {renderMenu()}
+                {
+                menu.map(
+                    line => 
+                            <div key={line.item} className='menuLine '>
+                                <div className='item'>
+                                    <span>{line.item}</span>
+                                </div> 
+                                <span>{line.qty}</span>
+                            </div>  
+                    )
+                }
             </div>
 
             <p className='text-centered checkin'>
