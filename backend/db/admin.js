@@ -27,16 +27,24 @@ class admin {
         return new Promise((resolve, reject) => {
             connection.one('select * from users where email = $1', [email])
             .then((data) => {
-                // success;
-                //console.log(data)
                 resolve(data);
             })
             .catch(error => {
-                // error;
-                console.error(error);
                 reject(false)
             });
         });        
+    }
+
+    static searchOrder(orderParams){
+        return new Promise((resolve,reject) => {
+            connection.one('select * from orders where student_id=$1 and event_id=$2',[orderParams.studentID+'@mail.sfsu.edu',orderParams.eventID])
+            .then((result) => {
+                resolve(result)
+            })
+            .catch((e) => {
+                reject({error: "Not Found"})
+            })
+        })
     }
 
 }

@@ -41,12 +41,6 @@ router.post('/place-order', async (req, res, next) => {
    *  insert into db orders table the order   
    */
    
-  // let orderSuccess = false;
-  // console.log('order: ', req.body)
-
-
-  // orderSuccess = true;
-  
   try{
     res.status(200).send(await db.student.placeOrder(req.body))
 
