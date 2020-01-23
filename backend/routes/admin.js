@@ -45,7 +45,7 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
      
   });
 
-  router.get('/search-order/:eventID/:studentID', function(req, res, next) {
+  router.get('/search-order/:eventID/:studentID', async (req, res, next) => {
   
     /**
      *  query the Orders table in the db for an order where
@@ -53,7 +53,12 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
      *  
      *  return json of the order
      */
-     console.log('search params: ', req.params)
+
+     try{
+      res.status(200).send(await db.admin.searchOrder(req.params))
+     }catch(e){
+      res.status(200).send(e)
+     }
 
   });
 
@@ -99,17 +104,6 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
     }catch(e){
       console.log(e)
     }
-
-    // try{
-      
-    //   await db.events.createEvents(req.body)
-      
-    //   res.send("Created")
-
-    // }catch(e){
-      
-    //   res.json({error: "Cannot be created"})
-
     
      
   });
