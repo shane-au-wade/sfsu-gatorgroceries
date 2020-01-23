@@ -4,19 +4,23 @@ const passport = require('../auth/passport').passport;
 
 const db = require("../db/index.js");
 
-  // router.post('/login',  passport.authenticate('local'), function(req, res, next) {
-  // // console.log('User Authenicated');
-  // res.status(200).send(true);
-  // });
+router.post('/login',  passport.authenticate('local', {session: false}), function(req, res, next) {
+  // console.log('Username: ', req.body.username);
+  // console.log('password: ', req.body.password);
+  // console.log('User Authenicated');
+  res.status(200).send(true);
+});
 
-  router.post('/login', function(req, res, next) {
-    // console.log('User Authenicated');
-    console.log('login: ', req.body)
-    res.status(200).send(true);
-    });
+  // router.post('/login', function(req, res, next) {
+  //   // console.log('User Authenicated');
+  //   console.log('login: ', req)
+  //   res.status(200).send(true);
+  //   });
+
 
   router.get('/get-active-events', async (req, res, next) => {
   
+
     /**
      *  return all active events from the events table in the db
      *  json

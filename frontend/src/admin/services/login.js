@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const login = (admin) => {
-  const request =  axios.post('login', admin)
+const login = (user) => {
+  const request =  axios.post('/admin/login', user)
   return request.then(response => response.data)
 }
 

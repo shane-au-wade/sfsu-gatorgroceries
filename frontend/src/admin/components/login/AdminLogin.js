@@ -18,16 +18,22 @@ const AdminLogin = (props) => {
     
       const handleLogIn = (event) => {
         event.preventDefault()
-        const user = {email:email, password:password}
+        event.target.email.value = '';
+        event.target.password.value = '';
+        const user = {username:email, password:password}
     
-        console.log(user)
+        console.log('user', user)
 
         loginService.login(user).then(success => {
           if(success)
           {
             props.history.push('/admin/events')
           }
-        })
+        }).catch(err => {
+          // console.error('Login error: ', err)
+          
+           alert('invalid credentials')
+        });
       }
 
     return (
@@ -44,8 +50,8 @@ const AdminLogin = (props) => {
                      <div className='log-in-background'>
                         <div className='log-in-container'>
                           <form className='signin-form-2' onSubmit={handleLogIn}>
-                              <input type='text' placeholder='Email' value={email} onChange={handleEmailChange} required />
-                              <input type='password' name='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
+                              <input name='email' type='text' placeholder='Email'  onChange={handleEmailChange} required />
+                              <input type='password' name='password' placeholder='Password' onChange={handlePasswordChange} required />
                               <div className='login-button'>
                                 <div>
                                   <input type='submit' value='Submit' className='app-button-2' />

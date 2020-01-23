@@ -21,7 +21,7 @@ const admin = require('../db/index.js').admin;
 
           // console.log('bcypt compare is called');
           if (err) {
-            console.log(err);
+            // console.log(err);
             return done(err)
           }
           if (!isValid) {
@@ -29,10 +29,12 @@ const admin = require('../db/index.js').admin;
             return done(null, false)
           }
 
-          //console.log('User Authenticated:', user)
+          // console.log('User Authenticated:', user)
           return done(null, user)
         })
-      })      
+      }).catch(err => {
+        return done(null, false);
+      })
     }));
 
 module.exports = {passport:passport}
