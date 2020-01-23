@@ -34,7 +34,7 @@ class admin {
             .catch(error => {
                 // error;
                 console.error(error);
-                reject(error)
+                reject(false)
             });
         });        
     }
