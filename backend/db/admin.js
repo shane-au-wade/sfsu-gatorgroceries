@@ -12,7 +12,7 @@ class admin {
         return new Promise((resolve,reject) => {
             bcrypt.hash(userBody.password, saltRounds, function(err, hash) {
                 // Store hash in your password DB. 
-                connection.none('insert into users (id, type, first_name, last_name, email, password) values ($1,$2,$3,$4,$5,$6)', [uuid, userBody.type, userBody.firstName, userBody.lastName, userBody.email, hash])
+                connection.none('insert into users (id, type, first_name, last_name, email, password) values ($1,$2,$3,$4,$5,$6)', [uuid, userBody.type, userBody.firstName.toLowerCase(), userBody.lastName.toLowerCase(), userBody.email.toLowerCase(), hash])
                 .then(() => {
                     resolve("User Added")
                 })
@@ -43,6 +43,24 @@ class admin {
             })
             .catch((e) => {
                 reject({error: "Not Found"})
+            })
+        })
+    }
+
+    static getUsers(){
+        return new Promise((resolve,reject) => {
+            connection.many("select * from users where type = 'admin'")
+            .then((result) => {
+
+                const newUser = result.map((item) => {
+                    console.log()
+                                        
+                    return {name: item.first_name.charAt(0).toUpperCase() + item.first_name.slice(1) + ' ' + item.last_name.charAt(0).toUpperCase() +'.', type: item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                })
+                resolve(newUser)
+            })
+            .catch((e) => {
+                reject({error: "No User Found"})
             })
         })
     }
