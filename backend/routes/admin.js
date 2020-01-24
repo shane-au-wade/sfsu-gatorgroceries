@@ -8,6 +8,7 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
   // console.log('Username: ', req.body.username);
   // console.log('password: ', req.body.password);
   // console.log('User Authenicated');
+  req.session.loggedin = true;
   res.status(200).send(true);
 });
 

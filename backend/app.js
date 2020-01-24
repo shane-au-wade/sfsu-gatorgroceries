@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const session = require('express-session')
 const passport = require('passport');
 
 if(process.env.NODE_ENV === 'development') {
@@ -24,7 +24,7 @@ const app = express();
 
 // dotenv setup when in development mode
 
-
+console.log('Session Secret: ',process.env.SESSION_SECRET)
 
 global.__basedir = __dirname;
 
@@ -37,6 +37,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {httpOnly: false, maxAge: 24 * 60 * 60 * 1000 }
+}))
 
 // serving frontend
 app.use(express.static(path.join(__dirname, 'build')));
