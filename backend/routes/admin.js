@@ -62,22 +62,25 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
 
   });
 
-  router.get('/get-admin-users', function(req, res, next) {
+  router.get('/get-admin-users', async (req, res, next) => {
   
     /**
      *  Query the users table and return all users that are of type admin or dev
      *  
      *  return the users
      */
-     console.log('get-admin-users called from admin/accounts/adminAccounts.js')
+    try{
+      
+     res.status(200).send( await db.admin.getUsers())
 
-     let tempUsers = [
-      {name: 'Shane W.', type:'Dev'},
-      {name: 'Jon K.', type:'Dev'},
-      {name: 'Eduardo R.', type:'Dev'},
-      ]
+    }catch(e){
+      
+     res.status(200).send(e)
+    }
+      
 
-     res.status(200).send(tempUsers)
+
+
   });
 
 
