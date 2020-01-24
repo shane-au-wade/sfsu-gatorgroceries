@@ -20,20 +20,30 @@
 
 .adminCheckin .order-div p {
   color: #ffffff;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+.adminCheckin .order-div span {
+  color: white;
 }
 
 .adminCheckin .order-div .info {
   font-size: 16px;
-  color: #f3f3f3;
 }
 
-.adminCheckin .order-div .menu {
-  color: #fff999;
+.adminCheckin .no_menu {
+  display: none;
 }
 
-.adminCheckin .menu:hover {
-  color: #ffffff;
+.adminCheckin .item {
+  display: inline-block;
+  margin-left: 30px;
+  width: 240px;
+}
+
+.adminCheckin .menuHeader {
+  margin-right: 180px;
+  margin-left: 30px;
 }
 
 .adminCheckin .search-div {
@@ -145,6 +155,17 @@
 @media screen and (max-width: 500px) {
   .adminCheckin .checkin-div {
     width: 300px;
+  }
+  .adminCheckin .order-div {
+    width: 260px;
+  }
+  .adminCheckin .item {
+    margin-left: 30px;
+    width: 180px;
+  }
+  .adminCheckin .menuHeader {
+    margin-right: 100px;
+    margin-left: 30px;
   }
 }
 

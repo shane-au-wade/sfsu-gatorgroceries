@@ -2,14 +2,16 @@ import React, {useState} from 'react'
 // import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/AdminCheckin.css'
-import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+
 import searchIcon from '../../icons/search-24px.svg';
 import checkinServices from '../../services/checkin'
+import Order from './order.jsx'
 
 const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
     const [order, setOrder] = useState('')
+    const [showMenu, setShowMenu] = useState('no_menu');
 
     const handleSumbit = (event) => {
         event.preventDefault();
@@ -20,9 +22,9 @@ const AdminCheckin = (props) => {
         console.log(searchParams)
         checkinServices.searchOrder(searchParams).then((foundOrder) => {
             console.log('Order: ', foundOrder)
-            // setOrder(foundOrder);
-            event.target.search.value = '';
-            setSearchKey('');
+            let tempOrder = foundOrder
+            setOrder(tempOrder);
+           
         }).catch(err => {
             
         })
@@ -30,39 +32,26 @@ const AdminCheckin = (props) => {
 
     const handleChange = (event) => {
         event.preventDefault();
+
+        if(event.target.value === '')
+        {
+            setOrder('');
+        }
         setSearchKey(event.target.value);
         // console.log(searchKey);
     }
 
-    const handlePrint = (event) => {
-        console.log('printing')
-        window.open('/admin/receipt'); 
-        window.focus();
-        // handle.blur();
+    const renderOrder = () => {
+        if(order !== '')
+        {
+            console.log('rendering order')
+            return <Order info={order}></Order>
+        }
+        else 
+        {
+            return <div></div>
+        }
     }
-
-    const handleOrderClick = () => {
-       
-    }
-
-    const Order = (props) => {
-        return (<div className='order-div'>
-                    
-                   <p className='info'>Name</p> 
-                    <p>&nbsp;{props.ordername}</p>
-                    <p className='info'>Order ID</p>
-                    <p>&nbsp;{props.orderID}</p>
-                    <p className='menu' onClickCapture={handleOrderClick}>
-                    <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
-                    Order
-                    </p>
-                    <div className='text-centered checkin'> 
-                            <button onClickCapture={handlePrint}>
-                                Print
-                            </button>
-                    </div>
-        </div>)
-    };
 
 return (
     <div className='adminCheckin'>
@@ -80,12 +69,7 @@ return (
                     {/* <button></button> */}
                 </form>
             </div>
-
-            {/* this will be the order tile that will pop up after an order is found
-            it will also indicate if there is not order at all */}
-           
-            {/* <Order ordername='swade1' orderID='001'></Order> */}
-
+            {renderOrder()}      
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ $primary-color: #ffffff;
         margin: 0 auto;
         margin-bottom: 20px;
         padding: 20px;
+
     }
 
     .order-div {
@@ -20,24 +21,36 @@ $primary-color: #ffffff;
         padding: 20px;
         border-radius: 8px;
         font-size: 20px;
+        
     }
 
     .order-div p {
         color: $primary-color;
-        margin-bottom: 4px;
+        margin-bottom: 10px;
+    }
+
+    .order-div span {
+        color: white;
     }
 
     .order-div .info {
         font-size: 16px;
-        color: #f3f3f3;
     }
 
-    .order-div .menu {
-        color: #fff999;
+    .no_menu {
+        display: none;
     }
 
-    .menu:hover {
-        color: #ffffff;
+    .item {
+        display: inline-block;
+        margin-left: 30px;
+        width: 240px;
+        
+    }
+    
+    .menuHeader {
+        margin-right: 180px;
+        margin-left: 30px;
     }
 
     .search-div {
@@ -149,6 +162,23 @@ $primary-color: #ffffff;
         .checkin-div {
             width: 300px;   
         }
+
+        .order-div {
+            width: 260px;
+  
+        }
+
+        .item {
+            margin-left: 30px;
+            width: 180px;
+            
+        }
+        
+        .menuHeader {
+            margin-right: 100px;
+            margin-left: 30px;
+        }
+    
     }
 
     @media screen and (max-width:350px) {
