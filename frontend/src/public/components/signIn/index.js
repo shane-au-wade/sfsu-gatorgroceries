@@ -61,23 +61,31 @@ const SignIn = (props) => {
 
     console.log(student)
 
-    signInServices.verifyStudent(student).then((surveyComplete) => {
-      // console.log(surveyComplete)
-      // depending on the value of survey_complete,
-      // we will redirect to either 
-      // the survey or placeorder
-      if(surveyComplete)
-      {
-        props.history.push('/events', [student]);
-      }
-      else
-      {
-        props.history.push('/survey', [student]);
-      }
+    if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
+    {
+        signInServices.verifyStudent(student).then((surveyComplete) => {
+        // console.log(surveyComplete)
+        // depending on the value of survey_complete,
+        // we will redirect to either 
+        // the survey or placeorder
+        if(surveyComplete)
+        {
+          props.history.push('/events', [student]);
+        }
+        else
+        {
+          props.history.push('/survey', [student]);
+        }
 
-    }).catch(err => {
-      console.error('Error in student Verification: ', err)
-    })
+        }).catch(err => {
+          console.log('Error in student Verification: ', err)
+        })
+    }
+    else{
+      alert('invalid credentials')
+    }
+
+   
   }
 
   return (
