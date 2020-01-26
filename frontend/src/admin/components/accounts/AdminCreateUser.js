@@ -4,11 +4,11 @@ import './style/adminAccounts.css'
 
 import CreateUser from './CreateUser.jsx';
 
-const AdminCreateUser = () => {
+const AdminCreateUser = (props) => {
 
 return (
     <div className='adminAccounts'>
-    <AdminHeader selected='Accounts' username='Admin T.'></AdminHeader>
+    <AdminHeader selected='Accounts' username='Admin T.' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Create User</h3>
         <CreateUser></CreateUser>

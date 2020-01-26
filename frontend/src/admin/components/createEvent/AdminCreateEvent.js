@@ -84,7 +84,7 @@ class AdminCreateEvent extends Component {
   render() { 
     return (  
       <div className='AdminCreateEvents'>
-      <AdminHeader selected='Create Event' username='Admin T.'></AdminHeader>
+      <AdminHeader selected='Create Event' username='Admin T.' history={this.props.history}></AdminHeader>
       <div className='AdminContentArea'>
       <h3 className='text-centered padded'>Create Event</h3> 
             <div className='centered-container'>

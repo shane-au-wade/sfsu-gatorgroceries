@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import './style/AdminCheckin.css'
 
-const Receipt = () => {
+const Receipt = (props) => {
 
     useEffect(() => {
         console.log('this function has been called')
