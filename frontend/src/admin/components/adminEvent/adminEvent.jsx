@@ -82,41 +82,47 @@ const AdminEvent = (props) => {
         let button = '';
         if(preview === true)
         {
-            button = (<button onClickCapture={handlePublish}>
-                Publish
-            </button>)
+            button = ( 
+                    <Link to={{
+                        pathname: '/admin/events',
+                    }}>
+                    <button onClickCapture={handlePublish}>
+                        Publish
+                    </button>
+                    </Link>
+                    )
         }
         else if(props.order === true)
         {
             button = (
-                <Link to={{
-                    pathname: '/place-order',
-                    state: {
-                      eventID: id,
-                      menu:menu,
-                      student: props.student
-                    } 
-                }} >
-                    <button>
-                        Order
-                    </button>
-                </Link>
-            )
+                    <Link to={{
+                        pathname: '/place-order',
+                        state: {
+                        eventID: id,
+                        menu:menu,
+                        student: props.student
+                        } 
+                    }} >
+                        <button>
+                            Order
+                        </button>
+                    </Link>
+                    )
         }
         else
         {
             button = (
-                <Link to={{
-                    pathname: '/admin/checkin',
-                    state: {
-                      eventID: id,
-                    } 
-                }} >
-                    <button>
-                        Checkin
-                    </button>
-                </Link>
-            )
+                    <Link to={{
+                        pathname: '/admin/checkin',
+                        state: {
+                        eventID: id,
+                        } 
+                    }} >
+                        <button>
+                            Checkin
+                        </button>
+                    </Link>
+                    )
         }
         return button
     }

@@ -156,11 +156,27 @@ $primary-color: #ffffff;
         .event-div {
             width: 300px;   
         }
+
+        .menuHeader {
+            margin-right: 150px;
+        }
+        
+        .item {
+            width: 210px;
+        }
     }
 
     @media screen and (max-width:350px) {
         .event-div {
             width: 250px;   
+        }
+
+        .menuHeader {
+            margin-right: 120px;
+        }
+
+        .item {
+            width: 184px;
         }
     }
 }
