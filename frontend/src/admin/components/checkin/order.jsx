@@ -3,7 +3,7 @@ import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 
 const Order = (props) => {
 
-    const [order, setOrder] = useState(props.info)
+    const [order] = useState(props.info)
     const [showMenu, setShowMenu] = useState('no_menu');
 
     const handlePrint = (event) => {

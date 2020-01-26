@@ -153,11 +153,23 @@
   .adminEvent .event-div {
     width: 300px;
   }
+  .adminEvent .menuHeader {
+    margin-right: 150px;
+  }
+  .adminEvent .item {
+    width: 210px;
+  }
 }
 
 @media screen and (max-width: 350px) {
   .adminEvent .event-div {
     width: 250px;
+  }
+  .adminEvent .menuHeader {
+    margin-right: 120px;
+  }
+  .adminEvent .item {
+    width: 184px;
   }
 }
 /*# sourceMappingURL=event.css.map */

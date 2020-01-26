@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-// import {Link} from 'react-router-dom'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/AdminCheckin.css'
-
 import searchIcon from '../../icons/search-24px.svg';
 import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
@@ -10,47 +8,56 @@ import Order from './order.jsx'
 const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
-    const [order, setOrder] = useState('')
-    const [showMenu, setShowMenu] = useState('no_menu');
+    const [order, setOrder] = useState('init')
 
     const handleSumbit = (event) => {
         event.preventDefault();
-        console.log(searchKey);
-        let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
-        
-        //axios call will go here
-        console.log(searchParams)
-        checkinServices.searchOrder(searchParams).then((foundOrder) => {
-            console.log('Order: ', foundOrder)
-            let tempOrder = foundOrder
-            setOrder(tempOrder);
-           
-        }).catch(err => {
-            
-        })
+        if(searchKey !== '')
+        {
+            let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
+            //axios call will go here
+            checkinServices.searchOrder(searchParams).then((foundOrder) => {
+                // console.log('Order: ', foundOrder)
+                if(foundOrder.error)
+                {
+                    setOrder('')
+                }
+                else
+                {
+                    setOrder(foundOrder); 
+                }     
+            }).catch(err => {
+                console.log('db error')
+            })
+        }
     }
 
     const handleChange = (event) => {
         event.preventDefault();
-
         if(event.target.value === '')
         {
-            setOrder('');
+            setOrder('init');
         }
         setSearchKey(event.target.value);
-        // console.log(searchKey);
     }
 
     const renderOrder = () => {
-        if(order !== '')
+        // console.log('rendering order: ', order)
+        // console.log(typeof(order))
+        let retVal = ''
+        if(typeof(order) === 'object')
         {
-            console.log('rendering order')
-            return <Order info={order}></Order>
+            retVal = <Order info={order}></Order>
+        }
+        else if(order === 'init')
+        {
+            retVal = ''
         }
         else 
         {
-            return <div></div>
+            retVal = <p className="text-centered">Order Not Found</p>
         }
+        return retVal
     }
 
 return (
