@@ -62,7 +62,7 @@ const AdminCheckin = (props) => {
 
 return (
     <div className='adminCheckin'>
-    <AdminHeader selected='Events' username='Admin T.'></AdminHeader>
+    <AdminHeader selected='Events' username='Admin T.'  history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Checkin</h3>
             <div className='checkin-div'>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-
 import './style/adminHeader.css';
 import eventIcon from '../../icons/calendar_today-24px.svg';
 import plusIcon from '../../icons/add_circle_outline-24px.svg';
@@ -9,6 +8,7 @@ import dataIcon from '../../icons/dashboard-24px.svg';
 import gg_logo from '../../../public/images/logo.png';
 import settingIcon from '../../icons/settings_applications-24px.svg';
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+import headerServices from '../../services/header'
 
 class AdminHeader extends Component {
     
@@ -84,8 +84,14 @@ class AdminHeader extends Component {
         }
     }
 
-    handleHover = () => {
-        console.log('hovering');
+    handleLogOut = (event) => {
+        event.preventDefault();
+        headerServices.signOut().then(() => {
+             console.log('signing out');
+             this.props.history.push('/');
+        }).catch(err => {
+            console.log('error in sign out: ', err);
+        })
     }
 
     render() { 
@@ -108,9 +114,9 @@ class AdminHeader extends Component {
                             Reset Password
                             </button>
                         </p>
-                        <p className='settingsOption'>
-                            <button>
-                            Sign Out
+                        <p className='settingsOption'>  
+                            <button onClickCapture={this.handleLogOut}>
+                                Sign Out
                             </button>
                         </p> 
                     </div>

@@ -4,7 +4,7 @@ import './style/adminAccounts.css'
 import UserTable from './UserTable.jsx';
 import accountServices from '../../services/accounts'
 
-const AdminAccounts = () => {
+const AdminAccounts = (props) => {
 
     // let tempUsers = [
     //     {name: 'Shane W.', type:'Dev'},
@@ -24,7 +24,7 @@ const AdminAccounts = () => {
 
 return (
     <div className='adminAccounts'>
-    <AdminHeader selected='Accounts' username='Admin T.'></AdminHeader>
+    <AdminHeader selected='Accounts' username='Admin T.' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Users</h3>
         <UserTable users={users}></UserTable>

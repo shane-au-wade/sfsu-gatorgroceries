@@ -12,12 +12,18 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
   res.status(200).send(true);
 });
 
-  // router.post('/login', function(req, res, next) {
-  //   // console.log('User Authenicated');
-  //   console.log('login: ', req)
-  //   res.status(200).send(true);
-  //   });
-
+router.post('/logout', function(req, res, next) {
+  
+  if(req.session.loggedin)
+  {
+    delete req.session.loggedin
+  }
+  if(req.session.cookie_monster)
+  {
+    delete req.session.cookie_monster;
+  }
+  res.status(200).send(true);
+});
 
   router.get('/get-active-events', async (req, res, next) => {
   
