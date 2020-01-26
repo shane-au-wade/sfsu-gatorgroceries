@@ -16,7 +16,8 @@ class InputSpinner extends Component {
   }
 
   IncrementItem = () => {
-    if(this.state.clicks === this.state.maxQty){
+
+    if(this.state.clicks === parseInt(this.state.maxQty,10)){
       alert('Cannot Choose More than ' + this.state.maxQty);
     }else{
       let tempState = this.state;
