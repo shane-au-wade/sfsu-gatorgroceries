@@ -124,14 +124,20 @@ class AdminHeader extends Component {
                 
                 <div className='quickTools'>
                     <div className='quickToolSpacer '></div>
-                        <Link to='/admin/events' className='none'>
+                        <Link to={{
+                            pathname: '/admin/events',
+                            state: {user_name: this.state.username}
+                            }} className='none'>
                             <div className={this.state.event} onClickCapture={this.eventClick}>
                                 <img src={eventIcon} className='centered leftMargin' alt='eventIcon'></img>
                                 <div className='quickToolName '>Events</div>  
                             </div>
                         </Link>
                     <div id={this.state.spacer_1} className='quickToolSeperator centered'>|</div>
-                        <Link to='/admin/create-event' className='none'>
+                        <Link to={{
+                            pathname: '/admin/create-event',
+                            state: {user_name: this.state.username}
+                            }} className='none'>
                             <div className={this.state.createEvent} onClickCapture={this.createEventClick}>
                                 <img src={eventIcon} id='mobileFix_1' className='centered leftMargin' alt='eventIcon'></img>
                                 <img src={plusIcon} id='mobileFix_2' className='plusResize' alt='plusIcon'></img>
@@ -139,14 +145,20 @@ class AdminHeader extends Component {
                             </div>
                         </Link>
                     <div id={this.state.spacer_2} className='quickToolSeperator centered'>|</div>
-                        <Link to='/admin/accounts' className='none'>
+                        <Link to={{
+                            pathname: '/admin/accounts',
+                            state: {user_name: this.state.username}
+                            }} className='none'>
                             <div className={this.state.accounts} onClickCapture={this.accountsClick}>
                                 <img src={accountsIcon}   className='centered leftMargin' alt='accountsIcon'></img>
                                 <div className='quickToolName'>Accounts</div>
                             </div>
                         </Link>
                     <div id={this.state.spacer_3} className='quickToolSeperator centered'>|</div>
-                        <Link to='/admin/data' className='none'>
+                        <Link to={{
+                            pathname: '/admin/data',
+                            state: {user_name: this.state.username}
+                            }} className='none'>
                             <div className={this.state.data} onClickCapture={this.dataClick}>
                                 <img src={dataIcon} className='centered leftMargin' alt='dataIcon'></img>
                                 <div className='quickToolName'>Data</div>

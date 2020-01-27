@@ -84,7 +84,7 @@ class AdminCreateEvent extends Component {
   render() { 
     return (  
       <div className='AdminCreateEvents'>
-      <AdminHeader selected='Create Event' username='Admin T.' history={this.props.history}></AdminHeader>
+      <AdminHeader selected='Create Event' username={this.props.location.state.user_name} history={this.props.history}></AdminHeader>
       <div className='AdminContentArea'>
       <h3 className='text-centered padded'>Create Event</h3> 
             <div className='centered-container'>
@@ -200,7 +200,8 @@ class AdminCreateEvent extends Component {
                                 time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
                                 name: this.state.event.name,
                                 location: this.state.event.location,
-                                menu:this.state.event.menu
+                                menu:this.state.event.menu,
+                                user_name: this.props.location.state.user_name
                               } 
                           }} >
                             <button type='text'>Preview</button>
