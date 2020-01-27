@@ -18,7 +18,7 @@ const AdminEvents = (props) => {
 
 return (
     <div className='adminEvents'>
-        <AdminHeader selected='Events' username='Admin T.' history={props.history}></AdminHeader>
+        <AdminHeader selected='Events' username={props.location.state.user_name} history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Upcoming Events</h3> 
             <div className='events-container'>

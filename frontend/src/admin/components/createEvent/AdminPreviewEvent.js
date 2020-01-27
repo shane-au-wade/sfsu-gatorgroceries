@@ -23,7 +23,7 @@ const AdminPreviewEvent = (props) => {
 
 return (
     <div className='adminEvents'>
-        <AdminHeader selected='Create Event' username='Admin T.' history={props.history}></AdminHeader>
+        <AdminHeader selected='Create Event' username={props.location.state.user_name} history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Preview Event</h3> 
             <div className='events-container'>

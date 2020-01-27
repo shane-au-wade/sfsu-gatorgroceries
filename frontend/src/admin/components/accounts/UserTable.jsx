@@ -14,7 +14,6 @@ const UserTable = (props) => {
                         <th>Name</th>
                         <th>Type</th>
                     </tr>
-                    <TableRow userName='Horace T.' userType='Sys Admin' editIcon='hidden'></TableRow>
                     {   
                     props.users.map(user => 
                         (<TableRow key={user.name} userName={user.name} userType={user.type}></TableRow>)
@@ -23,7 +22,10 @@ const UserTable = (props) => {
                 </tbody>    
             </table>
             <p className='text-centered checkin'>
-                <Link to='/admin/create-user'>
+            <Link to={{
+                            pathname: '/admin/create-user',
+                            state: {user_name: props.username}
+                            }}>
                     <button>
                         New 
                     </button>

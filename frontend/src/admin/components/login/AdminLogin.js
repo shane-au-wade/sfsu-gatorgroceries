@@ -21,17 +21,18 @@ const AdminLogin = (props) => {
         event.target.email.value = '';
         event.target.password.value = '';
         const user = {username:email, password:password}
-    
+        const name = email.split('@')
         console.log('user', user)
-
         loginService.login(user).then(success => {
           if(success)
           {
-            props.history.push('/admin/events')
+            props.history.push({
+              pathname: '/admin/events',
+              state: {user_name: name[0]}
+            })
           }
         }).catch(err => {
           // console.error('Login error: ', err)
-          
            alert('invalid credentials')
         });
       }
