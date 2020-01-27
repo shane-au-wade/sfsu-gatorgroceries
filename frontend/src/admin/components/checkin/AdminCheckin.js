@@ -47,7 +47,7 @@ const AdminCheckin = (props) => {
         let retVal = ''
         if(typeof(order) === 'object')
         {
-            retVal = <Order info={order}></Order>
+            retVal = <Order info={order} history={props.history}></Order>
         }
         else if(order === 'init')
         {

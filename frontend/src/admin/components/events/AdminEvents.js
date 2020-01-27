@@ -6,15 +6,44 @@ import AdminEvent from '../adminEvent/adminEvent.jsx'
 
 const AdminEvents = (props) => {
 
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState('')
         
     useEffect(() => {        
         eventServices.getActiveEvents().then( events => {
-            console.log("events", events);   
+            console.log("events in useEffect", events);   
             setEvents(events)
+        }).catch(err => {
+            //no active events
+            console.log('catching db error')
+            setEvents(err)
         });
         
     }, []);
+
+    const renderEvents = () => {
+        let retObj = ''
+        console.log('events: ', typeof(events))
+        if(typeof(events) !== 'string' && !events.error)
+        {
+            retObj = events.map(event => 
+                <AdminEvent
+                    key={event.id}
+                    id={event.id}
+                    date={event.date}
+                    time={event.time}
+                    name={event.name}
+                    location={event.location}
+                    menu={event.menu}
+                    username={props.location.state.user_name}
+                    ></AdminEvent>
+                    )
+        }
+        else
+        {
+            retObj = <div></div>
+        }
+        return retObj;
+    }
 
 return (
     <div className='adminEvents'>
@@ -22,18 +51,8 @@ return (
         <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Upcoming Events</h3> 
             <div className='events-container'>
-               {
-               events.map(event => 
-                            <AdminEvent
-                                key={event.id}
-                                id={event.id}
-                                date={event.date}
-                                time={event.time}
-                                name={event.name}
-                                location={event.location}
-                                menu={event.menu}
-                                ></AdminEvent>
-                         )
+                {
+                renderEvents()
                 }
             </div>
         </div>

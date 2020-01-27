@@ -43,8 +43,7 @@ $primary-color: #ffffff;
 
     .item {
         display: inline-block;
-        margin-left: 30px;
-        width: 240px;
+        width: 200px;
         
     }
     
@@ -123,7 +122,7 @@ $primary-color: #ffffff;
         font-family: sans-serif;
     }
 
-    .logo {
+    .receipt .logo {
         height: calc(563px * 0.08);
         width: calc(1025px * 0.08);
     }
