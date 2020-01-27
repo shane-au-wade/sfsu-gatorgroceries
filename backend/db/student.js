@@ -39,7 +39,7 @@ class Student {
         let uuid = uuidv4()
        return new Promise((resolve,reject) => {
        
-        console.log(orderBody.order)
+        // console.log(orderBody.order)
         connection.none('insert into orders (student_id, event_id, "order", complete, bag, id) values ($1,$2,$3,$4,$5,$6)',[orderBody.student_id.toLowerCase(), orderBody.event_id,JSON.stringify(orderBody.order), false, false, uuid])
         .then(() => {
             let queries = orderBody.order.map(line => connection.none('insert into items (order_id, item, qty) values ($1,$2,$3)',[uuid, line.item, line.qty]))
