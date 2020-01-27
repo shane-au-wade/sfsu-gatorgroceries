@@ -12,6 +12,8 @@ router.post('/login',  passport.authenticate('local', {session: false}), functio
   res.status(200).send(true);
 });
 
+//comment
+
 router.post('/logout', function(req, res, next) {
   
   if(req.session.loggedin)
