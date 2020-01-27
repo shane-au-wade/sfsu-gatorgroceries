@@ -25,7 +25,7 @@ class admin {
         
     static getUserByEmail(email) {
         return new Promise((resolve, reject) => {
-            connection.one('select * from users where email = $1', [email])
+            connection.one('select * from users where email = $1', [email.toLowerCase()])
             .then((data) => {
                 resolve(data);
             })
@@ -37,7 +37,7 @@ class admin {
 
     static searchOrder(orderParams){
         return new Promise((resolve,reject) => {
-            connection.one('select * from orders where student_id=$1 and event_id=$2',[orderParams.studentID+'@mail.sfsu.edu',orderParams.eventID])
+            connection.one('select * from orders where student_id=$1 and event_id=$2',[orderParams.studentID.toLowerCase()+'@mail.sfsu.edu',orderParams.eventID])
             .then((result) => {
                 resolve(result)
             })
