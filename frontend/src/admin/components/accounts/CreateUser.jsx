@@ -27,7 +27,7 @@ const CreateUser = (props) => {
 
             // axios api calls
             createUserService.createUser(user).then(() => {
-                props.history.push('/admin/accounts');
+                props.history.goBack();
             }).catch(err => {
                 console.log(err);
             })
