@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
+import gg_logo from '../../../public/images/logo.png';
 
 const Order = (props) => {
 
@@ -9,8 +10,15 @@ const Order = (props) => {
     const handlePrint = (event) => {
         event.preventDefault()
         console.log('printing')
-        window.open('/admin/receipt'); 
-        window.focus();
+        props.history.push({
+            pathname: '/admin/receipt',
+            target: '_blank',
+            state: {
+                email: order.student_id,
+                order: order.order,
+                logo: gg_logo
+            }
+          })
         // handle.blur();
     }
 

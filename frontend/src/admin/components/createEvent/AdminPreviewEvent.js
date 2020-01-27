@@ -16,6 +16,7 @@ const AdminPreviewEvent = (props) => {
                 location={props.location.state.location}
                 menu={props.location.state.menu}
                 preview={true}
+                username={props.location.state.user_name}
                 ></AdminEvent>
             )
         }

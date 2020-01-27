@@ -85,6 +85,9 @@ const AdminEvent = (props) => {
             button = ( 
                     <Link to={{
                         pathname: '/admin/events',
+                        state: {
+                            user_name: props.username
+                        }
                     }}>
                     <button onClickCapture={handlePublish}>
                         Publish
@@ -100,7 +103,7 @@ const AdminEvent = (props) => {
                         state: {
                         eventID: id,
                         menu:menu,
-                        student: props.student
+                        student: props.student,
                         } 
                     }} >
                         <button>
@@ -116,6 +119,7 @@ const AdminEvent = (props) => {
                         pathname: '/admin/checkin',
                         state: {
                         eventID: id,
+                        user_name: props.username
                         } 
                     }} >
                         <button>
