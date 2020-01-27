@@ -11,7 +11,8 @@
     "start:mac": "concurrently \"npm run start:backend:mac\" \"npm run start:frontend\"",
     "db:create:migration": "sequelize migration:generate --name ",
     "db:migrate": "sequelize db:migrate",
-    "db:rollback": "sequelize db:migrate:undo"
+    "db:rollback": "sequelize db:migrate:undo",
+    "postinstall": "sequelize db:migrate"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
