@@ -43,57 +43,57 @@ const loggedin = (req, res, next) => {
 
 /* GET home page. */
 router.get('/', function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/events', function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/signin', function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/place-order', function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/survey', function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/login', cookieCheck, initLoggin, function(request, response, next) {
   console.log('Login Session:', request.session)
-    response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+    response.status(200).sendFile(__basedir + '/build/index.html');
 
 });
 
 router.get('/admin/events', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/checkin', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/create-event', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/preview-event', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/accounts', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/create-user', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/data', cookieCheck, loggedin, function(request, response, next) {
-  response.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 router.get('/admin/cookie-jar', function(req, res, next) {
@@ -102,7 +102,7 @@ router.get('/admin/cookie-jar', function(req, res, next) {
    *  give the admin a special cookie to view the admin/login page 
    */
    req.session.cookie_monster = 'admin';
-  res.status(200).sendFile(__basedir + '/frontend/build/index.html');
+  res.status(200).sendFile(__basedir + '/build/index.html');
 });
 
 module.exports = router;
