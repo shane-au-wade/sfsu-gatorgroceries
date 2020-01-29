@@ -47,6 +47,28 @@ class admin {
         })
     }
 
+    static getAllOrders(orderParams){
+        let query = `select 
+                    orders.*, 
+                    users.first_name, 
+                    users.last_name 
+                    from orders 
+                    left join 
+                    users 
+                    on orders.student_id = users.email
+                    where event_id=$1`
+
+        return new Promise((resolve,reject) => {
+            connection.manyOrNone(query,[orderParams.eventID])
+            .then((result) => {
+                resolve(result)
+            })
+            .catch((e) => {
+                reject({error: "Not Found"})
+            })
+        })
+    }
+
     static getUsers(){
         return new Promise((resolve,reject) => {
             connection.many("select * from users where type = 'admin'")

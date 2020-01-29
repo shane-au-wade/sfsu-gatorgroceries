@@ -101,7 +101,7 @@ router.get('/admin/cookie-jar', function(req, res, next) {
   /**
    *  give the admin a special cookie to view the admin/login page 
    */
-   req.session.cookie_monster = 'admin';
+  req.session.cookie_monster = 'admin';
   res.status(200).sendFile(__basedir + '/build/index.html');
 });
 

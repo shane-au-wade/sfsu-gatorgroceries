@@ -9,7 +9,7 @@ const Receipt = (props) => {
         setTimeout(function(){
             console.log('after');
             props.history.goBack()
-        },2000)
+        },1000)
         
     }, []);
 

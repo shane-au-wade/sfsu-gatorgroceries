@@ -5,4 +5,12 @@ const searchOrder = (searchParams) => {
   return request.then(response => response.data)
 }
 
-export default {searchOrder}
+
+
+const getAllOrders = (searchParams) => {
+  const request =  axios.get(`/admin/get-all-orders/${searchParams.eventID}`)
+  return request.then(response => response.data)
+}
+
+
+export default {searchOrder, getAllOrders}
