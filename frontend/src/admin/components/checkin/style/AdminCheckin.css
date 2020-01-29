@@ -1,42 +1,14 @@
+.adminCheckin {
+  margin: 0px;
+}
+
 .adminCheckin .debug {
   border: solid red 1px;
 }
 
-.adminCheckin .flex-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  width: 100%;
-}
-
-.adminCheckin .one-third {
-  width: 100%;
-}
-
-.adminCheckin .order-button {
-  border: none;
-  border-radius: 6px;
-  width: 60px;
-  height: 30px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-}
-
-.adminCheckin .print {
-  background-color: #FF6060;
-  color: #000000;
-}
-
-.adminCheckin .ready {
-  background-color: #FAFF16;
-}
-
-.adminCheckin .complete {
-  background-color: #2BD700;
+.adminCheckin h3 {
+  text-align: center;
+  padding: 20px;
 }
 
 .adminCheckin .centered-container {
@@ -51,39 +23,154 @@
 }
 
 .adminCheckin .order-div {
-  width: 350px;
+  width: 380px;
   margin: 0 auto;
+  margin-bottom: 5px;
   background-color: #211061;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
-  font-size: 20px;
 }
 
-.adminCheckin .order-div p {
-  color: #ffffff;
-  margin-bottom: 10px;
+.adminCheckin .order-div .dropDown hr {
+  width: 65%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 30px;
 }
 
-.adminCheckin .order-div span {
+.adminCheckin .order-div .dropDown .email {
+  color: white;
+  margin-left: 30px;
+}
+
+.adminCheckin .order-div .dropDown .order {
+  color: white;
+  margin-left: 30px;
+}
+
+.adminCheckin .order-div .dropDown .menuHeader {
+  margin-right: 180px;
+  margin-left: 35px;
+}
+
+.adminCheckin .order-div .dropDown .menuLine, .adminCheckin .order-div .dropDown span {
   color: white;
 }
 
-.adminCheckin .order-div .info {
+.adminCheckin .order-div .dropDown .item {
+  display: inline-block;
+  width: 240px;
+  margin-left: 35px;
+}
+
+.adminCheckin .order-div .dropDown .bottom-buttons {
+  margin-top: 15px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.adminCheckin .order-div .dropDown .bottom-buttons div {
+  width: 100%;
+}
+
+.adminCheckin .order-div .flex-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  height: 30px;
+}
+
+.adminCheckin .order-div .flex-row button:active {
+  -webkit-transform: scale(0.99);
+          transform: scale(0.99);
+}
+
+.adminCheckin .order-div .flex-row button:focus {
+  outline-offset: -6px;
+}
+
+.adminCheckin .order-div .flex-row .dropDownIcon {
+  position: relative;
+  top: 6px;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 6px;
+}
+
+.adminCheckin .order-div .flex-row .name {
+  width: 100%;
   font-size: 16px;
+}
+
+.adminCheckin .order-div .flex-row .name span {
+  color: white;
+  position: relative;
+  bottom: 2px;
+}
+
+.adminCheckin .order-div .flex-row .order-button {
+  border: none;
+  border-radius: 6px;
+  width: 60px;
+  height: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  padding: 0px;
+}
+
+.adminCheckin .order-div .flex-row .print {
+  background-color: #FF6060;
+  color: #000000;
+}
+
+.adminCheckin .order-div .flex-row .print:hover, .adminCheckin .order-div .flex-row .print:focus {
+  background: #FF8080;
+}
+
+.adminCheckin .order-div .flex-row .ready {
+  background-color: #FAFF16;
+}
+
+.adminCheckin .order-div .flex-row .ready button, .adminCheckin .order-div .flex-row .ready img {
+  position: relative;
+  top: 1px;
+}
+
+.adminCheckin .order-div .flex-row .ready:hover, .adminCheckin .order-div .flex-row .ready:focus {
+  background: #f0f184;
+}
+
+.adminCheckin .order-div .flex-row .complete {
+  background-color: #2BD700;
+}
+
+.adminCheckin .order-div .flex-row .complete button, .adminCheckin .order-div .flex-row .complete img {
+  position: relative;
+  top: 1px;
+}
+
+.adminCheckin .order-div .flex-row .complete:hover, .adminCheckin .order-div .flex-row .complete:focus {
+  background: #5ff839;
+}
+
+.adminCheckin .order-div .flex-row .status {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.adminCheckin .order-div .flex-row .status span {
+  color: white;
+  position: relative;
+  top: 1px;
 }
 
 .adminCheckin .no_menu {
   display: none;
-}
-
-.adminCheckin .item {
-  display: inline-block;
-  width: 200px;
-}
-
-.adminCheckin .menuHeader {
-  margin-right: 180px;
-  margin-left: 30px;
 }
 
 .adminCheckin .search-div {
@@ -91,7 +178,7 @@
   margin: 0 auto;
 }
 
-.adminCheckin .search {
+.adminCheckin .search-div .search {
   width: calc(100% - 40px);
   height: 30px;
   border-radius: 15px;
@@ -103,30 +190,10 @@
   font-size: 18px;
 }
 
-.adminCheckin #searchIcon {
+.adminCheckin .search-div #searchIcon {
   position: absolute;
   padding: 3px;
   margin-left: 6px;
-}
-
-.adminCheckin .text-centered {
-  text-align: center;
-}
-
-.adminCheckin .text-left {
-  text-align: right;
-}
-
-.adminCheckin .padded {
-  padding: 20px;
-}
-
-.adminCheckin .dropDownIcon {
-  position: relative;
-  top: 4px;
-  background: #ffffff;
-  border-radius: 15px;
-  margin-right: 6px;
 }
 
 .adminCheckin .receipt {
@@ -161,57 +228,42 @@
   width: calc(1025px * 0.08);
 }
 
-.adminCheckin .checkin {
-  margin-top: 20px;
-  font-style: normal;
-  font-weight: 500;
-}
-
-.adminCheckin .checkin button {
-  border: none;
-  border-radius: 6px;
-  background-color: #FF6060;
-  width: 120px;
-  height: 40px;
-  color: #000000;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-}
-
-.adminCheckin .checkin button:hover,
-.adminCheckin .checkin button:focus {
-  background: #FF8080;
-}
-
-.adminCheckin .checkin button:focus {
-  outline-offset: -6px;
-}
-
-.adminCheckin .checkin button:active {
-  -webkit-transform: scale(0.99);
-          transform: scale(0.99);
-}
-
 @media screen and (max-width: 500px) {
+  .adminCheckin .centered-container {
+    width: 330px;
+  }
+  .adminCheckin .order-div {
+    width: 310px;
+  }
+  .adminCheckin .order-div .dropDown .menuHeader {
+    margin-right: 130px;
+    margin-left: 30px;
+  }
+  .adminCheckin .order-div .dropDown .item {
+    display: inline-block;
+    width: 185px;
+    margin-left: 30px;
+  }
+  .adminCheckin .order-div .dropDown .bottom-buttons {
+    margin-left: 18px;
+  }
+}
+
+@media screen and (max-width: 375px) {
   .adminCheckin .centered-container {
     width: 300px;
   }
   .adminCheckin .order-div {
-    width: 260px;
-  }
-  .adminCheckin .item {
-    margin-left: 30px;
-    width: 180px;
-  }
-  .adminCheckin .menuHeader {
-    margin-right: 100px;
-    margin-left: 30px;
+    width: 280px;
   }
 }
 
 @media screen and (max-width: 350px) {
   .adminCheckin .centered-container {
-    width: 250px;
+    width: 280px;
+  }
+  .adminCheckin .order-div {
+    width: 260px;
   }
 }
 /*# sourceMappingURL=AdminCheckin.css.map */

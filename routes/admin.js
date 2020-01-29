@@ -71,6 +71,21 @@ router.post('/logout', function(req, res, next) {
 
   });
 
+  router.get('/get-all-orders/:eventID', async (req, res, next) => {
+  
+    /**
+     *  query the Orders table in the db for all orders for a specified event
+     *  return json of the orders
+     */
+
+     try{
+      res.status(200).send(await db.admin.getAllOrders(req.params))
+     }catch(e){
+      res.status(200).send(e)
+     }
+
+  });
+
   router.get('/get-admin-users', async (req, res, next) => {
   
     /**

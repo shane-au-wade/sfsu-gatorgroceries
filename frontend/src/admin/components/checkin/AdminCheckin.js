@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/AdminCheckin.css'
 import searchIcon from '../../icons/search-24px.svg';
@@ -8,27 +8,47 @@ import Order from './order.jsx'
 const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
-    const [order, setOrder] = useState('init')
+    const [orders, setOrders] = useState('init')
+
+    useEffect(() => {
+        let searchParams = {eventID: props.location.state.eventID}
+        console.log(searchParams);
+        checkinServices.getAllOrders(searchParams).then(foundOrders => {
+            if(foundOrders.error)
+                {
+                    console.log('no orders found error')
+                    setOrders('')
+                }
+                else
+                {
+                    console.log('orders', foundOrders)
+                    setOrders(foundOrders); 
+                }     
+        }).catch(err => {
+            console.log('db error')
+        })
+    }, [])
+
 
     const handleSumbit = (event) => {
         event.preventDefault();
         if(searchKey !== '')
         {
-            let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
-            //axios call will go here
-            checkinServices.searchOrder(searchParams).then((foundOrder) => {
-                // console.log('Order: ', foundOrder)
-                if(foundOrder.error)
-                {
-                    setOrder('')
-                }
-                else
-                {
-                    setOrder(foundOrder); 
-                }     
-            }).catch(err => {
-                console.log('db error')
-            })
+            // let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
+            // //axios call will go here
+            // checkinServices.searchOrder(searchParams).then((foundOrder) => {
+            //     // console.log('Order: ', foundOrder)
+            //     if(foundOrder.error)
+            //     {
+            //         setOrder('')
+            //     }
+            //     else
+            //     {
+            //         setOrder(foundOrder); 
+            //     }     
+            // }).catch(err => {
+            //     console.log('db error')
+            // })
         }
     }
 
@@ -36,40 +56,27 @@ const AdminCheckin = (props) => {
         event.preventDefault();
         if(event.target.value === '')
         {
-            setOrder('init');
+            setOrders('init');
         }
         setSearchKey(event.target.value);
     }
 
-    const renderOrder = () => {
-        // let retVal = ''
-        // if(typeof(order) === 'object')
-        // {
-        //     console.log(order)
-        //     retVal = <Order info={order} history={props.history}></Order>
-        // }
-        // else if(order === 'init')
-        // {
-        //     retVal = ''
-        // }
-        // else 
-        // {
-        //     retVal = <p className="text-centered">Order Not Found</p>
-        // }
-        // return retVal
-
-        let tempOrder = {student_id: "test2@mail.sfsu.edu",
-        first_name: 'shane',
-        last_name: 'wade',
-        event_id: "45026795-8926-42d6-9b0c-6ef1d40bd692",
-        order: [{item:'item1', qty: '5'} , {item:'item1', qty: '5'}, {item:'item1', qty: '5'}, {item:'item1', qty: '5'}],
-        status: 'complete',
-        bag: false,
-        created_at: "2020-01-27T02:58:07.539Z",
-        updated_at: "2020-01-27T02:58:07.539Z",
-        id: "2b1c2824-2560-4e38-9fed-b037495e3ff7"}
-
-        return <Order info={tempOrder} history={props.history}></Order>
+    const renderOrders = () => {
+        let retVal = ''
+        if(typeof(orders) === 'object')
+        {
+            console.log(orders)
+            retVal = orders.map(order => <Order info={order} history={props.history}></Order>)
+        }
+        else if(orders === 'init')
+        {
+            retVal = ''
+        }
+        else 
+        {
+            retVal = <p className="text-centered">Order Not Found</p>
+        }
+        return retVal
     }
 
 return (
@@ -88,7 +95,7 @@ return (
                     {/* <button></button> */}
                 </form>
             </div>
-            {renderOrder()}      
+            {renderOrders()}      
             </div>
         </div>
     </div>
