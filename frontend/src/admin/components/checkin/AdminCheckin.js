@@ -42,22 +42,34 @@ const AdminCheckin = (props) => {
     }
 
     const renderOrder = () => {
-        // console.log('rendering order: ', order)
-        // console.log(typeof(order))
-        let retVal = ''
-        if(typeof(order) === 'object')
-        {
-            retVal = <Order info={order} history={props.history}></Order>
-        }
-        else if(order === 'init')
-        {
-            retVal = ''
-        }
-        else 
-        {
-            retVal = <p className="text-centered">Order Not Found</p>
-        }
-        return retVal
+        // let retVal = ''
+        // if(typeof(order) === 'object')
+        // {
+        //     console.log(order)
+        //     retVal = <Order info={order} history={props.history}></Order>
+        // }
+        // else if(order === 'init')
+        // {
+        //     retVal = ''
+        // }
+        // else 
+        // {
+        //     retVal = <p className="text-centered">Order Not Found</p>
+        // }
+        // return retVal
+
+        let tempOrder = {student_id: "test2@mail.sfsu.edu",
+        first_name: 'shane',
+        last_name: 'wade',
+        event_id: "45026795-8926-42d6-9b0c-6ef1d40bd692",
+        order: [{item:'item1', qty: '5'} , {item:'item1', qty: '5'}, {item:'item1', qty: '5'}, {item:'item1', qty: '5'}],
+        status: 'complete',
+        bag: false,
+        created_at: "2020-01-27T02:58:07.539Z",
+        updated_at: "2020-01-27T02:58:07.539Z",
+        id: "2b1c2824-2560-4e38-9fed-b037495e3ff7"}
+
+        return <Order info={tempOrder} history={props.history}></Order>
     }
 
 return (
@@ -65,7 +77,7 @@ return (
     <AdminHeader selected='Events' username={props.location.state.user_name}  history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Checkin</h3>
-            <div className='checkin-div'>
+            <div className='centered-container'>
             
             {/* this div will contain the search feature of the checkin. 
             users will input gator groceries ID's that are associated with their order */}

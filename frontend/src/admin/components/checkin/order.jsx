@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import gg_logo from '../../../public/images/logo.png';
+import checkIcon from '../../icons/check_circle-24px.svg';
 
 const Order = (props) => {
 
@@ -33,13 +34,46 @@ const Order = (props) => {
         }
     }
 
+    const renderButton = () => {
+        let retVal = ''
+
+        switch(order.status)
+        {
+            case 'placed':
+                retVal = <button className='order-button print'>Print</button>
+                break;
+            case 'ready':
+                retVal = <button className='order-button ready'><img src={checkIcon}></img></button>
+                break;
+            case 'complete':
+                retVal = <button className='order-button complete'><img src={checkIcon}></img></button>
+                break;
+            default:
+                console.log('error in button render in order.jsx')
+                break;
+        }
+        return retVal;
+    }
+
   
 return (
     <div className='order-div'>
                     
-                   <p className='info'>Order ID:</p> 
-                    <p>{order.student_id}</p>
-                    <p className='menu' onClickCapture={handleOrderClick}>
+                   {/* <p className='info'>Order ID:</p>  */}
+                   <div className='flex-row'>
+                        <div className=' one-third'>
+                            <span>
+                                <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
+                            </span>
+                            <span>
+                            {order.first_name + " " + order.last_name}
+                            </span>
+                        </div>
+                        <div className=''><span>{order.status}</span> </div>
+                        <div className=''>{renderButton()}</div>
+                   </div>
+                   
+                    {/* <p className='menu' onClickCapture={handleOrderClick}>
                     <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
                     Order
                     </p>
@@ -63,7 +97,7 @@ return (
                             <button onClickCapture={handlePrint}>
                                 Print
                             </button>
-                    </div>
+                    </div> */}
         </div>
         )
 };
