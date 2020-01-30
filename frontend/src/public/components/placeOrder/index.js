@@ -8,10 +8,15 @@ const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
   const [order] = useState({})
+  const [timeBlocks, setTimeBlocks] = useState('init')
 
   useEffect(() => {
     // console.log('props placeorder', props)
     setMenu(props.location.state.menu)
+    setTimeBlocks(props.location.state.time_blocks)
+
+    // @ED these are the time blocks being passed in as a [{block:'1:00-2:00 PM'}]
+    console.log('Blocks: ', props.location.state.time_blocks);
   }, [props]); 
 
   const updateOrder = (spinnerState) => {
@@ -31,6 +36,13 @@ const PlaceOrder = (props) => {
         orderData.student_id = props.location.state.student.student_email;
         orderData.event_id = props.location.state.eventID;
         orderData.order = finalOrder;
+        orderData.status = 'placed'
+
+
+        //@Ed you need to populate this pickup field with the dropdown menu. 
+        orderData.pickup = ''
+
+
         // axios api call
         orderServices.placeOrder(orderData).then(success => {
             if(success)
@@ -51,7 +63,7 @@ const PlaceOrder = (props) => {
            { 
            menu.map((line) => 
                       (
-                        <InputSpinner item={line.item} maxQty={line.qty} update={updateOrder}></InputSpinner>
+                           <InputSpinner item={line.item} maxQty={line.qty} update={updateOrder}></InputSpinner>   
                       )
             )}
 
