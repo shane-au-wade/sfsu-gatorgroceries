@@ -21,6 +21,7 @@ class AdminCreateEvent extends Component {
               name: '',
               location: '',
               menu: [{}],
+              time_blocks: ''
             },
             counter: 0
         }
@@ -35,6 +36,46 @@ class AdminCreateEvent extends Component {
         this.setState(updatedState);
       }
       
+      generateTimeBlocks = (obj) => {
+        let startArr =  obj.event.startTime.split(':');
+        let endArr =  obj.event.endTime.split(':');
+        let start = new Date(2020, 0, 1, startArr[0], startArr[1], 0, 0)
+        let end = new Date(2020, 0, 1, endArr[0], endArr[1], 0, 0)
+        let blocks = []
+        let startStr = '';
+        let endStr = ''
+        do
+        { 
+          // extract and save the start time
+          // increment the start 
+          // concat the times and push on blocks
+          startStr = start.getHours() + ':' + start.getMinutes();
+          if(start.getHours() + 1 > 12)
+          {
+            start.setHours(1)
+          }
+          else
+          {
+            start.setHours(start.getHours() + 1);
+          }
+
+          if(start.getHours() === end.getHours() && start.getMinutes() > end.getMinutes())
+          {
+            endStr = start.getHours() + ':' + end.getMinutes();
+          }
+          else
+          {
+             endStr = start.getHours() + ':' + start.getMinutes();
+          }
+
+          blocks.push({block:startStr.padEnd(4,'0') + '-' + endStr.padEnd(4,'0') + ' ' + obj.event.startTP})
+
+        } while (start.getHours() < end.getHours())
+
+        console.log('time blocks', blocks)
+        return blocks;
+      }
+
       handleChange = (evt) => {
         evt.preventDefault();
         console.log('EVENT NAME: ', evt.target.name);
@@ -51,8 +92,17 @@ class AdminCreateEvent extends Component {
         {
           updatedState.event[evt.target.name] = evt.target.value;
         }
-         console.log(updatedState.event)
-         this.setState(updatedState)
+
+        if(updatedState.event.startTime !== '' && updatedState.event.endTime !== '') // if the start and end times are populated
+        {
+          updatedState.event.time_blocks = this.generateTimeBlocks(updatedState);
+          this.setState(updatedState)
+        }
+        else{
+          console.log(updatedState.event)
+          this.setState(updatedState)
+        }
+         
       }
   
       handleAdd = (evt) => {
@@ -201,6 +251,7 @@ class AdminCreateEvent extends Component {
                                 name: this.state.event.name,
                                 location: this.state.event.location,
                                 menu:this.state.event.menu,
+                                time_blocks: this.state.event.time_blocks,
                                 user_name: this.props.location.state.user_name
                               } 
                           }} >

@@ -14,7 +14,7 @@ const AdminEvent = (props) => {
     const [location] = useState(props.location);
     const [menu] = useState(props.menu);
     const [preview] = useState(props.preview)
-
+    const [timeBlocks] = useState(props.time_blocks)
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
     
     const [showMenu, setShowMenu] = useState('no_menu');
@@ -104,6 +104,7 @@ const AdminEvent = (props) => {
                         eventID: id,
                         menu:menu,
                         student: props.student,
+                        time_blocks: timeBlocks
                         } 
                     }} >
                         <button>
@@ -140,7 +141,7 @@ const AdminEvent = (props) => {
         eventData.name = name;
         eventData.location = location;
         eventData.menu = menu;
-
+        eventData.time_blocks = timeBlocks;
         createEventServices.createEvent(eventData).then(() => {
 
         }).catch(err => {

@@ -47,6 +47,7 @@ const Events = (props) => {
                     editIcon='hide'
                     order={true}
                     student={props.location.state[0]}
+                    time_blocks={event.time_blocks}
                     ></Event>
                     )
         }
