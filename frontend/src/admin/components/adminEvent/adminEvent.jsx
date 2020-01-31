@@ -120,7 +120,8 @@ const AdminEvent = (props) => {
                         pathname: '/admin/checkin',
                         state: {
                         eventID: id,
-                        user_name: props.username
+                        user_name: props.username,
+                        time_blocks: timeBlocks
                         } 
                     }} >
                         <button>

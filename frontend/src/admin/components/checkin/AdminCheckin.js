@@ -4,13 +4,23 @@ import './style/AdminCheckin.css'
 import searchIcon from '../../icons/search-24px.svg';
 import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
+import Receipt from './Receipt.js'
 
 const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
     const [orders, setOrders] = useState('init')
+    const [timeBlocks, setTimeBlocks] = useState ([])
+    const[receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
+
+    // let scrollPos = 0;
 
     useEffect(() => {
+        // window.addEventListener("scroll", (event) => {event.preventDefault(); console.log('scrolling', event)});
+        let tempBlocks = props.location.state.time_blocks;
+        tempBlocks.push({block: 'none'})
+        setTimeBlocks(tempBlocks)
+        console.log('time blocks', props.location.state.time_blocks)
         let searchParams = {eventID: props.location.state.eventID}
         console.log(searchParams);
         checkinServices.getAllOrders(searchParams).then(foundOrders => {
@@ -22,13 +32,55 @@ const AdminCheckin = (props) => {
                 else
                 {
                     console.log('orders', foundOrders)
-                    setOrders(foundOrders); 
+
+                    processOrders(foundOrders, props.location.state.time_blocks).then((processedOrders) => {
+                        setOrders(processedOrders);
+                    })
+
+                    
                 }     
         }).catch(err => {
             console.log('db error')
         })
+
+
+
     }, [])
 
+    const processOrders = (foundOrders, timeBlocks) => {
+        return new Promise((resolve, reject) => {
+            let processedOrders = {}
+            processedOrders.none = [];
+            try {
+                timeBlocks.forEach(time => {
+                        processedOrders[time.block] = [];
+                    });
+            } catch (error) {
+                
+            }
+                    
+
+                    console.log('orders before adding:', processedOrders)
+                    // if(typeof(orders) === 'object')
+                    // {
+                    //     orders.forEach(order => {
+                    //        processedOrders[order.pickup].push(order)
+                    //     })
+                    // }
+            try {
+                foundOrders.forEach(order => {
+                               processedOrders[order.pickup].push(order)
+                            })
+            } catch (error) {
+                
+            }
+                    
+
+                    console.log('final processed orders:', processedOrders)
+
+                    resolve(processedOrders)
+        })    
+    }
 
     const handleSumbit = (event) => {
         event.preventDefault();
@@ -61,43 +113,60 @@ const AdminCheckin = (props) => {
         setSearchKey(event.target.value);
     }
 
-    const renderOrders = () => {
-        let retVal = ''
-        if(typeof(orders) === 'object')
+    const updateReceipt = (order) => {
+        setReceipt(<Receipt email={order.student_id} order={order.order} firstName={order.first_name} lastName={order.last_name}></Receipt>);
+        let y = window.scrollY
+        console.log('scroll top height', y)
+         window.print()
+         window.scrollTo(0,y);
+    }
+
+    const renderOrders = (arr) => {  
+        if(typeof(arr) === 'object')
         {
-            console.log(orders)
-            retVal = orders.map(order => <Order info={order} history={props.history}></Order>)
-        }
-        else if(orders === 'init')
-        {
-            retVal = ''
-        }
-        else 
-        {
-            retVal = <p className="text-centered">Order Not Found</p>
-        }
-        return retVal
+            return arr.map(order => <Order info={order} history={props.history} updateReceipt={updateReceipt}></Order>)
+        }  
+    }
+
+    const renderTimeBlocks = () => {
+        console.log('!!!', orders)
+        console.log(timeBlocks)
+             return timeBlocks.map(time => (
+                <div className='time-container'>
+                <p className='timeHeader'>{time.block}</p>
+                {renderOrders(orders[time.block])}
+                </div>
+                )
+            )
+       
     }
 
 return (
     <div className='adminCheckin'>
-    <AdminHeader selected='Events' username={props.location.state.user_name}  history={props.history}></AdminHeader>
-        <div className='AdminContentArea'>
-        <h3 className='text-centered padded'>Checkin</h3>
-            <div className='centered-container'>
-            
-            {/* this div will contain the search feature of the checkin. 
-            users will input gator groceries ID's that are associated with their order */}
-            <div className='search-div'>
-                <form onSubmit={handleSumbit}>
-                <img src={searchIcon} id='searchIcon' alt='searchIcon'></img>
-                    <input name='search' type='text' autoComplete='off' className='search' onChange={handleChange}></input> 
-                    {/* <button></button> */}
-                </form>
-            </div>
-            {renderOrders()}      
-            </div>
+        <div>
+            {receipt}
         </div>
+
+        <div className='page'>
+            <AdminHeader selected='Events' username={props.location.state.user_name}  history={props.history}></AdminHeader>
+            <div className='AdminContentArea'>
+            <h3 className='text-centered padded'>Checkin</h3>
+                <div  className='centered-container'>
+                
+                {/* this div will contain the search feature of the checkin. 
+                users will input gator groceries ID's that are associated with their order */}
+                <div className='search-div'>
+                    <form onSubmit={handleSumbit}>
+                    <img src={searchIcon} id='searchIcon' alt='searchIcon'></img>
+                        <input name='search' type='text' autoComplete='off' className='search' onChange={handleChange}></input> 
+                        {/* <button></button> */}
+                    </form>
+                </div>
+                {renderTimeBlocks()}
+                {/* {renderOrders()}       */}
+                </div>
+            </div>
+        </div>    
     </div>
 )};
 

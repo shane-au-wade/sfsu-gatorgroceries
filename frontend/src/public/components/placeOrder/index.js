@@ -8,7 +8,8 @@ const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
   const [order] = useState({})
-  const [timeBlocks, setTimeBlocks] = useState('init')
+  const [timeBlocks, setTimeBlocks] = useState([])
+  const [timeSelect, updateTimeSelect] = useState('none')
 
   useEffect(() => {
     // console.log('props placeorder', props)
@@ -40,9 +41,9 @@ const PlaceOrder = (props) => {
 
 
         //@Ed you need to populate this pickup field with the dropdown menu. 
-        orderData.pickup = ''
+        orderData.pickup = timeSelect
 
-
+        console.log(orderData)
         // axios api call
         orderServices.placeOrder(orderData).then(success => {
             if(success)
@@ -52,6 +53,11 @@ const PlaceOrder = (props) => {
         })     
   }
 
+  const updateTimeBlock = (event) => {
+    event.preventDefault();
+    updateTimeSelect(event.target.value)
+  }
+
   return (
     <div className='place-order'>
       <div className='header'>
@@ -59,16 +65,32 @@ const PlaceOrder = (props) => {
       </div>
          <h3 className='text-centered padding'>Choose from the following items</h3> 
       <div className='centered-container'>
-        <div className='spinner-container'>
-           { 
-           menu.map((line) => 
-                      (
-                           <InputSpinner item={line.item} maxQty={line.qty} update={updateOrder}></InputSpinner>   
-                      )
-            )}
+            <div className='spinner-container'>
+              { 
+              menu.map((line) => 
+                          (
+                              <InputSpinner item={line.item} maxQty={line.qty} update={updateOrder}></InputSpinner>   
+                          )
+                )}
 
-        </div>
+            </div>
       </div>
+
+    <h3 className='text-centered padding'>Select a Pickup Time</h3> 
+      <div className='centered-container'>
+            <div className='time-block-container'>
+              <div className='time-select'>
+                <select onChange={updateTimeBlock} name='timeSelect'>
+                <option  value='none'>None</option>
+                  {
+                    timeBlocks.map(time => (<option  value={time.block}>{time.block}</option>))
+                  }
+                </select>
+              </div>
+                
+            </div>
+      </div>
+
              <div className='submit-place-order'>
                 <button type='submit' id='place-order-submit' onClick={redirect}>Submit</button>
             </div>

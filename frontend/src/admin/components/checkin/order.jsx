@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
-import gg_logo from '../../../public/images/logo.png';
 import checkIcon from '../../icons/check_circle-24px.svg';
+import checkinServices from '../../services/checkin'
 
 const Order = (props) => {
 
@@ -11,18 +11,30 @@ const Order = (props) => {
     const handlePrint = (event) => {
         event.preventDefault()
         console.log('printing')
+        props.updateReceipt(order)
+        let tempOrder = JSON.parse(JSON.stringify(order))
+        tempOrder.status = 'ready';
 
+        checkinServices.updateOrder(tempOrder).then((info) => {
+            console.log('order update info:', info)
+                setOrder(tempOrder);
+        }).catch(err => {
+            console.log('Error in order update:', err)
+        })
+
+        
+        
         //axios call to update the orders state
 
-        props.history.push({
-            pathname: '/admin/receipt',
-            target: '_blank',
-            state: {
-                email: order.student_id,
-                order: order.order,
-                logo: gg_logo
-            }
-          })
+        // props.history.push({
+        //     pathname: '/admin/receipt',
+        //     target: '_blank',
+        //     state: {
+        //         email: order.student_id,
+        //         order: order.order,
+        //         logo: gg_logo
+        //     }
+        //   })
         // handle.blur();
     }
 
@@ -40,7 +52,24 @@ const Order = (props) => {
     const handleReadyClick = () => {
         let tempOrder = JSON.parse(JSON.stringify(order))
         tempOrder.status = 'complete';
-        setOrder(tempOrder);
+
+        checkinServices.updateOrder(tempOrder).then((info) => {
+            console.log('order update info:', info)
+                setOrder(tempOrder);
+        }).catch(err => {
+            console.log('Error in order update:', err)
+        })
+    }
+
+    const handleReadyUpdate = () => {
+        let tempOrder = JSON.parse(JSON.stringify(order))
+        tempOrder.status = 'ready';
+        checkinServices.updateOrder(tempOrder).then((info) => {
+            console.log('order update info:', info)
+                setOrder(tempOrder);
+        }).catch(err => {
+            console.log('Error in order update:', err)
+        })
     }
 
     const renderButton = () => {
@@ -102,13 +131,13 @@ return (
 
                         <div className='flex-row bottom-buttons'>
                             <div>
-                                <button className='order-button print'>Print</button>
+                                <button onClickCapture={handlePrint} className='order-button print'>Print</button>
                             </div>
                             <div className=''>
-                                <button className='order-button ready'><img src={checkIcon}></img></button>
+                                <button onClickCapture={handleReadyUpdate} className='order-button ready'><img src={checkIcon}></img></button>
                             </div>
                             <div className=''>
-                                <button className='order-button complete'><img src={checkIcon}></img></button>
+                                <button onClickCapture={handleReadyClick} className='order-button complete'><img src={checkIcon}></img></button>
                             </div>
                         </div>
 

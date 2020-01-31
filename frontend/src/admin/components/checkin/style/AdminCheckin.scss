@@ -13,11 +13,10 @@ $primary-color: #ffffff;
         text-align: center;
         padding: 20px;
     }
-   
     // css for the order.jsx compeonent 
     // styles the main tile and buttons
     .centered-container {
-            width: 400px; 
+            width: 500px; 
             background: #f3f3f3;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
@@ -25,10 +24,27 @@ $primary-color: #ffffff;
             margin-bottom: 20px;
             padding: 20px;
 
+            .time-container {
+                background-color: lightGray;
+                border-radius: 10px;
+                padding-bottom: 5px;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-top: 20px;
+                padding-top: 8px;
+
+            }
+
+            .timeHeader {
+                font-size: 20px;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 10px;
+            }
         }
 
     .order-div {
-        width: 380px;
+        width: 460px;
         margin: 0 auto;
         margin-bottom: 5px;
         background-color: #211061;
@@ -210,37 +226,16 @@ $primary-color: #ffffff;
     
 
     .receipt {
-        width: 70mm;
-        padding: 10px;
-        background: #ffffff;
+        position: absolute;
+        z-index: -1;
+        
+        .logoResize {
+            margin: 5px;
+            height: 40px;
+        }    
     }
 
-    #receiptInfo {
-        margin: 0;
-        font-size: 20px;
-        font-family: sans-serif;
-    }
-
-    #order {
-        font-family: sans-serif;
-    }
-    
-    #noteInfo {
-        margin: 0;
-        font-family: sans-serif;
-    }
-    
-    #item {
-        text-align: center;
-        font-size: 25px;
-        font-family: sans-serif;
-    }
-
-    .receipt .logo {
-        height: calc(563px * 0.08);
-        width: calc(1025px * 0.08);
-    }
-
+   
 
     @media screen and (max-width:500px) {
         
@@ -269,10 +264,22 @@ $primary-color: #ffffff;
     
     }
 
+    @media screen and (max-width:450px) { 
+    
+        .centered-container {
+            width: 360px;   
+        }
+
+        .order-div {
+            width: 320px;
+        }
+}
+
+
     @media screen and (max-width:375px) { 
-        
+    
             .centered-container {
-                width: 300px;   
+                width: 320px;   
             }
 
             .order-div {
@@ -282,11 +289,60 @@ $primary-color: #ffffff;
 
     @media screen and (max-width:350px) {
         .centered-container {
-            width: 280px;   
+            width: 280px;    
+            
+            .time-container{
+            padding-left: 0px;
+
+            padding-right: 0px;
+        }
         }
 
         .order-div {
             width: 260px;
+        }
+
+       
+    }
+
+    @media print {
+
+        .page{
+            visibility: hidden;
+        }
+
+        .receipt {
+            z-index: 3;
+            display: block;
+            width: 70mm;
+            padding: 10px;
+            background: #ffffff; 
+
+                .logoResize {
+                    margin: 5px;
+                    height: 40px;
+                }
+                
+                    .receiptInfo {
+                        
+                        font-size: 16px;
+                        font-family: sans-serif;
+                    }
+
+                    #order {
+                        font-family: sans-serif;
+                    }
+                    
+                    #noteInfo {
+                        margin: 0;
+                        font-family: sans-serif;
+                    }
+                    
+                    #item {
+                        text-align: center;
+                        font-size: 25px;
+                        font-family: sans-serif;
+                    }
         }
     }
 

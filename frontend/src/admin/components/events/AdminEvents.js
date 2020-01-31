@@ -35,6 +35,7 @@ const AdminEvents = (props) => {
                     location={event.location}
                     menu={event.menu}
                     username={props.location.state.user_name}
+                    time_blocks={event.time_blocks}
                     ></AdminEvent>
                     )
         }

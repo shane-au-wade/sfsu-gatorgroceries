@@ -14,12 +14,12 @@
     }
 
     .plus-button{
-        height: 18px;
+        height: 22px;
         
     }
 
     .minus-button{
-        height: 18px;
+        height: 22px;
     }
 
     input:focus,
@@ -33,22 +33,32 @@
         display: flex;
         flex-direction: row;  
         margin: 0 auto;
-        width: 390px;
+        width: 500px;
+
+        .button-cluster {
+            display: flex;
+            flex-direction: row;
+            width: 100px;
+        }
         
+    }
+
+    h2 {
+        font-size: 24px;
     }
 
     h3, h4{
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
         font-weight: normal;
-        font-size: 14px;
+        font-size: 16px;
         color: black;
         line-height: 0px;
     }
 
     .item-display{
         margin-top: 18px;
-        width: 150px;
+        width: 200px;
         text-align: center; 
         
     }
@@ -56,24 +66,23 @@
     .max-qty-display{
         margin: 0 auto;
         margin-top: 15px;
-        padding-left: 5px
-
+        width: 50px
     }
 
     @media screen and (max-width:500px) {
         .spinner-container{
-           width: 350px;
+           width: 315px;
           
         }
         .item-display{
             
-            text-align: left;
-            padding-right: 0px;
+            text-align: center;
+            width: 105px;
         }
         .max-qty-display{
             
             padding-left: 0px;
-            padding-right: 5px;
+            
         }
     }
 
