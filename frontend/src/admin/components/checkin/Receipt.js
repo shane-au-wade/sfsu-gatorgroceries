@@ -5,26 +5,27 @@ import './style/AdminCheckin.css'
 const Receipt = (props) => {
 
     useEffect(() => { 
-        window.print()
-        setTimeout(function(){
-            console.log('after');
-            props.history.goBack()
-        },1000)
+        // window.print()
+        // setTimeout(function(){
+        //     console.log('after');
+        //     props.history.goBack()
+        // },1000)
         
     }, []);
 
     const renderOrder = () => {
-    return props.location.state.order.map(line => 
+    return props.order.map(line => 
         <p id='item'>{line.item}<span> x </span><span>{line.qty}</span></p>
         )
     }
 
 return (
-        <div className='adminCheckin'>
              <div className="receipt" id='receipt'>
-                    <img src={props.location.state.logo} className="logo" alt='GG Logo'></img>
+                    <p>Gator Groceries</p>
                     <br></br>
-                    <p id='receiptInfo'>{'ID: ' + props.location.state.email}</p>
+                    <p className='receiptInfo'>{'ID: ' + props.email}</p>
+                    <br></br>
+                    <p className='receiptInfo'>{props.firstName + ' ' + props.lastName}</p>
                     <br></br>
                     <p id='receiptInfo'>Order:</p>
                     {
@@ -33,9 +34,7 @@ return (
                     <br></br>
                     {/* <p id='noteInfo'><strong>NOTE:</strong></p>
                     <p id='noteInfo'><em>peanut allergy</em></p> */}
-            </div>
-        </div>
-           
+            </div>       
 )};
 
 export default Receipt

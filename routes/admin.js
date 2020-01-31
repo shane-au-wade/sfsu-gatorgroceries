@@ -86,6 +86,21 @@ router.post('/logout', function(req, res, next) {
 
   });
 
+  router.post('/updateOrder', async (req, res, next) => {
+  
+    /**
+     *  query the db for events that are created in a certain time frame
+     *  get all events that happened 2 months ago using the created_at field
+     * 
+     */
+    try{
+      res.status(200).send(await db.admin.updateOrder(req.body))
+     }catch(e){
+      res.status(200).send(e)
+     }
+     
+  });
+
   router.get('/get-admin-users', async (req, res, next) => {
   
     /**

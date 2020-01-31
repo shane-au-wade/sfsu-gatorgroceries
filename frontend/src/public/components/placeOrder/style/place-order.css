@@ -1,5 +1,5 @@
 .place-order .centered-container {
-  width: 400px;
+  width: 500px;
   background: #f3f3f3;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -7,6 +7,19 @@
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 20px;
+}
+
+.place-order .centered-container .time-block-container .time-select {
+  margin: 0 auto;
+  width: 105px;
+}
+
+.place-order .centered-container .time-block-container .time-select, .place-order .centered-container .time-block-container select {
+  width: 120px;
+  height: 40px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 5px;
 }
 
 .place-order .header {
@@ -51,9 +64,19 @@
   border: none;
 }
 
+.place-order #place-order-submit {
+  margin-top: 10px;
+  height: 30px;
+  font-size: 18px;
+}
+
 @media screen and (max-width: 500px) {
   .place-order .centered-container {
     width: 315px;
+  }
+  .place-order #place-order-submit {
+    height: 40px;
+    font-size: 18px;
   }
 }
 

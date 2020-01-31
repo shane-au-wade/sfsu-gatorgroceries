@@ -11,11 +11,11 @@
 }
 
 .inputSpinner .plus-button {
-  height: 18px;
+  height: 22px;
 }
 
 .inputSpinner .minus-button {
-  height: 18px;
+  height: 22px;
 }
 
 .inputSpinner input:focus,
@@ -34,41 +34,55 @@
       -ms-flex-direction: row;
           flex-direction: row;
   margin: 0 auto;
-  width: 390px;
+  width: 500px;
+}
+
+.inputSpinner .spinner-container .button-cluster {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100px;
+}
+
+.inputSpinner h2 {
+  font-size: 24px;
 }
 
 .inputSpinner h3, .inputSpinner h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   color: black;
   line-height: 0px;
 }
 
 .inputSpinner .item-display {
   margin-top: 18px;
-  width: 150px;
+  width: 200px;
   text-align: center;
 }
 
 .inputSpinner .max-qty-display {
   margin: 0 auto;
   margin-top: 15px;
-  padding-left: 5px;
+  width: 50px;
 }
 
 @media screen and (max-width: 500px) {
   .inputSpinner .spinner-container {
-    width: 350px;
+    width: 315px;
   }
   .inputSpinner .item-display {
-    text-align: left;
-    padding-right: 0px;
+    text-align: center;
+    width: 105px;
   }
   .inputSpinner .max-qty-display {
     padding-left: 0px;
-    padding-right: 5px;
   }
 }
 

@@ -47,6 +47,19 @@ class admin {
         })
     }
 
+    static updateOrder(orderBody){
+        console.log(orderBody);
+        return new Promise((resolve,reject) => {
+            connection.none('update orders set status = $1 where id=$2',[orderBody.status, orderBody.id])
+            .then((result) => {
+                resolve(result)
+            })
+            .catch((e) => {
+                reject({error: "Not Updated"})
+            })
+        })
+    }
+
     static getAllOrders(orderParams){
         let query = `select 
                     orders.*, 

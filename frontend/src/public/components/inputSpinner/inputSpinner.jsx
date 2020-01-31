@@ -51,18 +51,20 @@ class InputSpinner extends Component {
             <div className='item-display'>
             {this.state.show ? <h3>{this.state.item}</h3> : ''}
             </div>
+           <div className='button-cluster'>
+                <button onClick={this.DecreaseItem} className='remove-outline'>
+                <img src={minusButton} alt='minus' className='minus-button'></img>
+                </button>
+
+                <div className='display-number'>
+                { this.state.show ? <h2>{ this.state.clicks }</h2> : '' }
+                </div>
+
+                <button onClick={this.IncrementItem} className='remove-outline'>
+                    <img src={plusButton} alt='plus' className='plus-button'></img>
+                </button>
+           </div>
            
-            <button onClick={this.DecreaseItem} className='remove-outline'>
-            <img src={minusButton} alt='minus' className='minus-button'></img>
-            </button>
-
-            <div className='display-number'>
-            { this.state.show ? <h2>{ this.state.clicks }</h2> : '' }
-            </div>
-
-            <button onClick={this.IncrementItem} className='remove-outline'>
-                <img src={plusButton} alt='plus' className='plus-button'></img>
-            </button>
 
             <div className='max-qty-display'>
             {this.state.show ? <h4>Max: {this.state.maxQty}</h4> : ''}

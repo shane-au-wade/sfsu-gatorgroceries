@@ -5,12 +5,15 @@ const searchOrder = (searchParams) => {
   return request.then(response => response.data)
 }
 
-
-
 const getAllOrders = (searchParams) => {
   const request =  axios.get(`/admin/get-all-orders/${searchParams.eventID}`)
   return request.then(response => response.data)
 }
 
+const updateOrder = (order) => {
+  const request =  axios.post(`/admin/updateOrder`, order)
+  return request.then(response => response.data)
+}
 
-export default {searchOrder, getAllOrders}
+
+export default {searchOrder, getAllOrders, updateOrder}
