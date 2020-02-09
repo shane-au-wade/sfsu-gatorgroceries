@@ -6,4 +6,9 @@ const createEvent = (event) => {
   return request.then(response => response.data)
 }
 
-export default {createEvent}
+const updateEvent = (event) => {
+  const request =  axios.post('/admin/update-event', event)
+  return request.then(response => response.data)
+}
+
+export default {createEvent, updateEvent}

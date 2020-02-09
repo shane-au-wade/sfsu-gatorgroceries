@@ -152,10 +152,27 @@ const AdminEvent = (props) => {
     
     return (
         <div key={id} id={id} className='adminEvent'>
-                <div  className='event-div'>
-            <button className={'editIcon ' + props.editIcon}>
-            <img src={editIcon} alt='editIcon'></img>
-            </button>
+            <div  className='event-div'>
+
+
+            <Link to={{
+                        pathname: '/admin/create-event',
+                        state: {
+                        user_name: props.username,
+                        edit: true,
+                        eventID: id,
+                        name: name,
+                        location: location,
+                        menu: menu,
+                        date: date,
+                        time: time
+                        } 
+                    }} >
+                    <button className={'editIcon ' + props.editIcon}>
+                    <img src={editIcon} alt='editIcon'></img>
+                    </button>
+            </Link>
+
             <div className='date'>
                 <p className='text-left'>{getMonth()}</p>
                 <p className='text-left'>{date.getDate()}</p>
