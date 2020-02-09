@@ -203,6 +203,7 @@ class AdminCreateEvent extends Component {
         handleEventUpdate = () => {
           console.log('handling event update')
          let eventData = {
+            id: this.props.location.state.eventID,
             date: this.state.event.startDate,
             time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
             name: this.state.event.name,
@@ -213,7 +214,7 @@ class AdminCreateEvent extends Component {
           } 
           //axios call to updateEvent;
           eventServices.updateEvent(eventData).then(res => {
-            this.props.history.goBack();
+            
           }).catch(err => {
             console.log('Error in createEvent: UpdateEvent:', err);
           })
@@ -225,7 +226,15 @@ class AdminCreateEvent extends Component {
           
           if(this.props.location.state.edit) // this is an edit to the event
           {
-            retButton = <button onClickCapture={this.handleEventUpdate}>Update</button>
+            retButton =  
+            <Link to={{
+              pathname: '/admin/events',
+              state: {
+                  user_name: this.props.location.state.user_name
+              }
+              }}>
+            <button onClickCapture={this.handleEventUpdate}>Update</button>
+            </Link>
           }
           else
           {

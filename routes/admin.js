@@ -88,11 +88,7 @@ router.post('/logout', function(req, res, next) {
 
   router.post('/updateOrder', async (req, res, next) => {
   
-    /**
-     *  query the db for events that are created in a certain time frame
-     *  get all events that happened 2 months ago using the created_at field
-     * 
-     */
+
     try{
       res.status(200).send(await db.admin.updateOrder(req.body))
      }catch(e){
@@ -124,29 +120,30 @@ router.post('/logout', function(req, res, next) {
 
 
   router.post('/create-user', async (req, res, next) => {
-    
     try{
-      
         res.send(await db.admin.createUser(req.body))
-
     }catch(e){
-
-        res.json({error: "Cannot be created"})
-        
+        res.json({error: "Cannot be created"})   
     }
-
   });
 
 
   router.post('/create-event', async (req, res, next) => {
-
-    
     try{
-      res.status(200).send(await db.events.createEvents(req.body))
+      res.status(200).send(await db.events.createEvent(req.body))
     }catch(e){
       console.log(e)
     }
+  });
+
+  router.post('/update-event', async (req, res, next) => {
     
+    // console.log('Event Data:', req.body)
+    try{
+      res.status(200).send(await db.events.updateEvent(req.body))
+    }catch(e){
+      console.log(e)
+    }
      
   });
 
