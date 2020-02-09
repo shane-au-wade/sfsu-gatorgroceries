@@ -21,7 +21,7 @@ class events {
     }
 
 
-    static createEvents (eventBody) {
+    static createEvent (eventBody) {
 
       return new Promise((resolve,reject) => {
         let uuid = uuidv4()
@@ -31,7 +31,40 @@ class events {
           'location, menu, time_blocks) values ($1,$2,$3,$4,$5,$6,$7,$8,$9)',[uuid, '03fea3c8-87d0-4409-a0ca-cf2aa57e766a', true, eventBody.date
           , eventBody.time, eventBody.name, eventBody.location, JSON.stringify(eventBody.menu), JSON.stringify(eventBody.time_blocks)])
         .then(() => {
-          console.log("Success")
+          resolve(true)
+        }).catch(e => {
+          console.log(e)
+          console.log("error")
+        })
+      })
+    }
+
+
+    static updateEvent (eventBody) {
+
+      return new Promise((resolve,reject) => {
+        
+        //Admin Id: 03fea3c8-87d0-4409-a0ca-cf2aa57e766a
+
+        let query = 
+        `
+        update events
+        set 
+        date = $2
+        ,time = $3
+        ,name = $4
+        ,location = $5
+        ,menu = $6
+        ,time_blocks = $7
+        ,updated_at = NOW()
+        where 
+        id = $1
+        `
+
+        connection.none(query,[eventBody.id, eventBody.date
+          , eventBody.time, eventBody.name, eventBody.location, JSON.stringify(eventBody.menu), JSON.stringify(eventBody.time_blocks)])
+        .then(() => {
+          resolve(true)
         }).catch(e => {
           console.log(e)
           console.log("error")

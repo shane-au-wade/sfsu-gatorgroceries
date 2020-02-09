@@ -21,6 +21,33 @@
         margin: 0 auto;
         margin-bottom: 20px;
         padding: 20px;
+
+        .menuLine{
+
+            .removeIcon {
+                width: 20px;
+
+            }
+
+            .removeButton {
+                background-color: #FF6060;
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+                border: none;
+                position: relative;
+                left: 28px;
+                top: 3px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: #FF8080;
+
+                }
+            }
+
+        
+        }
     }
     
     .formEntry {
@@ -258,105 +285,5 @@
             width: 250px;   
         }
     }
-// h2{
-//     font-family: 'Roboto', sans-serif;
-//     font-style: normal;
-//     font-weight: normal;
-//     font-size: 36px;
-//     color: black;
-//     line-height: 0px;
-// }
-
-// .create-event-background{
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     background-color: #F3F3F3;
-//     margin: 0 auto;
-//     width: 600px;
-//     height: 600px;
-//     border-radius: 4px;
-//     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-// }
-
-// .button-container{
-//     display: flex;
-//     align-items: center;
-//     margin-left: 1000px;
-//     height: 80px;
-    
-// }
-
-// button{
-//     background-color: white;
-//     border:1px solid black;
-//     border-radius: 4px;
-//     width: 150px;
-//     height: 80px;
-//     /* 
-    
-//     margin-right: 500px;*/
-// } 
-
-// .title-container{
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-   
-//     height: 100px;
-// }
-
-// label{
-    
-//     font-family: 'Roboto', sans-serif;
-//     font-style: normal;
-//     font-weight: normal;
-//     font-size: 16px;
-//     color: black;
-//     line-height: 0px;
-// }
-
-// input:focus,
-// select:focus,
-// textarea:focus,
-// button:focus {
-//     outline: none;
-// }
-
-// input{
-//     display: block;
-//    border-radius: 4px;
-//    width: 430px;
-//     height: 30px;
-//     border:1px solid black;
-//     margin-bottom: 30px;
-    
-// }
-
-// .debug{
-//     border: 2px solid yellow;
-//     background-color: red;
-// }
-// .start-end-time{
-//    display: inline;
-// }
-
-// .start-end-time input{
-//    border-radius: 4px;
-//    width: 50px;
-//     height: 30px;
-//     border:1px solid black;
-//     margin-bottom: 30px;
-// }
-
-
-// .form-container{
-//     margin: 0 auto;
-//     // height:500px;
-// }
-
-// .label-stack{
-   
-// }
 
 }

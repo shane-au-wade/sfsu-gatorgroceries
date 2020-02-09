@@ -2,37 +2,98 @@ import React, { Component } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/Admin-create-event-style.css'
 import addItem from '../../icons/add_circle_outline-24px.svg'
+import removeItem from '../../icons/remove_circle_outline-24px.svg'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import eventServices from '../../services/createEvent';
 
 class AdminCreateEvent extends Component {
 
       constructor(props) {
         super(props);
-        let initState ={
-            menu:  [],
-            lineItem: {item: '', qty: ''},
-            event: {
-              startDate: '',
-              startTime: '',
-              startTP: 'PM',
-              endTime: '',
-              endTP: 'PM',
-              name: '',
-              location: '',
-              menu: [{}],
-              time_blocks: ''
-            },
-            counter: 0
-        }
+        let initState = {};
 
+        console.log('Props in Create-event', props.location.state)
+
+        // eventID: id,
+        // name: name,
+        // location: location,
+        // menu: menu,
+        // date: date,
+        // time: time
+
+        if(props.location.state.edit)
+        {
+          console.log('this is editing setup')
+
+          let tempTimeAr = props.location.state.time.split(' - ');
+          let startTimeAr = tempTimeAr[0].split(' ');
+          let endTimeAr = tempTimeAr[1].split(' ');
+          let newMenu = JSON.parse(JSON.stringify(props.location.state.menu))
+
+          initState ={
+                      menu:  newMenu,
+                      lineItem: {item: '', qty: ''},
+                      event: {
+                        startDate: props.location.state.date,
+                        startTime: startTimeAr[0], 
+                        startTP: startTimeAr[1],
+                        endTime: endTimeAr[0],
+                        endTP: endTimeAr[1],
+                        name: props.location.state.name,
+                        location: props.location.state.location,
+                        menu: props.location.state.menu,
+                        time_blocks: ''
+                      },
+                      counter: props.location.state.menu.length
+                  }
+
+                  
+        }
+        else
+        {
+        initState ={
+                    menu:  [],
+                    lineItem: {item: '', qty: ''},
+                    event: {
+                      startDate: '',
+                      startTime: '',
+                      startTP: 'PM',
+                      endTime: '',
+                      endTP: 'PM',
+                      name: '',
+                      location: '',
+                      menu: [{}],
+                      time_blocks: ''
+                    },
+                    counter: 0
+                }
+        }
+        
         this.state = initState;
+        console.log(this.state);
       }
 
       componentDidMount() {
         let updatedState = this.state;
         updatedState.lineItem.item = document.getElementById('Item');
         updatedState.lineItem.qty = document.getElementById('Max');
+
+        if(this.props.location.state.edit) // this is an edit to the event
+        {
+          let formatedDate = this.state.event.startDate.getMonth() + '/' + this.state.event.startDate.getDate() + '/' + this.state.event.startDate.getFullYear();
+            console.log('component did mount: writing values');
+            document.getElementById('eventTitle').value = this.state.event.name;
+            document.getElementById('location').value = this.state.event.location;
+            document.getElementById('startDate').value = formatedDate;
+            document.getElementById('startTime').value = this.state.event.startTime;
+            document.getElementById('startTP').value = this.state.event.startTP;
+            document.getElementById('endTime').value = this.state.event.endTime;
+            document.getElementById('endTP').value = this.state.event.endTP;
+            updatedState.event.menu.push({}); // for setup purposes
+        }
+
+
         this.setState(updatedState);
       }
       
@@ -124,11 +185,76 @@ class AdminCreateEvent extends Component {
           }
         }
   
+        handleItemRemove = (line) => {
+          console.log('removing item:', line);
+          let updatedState = this.state;
+          updatedState.menu.splice( updatedState.menu.indexOf(line), 1 );
+          this.setState(updatedState);
+            console.log('state: ', this.state)
+        }
+
         handleForm = (evt) => {
           evt.preventDefault()
           // const EventObject = {eventTitle, location,startDate,startTime,endDate,endTime,item,maxQty}
           
-          console.log(this.state.event)
+          // console.log(this.state.event)
+        }
+
+        handleEventUpdate = () => {
+          console.log('handling event update')
+         let eventData = {
+            id: this.props.location.state.eventID,
+            date: this.state.event.startDate,
+            time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
+            name: this.state.event.name,
+            location: this.state.event.location,
+            menu:this.state.menu,
+            time_blocks: this.state.event.time_blocks,
+            user_name: this.props.location.state.user_name
+          } 
+          //axios call to updateEvent;
+          eventServices.updateEvent(eventData).then(res => {
+            
+          }).catch(err => {
+            console.log('Error in createEvent: UpdateEvent:', err);
+          })
+         
+        }
+
+        renderButton = () => {
+          let retButton;
+          
+          if(this.props.location.state.edit) // this is an edit to the event
+          {
+            retButton =  
+            <Link to={{
+              pathname: '/admin/events',
+              state: {
+                  user_name: this.props.location.state.user_name
+              }
+              }}>
+            <button onClickCapture={this.handleEventUpdate}>Update</button>
+            </Link>
+          }
+          else
+          {
+              retButton = <Link to={{
+                pathname: '/admin/preview-event',
+                state: {
+                  date: this.state.event.startDate,
+                  time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
+                  name: this.state.event.name,
+                  location: this.state.event.location,
+                  menu:this.state.menu,
+                  time_blocks: this.state.event.time_blocks,
+                  user_name: this.props.location.state.user_name
+                } 
+            }} >
+              <button>Preview</button>
+             </Link>
+          }
+    
+          return retButton;
         }
 
   render() { 
@@ -162,7 +288,7 @@ class AdminCreateEvent extends Component {
                         </p>
                       
                         <input type='text' name="startTime" id='startTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='startTP' className='formLocation'>
+                        <select form='eventForm' name='startTP' id='startTP' className='formLocation'>
                           <option value='PM'>PM</option>
                           <option value='AM'>AM</option>
                         </select>
@@ -179,7 +305,7 @@ class AdminCreateEvent extends Component {
                           <label for='endTime'>End</label>
                         </p>
                         <input type='text' name="endTime" id='endTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='endTP' className='formLocation'>
+                        <select form='eventForm' name='endTP' id='endTP' className='formLocation'>
                           <option  value='PM'>PM</option>
                           <option  value='AM'>AM</option>
                         </select>
@@ -235,6 +361,7 @@ class AdminCreateEvent extends Component {
                                     <span>{line.item}</span>
                                 </div> 
                                 <span>{line.qty}</span>
+                                <span> <button className='removeButton'  onClickCapture={() => {this.handleItemRemove(line)} }> <img src={removeItem} alt="remove" className='removeIcon' /> </button>  </span>
                             </div>
                             )
                           }
@@ -243,20 +370,7 @@ class AdminCreateEvent extends Component {
                       <div className='preview-publish'>
 
                         <div>
-                          <Link to={{
-                              pathname: '/admin/preview-event',
-                              state: {
-                                date: this.state.event.startDate,
-                                time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
-                                name: this.state.event.name,
-                                location: this.state.event.location,
-                                menu:this.state.event.menu,
-                                time_blocks: this.state.event.time_blocks,
-                                user_name: this.props.location.state.user_name
-                              } 
-                          }} >
-                            <button type='text'>Preview</button>
-                           </Link>
+                          {this.renderButton()}
                         </div>
                         
                       </div>

@@ -21,6 +21,26 @@
   padding: 20px;
 }
 
+.AdminCreateEvents .centered-container .menuLine .removeIcon {
+  width: 20px;
+}
+
+.AdminCreateEvents .centered-container .menuLine .removeButton {
+  background-color: #FF6060;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+  left: 28px;
+  top: 3px;
+  cursor: pointer;
+}
+
+.AdminCreateEvents .centered-container .menuLine .removeButton:hover {
+  background-color: #FF8080;
+}
+
 .AdminCreateEvents .formEntry {
   margin-bottom: 20px;
 }

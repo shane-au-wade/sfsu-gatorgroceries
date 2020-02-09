@@ -7,7 +7,6 @@ const session = require('express-session')
 const passport = require('passport');
 
 if(process.env.NODE_ENV === 'development') {
-  console.log("here")
   require('dotenv').config();
 }
 
