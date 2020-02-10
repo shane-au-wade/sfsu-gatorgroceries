@@ -11,10 +11,9 @@ const AdminCheckin = (props) => {
     const [searchKey, setSearchKey] = useState('')
     const [orders, setOrders] = useState('init')
     const [timeBlocks, setTimeBlocks] = useState ([])
-    const[receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
-
-    // let scrollPos = 0;
-
+    const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
+    const [foundOrder, setFoundOrder] = useState('Order Not Found');
+    
     useEffect(() => {
         // window.addEventListener("scroll", (event) => {event.preventDefault(); console.log('scrolling', event)});
         let tempBlocks = props.location.state.time_blocks;
@@ -51,34 +50,21 @@ const AdminCheckin = (props) => {
         return new Promise((resolve, reject) => {
             let processedOrders = {}
             processedOrders.none = [];
-            try {
+            try 
+            {
                 timeBlocks.forEach(time => {
                         processedOrders[time.block] = [];
                     });
-            } catch (error) {
-                
-            }
-                    
-
-                    console.log('orders before adding:', processedOrders)
-                    // if(typeof(orders) === 'object')
-                    // {
-                    //     orders.forEach(order => {
-                    //        processedOrders[order.pickup].push(order)
-                    //     })
-                    // }
-            try {
+            } catch (error) { }   
+            console.log('orders before adding:', processedOrders) 
+            try 
+            {
                 foundOrders.forEach(order => {
                                processedOrders[order.pickup].push(order)
                             })
-            } catch (error) {
-                
-            }
-                    
-
-                    console.log('final processed orders:', processedOrders)
-
-                    resolve(processedOrders)
+            } catch (error) {  }      
+            console.log('final processed orders:', processedOrders)
+            resolve(processedOrders)
         })    
     }
 
@@ -101,6 +87,27 @@ const AdminCheckin = (props) => {
             // }).catch(err => {
             //     console.log('db error')
             // })
+            
+            let query = '[id*="' + searchKey +'"]';
+            let foundOrders = 'Order Not Found'
+            let orderIDs = []
+            try
+            {
+                foundOrders = document.querySelectorAll(query);
+                foundOrders.forEach(node => {
+                    console.log(node.id);
+                    orderIDs.push(node.id)
+                })
+            }
+            catch(error)
+            {
+
+            }
+            // console.log('order list:', foundOrders);
+            if(orderIDs.length > 0)
+            {
+                setFoundOrder(orderIDs);
+            }        
         }
     }
 
@@ -108,7 +115,7 @@ const AdminCheckin = (props) => {
         event.preventDefault();
         if(event.target.value === '')
         {
-            setOrders('init');
+            setFoundOrder('Order Not Found');
         }
         setSearchKey(event.target.value);
     }
@@ -124,13 +131,38 @@ const AdminCheckin = (props) => {
     const renderOrders = (arr) => {  
         if(typeof(arr) === 'object')
         {
-            return arr.map(order => <Order info={order} history={props.history} updateReceipt={updateReceipt}></Order>)
+            let retOrders = [];
+            let indexCounter = 0;
+            arr.forEach(order => {
+                retOrders.push(<Order info={order} index={indexCounter} history={props.history} updateReceipt={updateReceipt}></Order>)
+                indexCounter++;
+            })
+            return retOrders;
         }  
     }
 
+    const renderFoundOrder = () => {
+        if(foundOrder !== 'Order Not Found')
+        {
+            console.log('orders', orders)
+            console.log('found orders:', foundOrder)
+            let retOrders = []
+
+            foundOrder.forEach(orderStr => {
+                let keyArr = orderStr.split('&');
+                retOrders.push(orders[keyArr[1]][keyArr[2]])
+            })
+
+            console.log('order arr', retOrders);
+
+            return retOrders.map(order => <Order info={order} index={777} history={props.history} updateReceipt={updateReceipt}></Order>);
+        }
+        //console.log(orders);
+       
+                           
+    }
+
     const renderTimeBlocks = () => {
-        console.log('!!!', orders)
-        console.log(timeBlocks)
              return timeBlocks.map(time => (
                 <div className='time-container'>
                 <p className='timeHeader'>{time.block}</p>
@@ -138,7 +170,6 @@ const AdminCheckin = (props) => {
                 </div>
                 )
             )
-       
     }
 
 return (
@@ -162,6 +193,10 @@ return (
                         {/* <button></button> */}
                     </form>
                 </div>
+                <div id='foundOrderLocation'>
+                {renderFoundOrder()}
+                </div>
+                <br></br>
                 {renderTimeBlocks()}
                 {/* {renderOrders()}       */}
                 </div>
