@@ -33,7 +33,7 @@ const PlaceOrder = (props) => {
         lineItems.forEach( lineItem => {
           finalOrder.push({item:lineItem[0],qty:lineItem[1]})
         })
-        // console.log('finalOrder: ', finalOrder)
+        console.log('finalOrder: ', finalOrder)
         orderData.student_id = props.location.state.student.student_email;
         orderData.event_id = props.location.state.eventID;
         orderData.order = finalOrder;
@@ -45,12 +45,20 @@ const PlaceOrder = (props) => {
 
         console.log(orderData)
         // axios api call
-        orderServices.placeOrder(orderData).then(success => {
+        if(finalOrder.length > 0)
+        {
+           orderServices.placeOrder(orderData).then(success => {
             if(success)
             {
               props.history.push('/completed-order')
             }
-        })     
+          })     
+        }
+        else
+        {
+          alert("Cannot place empty order")
+        }
+       
   }
 
   const updateTimeBlock = (event) => {
