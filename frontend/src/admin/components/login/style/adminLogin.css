@@ -50,9 +50,9 @@
   margin-top: 22px;
   font-size: 20px;
   padding-left: 10px;
-  border-radius: 11px;
-  background-color: #CFC8C8;
-  color: #FFFFFF;
+  border-radius: 7px;
+  background-color: #F6F6F6;
+  color: black;
   width: 350px;
   height: 48px;
 }
@@ -61,31 +61,35 @@
   margin-top: 22px;
   font-size: 20px;
   padding-left: 10px;
-  border-radius: 11px;
-  background-color: #CFC8C8;
-  color: #FFFFFF;
+  border-radius: 7px;
+  background-color: #F6F6F6;
+  color: black;
   width: 350px;
   height: 48px;
 }
 
+.adminLogin .signin-form-2 input:focus {
+  background-color: white;
+}
+
 .adminLogin .signin-form-2 input::-webkit-input-placeholder {
   font-size: 20px;
-  color: #FFFFFF;
+  color: light gray;
 }
 
 .adminLogin .signin-form-2 input:-ms-input-placeholder {
   font-size: 20px;
-  color: #FFFFFF;
+  color: light gray;
 }
 
 .adminLogin .signin-form-2 input::-ms-input-placeholder {
   font-size: 20px;
-  color: #FFFFFF;
+  color: light gray;
 }
 
 .adminLogin .signin-form-2 input::placeholder {
   font-size: 20px;
-  color: #FFFFFF;
+  color: light gray;
 }
 
 .adminLogin .signin-form-2 input[type='submit'] {
