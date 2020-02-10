@@ -8,7 +8,7 @@ class events {
     
       return new Promise((resolve,reject) => {
 
-        connection.many('select * from events where active=true and date >= NOW();').then(data => {
+        connection.many('select * from events where active=true and date >= CURRENT_DATE;').then(data => {
 
             resolve(data)
 

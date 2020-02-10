@@ -165,7 +165,8 @@ const AdminEvent = (props) => {
                         location: location,
                         menu: menu,
                         date: date,
-                        time: time
+                        time: time,
+                        time_blocks: timeBlocks
                         } 
                     }} >
                     <button className={'editIcon ' + props.editIcon}>
