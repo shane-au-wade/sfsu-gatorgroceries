@@ -13,8 +13,7 @@ const AdminCheckin = (props) => {
     const [timeBlocks, setTimeBlocks] = useState ([])
     const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
     const [foundOrder, setFoundOrder] = useState('Order Not Found');
-    // let scrollPos = 0;
-
+    
     useEffect(() => {
         // window.addEventListener("scroll", (event) => {event.preventDefault(); console.log('scrolling', event)});
         let tempBlocks = props.location.state.time_blocks;
@@ -88,26 +87,36 @@ const AdminCheckin = (props) => {
             // }).catch(err => {
             //     console.log('db error')
             // })
-
+            
             let query = '[id*="' + searchKey +'"]';
-            let foundOrderID = 'Order Not Found'
+            let foundOrders = 'Order Not Found'
+            let orderIDs = []
             try
             {
-                foundOrderID = document.querySelector(query).id;
-                
+                foundOrders = document.querySelectorAll(query);
+                foundOrders.forEach(node => {
+                    console.log(node.id);
+                    orderIDs.push(node.id)
+                })
             }
             catch(error)
             {
 
             }
-            
-            console.log('order list:', foundOrderID);
-            setFoundOrder(foundOrderID);
+            // console.log('order list:', foundOrders);
+            if(orderIDs.length > 0)
+            {
+                setFoundOrder(orderIDs);
+            }        
         }
     }
 
     const handleChange = (event) => {
         event.preventDefault();
+        if(event.target.value === '')
+        {
+            setFoundOrder('Order Not Found');
+        }
         setSearchKey(event.target.value);
     }
 
@@ -122,21 +131,34 @@ const AdminCheckin = (props) => {
     const renderOrders = (arr) => {  
         if(typeof(arr) === 'object')
         {
-            return arr.map(order => <Order info={order} history={props.history} updateReceipt={updateReceipt}></Order>)
+            let retOrders = [];
+            let indexCounter = 0;
+            arr.forEach(order => {
+                retOrders.push(<Order info={order} index={indexCounter} history={props.history} updateReceipt={updateReceipt}></Order>)
+                indexCounter++;
+            })
+            return retOrders;
         }  
     }
 
     const renderFoundOrder = () => {
-        
-        let retElement = <div></div>
         if(foundOrder !== 'Order Not Found')
         {
-            
-            console.log('order element', retElement);
-            // use the found id to loop through the orders array of objects. 
+            console.log('orders', orders)
+            console.log('found orders:', foundOrder)
+            let retOrders = []
+
+            foundOrder.forEach(orderStr => {
+                let keyArr = orderStr.split('&');
+                retOrders.push(orders[keyArr[1]][keyArr[2]])
+            })
+
+            console.log('order arr', retOrders);
+
+            return retOrders.map(order => <Order info={order} index={777} history={props.history} updateReceipt={updateReceipt}></Order>);
         }
-        console.log(orders);
-        return retElement;
+        //console.log(orders);
+       
                            
     }
 

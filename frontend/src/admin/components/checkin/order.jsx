@@ -95,7 +95,7 @@ const Order = (props) => {
 
   
 return (
-    <div id={order.first_name + " " + order.last_name + " " + order.student_id}className='order-div'>
+    <div id={order.first_name + " " + order.last_name + " " + order.student_id + '&' + order.pickup + '&' + props.index} className='order-div'>
                     
                    {/* <p className='info'>Order ID:</p>  */}
                    <div className='flex-row'>
