@@ -55,14 +55,21 @@ const AdminCheckin = (props) => {
                 timeBlocks.forEach(time => {
                         processedOrders[time.block] = [];
                     });
-            } catch (error) { }   
+            } catch (error) {
+                console.log('error in order time block setup')
+            }   
+
             console.log('orders before adding:', processedOrders) 
+            
             try 
             {
                 foundOrders.forEach(order => {
-                               processedOrders[order.pickup].push(order)
+                                try{ processedOrders[order.pickup].push(order) }
+                                catch(error) { console.log('invalid order pickup time') } 
                             })
-            } catch (error) {  }      
+            } catch (error) {  
+                console.log('error in order processing', error)
+            }      
             console.log('final processed orders:', processedOrders)
             resolve(processedOrders)
         })    
