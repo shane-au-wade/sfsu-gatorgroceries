@@ -18,14 +18,18 @@ const TextInput = styled.input`
   margin-top: 22px;
   font-size: 20px;
   padding-left: 10px;
-  border-radius: 11px;
-  background-color: #CFC8C8;
-  color: #FFFFFF;
+  border-radius: 7px;
+  background-color: #F6F6F6;
+  color: light gray;
   width: 70%;
   height: 48px;
+  &:focus {
+    color:black;
+    background-color: white;
+  }
   &::placeholder {
     font-size: 20px;
-    color: #FFFFFF;
+    color: light gray;
   }
 `
 
@@ -92,7 +96,7 @@ const SignIn = (props) => {
     <PageWrapper>
       <LogoHeader />
       <SignInForm onSubmit={handleSignIn}>
-        <TextInput type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
+        <TextInput hover type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
         <TextInput type='text' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />
         <TextInput type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required /> <br />
         <SubmitButton type='submit' value='Submit' className='app-button' />
