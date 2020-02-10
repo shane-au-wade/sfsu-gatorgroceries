@@ -11,8 +11,8 @@ const AdminCheckin = (props) => {
     const [searchKey, setSearchKey] = useState('')
     const [orders, setOrders] = useState('init')
     const [timeBlocks, setTimeBlocks] = useState ([])
-    const[receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
-
+    const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
+    const [foundOrder, setFoundOrder] = useState('Order Not Found');
     // let scrollPos = 0;
 
     useEffect(() => {
@@ -51,34 +51,21 @@ const AdminCheckin = (props) => {
         return new Promise((resolve, reject) => {
             let processedOrders = {}
             processedOrders.none = [];
-            try {
+            try 
+            {
                 timeBlocks.forEach(time => {
                         processedOrders[time.block] = [];
                     });
-            } catch (error) {
-                
-            }
-                    
-
-                    console.log('orders before adding:', processedOrders)
-                    // if(typeof(orders) === 'object')
-                    // {
-                    //     orders.forEach(order => {
-                    //        processedOrders[order.pickup].push(order)
-                    //     })
-                    // }
-            try {
+            } catch (error) { }   
+            console.log('orders before adding:', processedOrders) 
+            try 
+            {
                 foundOrders.forEach(order => {
                                processedOrders[order.pickup].push(order)
                             })
-            } catch (error) {
-                
-            }
-                    
-
-                    console.log('final processed orders:', processedOrders)
-
-                    resolve(processedOrders)
+            } catch (error) {  }      
+            console.log('final processed orders:', processedOrders)
+            resolve(processedOrders)
         })    
     }
 
@@ -101,15 +88,26 @@ const AdminCheckin = (props) => {
             // }).catch(err => {
             //     console.log('db error')
             // })
+
+            let query = '[id*="' + searchKey +'"]';
+            let foundOrderID = 'Order Not Found'
+            try
+            {
+                foundOrderID = document.querySelector(query).id;
+                
+            }
+            catch(error)
+            {
+
+            }
+            
+            console.log('order list:', foundOrderID);
+            setFoundOrder(foundOrderID);
         }
     }
 
     const handleChange = (event) => {
         event.preventDefault();
-        if(event.target.value === '')
-        {
-            setOrders('init');
-        }
         setSearchKey(event.target.value);
     }
 
@@ -128,9 +126,21 @@ const AdminCheckin = (props) => {
         }  
     }
 
+    const renderFoundOrder = () => {
+        
+        let retElement = <div></div>
+        if(foundOrder !== 'Order Not Found')
+        {
+            
+            console.log('order element', retElement);
+            // use the found id to loop through the orders array of objects. 
+        }
+        console.log(orders);
+        return retElement;
+                           
+    }
+
     const renderTimeBlocks = () => {
-        console.log('!!!', orders)
-        console.log(timeBlocks)
              return timeBlocks.map(time => (
                 <div className='time-container'>
                 <p className='timeHeader'>{time.block}</p>
@@ -138,7 +148,6 @@ const AdminCheckin = (props) => {
                 </div>
                 )
             )
-       
     }
 
 return (
@@ -162,6 +171,10 @@ return (
                         {/* <button></button> */}
                     </form>
                 </div>
+                <div id='foundOrderLocation'>
+                {renderFoundOrder()}
+                </div>
+                <br></br>
                 {renderTimeBlocks()}
                 {/* {renderOrders()}       */}
                 </div>
