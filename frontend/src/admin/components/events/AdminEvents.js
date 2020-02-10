@@ -34,7 +34,7 @@ const AdminEvents = (props) => {
                     name={event.name}
                     location={event.location}
                     menu={event.menu}
-                    username={props.location.state.user_name}
+                    username={props.location.state !== undefined ? props.location.state.user_name:'none'}
                     time_blocks={event.time_blocks}
                     ></AdminEvent>
                     )
@@ -48,7 +48,7 @@ const AdminEvents = (props) => {
 
 return (
     <div className='adminEvents'>
-        <AdminHeader selected='Events' username={props.location.state.user_name} history={props.history}></AdminHeader>
+        <AdminHeader selected='Events' username={props.location.state !== undefined ? props.location.state.user_name:'none'} history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Upcoming Events</h3> 
             <div className='events-container'>
