@@ -43,7 +43,7 @@ class AdminCreateEvent extends Component {
                         name: props.location.state.name,
                         location: props.location.state.location,
                         menu: props.location.state.menu,
-                        time_blocks: ''
+                        time_blocks: props.location.state.time_blocks
                       },
                       counter: props.location.state.menu.length
                   }
@@ -81,7 +81,7 @@ class AdminCreateEvent extends Component {
 
         if(this.props.location.state.edit) // this is an edit to the event
         {
-          let formatedDate = this.state.event.startDate.getMonth() + '/' + this.state.event.startDate.getDate() + '/' + this.state.event.startDate.getFullYear();
+          let formatedDate = (this.state.event.startDate.getMonth() + 1)+ '/' + this.state.event.startDate.getDate() + '/' + this.state.event.startDate.getFullYear();
             console.log('component did mount: writing values');
             document.getElementById('eventTitle').value = this.state.event.name;
             document.getElementById('location').value = this.state.event.location;
