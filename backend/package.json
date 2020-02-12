@@ -15,7 +15,7 @@
     "postinstall": "sequelize db:migrate"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^3.0.5",
     "concurrently": "^5.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
