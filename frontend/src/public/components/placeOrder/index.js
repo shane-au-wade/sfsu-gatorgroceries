@@ -50,7 +50,8 @@ const PlaceOrder = (props) => {
            orderServices.placeOrder(orderData).then(success => {
             if(success)
             {
-              props.history.push('/completed-order')
+               // props.history.push('/completed-order')
+              props.history.push('/survey', [props.location.state.student ]);
             }
           })     
         }
