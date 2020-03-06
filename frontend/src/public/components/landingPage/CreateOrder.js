@@ -12,7 +12,7 @@ const CreateOrderWrapper = styled.div`
 `
 
 const FoodImage = styled.img`
-  width: 100%;
+  width: 80%;
   max-width: 440px;
   padding: 40px;
   margin: 0 auto;
