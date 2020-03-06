@@ -7,13 +7,15 @@ const CreateOrderWrapper = styled.div`
   text-align: center;
   background-color: #f7f7f7;
   padding-bottom: 25px;
-  max-width: 750px;
-  margin: 0 auto
+  display: flex;
+  flex-direction: column;
 `
 
 const FoodImage = styled.img`
-  width: 80%;
-  margin: 10% 10% 12%;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  margin: 0 auto;
 `
 
 const Button = styled.button`
@@ -22,6 +24,9 @@ const Button = styled.button`
   color: rgb(230, 230, 230);
   background-color: #211061;
   border-radius: 11px;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
 `
 
 const CreateOrder = () => {

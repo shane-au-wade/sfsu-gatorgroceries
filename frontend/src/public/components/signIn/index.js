@@ -40,6 +40,8 @@ const SubmitButton = styled.input`
   color: rgb(230, 230, 230);
   background-color: #211061;
   border-radius: 11px;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const SignIn = (props) => {

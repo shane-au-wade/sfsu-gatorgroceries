@@ -5,13 +5,12 @@ const SheduleWrapper = styled.div`
   font-size: 18px;
   background-color: #F3F3F3;
   text-align: center;
-  padding-bottom: 15px;
-  max-width: 750px;
+  padding-bottom: 30px;
   margin: 0 auto
 `
 
 const Header = styled.h2`
-  padding-top: 10px;
+  padding-top: 30px;
   font-size: 20px;
   font-weight: 400;
 `
