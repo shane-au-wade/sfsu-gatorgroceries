@@ -20,10 +20,10 @@ router.post('/logout', function(req, res, next) {
   {
     delete req.session.loggedin
   }
-  if(req.session.cookie_monster)
-  {
-    delete req.session.cookie_monster;
-  }
+  // if(req.session.cookie_monster)
+  // {
+  //   delete req.session.cookie_monster;
+  // }
   res.status(200).send(true);
 });
 
