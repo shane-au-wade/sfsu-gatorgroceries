@@ -2,7 +2,7 @@
 
 class htmlGenerator{
 
-    static generateEmail(body)
+    static generateEmail(body, dbStatus)
     {
        return new Promise((resolve, reject) => {
 
@@ -28,7 +28,7 @@ class htmlGenerator{
                             <p>Your Order has been placed!</p>
 
                             <p> If you would like to modify or cancel your order, click the link below</p>
-                            <a href='gatorgroceries.com'>gatorgroceries.com<a>
+                            <a href='gatorgroceries.com/edit-order/${dbStatus.id}'>gatorgroceries.com<a>
                             <br></br>
 
                             <p><strong>Pickup Time:</strong> ${body.pickup}</p>
