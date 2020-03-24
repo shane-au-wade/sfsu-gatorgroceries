@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-
+let express = require('express');
+let router = express.Router();
 const db = require('../db/index.js')
+const transporter = require('../nodemailer/nodemailer.js').transporter
+const htmlGen = require('../nodemailer/emailHTML').htmlGenerator
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -41,9 +42,22 @@ router.post('/place-order', async (req, res, next) => {
    *  insert into db orders table the order   
    */
    
-  try{
-    res.status(200).send(await db.student.placeOrder(req.body))
+  console.log(req.body)
+   
+  let msg = {
+    from: '"Shane Wade" <shane.au.wade@gmail.com>', // sender address
+    to: "eramos4@mail.sfsu.edu", // list of receivers
+    subject: "Gator Groceries Order", // Subject line
+   // text: JSON.stringify(req.body), // plain text body
+    html: ``
+  }
 
+  try{
+    let dbStatus = await db.student.placeOrder(req.body)
+    msg.html = await htmlGen.generateEmail(req.body, dbStatus)
+    await transporter.sendMail(msg)
+    console.log("Email status: ")
+    res.status(200).send(dbStatus)
   }catch(e){
     res.send("error")
   }

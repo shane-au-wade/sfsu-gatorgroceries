@@ -5,8 +5,8 @@ import SignIn from './public/components/signIn'
 import Survey from './public/components/survey'
 import PlaceOrder from './public/components/placeOrder'
 import CompletedOrder from './public/components/completedOrder/completedOrder'
+import EditOrder from './public/components/editOrder'
 import Events from './public/components/events'
-
 import CookieJar from './admin/components/cookie-jar/cookieJar'
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
@@ -32,6 +32,7 @@ const App = () => {
         <Route path='/events' component={Events} />
         <Route path='/place-order' component={PlaceOrder} />
         <Route path='/completed-order' component={CompletedOrder} />
+        <Route path='/edit-order/:order_id' component={EditOrder} />
         <Route path='/admin/cookie-jar' component={CookieJar} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/request-new-password' component={RequestNewPassword}/>

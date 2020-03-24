@@ -46,7 +46,8 @@ class Student {
 
             Promise.all(queries).then(function(values) {
                 // console.log(values);
-                resolve(true)
+                let resObj = {status: true, id: uuid}
+                resolve(resObj)
               });
 
         }).catch((e) => {

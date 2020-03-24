@@ -1,0 +1,90 @@
+.edit-order .centered-container {
+  width: 500px;
+  background: #f3f3f3;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.edit-order .centered-container .time-block-container .time-select {
+  margin: 0 auto;
+  width: 105px;
+}
+
+.edit-order .centered-container .time-block-container .time-select, .edit-order .centered-container .time-block-container select {
+  width: 120px;
+  height: 40px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 5px;
+}
+
+.edit-order .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background: #C4C4C4;
+  height: 200px;
+}
+
+.edit-order .main-logo {
+  margin: 0 auto;
+  height: 117px;
+  margin-top: 40px;
+}
+
+.edit-order .text-centered {
+  text-align: center;
+}
+
+.edit-order .padding {
+  padding: 20px;
+}
+
+.edit-order .submit-place-order {
+  margin-top: 15px;
+  padding: 1px;
+  text-align: center;
+}
+
+.edit-order .submit-place-order button {
+  width: 120px;
+  height: 50px;
+  border-radius: 11px;
+  color: white;
+  font-size: 20px;
+  background-color: #211061;
+  border: none;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.edit-order #place-order-submit {
+  margin-top: 10px;
+  height: 35px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 500px) {
+  .edit-order .centered-container {
+    width: 315px;
+  }
+  .edit-order #place-order-submit {
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .edit-order .centered-container {
+    width: 150px;
+  }
+}
+/*# sourceMappingURL=edit-order.css.map */
