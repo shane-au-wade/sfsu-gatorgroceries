@@ -6,9 +6,8 @@ import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
 import Receipt from './Receipt.js'
 
-import io from 'socket.io-client';
-
-
+// import io from 'socket.io-client';
+import socket from '../socket'
 
 const AdminCheckin = (props) => {
 
@@ -17,7 +16,7 @@ const AdminCheckin = (props) => {
     const [timeBlocks, setTimeBlocks] = useState ([])
     const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
     const [foundOrder, setFoundOrder] = useState('Order Not Found');
-    const socket = io('/event-checkin');
+    
 
 
     useEffect(() => {

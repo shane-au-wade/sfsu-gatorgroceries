@@ -1,6 +1,6 @@
 const socket = require('socket.io');
 const io = socket();  
-let users = []
+//let users = {}
 let connections = []
 
 
@@ -29,14 +29,24 @@ let connections = []
   io
  .of('/event-checkin')
  .on('connection', socket => {
-   console.log('incoming socket id: ', socket.id)
+   //console.log('incoming socket id: ', socket.id)
        connections.push(socket)
        console.log('Connected: %s sockets connected', connections.length);
-
-
+    
     socket.on("join-room", (event_id) => {
         console.log('joing room: ', event_id)
         socket.join(event_id)
+        //console.log('socket rooms', socket.rooms)
+    });
+
+    socket.on("leave-all-rooms", () => {
+        //console.log('now leaving all rooms')
+        let room_keys = Object.keys(socket.rooms)
+        for(let i = 1; i < room_keys.length; ++i)
+        {
+          console.log('Leaving room:', room_keys[i])
+          socket.leave(room_keys[i])
+        }
     });
 
      // Disconnect

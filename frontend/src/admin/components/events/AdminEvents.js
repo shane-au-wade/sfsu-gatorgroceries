@@ -3,12 +3,16 @@ import AdminHeader from '../adminHeader/adminHeader.jsx'
 import eventServices from '../../services/events.js'
 import './style/adminEvents.css'
 import AdminEvent from '../adminEvent/adminEvent.jsx'
+import socket from '../socket'
 
 const AdminEvents = (props) => {
 
     const [events, setEvents] = useState('')
         
-    useEffect(() => {        
+    useEffect(() => {   
+        
+        socket.emit('leave-all-rooms')
+
         eventServices.getActiveEvents().then( events => {
             console.log("events in useEffect", events);   
             setEvents(events)
