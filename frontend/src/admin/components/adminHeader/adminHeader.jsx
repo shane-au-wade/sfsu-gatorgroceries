@@ -23,7 +23,7 @@ class AdminHeader extends Component {
             spacer_1: '',
             spacer_2: '',
             spacer_3: '',
-            username: props.username,
+            username: window.sessionStorage.getItem('userName'),
             showSettings: 'settingsMenu hide'
         }
 

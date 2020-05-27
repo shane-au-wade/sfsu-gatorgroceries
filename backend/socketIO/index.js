@@ -29,11 +29,12 @@ let connections = []
   io
  .of('/event-checkin')
  .on('connection', socket => {
+   console.log('incoming socket id: ', socket.id)
        connections.push(socket)
        console.log('Connected: %s sockets connected', connections.length);
 
 
-    socket.on("join-room", (id, event_id) => {
+    socket.on("join-room", (event_id) => {
         console.log('joing room: ', event_id)
         socket.join(event_id)
     });

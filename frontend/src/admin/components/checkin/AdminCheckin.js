@@ -6,6 +6,10 @@ import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
 import Receipt from './Receipt.js'
 
+import io from 'socket.io-client';
+
+
+
 const AdminCheckin = (props) => {
 
     const [searchKey, setSearchKey] = useState('')
@@ -13,8 +17,14 @@ const AdminCheckin = (props) => {
     const [timeBlocks, setTimeBlocks] = useState ([])
     const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
     const [foundOrder, setFoundOrder] = useState('Order Not Found');
-    
+    const socket = io('/event-checkin');
+
+
     useEffect(() => {
+        
+        
+        socket.emit('join-room', props.location.state.eventID);
+        
         // window.addEventListener("scroll", (event) => {event.preventDefault(); console.log('scrolling', event)});
         let tempBlocks = props.location.state.time_blocks;
         tempBlocks.push({block: 'none'})

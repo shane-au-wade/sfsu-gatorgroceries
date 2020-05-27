@@ -26,6 +26,7 @@ const AdminLogin = (props) => {
         loginService.login(user).then(success => {
           if(success)
           {
+            window.sessionStorage.setItem('userName', name[0])
             props.history.push({
               pathname: '/admin/events',
               state: {user_name: name[0]}
