@@ -196,7 +196,7 @@ return (
         </div>
 
         <div className='page'>
-            <AdminHeader selected='Events' username={props.location.state.user_name}  history={props.history}></AdminHeader>
+            <AdminHeader selected='Events' history={props.history}></AdminHeader>
             <div className='AdminContentArea'>
             <h3 className='text-centered padded'>Checkin</h3>
                 <div  className='centered-container'>

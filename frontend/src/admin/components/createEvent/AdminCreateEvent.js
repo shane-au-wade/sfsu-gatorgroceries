@@ -210,7 +210,7 @@ class AdminCreateEvent extends Component {
             location: this.state.event.location,
             menu:this.state.menu,
             time_blocks: this.state.event.time_blocks,
-            user_name: this.props.location.state.user_name
+            user_name: sessionStorage.getItem('userName')
           } 
           //axios call to updateEvent;
           eventServices.updateEvent(eventData).then(res => {
@@ -227,12 +227,7 @@ class AdminCreateEvent extends Component {
           if(this.props.location.state.edit) // this is an edit to the event
           {
             retButton =  
-            <Link to={{
-              pathname: '/admin/events',
-              state: {
-                  user_name: this.props.location.state.user_name
-              }
-              }}>
+            <Link to={'/admin/events'}>
             <button onClickCapture={this.handleEventUpdate}>Update</button>
             </Link>
           }
@@ -247,7 +242,6 @@ class AdminCreateEvent extends Component {
                   location: this.state.event.location,
                   menu:this.state.menu,
                   time_blocks: this.state.event.time_blocks,
-                  user_name: this.props.location.state.user_name
                 } 
             }} >
               <button>Preview</button>
@@ -260,7 +254,7 @@ class AdminCreateEvent extends Component {
   render() { 
     return (  
       <div className='AdminCreateEvents'>
-      <AdminHeader selected='Create Event' username={this.props.location.state.user_name} history={this.props.history}></AdminHeader>
+      <AdminHeader selected='Create Event' history={this.props.history}></AdminHeader>
       <div className='AdminContentArea'>
       <h3 className='text-centered padded'>Create Event</h3> 
             <div className='centered-container'>

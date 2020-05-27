@@ -83,15 +83,10 @@ const AdminEvent = (props) => {
         if(preview === true)
         {
             button = ( 
-                    <Link to={{
-                        pathname: '/admin/events',
-                        state: {
-                            user_name: props.username
-                        }
-                    }}>
-                    <button onClickCapture={handlePublish}>
-                        Publish
-                    </button>
+                    <Link to='/admin/events'>
+                        <button onClickCapture={handlePublish}>
+                            Publish
+                        </button>
                     </Link>
                     )
         }
@@ -120,10 +115,9 @@ const AdminEvent = (props) => {
                         pathname: '/admin/checkin',
                         state: {
                         eventID: id,
-                        user_name: props.username,
                         time_blocks: timeBlocks
                         } 
-                    }} >
+                    }}>
                         <button>
                             Checkin
                         </button>
@@ -158,7 +152,6 @@ const AdminEvent = (props) => {
             <Link to={{
                         pathname: '/admin/create-event',
                         state: {
-                        user_name: props.username,
                         edit: true,
                         eventID: id,
                         name: name,
