@@ -6,7 +6,7 @@ import Graph from './graph.jsx'
 const AdminData = (props) => {
 return (
     <div className='adminData'>
-    <AdminHeader selected='Data' username={props.location.state.user_name} history={props.history}></AdminHeader>
+    <AdminHeader selected='Data' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Data</h3>
             <div className='centered-container'>

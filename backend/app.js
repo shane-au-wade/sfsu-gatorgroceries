@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session')
 const passport = require('passport');
+const io = require('./socketIO')
 
 if(process.env.NODE_ENV === 'development') {
   require('dotenv').config();
@@ -17,7 +18,7 @@ const studentRouter = require('./routes/student');
 const adminRouter = require('./routes/admin')
 
 const app = express();
-
+app.io = io
 
 
 

@@ -24,10 +24,10 @@ const AdminAccounts = (props) => {
 
 return (
     <div className='adminAccounts'>
-    <AdminHeader selected='Accounts' username={props.location.state.user_name} history={props.history}></AdminHeader>
+    <AdminHeader selected='Accounts' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
         <h3 className='text-centered padded'>Users</h3>
-        <UserTable users={users} username={props.location.state.user_name}></UserTable>
+        <UserTable users={users} username={sessionStorage.getItem('userName')}></UserTable>
         </div>
     </div>
 )};

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('../auth/passport').passport;
-
 const db = require("../db/index.js");
+let io = require('../socketIO')
 
 router.post('/login',  passport.authenticate('local', {session: false}), function(req, res, next) {
   // console.log('Username: ', req.body.username);
@@ -87,7 +87,7 @@ router.post('/logout', function(req, res, next) {
   });
 
   router.post('/updateOrder', async (req, res, next) => {
-  
+    // broadcast the updated order to all sockets connected
 
     try{
       res.status(200).send(await db.admin.updateOrder(req.body))
