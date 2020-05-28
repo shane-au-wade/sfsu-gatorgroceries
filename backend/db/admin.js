@@ -48,7 +48,7 @@ class admin {
     }
 
     static updateOrder(orderBody){
-        console.log(orderBody);
+        //console.log(orderBody);
         return new Promise((resolve,reject) => {
             connection.none('update orders set status = $1 where id=$2',[orderBody.status, orderBody.id])
             .then(async (result) => {
