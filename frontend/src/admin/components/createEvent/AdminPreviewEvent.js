@@ -17,6 +17,7 @@ const AdminPreviewEvent = (props) => {
                 menu={props.location.state.menu}
                 time_blocks={props.location.state.time_blocks}
                 preview={true}
+                history={props.history}
                 ></AdminEvent>
             )
         }
