@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import checkIcon from '../../icons/check_circle-24px.svg';
 import checkinServices from '../../services/checkin'
+import socket from '../socket'
 
 const Order = (props) => {
 
@@ -16,7 +17,7 @@ const Order = (props) => {
         tempOrder.status = 'ready';
 
         checkinServices.updateOrder(tempOrder).then((info) => {
-            console.log('order update info:', info)
+            // console.log('order update info:', info)
                 setOrder(tempOrder);
         }).catch(err => {
             console.log('Error in order update:', err)
@@ -93,6 +94,16 @@ const Order = (props) => {
         return retVal;
     }
 
+
+    socket.on("update-orders", (newOrder) => {
+
+        if(newOrder.id === order.id)
+        {
+            //console.log('now updating orders via socket.io in child order class: ', order)
+            setOrder(newOrder)
+        }
+        
+    })
   
 return (
     <div id={order.first_name + " " + order.last_name + " " + order.student_id + '&' + order.pickup + '&' + props.index} className='order-div'>

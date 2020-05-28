@@ -6,9 +6,10 @@ import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
 import Receipt from './Receipt.js'
 
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import socket from '../socket'
 
-
+let prevSearchKey = ''
 
 const AdminCheckin = (props) => {
 
@@ -17,11 +18,8 @@ const AdminCheckin = (props) => {
     const [timeBlocks, setTimeBlocks] = useState ([])
     const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
     const [foundOrder, setFoundOrder] = useState('Order Not Found');
-    const socket = io('/event-checkin');
-
 
     useEffect(() => {
-        
         
         socket.emit('join-room', props.location.state.eventID);
         
@@ -51,8 +49,6 @@ const AdminCheckin = (props) => {
         }).catch(err => {
             console.log('db error')
         })
-
-
 
     }, [])
 
@@ -87,24 +83,10 @@ const AdminCheckin = (props) => {
 
     const handleSumbit = (event) => {
         event.preventDefault();
-        if(searchKey !== '')
-        {
-            // let searchParams = {eventID: props.location.state.eventID, student_id: searchKey}
-            // //axios call will go here
-            // checkinServices.searchOrder(searchParams).then((foundOrder) => {
-            //     // console.log('Order: ', foundOrder)
-            //     if(foundOrder.error)
-            //     {
-            //         setOrder('')
-            //     }
-            //     else
-            //     {
-            //         setOrder(foundOrder); 
-            //     }     
-            // }).catch(err => {
-            //     console.log('db error')
-            // })
-            
+        //console.log(`seachkey = ${searchKey}, prevKey = ${prevSearchKey}`)
+        if(searchKey !== '' && searchKey !== prevSearchKey)
+        {   
+            prevSearchKey = searchKey
             let query = '[id*="' + searchKey +'"]';
             let foundOrders = 'Order Not Found'
             let orderIDs = []
@@ -159,10 +141,11 @@ const AdminCheckin = (props) => {
     }
 
     const renderFoundOrder = () => {
+
         if(foundOrder !== 'Order Not Found')
         {
-            console.log('orders', orders)
-            console.log('found orders:', foundOrder)
+            // console.log('orders', orders)
+            // console.log('found orders:', foundOrder)
             let retOrders = []
 
             foundOrder.forEach(orderStr => {
@@ -170,7 +153,7 @@ const AdminCheckin = (props) => {
                 retOrders.push(orders[keyArr[1]][keyArr[2]])
             })
 
-            console.log('order arr', retOrders);
+            // console.log('order arr', retOrders);
 
             return retOrders.map(order => <Order info={order} index={777} history={props.history} updateReceipt={updateReceipt}></Order>);
         }
@@ -188,6 +171,36 @@ const AdminCheckin = (props) => {
                 )
             )
     }
+
+    /**
+     * socket.io update 
+     */
+
+    socket.on("update-orders", (order) => {
+
+        if(orders !== 'init')
+        {
+            //console.log('now updating orders via socket.io: ', order)
+            let updatedOrders = JSON.parse(JSON.stringify(orders))
+            //console.log(updatedOrders)
+
+            for(let i = 0; i < updatedOrders[order.pickup].length; i++)
+            {
+                if(updatedOrders[order.pickup][i].id === order.id)
+                {
+                    updatedOrders[order.pickup][i].status = order.status
+                }
+
+                if(i === (updatedOrders[order.pickup].length - 1))
+                {
+                    //console.log('calling setORder from socket update:')
+                   // console.log(updatedOrders)
+                    setOrders(updatedOrders)       
+                }
+            }  
+        }
+        
+    })
 
 return (
     <div className='adminCheckin'>

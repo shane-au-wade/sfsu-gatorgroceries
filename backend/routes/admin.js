@@ -90,7 +90,10 @@ router.post('/logout', function(req, res, next) {
     // broadcast the updated order to all sockets connected
 
     try{
-      res.status(200).send(await db.admin.updateOrder(req.body))
+
+      let orderUpdate = await db.admin.updateOrder(req.body)
+      io.of('/event-checkin').emit("update-orders", orderUpdate)
+      res.status(200).send(orderUpdate)
      }catch(e){
       res.status(200).send(e)
      }

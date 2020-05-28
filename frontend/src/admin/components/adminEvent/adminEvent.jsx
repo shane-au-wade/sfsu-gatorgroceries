@@ -83,11 +83,9 @@ const AdminEvent = (props) => {
         if(preview === true)
         {
             button = ( 
-                    <Link to='/admin/events'>
                         <button onClickCapture={handlePublish}>
                             Publish
                         </button>
-                    </Link>
                     )
         }
         else if(props.order === true)
@@ -138,6 +136,8 @@ const AdminEvent = (props) => {
         eventData.menu = menu;
         eventData.time_blocks = timeBlocks;
         createEventServices.createEvent(eventData).then(() => {
+
+            props.history.push('/admin/events')
 
         }).catch(err => {
             console.error('Error in creating Event: ', err)

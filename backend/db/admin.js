@@ -51,11 +51,35 @@ class admin {
         console.log(orderBody);
         return new Promise((resolve,reject) => {
             connection.none('update orders set status = $1 where id=$2',[orderBody.status, orderBody.id])
-            .then((result) => {
-                resolve(result)
+            .then(async (result) => {
+
+                resolve(await this.getOrder(orderBody.id))
             })
             .catch((e) => {
                 reject({error: "Not Updated"})
+            })
+        })
+    }
+
+    static getOrder(orderID)
+    {
+        let query = `select 
+        orders.*, 
+        users.first_name, 
+        users.last_name 
+        from orders 
+        left join 
+        users 
+        on orders.student_id = users.email
+        where orders.id=$1`
+
+        return new Promise((resolve,reject) => {
+            connection.oneOrNone(query,[orderID])
+            .then((order) => {
+                resolve(order)
+            })
+            .catch((e) => {
+                reject({error: "Not Found"})
             })
         })
     }
