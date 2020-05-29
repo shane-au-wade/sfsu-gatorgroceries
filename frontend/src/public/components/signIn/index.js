@@ -74,15 +74,15 @@ const SignIn = (props) => {
         // depending on the value of survey_complete,
         // we will redirect to either 
         // the survey or placeorder
-        props.history.push('/events', [student]);
-        // if(surveyComplete)
-        // {
-        //   props.history.push('/events', [student]);
-        // }
-        // else
-        // {
-        //   props.history.push('/survey', [student]);
-        // }
+        // props.history.push('/events', [student]);
+        if(surveyComplete)
+        {
+          props.history.push('/events', [student]);
+        }
+        else
+        {
+          props.history.push('/survey', [student]);
+        }
 
         }).catch(err => {
           console.log('Error in student Verification: ', err)
