@@ -18,15 +18,10 @@ const Header = styled.h2`
 const Schedule = () => {
   return (
     <SheduleWrapper>
-        <Header>WEEKLY FOOD DISTRIBUTION</Header>
-        Every Monday <br />
-        12:30 pm - 3:00 pm <br />
-        Annex I <br />
-        <Header>EMERGRENCY MEALS & SNACKS</Header>
-        Every Wednesday & Thursday <br />
-        1:00 pm - 6:00 pm <br />
-        Cesar Chavez Student Center <br />
-        Recreation & Dining Level
+        <Header><strong>WEEKLY FOOD DISTRIBUTION</strong></Header>
+        Every Wednesdays and Thursdays <br />
+        11:00 am - 01:00 pm <br />
+        SFSU, Cesar Chavez Building <br />
     </SheduleWrapper>
   )
 }
