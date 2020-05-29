@@ -27,6 +27,23 @@
                 border-radius: 5px;
             }
         }
+
+        .package-container {
+            
+            .time-select{
+                margin: 0 auto;
+               
+                width: 105px;
+            }
+
+            .time-select, select {
+                width: 160px;
+                height: 40px;
+                padding-left: 6px;
+                padding-right: 6px;
+                border-radius: 5px;
+            }
+        }
     
     }
 

@@ -7,7 +7,7 @@ import orderServices from '../../services/placeOrder.js'
 const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
-  const [order] = useState({})
+  const [order, setOrder] = useState({'item': props.location.state.menu[0].item, 'qty':1})
   const [timeBlocks, setTimeBlocks] = useState([])
   const [timeSelect, updateTimeSelect] = useState('none')
 
@@ -20,23 +20,32 @@ const PlaceOrder = (props) => {
     console.log('Blocks: ', props.location.state.time_blocks);
   }, [props]); 
 
-  const updateOrder = (spinnerState) => {
+/**old code for the order spinnners */
+
+  // const updateOrder = (spinnerState) => {
+  //   // console.log(spinnerState)
+  //   order[spinnerState.item] = spinnerState.clicks
+  // }
+
+  const updateOrder = (event) => {
     // console.log(spinnerState)
-    order[spinnerState.item] = spinnerState.clicks
+    setOrder({'item': event.target.value, 'qty':1})
   }
 
   const redirect = () =>{
         // console.log(order);
         let orderData = {}
-        let finalOrder = []
-        let lineItems = Object.entries(order);
-        lineItems.forEach( lineItem => {
-          finalOrder.push({item:lineItem[0],qty:lineItem[1]})
-        })
-        console.log('finalOrder: ', finalOrder)
+        // let finalOrder = []
+        // let lineItems = Object.entries(order);
+        // lineItems.forEach( lineItem => {
+        //   finalOrder.push({item:lineItem[0],qty:lineItem[1]})
+        // })
+
+
+        // console.log('finalOrder: ', finalOrder)
         orderData.student_id = props.location.state.student.student_email;
         orderData.event_id = props.location.state.eventID;
-        orderData.order = finalOrder;
+        orderData.order = order;
         orderData.status = 'placed'
 
 
@@ -44,21 +53,30 @@ const PlaceOrder = (props) => {
         orderData.pickup = timeSelect
 
         console.log(orderData)
-        // axios api call
-        if(finalOrder.length > 0)
-        {
-           orderServices.placeOrder(orderData).then(success => {
-            if(success)
-            {
-               // props.history.push('/completed-order')
-              props.history.push('/survey', [props.location.state.student ]);
-            }
-          })     
-        }
-        else
-        {
-          alert("Cannot place empty order")
-        }
+
+        orderServices.placeOrder(orderData).then(success => {
+              if(success)
+              {
+                props.history.push('/completed-order')
+                //props.history.push('/survey', [props.location.state.student ]);
+              }
+        }) 
+
+        //axios api call
+        // if(orderData.pickup != 'none')
+        // {
+        //    orderServices.placeOrder(orderData).then(success => {
+        //     if(success)
+        //     {
+        //        // props.history.push('/completed-order')
+        //       props.history.push('/survey', [props.location.state.student ]);
+        //     }
+        //   })     
+        // }
+        // else
+        // {
+        //   alert("Cannot place empty order")
+        // }
        
   }
 
@@ -72,16 +90,24 @@ const PlaceOrder = (props) => {
       <div className='header'>
       <img src={logo} alt='logo' className='main-logo'></img>
       </div>
-         <h3 className='text-centered padding'>Choose from the following items</h3> 
+         <h3 className='text-centered padding'>Choose One Packge from the following options</h3> 
       <div className='centered-container'>
-            <div className='spinner-container'>
+            {/* <div className='spinner-container'>
               { 
               menu.map((line) => 
                           (
                               <InputSpinner item={line.item} maxQty={line.qty} update={updateOrder}></InputSpinner>   
                           )
                 )}
+            </div> */}
 
+            <div className='package-container'>
+              <div className='time-select'>
+                <select onChange={updateOrder} name='timeSelect'>
+                  { menu.map((line) => <option  value={line.item}>{line.item}</option>) }
+                </select>
+            </div>
+                
             </div>
       </div>
 
