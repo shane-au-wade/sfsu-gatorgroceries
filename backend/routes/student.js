@@ -45,8 +45,8 @@ router.post('/place-order', async (req, res, next) => {
   console.log(req.body)
    
   let msg = {
-    from: '"Shane Wade" <shane.au.wade@gmail.com>', // sender address
-    to: "eramos4@mail.sfsu.edu", // list of receivers
+    from: 'foodpantry@asi.sfsu.edu', // sender address
+    to: 'shane.au.wade@gmail.com', // list of receivers
     subject: "Gator Groceries Order", // Subject line
    // text: JSON.stringify(req.body), // plain text body
     html: ``

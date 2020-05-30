@@ -5,8 +5,8 @@ require('dotenv').config();
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-            user: process.env.EMAIL, // generated ethereal user
-            pass: process.env.PASS // generated ethereal password
+            user: process.env.EMAIL, // sfsu email
+            pass: process.env.PASS // sfsu email pass
             },
     tls:{
         rejectUnauthorized: false
