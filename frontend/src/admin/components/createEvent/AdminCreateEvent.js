@@ -14,7 +14,6 @@ import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -44,7 +43,10 @@ const AdminCreateEvent = (props) => {
 
   //console.log("Passed props: ", props)
 
-  const itemAdd = () => {
+  const itemAdd = (e) => {
+    // Prevent the browser from refreshing after adding an item.
+    e.preventDefault()
+
     // This will make sure that a item doesn't get added if name and/or qty textboxes are empty.
     if(itemName !== '' || itemQTY !== '')
     {
@@ -102,10 +104,13 @@ const AdminCreateEvent = (props) => {
               <TextField id='event-startTime' type='time' label='Start' InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
               <TextField id='event-endTime' type='time' label='End' InputLabelProps={{ shrink: true }} style={{ width: 110, marginLeft: '5%', marginTop: '5%' }} required />
               <br />
-              <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} />
-              <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} />
-              <IconButton variant='contained' id='event-addItem' onClick={() => itemAdd()} style={{ marginLeft: '1%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
-
+              
+              <form onSubmit={(e) => itemAdd(e)}>
+                <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} required/>
+                <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} required/>
+                <IconButton variant='contained' id='event-addItem' type='submit' style={{ marginLeft: '1%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
+              </form>
+             
               <List subheader='Items in Cart'>
                 {itemList.map((item) => {
                   const itemLabel = `item-list-label-${item.name}-${item.qty}`
