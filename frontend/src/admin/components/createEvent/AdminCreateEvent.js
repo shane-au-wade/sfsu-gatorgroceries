@@ -8,18 +8,31 @@ import {Link} from 'react-router-dom';
 import eventServices from '../../services/createEvent';
 
 import { makeStyles } from '@material-ui/core/styles';
+
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import ListSubheader from '@material-ui/core/ListSubheader';
+
 import Card from '@material-ui/core/Paper';
-import { CardHeader, CardContent, TextField } from '@material-ui/core';
+import { CardHeader, CardContent, TextField, Checkbox } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '90vw',
     maxWidth: 500,
     position: 'absolute', left: '50%', top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -28,9 +41,24 @@ const useStyles = makeStyles((theme) => ({
     margin: '40px auto',
   },
 
+  // This card style controls the Card component on which the entire Create Event section is located on.
   card: {
     padding: theme.spacing(2),
     textAlign: 'center',
+  },
+
+  // This paper style controls the Paper component on which the item table is located on.
+  paper: {
+    width: '100%'
+  },
+
+  table: {
+    width: 500,
+  },
+
+  // The table container will expand vertically up to a max of 175px, then it will apply scrolling behavior.
+  container: {
+    maxHeight: 175,
   },
 }))
 
@@ -89,16 +117,21 @@ const AdminCreateEvent = (props) => {
     setItemQTY('')
   }
 
+  // Calculate time blocks and then push user to the preview screen.
+  const calculateTimeBlocks = (e) => {
+    console.log("Contents: ", e)
+  }
+
   return (
-    <div>
+    <div style={{overflow: 'hidden'}}>
       <AdminHeader selected='Create Event' history={props.history}></AdminHeader>
       <div className='AdminContentArea'>
         <Card className={classes.root}>
           <CardHeader title='Create Event' style={{ textAlign: 'center' }}/>
           <CardContent>
-            <form>
-              <TextField id='event-title' label='Event Title' type='text' style={{ width: 400 }} required />
-              <TextField id='event-location' label='Location' type='text' style={{ width: 400, marginTop: '1%' }} required />
+            <form onSubmit={(e) => calculateTimeBlocks(e)}>
+              <TextField id='event-title' label='Event Title' type='text' style={{ maxWidth:'80vh', marginRight: '5%' }} required />
+              <TextField id='event-location' label='Location' type='text' style={{}} required />
               <TextField id='event-date' type='date' label='Date' InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
               <br />
               <TextField id='event-startTime' type='time' label='Start' InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
@@ -108,24 +141,56 @@ const AdminCreateEvent = (props) => {
               <form onSubmit={(e) => itemAdd(e)}>
                 <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} required/>
                 <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} required/>
-                <IconButton variant='contained' id='event-addItem' type='submit' style={{ marginLeft: '1%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
+                <IconButton variant='contained' id='event-addItem' type='submit' style={{ marginLeft: '5%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
               </form>
+
+              <Paper className={classes.paper}>
+                <TableContainer className={classes.container}>
+                  <Table stickyHeader size='small' aria-label="a simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align='left' style={{ minWidth: 50}}>Item</TableCell>
+                        <TableCell align='left' style={{ minWidth: 50}}>QTY</TableCell>
+                        <TableCell align='left' style={{ minWidth: 50}}>Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {itemList.map((item) => {
+                        const itemLabel = `item-list-label-${item.name}-${item.qty}`;
+
+                        return (
+                          <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
+                            <TableCell align='left'>{item.name}</TableCell>
+                            <TableCell align='left'>{item.qty}</TableCell>
+                            <TableCell align='left'><IconButton aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton></TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
              
-              <List subheader='Items in Cart'>
+              {/* This List has been commented out as the Table implementation is much better and offers more functionality than List does. */}
+              {/* <List id='item-list'>
+                <ListSubheader component='div' id='item-list-subheader-item'>Menu Item</ListSubheader>
                 {itemList.map((item) => {
                   const itemLabel = `item-list-label-${item.name}-${item.qty}`
 
                   return (
                     <ListItem key={itemLabel}>
-                      <ListItemText primary={`Name: ${item.name}, QTY: ${item.qty}`} />
+                      <ListItemText primary={`${item.name}`} />
+                      <ListItemText primary={`${item.qty}`}/>
                       <ListItemSecondaryAction>
                         <IconButton edge='end' aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton>
                       </ListItemSecondaryAction>
                     </ListItem>
                   )
                 })}
+              </List> */}
 
-              </List>
+              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Preview</Button>
+              
             </form>
           </CardContent>  
         </Card>
