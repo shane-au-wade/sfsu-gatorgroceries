@@ -58,6 +58,11 @@ router.get('/place-order', function(request, response, next) {
   response.status(200).sendFile(__basedir + '/build/index.html');
 });
 
+router.get('/confirm-order/:order_id', function(request, response, next) {
+  response.status(200).sendFile(__basedir + '/build/index.html');
+});
+
+
 router.get('/survey', function(request, response, next) {
   response.status(200).sendFile(__basedir + '/build/index.html');
 });
