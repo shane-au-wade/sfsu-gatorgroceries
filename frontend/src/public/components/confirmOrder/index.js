@@ -6,7 +6,7 @@ import checkEmail from '../../images/check_email.svg'
 
 const CompletedOrder = (props) => {
 
-  console.log('order confirmed props', props.match.params)
+  console.log('order confirmed props', props)
 
   // use the use effect to query to DB to ensure that the order
   // is valid and check if it has already been confirmed. 
