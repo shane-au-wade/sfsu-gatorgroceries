@@ -137,10 +137,10 @@ const AdminCreateEvent = (props) => {
     let endMinutes = endArr[1]
 
     // Perform check to see if start and end hours are less than 10. If so, remove the zero in front of them.
-    if(startHour < 10){
+    if(startHour.charAt(0) === '0'){
       startHour = startHour.substr(1)
     }
-    if(endHour < 10){
+    if(endHour.charAt(0) === '0'){
       endHour = endHour.substr(1)
     }
 
@@ -165,16 +165,21 @@ const AdminCreateEvent = (props) => {
 
       let newStartHour = 0
 
-      // Calculate the next hour after the starting hour and set timeDesignation to the next hour with the minutes.
+      // Calculate the next hour after the starting hour and set time designations to the start hour and the next hour.
       let nextHour = parseInt(startHour) + 1
-      let timeDesignation = [nextHour, startMinutes]
+      let startTimeDesignation = parseInt(startHour)
+      let nextTimeDesignation = nextHour
 
-      // If the start hour is after 12PM, convert it to standard. Otherwise, keep it the same.
-      if(startHour > 13){
+      if(parseInt(startHour) > 13){
         newStartHour = Math.abs(startHour - 12)
       }
       else{
         newStartHour = startHour
+      }
+
+      // If the start hour is after 12PM, convert it to standard. Otherwise, keep it the same.
+      if(startTimeDesignation > 13){
+        startTimeDesignation = Math.abs(startTimeDesignation - 12)
       }
 
       // If the next hour after the start hour is after 12PM, convert it to standard.
@@ -183,11 +188,17 @@ const AdminCreateEvent = (props) => {
       }
 
       // If the next hour is after 11:59AM, set timeDesignation to PM. Otherwise, set it to AM.
-      if(timeDesignation[0] > '11'){
-        timeDesignation = "PM"
+      if(parseInt(startHour) > 11){
+        startTimeDesignation = "PM"
       }
       else{
-        timeDesignation = "AM"
+        startTimeDesignation = "AM"
+      }
+      if(nextTimeDesignation > 11){
+        nextTimeDesignation = "PM"
+      }
+      else{
+        nextTimeDesignation = "AM"
       }
 
       // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
@@ -196,7 +207,7 @@ const AdminCreateEvent = (props) => {
       }
 
       // Push the first time block onto timeBlocks array and move to the for loop for the rest of the time blocks.
-      timeBlocks.push({ block: `${newStartHour}:${startMinutes}AM - ${nextHour}:${startMinutes}${timeDesignation}` })
+      timeBlocks.push({ block: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${nextHour}:${startMinutes}${nextTimeDesignation}` })
 
       // For loop through timeBlocks and push a block in specified format. If the end is reached, push the final block
       // and set the end minutes.
@@ -260,43 +271,51 @@ const AdminCreateEvent = (props) => {
     else{
       console.log("Starting time in AM")
 
-      if(startHour < 10){
-        startHour = startHour.substr(1)
-      }
-
       let newStartHour = 0
 
-      // Calculate time block size from start to end.
-      let blockSize = endHour - startHour
-      console.log("Block size between start and end is: ", blockSize)
-
-      // Calculate the next hour after the starting hour and set timeDesignation to the next hour with the minutes.
+      // Calculate the next hour after the starting hour and set time designations to the start hour and the next hour.
       let nextHour = parseInt(startHour) + 1
-      let timeDesignation = [nextHour, startMinutes]
+      let startTimeDesignation = parseInt(startHour)
+      let nextTimeDesignation = nextHour
 
-      // If the start hour is after 12PM, convert it to standard. Otherwise, keep it the same.
-      if(startHour > 13){
+      if(parseInt(startHour) > 13){
         newStartHour = Math.abs(startHour - 12)
       }
       else{
         newStartHour = startHour
       }
 
+      // If the start hour is after 12PM, convert it to standard. Otherwise, keep it the same.
+      if(startTimeDesignation > 13){
+        startTimeDesignation = Math.abs(startTimeDesignation - 12)
+      }
+
       // If the next hour after the start hour is after 12PM, convert it to standard.
       if(nextHour > 13){
-        Math.abs(nextHour - 12)
+        nextHour = Math.abs(nextHour - 12)
       }
 
       // If the next hour is after 11:59AM, set timeDesignation to PM. Otherwise, set it to AM.
-      if(timeDesignation[0] > '11'){
-        timeDesignation = "PM"
+      if(parseInt(startHour) > 11){
+        startTimeDesignation = "PM"
       }
       else{
-        timeDesignation = "AM"
+        startTimeDesignation = "AM"
+      }
+      if(nextTimeDesignation > 11){
+        nextTimeDesignation = "PM"
+      }
+      else{
+        nextTimeDesignation = "AM"
+      }
+
+      // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
+      if(nextHour === 13){
+        nextHour = 1
       }
 
       // Push the first time block onto timeBlocks array and move to the for loop for the rest of the time blocks.
-      timeBlocks.push({ block: `${newStartHour}:${startMinutes}AM - ${nextHour}:${startMinutes}${timeDesignation}` })
+      timeBlocks.push({ block: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${nextHour}:${startMinutes}${nextTimeDesignation}` })
 
       // For loop through timeBlocks and push a block in specified format. If the end is reached, push the final block
       // and set the end minutes.
