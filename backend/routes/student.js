@@ -45,7 +45,7 @@ router.post('/place-order', async (req, res, next) => {
   console.log(req.body)
    
   let msg = {
-    from: 'foodpantry@asi.sfsu.edu', // sender address
+    from: 'no-reply@gatorgroceries.com', // sender address
     to: 'shane.au.wade@gmail.com', // list of receivers
     subject: "Gator Groceries Order", // Subject line
    // text: JSON.stringify(req.body), // plain text body
@@ -55,8 +55,8 @@ router.post('/place-order', async (req, res, next) => {
   try{
     let dbStatus = await db.student.placeOrder(req.body)
     msg.html = await htmlGen.generateEmail(req.body, dbStatus)
-    await transporter.sendMail(msg)
-    console.log("Email status: ")
+    let info = await transporter.sendMail(msg)
+    //console.log("Email status: ", info)
     res.status(200).send(dbStatus)
   }catch(e){
     res.send("error")
