@@ -204,9 +204,15 @@ const AdminCreateEvent = (props) => {
     }
 
     // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
-    if(nextHour === 13){
+    console.log("newStartHour is: ", newStartHour)
+    if(newStartHour === 13 || newStartHour === '13'){
+      newStartHour = 1
+    }
+    if(nextHour === 13 || nextHour === '13'){
       nextHour = 1
     }
+
+    console.log("newStartHour is: ", newStartHour)
 
     // Push the first time block onto timeBlocks array and move to the for loop for the rest of the time blocks.
     timeBlocks.push({ block: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${nextHour}:${startMinutes}${nextTimeDesignation}` })
@@ -276,7 +282,7 @@ const AdminCreateEvent = (props) => {
     //   pathname: '/admin/preview-event',
     //   state: {
     //     date: eventDate,
-    //     time: `${startHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`,
+    //     time: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`,
     //     name: eventTitle,
     //     location: eventLocation,
     //     menu: itemList,
