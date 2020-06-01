@@ -138,6 +138,7 @@ const AdminCreateEvent = (props) => {
 
     // Get individual hours and minutes from start and end arrays.
     let startHour = startArr[0]
+    let newStartHour = 0
     let endHour = endArr[0]
     let startMinutes = startArr[1]
     let endMinutes = endArr[1]
@@ -163,8 +164,6 @@ const AdminCreateEvent = (props) => {
     let blockSize = Math.abs(endHour - startHour)
 
     console.log("Block size between start and end is: ", blockSize)
-
-    let newStartHour = 0
 
     // Calculate the next hour after the starting hour and set time designations to the start hour and the next hour.
     let nextHour = parseInt(startHour) + 1
@@ -269,7 +268,19 @@ const AdminCreateEvent = (props) => {
 
     console.log("Time blocks are: ", timeBlocks)
     setTimeBlocks(timeBlocks)
-  
+    
+    // Now send page information to Preview.
+    props.history.push({
+      pathname: '/admin/preview-event',
+      state: {
+        date: eventDate,
+        time: '',
+        name: eventTitle,
+        location: eventLocation,
+        menu: itemList,
+        time_blocks: timeBlocks,
+      }
+    })
   }
 
 
