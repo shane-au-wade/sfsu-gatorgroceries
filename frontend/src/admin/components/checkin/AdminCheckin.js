@@ -119,13 +119,14 @@ const AdminCheckin = (props) => {
         setSearchKey(event.target.value);
     }
 
-    const updateReceipt = (order) => {
-        setReceipt(<Receipt email={order.student_id} order={order.order} firstName={order.first_name} lastName={order.last_name}></Receipt>);
+    const updateReceipt = async (order) => {
+        await setReceipt(<Receipt email={order.student_id} order={order.order} firstName={order.first_name} lastName={order.last_name}></Receipt>);
         let y = window.scrollY
-        console.log('scroll top height', y)
-         window.print()
-         window.scrollTo(0,y);
+            console.log('scroll top height', y)
+             window.print()
+             window.scrollTo(0,y);   
     }
+
 
     const renderOrders = (arr) => {  
         if(typeof(arr) === 'object')
