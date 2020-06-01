@@ -46,7 +46,7 @@ class Student {
 
             Promise.all(queries).then(function(values) {
                 // console.log(values);
-                let resObj = {status: true, id: uuid}
+                let resObj = {status: true, id: uuid, student_email:orderBody.student_id.toLowerCase()}
                 resolve(resObj)
               });
 
