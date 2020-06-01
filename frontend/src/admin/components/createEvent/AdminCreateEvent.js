@@ -30,6 +30,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '90vw',
@@ -71,6 +77,7 @@ const AdminCreateEvent = (props) => {
   const [eventLocation, setEventLocation] = useState('')
   const [eventDate, setEventDate] = useState('')
 
+  const [concatTime, setConcatTime] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [timeBlocks, setTimeBlocks] = useState([])
@@ -80,6 +87,7 @@ const AdminCreateEvent = (props) => {
   const [itemList, setItemList] = useState([])
 
   const[showPreviewButton, setShowPreviewButton] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
 
   //console.log("Passed props: ", props)
@@ -89,8 +97,12 @@ const AdminCreateEvent = (props) => {
     e.preventDefault()
 
     // This will make sure that a item doesn't get added if name and/or qty textboxes are empty.
-    if(itemName !== '' || itemQTY !== '')
+    if(itemName !== '')
     {
+      if(itemQTY === '' || itemQTY === '0' || itemQTY === 0){
+        console.log("empty")
+        setItemQTY('1')
+      }
       // Attach a unique id to the item.
       const itemLabel = `item-list-label-${itemName}-${itemQTY}`
 
@@ -133,6 +145,12 @@ const AdminCreateEvent = (props) => {
   // Calculate time blocks and then push user to the preview screen.
   const calculateTimeBlocks = (e) => {
     e.preventDefault()
+
+    // Clear the timeBlocks if the user happened to somehow press the Submit button a second time.
+    if(timeBlocks.length > 0){
+      console.log("Length is: ", timeBlocks.length)
+      timeBlocks.splice(0, timeBlocks.length)
+    }
 
     // Split the start and end times by the colon, seperating them into hours and minutes. Then create the start and end Date objects.
     let startArr =  startTime.split(':');
@@ -204,15 +222,12 @@ const AdminCreateEvent = (props) => {
     }
 
     // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
-    console.log("newStartHour is: ", newStartHour)
     if(newStartHour === 13 || newStartHour === '13'){
       newStartHour = 1
     }
     if(nextHour === 13 || nextHour === '13'){
       nextHour = 1
     }
-
-    console.log("newStartHour is: ", newStartHour)
 
     // Push the first time block onto timeBlocks array and move to the for loop for the rest of the time blocks.
     timeBlocks.push({ block: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${nextHour}:${startMinutes}${nextTimeDesignation}` })
@@ -276,20 +291,37 @@ const AdminCreateEvent = (props) => {
 
     console.log("Time blocks are: ", timeBlocks)
     setTimeBlocks(timeBlocks)
-    
-    // // Now send page information to Preview.
-    // props.history.push({
-    //   pathname: '/admin/preview-event',
-    //   state: {
-    //     date: eventDate,
-    //     time: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`,
-    //     name: eventTitle,
-    //     location: eventLocation,
-    //     menu: itemList,
-    //     time_blocks: timeBlocks,
-    //   }
-    // })
 
+    // Concat the time into one string for display on the Preview page.
+    let tempConcatTime = `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`
+    setConcatTime(tempConcatTime)
+
+    // Unhide the Preview button.
+    setShowPreviewButton(true)
+  }
+
+  // Controls Dialog Popup.
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
+  const eventAlertPopUp = () => {
+    // Now send page information to Preview.
+    props.history.push({
+      pathname: '/admin/preview-event',
+      state: {
+        date: eventDate,
+        time: concatTime,
+        name: eventTitle,
+        location: eventLocation,
+        menu: itemList,
+        time_blocks: timeBlocks,
+      }
+    })
   }
 
 
@@ -359,9 +391,22 @@ const AdminCreateEvent = (props) => {
                 })}
               </List> */}
 
-              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Submit</Button>
+              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Check</Button>
               
             </form>
+
+            { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Nothing here :)</span>}
+            <Dialog open={dialogOpen} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-dialog-description='alert-dialog-description'>
+              <DialogContent>
+                <DialogContentText id='alert-dialog-content'>
+                  Are you ready to see the Preview screen?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color='primary'>Go Back</Button>
+                <Button onClick={eventAlertPopUp} color='primary' autoFocus>Preview</Button>
+              </DialogActions>
+            </Dialog>
           </CardContent>  
         </Card>
       </div>
