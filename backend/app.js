@@ -15,7 +15,8 @@ if(process.env.NODE_ENV === 'development') {
 
 const indexRouter = require('./routes/index');
 const studentRouter = require('./routes/student');
-const adminRouter = require('./routes/admin')
+const adminRouter = require('./routes/admin');
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 app.io = io
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname, '/build')));
 app.use('/', indexRouter);
 app.use('/admin', adminRouter)
 app.use('/student', studentRouter);
+app.use('/orders', ordersRouter)
 
 app.use(passport.initialize());
 

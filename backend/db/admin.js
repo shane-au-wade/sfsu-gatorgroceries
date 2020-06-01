@@ -61,6 +61,20 @@ class admin {
         })
     }
 
+    static confirmOrder(orderBody){
+        //console.log(orderBody);
+        return new Promise((resolve,reject) => {
+            connection.none('update orders set confirmed = true where id=$1',[orderBody.order_id])
+            .then(async (result) => {
+
+                resolve(await this.getOrder(orderBody.order_id))
+            })
+            .catch((e) => {
+                reject({error: "Not Updated"})
+            })
+        })
+    }
+
     static getOrder(orderID)
     {
         let query = `select 

@@ -7,7 +7,7 @@ import orderServices from '../../services/placeOrder.js'
 const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
-  const [order, setOrder] = useState({'item': props.location.state.menu[0].item, 'qty':1})
+  let order = [{'item': props.location.state.menu[0].item, 'qty':1}]
   const [timeBlocks, setTimeBlocks] = useState([])
   const [timeSelect, updateTimeSelect] = useState('none')
 
@@ -29,7 +29,7 @@ const PlaceOrder = (props) => {
 
   const updateOrder = (event) => {
     // console.log(spinnerState)
-    setOrder({'item': event.target.value, 'qty':1})
+    order[0] = {'item': event.target.value, 'qty':1}
   }
 
   const redirect = () =>{

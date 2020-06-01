@@ -27,8 +27,8 @@ class htmlGenerator{
                         <body>
                             <p>Your Order has been placed!</p>
 
-                            <p> If you would like to modify or cancel your order, click the link below</p>
-                            <a href='gatorgroceries.com/edit-order/${dbStatus.id}'>gatorgroceries.com<a>
+                            <p> Please confirm your order by clicking the link below.  Only confirmed orders are accepted.</p>
+                            <a href='http://gatorgroceries.com/confirm-order/${dbStatus.id}'>Confirm Your Order<a>
                             <br></br>
 
                             <p><strong>Pickup Time:</strong> ${body.pickup}</p>

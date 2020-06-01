@@ -1,4 +1,4 @@
-.completed-order{
+.confirm-order{
     .centered-container{
         width: 400px;
         
@@ -29,6 +29,12 @@
 
     }
 
+    p {
+        text-align: center;
+        font-weight: 700;
+        font-size: 25px;
+    }
+
     .submit-place-order button{
         // border-radius: 4px;
         // background-color: #211061;
@@ -43,16 +49,7 @@
         
       
     }
-    p{
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    color: black;
    
-    color: rgb(192, 5, 5);
-   
-    }
     .check-in{
         padding-top: 20px;
     }
