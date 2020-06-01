@@ -79,6 +79,8 @@ const AdminCreateEvent = (props) => {
   const [itemQTY, setItemQTY] = useState('')
   const [itemList, setItemList] = useState([])
 
+  const[showPreviewButton, setShowPreviewButton] = useState(false)
+
 
   //console.log("Passed props: ", props)
 
@@ -269,18 +271,19 @@ const AdminCreateEvent = (props) => {
     console.log("Time blocks are: ", timeBlocks)
     setTimeBlocks(timeBlocks)
     
-    // Now send page information to Preview.
-    props.history.push({
-      pathname: '/admin/preview-event',
-      state: {
-        date: eventDate,
-        time: '',
-        name: eventTitle,
-        location: eventLocation,
-        menu: itemList,
-        time_blocks: timeBlocks,
-      }
-    })
+    // // Now send page information to Preview.
+    // props.history.push({
+    //   pathname: '/admin/preview-event',
+    //   state: {
+    //     date: eventDate,
+    //     time: `${startHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`,
+    //     name: eventTitle,
+    //     location: eventLocation,
+    //     menu: itemList,
+    //     time_blocks: timeBlocks,
+    //   }
+    // })
+
   }
 
 
@@ -301,11 +304,9 @@ const AdminCreateEvent = (props) => {
               <TextField id='event-endTime' type='time' label='End' onChange={e => setEndTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginLeft: '5%', marginTop: '5%' }} required />
               <br />
               
-              <form onSubmit={(e) => itemAdd(e)}>
-                <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} required/>
-                <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} required/>
-                <IconButton variant='contained' id='event-addItem' type='submit' style={{ marginLeft: '5%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
-              </form>
+              <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} />
+              <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} />
+              <IconButton variant='contained' id='event-addItem' onClick={e => itemAdd(e)} style={{ marginLeft: '5%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
 
               <Paper className={classes.paper}>
                 <TableContainer className={classes.container}>
@@ -352,7 +353,7 @@ const AdminCreateEvent = (props) => {
                 })}
               </List> */}
 
-              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Preview</Button>
+              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Submit</Button>
               
             </form>
           </CardContent>  
