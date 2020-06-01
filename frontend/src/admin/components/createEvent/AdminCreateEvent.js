@@ -107,7 +107,7 @@ const AdminCreateEvent = (props) => {
       const itemLabel = `item-list-label-${itemName}-${itemQTY}`
 
       // Add the new item to the itemList state and render the component again.
-      setItemList(itemList.concat({ name: itemName, qty: itemQTY, id: itemLabel }))
+      setItemList(itemList.concat({ item: itemName, qty: itemQTY, id: itemLabel }))
     }
 
     // Clear the item and qty textboxes.
@@ -311,6 +311,7 @@ const AdminCreateEvent = (props) => {
   // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
   const eventAlertPopUp = () => {
     // Now send page information to Preview.
+
     props.history.push({
       pathname: '/admin/preview-event',
       state: {
@@ -333,9 +334,9 @@ const AdminCreateEvent = (props) => {
           <CardHeader title='Create Event' style={{ textAlign: 'center' }}/>
           <CardContent>
             <form onSubmit={(e) => calculateTimeBlocks(e)}>
-              <TextField id='event-title' type='text' label='Event Title' onChange={e => setEventTitle(e)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
-              <TextField id='event-location' type='text' label='Location' onChange={e => setEventLocation(e)} style={{}} required />
-              <TextField id='event-date' type='date' label='Date' onChange={e => setEventDate(e)} InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
+              <TextField id='event-title' type='text' label='Event Title' onChange={e => setEventTitle(e.target.value)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
+              <TextField id='event-location' type='text' label='Location' onChange={e => setEventLocation(e.target.value)} style={{}} required />
+              <TextField id='event-date' type='date' label='Date' onChange={e => setEventDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
               
               <br />
               <TextField id='event-startTime' type='time' label='Start' onChange={e => setStartTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
@@ -362,7 +363,7 @@ const AdminCreateEvent = (props) => {
 
                         return (
                           <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
-                            <TableCell align='left'>{item.name}</TableCell>
+                            <TableCell align='left'>{item.item}</TableCell>
                             <TableCell align='left'>{item.qty}</TableCell>
                             <TableCell align='left'><IconButton aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton></TableCell>
                           </TableRow>
@@ -395,7 +396,7 @@ const AdminCreateEvent = (props) => {
               
             </form>
 
-            { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Nothing here :)</span>}
+            { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Please click the Preview button after you are done</span>}
             <Dialog open={dialogOpen} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-dialog-description='alert-dialog-description'>
               <DialogContent>
                 <DialogContentText id='alert-dialog-content'>
