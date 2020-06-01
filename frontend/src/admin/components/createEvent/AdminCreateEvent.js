@@ -73,6 +73,7 @@ const AdminCreateEvent = (props) => {
 
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
+  const [timeBlocks, setTimeBlocks] = useState([])
 
   const [itemName, setItemName] = useState('')
   const [itemQTY, setItemQTY] = useState('')
@@ -134,8 +135,6 @@ const AdminCreateEvent = (props) => {
     // Split the start and end times by the colon, seperating them into hours and minutes. Then create the start and end Date objects.
     let startArr =  startTime.split(':');
     let endArr =  endTime.split(':');
-
-    let timeBlocks = []
 
     // Get individual hours and minutes from start and end arrays.
     let startHour = startArr[0]
@@ -269,6 +268,7 @@ const AdminCreateEvent = (props) => {
     }
 
     console.log("Time blocks are: ", timeBlocks)
+    setTimeBlocks(timeBlocks)
   
   }
 
