@@ -33,6 +33,12 @@
   text-align: center;
 }
 
+.confirm-order p {
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+}
+
 .confirm-order .submit-place-order button {
   width: 120px;
   height: 30px;
