@@ -6,29 +6,29 @@ let aws = require('aws-sdk')
 // then we should be golden
 aws.config.update({region: process.env.SMTP_REGION});
 
-
-let transporter = nodemailer.createTransport({
-    SES: new aws.SES({
-        apiVersion: '2010-12-01'
-    })
-});
-
-
-
-
-// create reusable transporter object using the default SMTP transport
-
-
+/**
+ * Amazon Simple Email Service Transporter 
+ */
 
 // let transporter = nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//             user: process.env.EMAIL, // sfsu email
-//             pass: process.env.PASS // sfsu email pass
-//             },
-//     tls:{
-//         rejectUnauthorized: false
-//     }
+//     SES: new aws.SES({
+//         apiVersion: '2010-12-01'
+//     })
 // });
+
+/**
+ * Standard Gmail transported => Foodpantry email
+ */
+
+let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+            user: process.env.EMAIL, // sfsu email
+            pass: process.env.PASS // sfsu email pass
+            },
+    tls:{
+        rejectUnauthorized: false
+    }
+});
 
 module.exports = {transporter: transporter}
