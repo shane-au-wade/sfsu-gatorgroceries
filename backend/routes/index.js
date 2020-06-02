@@ -15,7 +15,6 @@ const cookieCheck = (req, res, next) => {
   }
 }
 
-
 const initLoggin = (req, res, next) => {
   if(req.session.loggedin)
   {
@@ -40,7 +39,6 @@ const loggedin = (req, res, next) => {
   }
 }
 
-
 /* GET home page. */
 router.get('/', function(request, response, next) {
   response.status(200).sendFile(__basedir + '/build/index.html');
@@ -61,7 +59,6 @@ router.get('/place-order', function(request, response, next) {
 router.get('/confirm-order/:order_id', function(request, response, next) {
   response.status(200).sendFile(__basedir + '/build/index.html');
 });
-
 
 router.get('/survey', function(request, response, next) {
   response.status(200).sendFile(__basedir + '/build/index.html');
