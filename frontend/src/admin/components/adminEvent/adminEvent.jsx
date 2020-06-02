@@ -156,16 +156,16 @@ const AdminEvent = (props) => {
 
 
             <Link to={{
-                        pathname: '/admin/create-event',
+                        pathname: '/admin/edit-event',
                         state: {
-                        edit: true,
-                        eventID: id,
-                        name: name,
-                        location: location,
-                        menu: menu,
-                        date: date,
-                        time: time,
-                        time_blocks: timeBlocks
+                            edit: true,
+                            eventID: id,
+                            name: name,
+                            location: location,
+                            menu: menu,
+                            date: date,
+                            time: time,
+                            time_blocks: timeBlocks
                         } 
                     }} >
                     <button className={'editIcon ' + props.editIcon}>

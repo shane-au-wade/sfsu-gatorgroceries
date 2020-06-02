@@ -102,7 +102,7 @@ const AdminCreateEvent = (props) => {
 
       // Prefix with zero if the day and/or month is less than 2 digits to fit Date picker format.
       if(tempDay < 10){
-        tempDay = "0" + (tempDate.getDay() + 1)
+        tempDay = "0" + (tempDate.getDay())
       }
       if(tempMonth < 10){
         tempMonth = "0" + (tempDate.getMonth() + 1)
@@ -377,9 +377,27 @@ const AdminCreateEvent = (props) => {
 
   // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
   const eventAlertPopUp = () => {
-    // Now send page information to Preview.
+    // This is to update the existing event. Axios call to updateEvent;
+    console.log('handling event update')
+    let eventData = {
+      id: props.location.state.eventID,
+      date: eventDate,
+      time: concatTime,
+      name: eventTitle,
+      location: eventLocation,
+      menu: itemList,
+      time_blocks: timeBlocks,
+      user_name: sessionStorage.getItem('userName')
+    } 
+
+    eventServices.updateEvent(eventData).then((res) => {
+    }).catch(err => {
+      console.log('Error in AdminEditEvent trying to update existing event: ', err);
+    })
+
+    // Now send page information to Events Page.
     props.history.push({
-      pathname: '/admin/preview-event',
+      pathname: '/admin/events',
       state: {
         date: eventDate,
         time: concatTime,
@@ -397,7 +415,7 @@ const AdminCreateEvent = (props) => {
       <AdminHeader selected='Create Event' history={props.history}></AdminHeader>
       <div className='AdminContentArea'>
         <Card className={classes.root}>
-          <CardHeader title='Create Event' style={{ textAlign: 'center' }}/>
+          <CardHeader title='Edit Event' style={{ textAlign: 'center' }}/>
           <CardContent>
             <form onSubmit={(e) => calculateTimeBlocks(e)}>
               <TextField id='event-title' type='text' label='Event Title' value={eventTitle} onChange={e => setEventTitle(e.target.value)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
@@ -462,7 +480,7 @@ const AdminCreateEvent = (props) => {
               <Dialog open={dialogOpen} onClose={handleClose}>
                 <DialogContent>
                   <DialogContentText id='alert-dialog-content'>
-                    Are you ready to see the Finalize Changes screen?
+                    Are you finished with your changes to this event?
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
