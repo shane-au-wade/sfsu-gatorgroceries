@@ -436,7 +436,7 @@ const AdminCreateEvent = (props) => {
                     </TableHead>
                     <TableBody>
                       {itemList.map((item) => {
-                        const itemLabel = `item-list-label-${item.name}-${item.qty}`;
+                        const itemLabel = `item-list-label-${item.item}-${item.qty}`;
 
                         return (
                           <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
