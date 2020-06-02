@@ -16,7 +16,7 @@ const AdminEvent = (props) => {
     const [preview] = useState(props.preview)
     const [timeBlocks] = useState(props.time_blocks)
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
-    
+
     const [showMenu, setShowMenu] = useState('no_menu');
 
     const getMonth = () => {
@@ -64,6 +64,12 @@ const AdminEvent = (props) => {
         }
         return month;
     }
+
+    // Parse out the month, day, and year from the date in props. The getMonth() is the function above.
+    const tempDateYear = new Date(props.date).getUTCFullYear()
+    const tempDateMonth = getMonth()
+    const tempDateDay = new Date(props.date).getUTCDate()
+    const constructedDate = tempDateYear + "-" + tempDateMonth + "-" + tempDateDay
 
     const handleMenuClick = () =>
     {
@@ -169,14 +175,14 @@ const AdminEvent = (props) => {
 
             <div className='date'>
                 <p className='text-left'>{getMonth()}</p>
-                <p className='text-left'>{date.getDate()}</p>
+                <p className='text-left'>{tempDateDay}</p>
             </div>
             <p><strong>{name}</strong></p> 
             <br></br>
             <hr></hr>
             <br></br>
             <p className='date-header'>Date And Time</p>
-            <p className='info'>{date.toDateString()}</p>
+            <p className='info'>{constructedDate}</p>
             <p className='info'>{time}</p>
             <br></br>
             <p className='date-header'>Location</p>

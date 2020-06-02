@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/Admin-create-event-style.css'
 import addItem from '../../icons/add_circle_outline-24px.svg'
@@ -29,6 +29,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,6 +77,7 @@ const AdminCreateEvent = (props) => {
   const [eventLocation, setEventLocation] = useState('')
   const [eventDate, setEventDate] = useState('')
 
+  const [concatTime, setConcatTime] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [timeBlocks, setTimeBlocks] = useState([])
@@ -80,7 +87,76 @@ const AdminCreateEvent = (props) => {
   const [itemList, setItemList] = useState([])
 
   const[showPreviewButton, setShowPreviewButton] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
+  // This useEffect will only run once on page load such that it will grab prop history's states if it exists.
+  useEffect(() => {
+    // If the props had existing information already, set them.
+    if(props.location.state.edit === true){
+      console.log("I AM BEING CALLED")
+      setEventTitle(props.location.state.name)
+      setEventLocation(props.location.state.location)
+
+      // The date picker is in yyyy-MM-dd format.
+      let tempDate = new Date(props.location.state.date)
+      let tempDay = 0
+      let tempMonth = 0
+
+      // Prefix with zero if the day and/or month is less than 2 digits to fit Date picker format.
+      if(tempDate.getDay() < 10){
+        tempDay = "0" + tempDate.getDay()
+      }
+      if(tempDate.getMonth() < 10){
+        tempMonth = "0" + tempDate.getMonth()
+      }
+      tempDate = tempDate.getFullYear() + "-" + tempMonth + "-" + tempDay
+      setEventDate(tempDate)
+
+      // Split the time string by the dash and remove the time designations while also keeping track of which 
+      // time to convert back to military format.
+      let tempTimeWithTimeDesignations = (props.location.state.time).split(" - ")
+      let tempStartTime = ''
+      let tempEndTime = ''
+      let startConvertToMilitary = false
+      let endConvertToMilitary = false
+
+      // Replace each instance of AM or PM with empty string and determine which ones need to be converted to military.
+      if(tempTimeWithTimeDesignations[0].indexOf("AM") !== -1){
+        tempStartTime = tempTimeWithTimeDesignations[0].replace("AM", "")
+      }
+      else{
+        tempStartTime = tempTimeWithTimeDesignations[0].replace("PM", "")
+        startConvertToMilitary = true
+      }
+      if(tempTimeWithTimeDesignations[1].indexOf("AM") !== -1){
+        tempEndTime = tempTimeWithTimeDesignations[1].replace("AM", "")
+      }
+      else{
+        tempEndTime = tempTimeWithTimeDesignations[1].replace("PM", "")
+        endConvertToMilitary = true
+      }
+
+      // Determine which time needs to be converted to military time.
+      let tempStartTimeArray = tempStartTime.split(":")
+      if(startConvertToMilitary){
+        tempStartTimeArray[0] = (parseInt(tempStartTimeArray[0]) + 12).toString()
+      }
+
+      let tempEndTimeArray = tempEndTime.split(":")
+      if(endConvertToMilitary){
+        tempEndTimeArray[0] = (parseInt(tempEndTimeArray[0]) + 12).toString()
+      }
+
+      // Bring them all together into temp variables to be pushed to their states.
+      tempStartTime = tempStartTimeArray[0] + ":" + tempStartTimeArray[1]
+      tempEndTime = tempEndTimeArray[0] + ":" + tempEndTimeArray[1]
+
+      setStartTime(tempStartTime)
+      setEndTime(tempEndTime)
+
+      setItemList(props.location.state.menu)
+    }
+  }, [])
 
   //console.log("Passed props: ", props)
 
@@ -89,13 +165,17 @@ const AdminCreateEvent = (props) => {
     e.preventDefault()
 
     // This will make sure that a item doesn't get added if name and/or qty textboxes are empty.
-    if(itemName !== '' || itemQTY !== '')
+    if(itemName !== '')
     {
+      if(itemQTY === '' || itemQTY === '0' || itemQTY === 0){
+        console.log("empty")
+        setItemQTY('1')
+      }
       // Attach a unique id to the item.
       const itemLabel = `item-list-label-${itemName}-${itemQTY}`
 
       // Add the new item to the itemList state and render the component again.
-      setItemList(itemList.concat({ name: itemName, qty: itemQTY, id: itemLabel }))
+      setItemList(itemList.concat({ item: itemName, qty: itemQTY, id: itemLabel }))
     }
 
     // Clear the item and qty textboxes.
@@ -133,6 +213,12 @@ const AdminCreateEvent = (props) => {
   // Calculate time blocks and then push user to the preview screen.
   const calculateTimeBlocks = (e) => {
     e.preventDefault()
+
+    // Clear the timeBlocks if the user happened to somehow press the Submit button a second time.
+    if(timeBlocks.length > 0){
+      console.log("Length is: ", timeBlocks.length)
+      timeBlocks.splice(0, timeBlocks.length)
+    }
 
     // Split the start and end times by the colon, seperating them into hours and minutes. Then create the start and end Date objects.
     let startArr =  startTime.split(':');
@@ -204,7 +290,10 @@ const AdminCreateEvent = (props) => {
     }
 
     // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
-    if(nextHour === 13){
+    if(newStartHour === 13 || newStartHour === '13'){
+      newStartHour = 1
+    }
+    if(nextHour === 13 || nextHour === '13'){
       nextHour = 1
     }
 
@@ -270,20 +359,38 @@ const AdminCreateEvent = (props) => {
 
     console.log("Time blocks are: ", timeBlocks)
     setTimeBlocks(timeBlocks)
-    
-    // // Now send page information to Preview.
-    // props.history.push({
-    //   pathname: '/admin/preview-event',
-    //   state: {
-    //     date: eventDate,
-    //     time: `${startHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`,
-    //     name: eventTitle,
-    //     location: eventLocation,
-    //     menu: itemList,
-    //     time_blocks: timeBlocks,
-    //   }
-    // })
 
+    // Concat the time into one string for display on the Preview page.
+    let tempConcatTime = `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`
+    setConcatTime(tempConcatTime)
+
+    // Unhide the Preview button.
+    setShowPreviewButton(true)
+  }
+
+  // Controls Dialog Popup.
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
+  const eventAlertPopUp = () => {
+    // Now send page information to Preview.
+
+    props.history.push({
+      pathname: '/admin/preview-event',
+      state: {
+        date: eventDate,
+        time: concatTime,
+        name: eventTitle,
+        location: eventLocation,
+        menu: itemList,
+        time_blocks: timeBlocks,
+      }
+    })
   }
 
 
@@ -295,13 +402,13 @@ const AdminCreateEvent = (props) => {
           <CardHeader title='Create Event' style={{ textAlign: 'center' }}/>
           <CardContent>
             <form onSubmit={(e) => calculateTimeBlocks(e)}>
-              <TextField id='event-title' type='text' label='Event Title' onChange={e => setEventTitle(e)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
-              <TextField id='event-location' type='text' label='Location' onChange={e => setEventLocation(e)} style={{}} required />
-              <TextField id='event-date' type='date' label='Date' onChange={e => setEventDate(e)} InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
+              <TextField id='event-title' type='text' label='Event Title' value={eventTitle} onChange={e => setEventTitle(e.target.value)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
+              <TextField id='event-location' type='text' label='Location' value={eventLocation} onChange={e => setEventLocation(e.target.value)} style={{}} required />
+              <TextField id='event-date' type='date' label='Date' value={eventDate} onChange={e => setEventDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
               
               <br />
-              <TextField id='event-startTime' type='time' label='Start' onChange={e => setStartTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
-              <TextField id='event-endTime' type='time' label='End' onChange={e => setEndTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginLeft: '5%', marginTop: '5%' }} required />
+              <TextField id='event-startTime' type='time' label='Start' value={startTime} onChange={e => setStartTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
+              <TextField id='event-endTime' type='time' label='End' value={endTime} onChange={e => setEndTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginLeft: '5%', marginTop: '5%' }} required />
               <br />
               
               <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} />
@@ -324,7 +431,7 @@ const AdminCreateEvent = (props) => {
 
                         return (
                           <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
-                            <TableCell align='left'>{item.name}</TableCell>
+                            <TableCell align='left'>{item.item}</TableCell>
                             <TableCell align='left'>{item.qty}</TableCell>
                             <TableCell align='left'><IconButton aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton></TableCell>
                           </TableRow>
@@ -353,9 +460,22 @@ const AdminCreateEvent = (props) => {
                 })}
               </List> */}
 
-              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Submit</Button>
+              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Check</Button>
               
             </form>
+
+            { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Please click the Check button after you are done</span>}
+            <Dialog open={dialogOpen} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-dialog-description='alert-dialog-description'>
+              <DialogContent>
+                <DialogContentText id='alert-dialog-content'>
+                  Are you ready to see the Finalize Changes screen?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color='primary'>Go Back</Button>
+                <Button onClick={eventAlertPopUp} color='primary' autoFocus>Finalize</Button>
+              </DialogActions>
+            </Dialog>
           </CardContent>  
         </Card>
       </div>
