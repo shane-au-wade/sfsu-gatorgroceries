@@ -102,7 +102,7 @@ const AdminCreateEvent = (props) => {
 
       // Prefix with zero if the day and/or month is less than 2 digits to fit Date picker format.
       if(tempDay < 10){
-        tempDay = "0" + (tempDate.getDay())
+        tempDay = "0" + tempDate.getUTCDate()
       }
       if(tempMonth < 10){
         tempMonth = "0" + (tempDate.getMonth() + 1)
@@ -145,10 +145,18 @@ const AdminCreateEvent = (props) => {
       if(endConvertToMilitary){
         tempEndTimeArray[0] = (parseInt(tempEndTimeArray[0]) + 12).toString()
       }
+      
+      // Add a zero in front of the start hour if it is less than 10.
+      if((parseInt(tempStartTimeArray[0]) < 10)){
+        tempStartTimeArray[0] = ("0" + tempStartTimeArray[0].toString())
+      }
 
       // Bring them all together into temp variables to be pushed to their states.
       tempStartTime = tempStartTimeArray[0] + ":" + tempStartTimeArray[1]
       tempEndTime = tempEndTimeArray[0] + ":" + tempEndTimeArray[1]
+
+      console.log("tempStartTime: ", tempStartTime)
+      console.log("tempEndTime: ", tempEndTime)
 
       setStartTime(tempStartTime)
       setEndTime(tempEndTime)
@@ -443,7 +451,7 @@ const AdminCreateEvent = (props) => {
                     </TableHead>
                     <TableBody>
                       {itemList.map((item) => {
-                        const itemLabel = `item-list-label-${item.name}-${item.qty}`;
+                        const itemLabel = `item-list-label-${item.item}-${item.qty}`;
 
                         return (
                           <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
