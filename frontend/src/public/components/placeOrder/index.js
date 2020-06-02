@@ -92,7 +92,7 @@ const PlaceOrder = (props) => {
       <div className='header'>
       <img src={logo} alt='logo' className='main-logo'></img>
       </div>
-         <h3 className='text-centered padding'>Choose One Packge from the following options</h3> 
+         <h3 className='text-centered padding'>Choose one package from the following options</h3> 
       <div className='centered-container'>
             {/* <div className='spinner-container'>
               { 

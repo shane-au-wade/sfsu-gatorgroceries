@@ -33,22 +33,23 @@ const Survey = (props) => {
   }
 
   return (
-
     <div className='survey'>
     <div className='header'>
     <img src={logo} alt='logo' className='main-logo'></img>
-
-    <button onClick={redirect} >
-          Go To Events | THIS IS FOR DEVELOPMENT ONLY
-    </button>
-
     </div>
       <h3 className='text-centered padding'>Survey</h3> 
       <div className='centered-container'>
-        {/* <iframe title='googleForm' onLoad={handleSumbit} src="https://docs.google.com/forms/d/e/1FAIpQLSeAf5PZuu7FvM86ls7f4OFA3KkuGPnWGdjwdc7jyaL_4TbfsA/viewform?embedded=true" className='googleForm'  >Loading…</iframe> */}
+        {/* current gg survey */}
         <iframe title='googleForm' onLoad={handleSubmit} src="https://docs.google.com/forms/d/e/1FAIpQLSc_v2IvZOpeOyFcqoQO2UyiFXqPUMsVooCu6vIp7tSfrW-5Bw/viewform?embedded=true" className='googleForm' frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-         {/* <iframe title='googleForm' onLoad={handleSumbit} src="https://docs.google.com/forms/d/e/1FAIpQLScDFJjB-FvpaxaqkbVxH2dOPyuCacaY8lUWXdH1BSAx1nSdGg/viewform?embedded=true" className='googleForm' frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> */}
+        {/* Shane Wade UX experience survey */}
+        {/* <iframe title='googleForm' onLoad={handleSumbit} src="https://docs.google.com/forms/d/e/1FAIpQLScDFJjB-FvpaxaqkbVxH2dOPyuCacaY8lUWXdH1BSAx1nSdGg/viewform?embedded=true" className='googleForm' frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> */}
       </div>
+
+       {/* 
+       This is a super sneaky hidden div button to bypass the survey.
+       That way, we do not need to dilute the gator groceries survey.
+       */}
+      <div style={{width:'30px', height: '30px'}}onClick={redirect}></div>
     </div>
   )
 }
