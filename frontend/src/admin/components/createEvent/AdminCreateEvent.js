@@ -93,23 +93,23 @@ const AdminCreateEvent = (props) => {
   useEffect(() => {
     // If the props had existing information already, set them.
     if(props.location.state.edit === true){
-      console.log("I AM BEING CALLED")
       setEventTitle(props.location.state.name)
       setEventLocation(props.location.state.location)
 
       // The date picker is in yyyy-MM-dd format.
       let tempDate = new Date(props.location.state.date)
-      let tempDay = 0
-      let tempMonth = 0
+      let tempDay = tempDate.getUTCDate()
+      let tempMonth = tempDate.getMonth() + 1
 
       // Prefix with zero if the day and/or month is less than 2 digits to fit Date picker format.
-      if(tempDate.getDay() < 10){
-        tempDay = "0" + tempDate.getDay()
+      if(tempDay < 10){
+        tempDay = "0" + (tempDate.getDay() + 1)
       }
-      if(tempDate.getMonth() < 10){
-        tempMonth = "0" + tempDate.getMonth()
+      if(tempMonth < 10){
+        tempMonth = "0" + (tempDate.getMonth() + 1)
       }
-      tempDate = tempDate.getFullYear() + "-" + tempMonth + "-" + tempDay
+
+      tempDate = tempDate.getUTCFullYear() + "-" + tempMonth + "-" + tempDay
       setEventDate(tempDate)
 
       // Split the time string by the dash and remove the time designations while also keeping track of which 
@@ -380,6 +380,8 @@ const AdminCreateEvent = (props) => {
   const eventAlertPopUp = () => {
     // Now send page information to Preview.
 
+    console.log("DATE IS ", eventDate)
+
     props.history.push({
       pathname: '/admin/preview-event',
       state: {
@@ -465,7 +467,7 @@ const AdminCreateEvent = (props) => {
             </form>
 
             { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Please click the Check button after you are done</span>}
-            <Dialog open={dialogOpen} onClose={handleClose} aria-labelledby='alert-dialog-title' aria-dialog-description='alert-dialog-description'>
+            <Dialog open={dialogOpen} onClose={handleClose}>
               <DialogContent>
                 <DialogContentText id='alert-dialog-content'>
                   Are you ready to see the Finalize Changes screen?
