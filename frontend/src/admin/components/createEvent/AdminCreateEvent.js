@@ -86,7 +86,6 @@ const AdminCreateEvent = (props) => {
   const [itemQTY, setItemQTY] = useState('')
   const [itemList, setItemList] = useState([])
 
-  const[showPreviewButton, setShowPreviewButton] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
 
   // This useEffect will only run once on page load such that it will grab prop history's states if it exists.
@@ -364,8 +363,8 @@ const AdminCreateEvent = (props) => {
     let tempConcatTime = `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`
     setConcatTime(tempConcatTime)
 
-    // Unhide the Preview button.
-    setShowPreviewButton(true)
+    // Display the Dialog alert.
+    handleClickOpen()
   }
 
   // Controls Dialog Popup.
@@ -379,9 +378,6 @@ const AdminCreateEvent = (props) => {
   // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
   const eventAlertPopUp = () => {
     // Now send page information to Preview.
-
-    console.log("DATE IS ", eventDate)
-
     props.history.push({
       pathname: '/admin/preview-event',
       state: {
@@ -462,22 +458,21 @@ const AdminCreateEvent = (props) => {
                 })}
               </List> */}
 
-              <Button variant='outlined' id='event-submitEvent' type='submit' color='secondary' size='large' style={{ marginTop: '7%' }}>Check</Button>
-              
+              <Button variant='outlined' id='event-Preview' color='secondary' type='submit' style={{ marginTop: '7%' }}>Preview</Button>
+              <Dialog open={dialogOpen} onClose={handleClose}>
+                <DialogContent>
+                  <DialogContentText id='alert-dialog-content'>
+                    Are you ready to see the Finalize Changes screen?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color='primary'>Go Back</Button>
+                  <Button onClick={eventAlertPopUp} color='primary' autoFocus>Finalize</Button>
+                </DialogActions>
+              </Dialog>
+            
             </form>
 
-            { showPreviewButton ? <Button variant='outlined' id='event-Preview' onClick={handleClickOpen} style={{ marginTop: '7%' }}>Preview</Button> : <span>Please click the Check button after you are done</span>}
-            <Dialog open={dialogOpen} onClose={handleClose}>
-              <DialogContent>
-                <DialogContentText id='alert-dialog-content'>
-                  Are you ready to see the Finalize Changes screen?
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color='primary'>Go Back</Button>
-                <Button onClick={eventAlertPopUp} color='primary' autoFocus>Finalize</Button>
-              </DialogActions>
-            </Dialog>
           </CardContent>  
         </Card>
       </div>
