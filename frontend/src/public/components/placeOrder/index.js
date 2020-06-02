@@ -115,7 +115,7 @@ const PlaceOrder = (props) => {
 
     <h3 className='text-centered padding'>Select a Pickup Time</h3> 
       <div className='centered-container'>
-            <div className='time-block-container'>
+            <div className='package-container'>
               <div className='time-select'>
                 <select onChange={updateTimeBlock} name='timeSelect'>
                 <option  value='none'>None</option>
