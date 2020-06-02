@@ -11,6 +11,7 @@ import Events from './public/components/events'
 import CookieJar from './admin/components/cookie-jar/cookieJar'
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
+import AdminEditEvent from './admin/components/createEvent/AdminEditEvent'
 import AdminPreviewEvent from './admin/components/createEvent/AdminPreviewEvent'
 import AdminCheckin from './admin/components/checkin/AdminCheckin'
 import Receipt from './admin/components/checkin/Receipt'
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='/admin/forgot-password' component={ForgotPassword}/>
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
+        <Route path='/admin/edit-event' component={AdminEditEvent} />
         <Route path='/admin/preview-event' component={AdminPreviewEvent} />
         <Route path='/admin/checkin' component={AdminCheckin} />
         <Route path='/admin/receipt' component={Receipt} />
