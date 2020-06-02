@@ -363,6 +363,17 @@ const AdminCreateEvent = (props) => {
     let tempConcatTime = `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`
     setConcatTime(tempConcatTime)
 
+    let eventData = {
+      date: eventDate,
+      time: concatTime,
+      name: eventTitle,
+      location: eventLocation,
+      menu: itemList,
+      time_blocks: timeBlocks,
+    } 
+
+    console.log("Items to be pushed to Preview Event page: ", eventData)
+
     // Display the Dialog alert.
     handleClickOpen()
   }
