@@ -7,7 +7,7 @@ import orderServices from '../../services/placeOrder.js'
 const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
-  let order = [{'item': props.location.state.menu[0].item, 'qty':1}]
+  const [order, setOrder] = useState([])
   const [timeBlocks, setTimeBlocks] = useState([])
   const [timeSelect, updateTimeSelect] = useState('none')
 
@@ -15,7 +15,7 @@ const PlaceOrder = (props) => {
     // console.log('props placeorder', props)
     setMenu(props.location.state.menu)
     setTimeBlocks(props.location.state.time_blocks)
-
+    order.push({'item': props.location.state.menu[0].item, 'qty':1})
     // @ED these are the time blocks being passed in as a [{block:'1:00-2:00 PM'}]
     console.log('Blocks: ', props.location.state.time_blocks);
   }, [props]); 
@@ -29,7 +29,9 @@ const PlaceOrder = (props) => {
 
   const updateOrder = (event) => {
     // console.log(spinnerState)
-    order[0] = {'item': event.target.value, 'qty':1}
+    
+    setOrder([{'item': event.target.value, 'qty':1}])
+    //console.log('Updated order: ', order)
   }
 
   const redirect = () =>{
