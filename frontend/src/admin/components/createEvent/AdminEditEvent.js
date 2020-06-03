@@ -356,8 +356,12 @@ const AdminCreateEvent = (props) => {
         }
 
         // Perform check to see if the end hour needs to be converted to standard time.
-        if(endHour > 13){
+        if(parseInt(endHour) > 13){
           endHour = Math.abs(endHour - 12)
+        }
+        // This is to make sure the endHour is not set to 13.
+        if(endHour === 13 | endHour === '13'){
+          endHour = 1
         }
 
         timeBlocks.push({ block: `${nextHour}:${startMinutes}${timeDesignations[0]} - ${endHour}:${endMinutes}${timeDesignation}`})
