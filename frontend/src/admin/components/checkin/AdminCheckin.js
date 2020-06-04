@@ -87,7 +87,7 @@ const AdminCheckin = (props) => {
         if(searchKey !== '' && searchKey !== prevSearchKey)
         {   
             prevSearchKey = searchKey
-            let query = '[id*="' + searchKey +'"]';
+            let query = '[id*="' + searchKey.trim() +'"]';
             let foundOrders = 'Order Not Found'
             let orderIDs = []
             try
@@ -114,6 +114,7 @@ const AdminCheckin = (props) => {
         event.preventDefault();
         if(event.target.value === '')
         {
+            prevSearchKey = ''
             setFoundOrder('Order Not Found');
         }
         setSearchKey(event.target.value.toLowerCase());

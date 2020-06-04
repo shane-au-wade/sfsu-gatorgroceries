@@ -47,7 +47,8 @@ export default function CircularIntegration(props) {
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
 
-  console.log('props in loop button:', props)
+  
+  //console.log('props in loop button:', props)
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -69,10 +70,10 @@ export default function CircularIntegration(props) {
         if(props.redirect !== 'none')
         {
           let redirectSuccess = props.redirect()
-          console.log('redirect success', redirectSuccess)
+          //console.log('redirect success', redirectSuccess)
           if(typeof redirectSuccess !== 'undefined')
           {
-            console.log('set success is called')
+            //console.log('set success is called')
             setSuccess(false);
           }
         }

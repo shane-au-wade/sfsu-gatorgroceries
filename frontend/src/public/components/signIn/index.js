@@ -84,7 +84,11 @@ const SignIn = (props) => {
         }
         else
         {
-          props.history.push('/survey', [student]);
+          // previously if survey was not complete we would push to survey
+          // for the summer of 2020, we will just redirect to events
+          // and find a way to survey them on their own time
+          // props.history.push('/survey', [student]);
+          props.history.push('/events', [student, {survey_incomplete:true}]);
         }
 
         }).catch(err => {
