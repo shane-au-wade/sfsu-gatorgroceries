@@ -68,8 +68,8 @@ const SignIn = (props) => {
     const student = {first_name:firstName, last_name:lastName, student_email:studentEmail}
 
     console.log(student)
-
-    if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
+    // if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
+    if(student.student_email.search(/@/i) !== -1)
     {
         signInServices.verifyStudent(student).then((surveyComplete) => {
         // console.log(surveyComplete)
@@ -106,10 +106,13 @@ const SignIn = (props) => {
   return (
     <PageWrapper>
       <LogoHeader />
+      
       <SignInForm>
         <TextInput hover type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
         <TextInput type='text' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />
         <TextInput type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required /> <br />
+        <p>We are temporarily allowing any email to be used: </p>
+        <p>Valid during Summer 2020</p>
         {/* <SubmitButton type='submit' value='Submit' className='app-button' /> */}
         <br />
         <LoopButton redirect={handleSignIn} text={'Submit'}></LoopButton>
