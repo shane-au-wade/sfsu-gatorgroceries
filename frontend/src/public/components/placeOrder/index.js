@@ -3,6 +3,7 @@ import './style/place-order.css'
 import logo from '../../images/logo.png'
 import InputSpinner from '../inputSpinner/inputSpinner.jsx'
 import orderServices from '../../services/placeOrder.js'
+import LoopButton from '../../../shared/loopButton.js'
 
 const PlaceOrder = (props) => {
 
@@ -129,8 +130,10 @@ const PlaceOrder = (props) => {
       </div>
 
              <div className='submit-place-order'>
-                <button type='submit' id='place-order-submit' onClick={redirect}>Submit</button>
+                <LoopButton redirect={redirect} text={'Submit'}></LoopButton>
             </div>
+
+           
       </div>
   )
 }

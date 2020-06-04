@@ -3,6 +3,7 @@ import LogoHeader from '../LogoHeader'
 import styled from 'styled-components'
 import signInServices from '../../services/signin'
 import {withRouter} from 'react-router-dom'
+import LoopButton from '../../../shared/loopButton'
 
 const PageWrapper = styled.div`
   text-align: center;
@@ -48,6 +49,7 @@ const SignIn = (props) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [studentEmail, setStudentEmail] = useState('')
+  const [reset, setReset] = useState(false)
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value)
@@ -61,8 +63,8 @@ const SignIn = (props) => {
     setStudentEmail(event.target.value)
   }
 
-  const handleSignIn = (event) => {
-    event.preventDefault()
+  const handleSignIn = () => {
+    // event.preventDefault()
     const student = {first_name:firstName, last_name:lastName, student_email:studentEmail}
 
     console.log(student)
@@ -75,6 +77,7 @@ const SignIn = (props) => {
         // we will redirect to either 
         // the survey or placeorder
         // props.history.push('/events', [student]);
+        
         if(surveyComplete)
         {
           props.history.push('/events', [student]);
@@ -90,6 +93,7 @@ const SignIn = (props) => {
     }
     else{
       alert('invalid credentials')
+      return false
     }
 
    
@@ -98,11 +102,13 @@ const SignIn = (props) => {
   return (
     <PageWrapper>
       <LogoHeader />
-      <SignInForm onSubmit={handleSignIn}>
+      <SignInForm>
         <TextInput hover type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
         <TextInput type='text' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />
         <TextInput type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required /> <br />
-        <SubmitButton type='submit' value='Submit' className='app-button' />
+        {/* <SubmitButton type='submit' value='Submit' className='app-button' /> */}
+        <br />
+        <LoopButton redirect={handleSignIn} text={'Submit'}></LoopButton>
       </SignInForm>
     </PageWrapper>
   )

@@ -116,7 +116,7 @@ const AdminCheckin = (props) => {
         {
             setFoundOrder('Order Not Found');
         }
-        setSearchKey(event.target.value);
+        setSearchKey(event.target.value.toLowerCase());
     }
 
     const updateReceipt = async (order) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import './style/completedOrder.css'
 import logo from '../../images/logo.png'
-import completedLogo from '../../images/completed-order.png'
 import checkEmail from '../../images/check_email.svg'
+import Button from '@material-ui/core/Button';
 
 const CompletedOrder = (props) => {
 
@@ -38,7 +38,9 @@ const CompletedOrder = (props) => {
        </div>
       </div>
              <div className='submit-place-order'>
-                <button type='submit' id='place-order-submit' onClick={redirect}>Go Home</button>
+                <Button variant="contained" color="primary" onClick={redirect}>  
+                    <span style={{color:'#fff'}}>Go Home</span>
+                </Button>
             </div>
       </div>
   )

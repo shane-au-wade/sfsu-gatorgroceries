@@ -33,16 +33,6 @@
   text-align: center;
 }
 
-.completed-order .submit-place-order button {
-  width: 120px;
-  height: 30px;
-  border-radius: 11px;
-  color: white;
-  font-size: 14px;
-  background-color: #211061;
-  border: none;
-}
-
 .completed-order p {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
