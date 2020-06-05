@@ -1,57 +1,26 @@
-import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import LandingPage from './public/components/landingPage'
-import SignIn from './public/components/signIn'
-import Survey from './public/components/survey'
-import PlaceOrder from './public/components/placeOrder'
-import CompletedOrder from './public/components/completedOrder/completedOrder'
-import EditOrder from './public/components/editOrder'
-import ConfirmOrder from './public/components/confirmOrder'
-import Events from './public/components/events'
-import CookieJar from './admin/components/cookie-jar/cookieJar'
-import AdminEvents from './admin/components/events/AdminEvents'
-import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
-import AdminEditEvent from './admin/components/createEvent/AdminEditEvent'
-import AdminPreviewEvent from './admin/components/createEvent/AdminPreviewEvent'
-import AdminCheckin from './admin/components/checkin/AdminCheckin'
-import Receipt from './admin/components/checkin/Receipt'
-import AdminAccounts from './admin/components/accounts/AdminAccounts'
-import AdminCreateUser from './admin/components/accounts/AdminCreateUser'; 
-import AdminData from './admin/components/data/AdminData'
-import AdminLogin from './admin/components/login/AdminLogin'
-import ForgotPassword from './admin/components/forgotPassword/forgotPassword';
-import RequestNewPassword from './admin/components/request-new-password/request-new-password'
-import './App.css'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-const App = () => {
-  
+function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path='/' exact component={LandingPage} />
-        <Route path='/signin' component={SignIn} />
-        <Route path='/survey' component={Survey} />
-        <Route path='/events' component={Events} />
-        <Route path='/place-order' component={PlaceOrder} />
-        <Route path='/completed-order' component={CompletedOrder} />
-        <Route path='/edit-order/:order_id' component={EditOrder} />
-        <Route path='/confirm-order/:order_id' component={ConfirmOrder} />
-        <Route path='/admin/cookie-jar' component={CookieJar} />
-        <Route path='/admin/login' component={AdminLogin}/>
-        <Route path='/admin/request-new-password' component={RequestNewPassword}/>
-        <Route path='/admin/forgot-password' component={ForgotPassword}/>
-        <Route path='/admin/events' component={AdminEvents} />
-        <Route path='/admin/create-event' component={AdminCreateEvent} />
-        <Route path='/admin/edit-event' component={AdminEditEvent} />
-        <Route path='/admin/preview-event' component={AdminPreviewEvent} />
-        <Route path='/admin/checkin' component={AdminCheckin} />
-        <Route path='/admin/receipt' component={Receipt} />
-        <Route path='/admin/accounts' component={AdminAccounts} />
-        <Route path='/admin/create-user' component={AdminCreateUser} />
-        <Route path='/admin/data' component={AdminData} />
-      </Switch>
-    </Router>
-  ) 
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
