@@ -150,7 +150,28 @@ router.post('/logout', function(req, res, next) {
      
   });
 
-  
+  router.post('/get-event-stats/:event_id', async (req, res, next) => {
+    
+    console.log('get event stats id: ', req.params)
 
+    try{
+      res.status(200).send(await db.events.getEventStats(req.params))
+    }catch(e){
+      console.log(e)
+    }
+     
+  });
+
+  router.post('/get-all-event-stats', async (req, res, next) => {
+    
+    console.log('get event stats id: ', req.params)
+
+    try{
+      res.status(200).send(await db.events.getAllEventStats(req.params))
+    }catch(e){
+      console.log(e)
+    }
+     
+  });
 
 module.exports = router;
