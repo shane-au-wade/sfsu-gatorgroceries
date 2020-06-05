@@ -33,38 +33,17 @@
   text-align: center;
 }
 
-.completed-order .submit-place-order button {
-  width: 120px;
-  height: 30px;
-  border-radius: 11px;
-  color: white;
-  font-size: 14px;
-  background-color: #211061;
-  border: none;
-}
-
 .completed-order p {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
   color: black;
-  line-height: 0px;
-  color: #4D924B;
+  color: #c00505;
 }
 
 .completed-order .check-in {
   padding-top: 20px;
-}
-
-.completed-order .order-completed {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
 }
 
 .completed-order .completed-msg {

@@ -87,7 +87,7 @@ const AdminCheckin = (props) => {
         if(searchKey !== '' && searchKey !== prevSearchKey)
         {   
             prevSearchKey = searchKey
-            let query = '[id*="' + searchKey +'"]';
+            let query = '[id*="' + searchKey.trim() +'"]';
             let foundOrders = 'Order Not Found'
             let orderIDs = []
             try
@@ -114,18 +114,20 @@ const AdminCheckin = (props) => {
         event.preventDefault();
         if(event.target.value === '')
         {
+            prevSearchKey = ''
             setFoundOrder('Order Not Found');
         }
-        setSearchKey(event.target.value);
+        setSearchKey(event.target.value.toLowerCase());
     }
 
-    const updateReceipt = (order) => {
-        setReceipt(<Receipt email={order.student_id} order={order.order} firstName={order.first_name} lastName={order.last_name}></Receipt>);
+    const updateReceipt = async (order) => {
+        await setReceipt(<Receipt email={order.student_id} order={order.order} firstName={order.first_name} lastName={order.last_name}></Receipt>);
         let y = window.scrollY
-        console.log('scroll top height', y)
-         window.print()
-         window.scrollTo(0,y);
+            console.log('scroll top height', y)
+             window.print()
+             window.scrollTo(0,y);   
     }
+
 
     const renderOrders = (arr) => {  
         if(typeof(arr) === 'object')

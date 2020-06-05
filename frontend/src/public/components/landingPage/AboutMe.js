@@ -17,6 +17,7 @@ const Header = styled.h2`
 const AboutMe = () => {
   return (
     <AboutUs>
+      <Header><strong>This is a SFSU only program. Please make sure to have your SFSU email ready.</strong></Header>
       <Header>What's Gator Groceries?</Header>
       <br />
       Gator Groceries is a free service provided by the associated students 

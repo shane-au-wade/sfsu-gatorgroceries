@@ -3,6 +3,7 @@ import LogoHeader from '../LogoHeader'
 import styled from 'styled-components'
 import signInServices from '../../services/signin'
 import {withRouter} from 'react-router-dom'
+import LoopButton from '../../../shared/loopButton'
 
 const PageWrapper = styled.div`
   text-align: center;
@@ -48,6 +49,7 @@ const SignIn = (props) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [studentEmail, setStudentEmail] = useState('')
+  const [reset, setReset] = useState(false)
 
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value)
@@ -61,28 +63,33 @@ const SignIn = (props) => {
     setStudentEmail(event.target.value)
   }
 
-  const handleSignIn = (event) => {
-    event.preventDefault()
+  const handleSignIn = () => {
+    // event.preventDefault()
     const student = {first_name:firstName, last_name:lastName, student_email:studentEmail}
 
     console.log(student)
-
-    if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
+    // if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
+    if(student.student_email.search(/@/i) !== -1)
     {
         signInServices.verifyStudent(student).then((surveyComplete) => {
         // console.log(surveyComplete)
         // depending on the value of survey_complete,
         // we will redirect to either 
         // the survey or placeorder
-        props.history.push('/events', [student]);
-        // if(surveyComplete)
-        // {
-        //   props.history.push('/events', [student]);
-        // }
-        // else
-        // {
-        //   props.history.push('/survey', [student]);
-        // }
+        // props.history.push('/events', [student]);
+        
+        if(surveyComplete)
+        {
+          props.history.push('/events', [student]);
+        }
+        else
+        {
+          // previously if survey was not complete we would push to survey
+          // for the summer of 2020, we will just redirect to events
+          // and find a way to survey them on their own time
+          // props.history.push('/survey', [student]);
+          props.history.push('/events', [student, {survey_incomplete:true}]);
+        }
 
         }).catch(err => {
           console.log('Error in student Verification: ', err)
@@ -90,6 +97,7 @@ const SignIn = (props) => {
     }
     else{
       alert('invalid credentials')
+      return false
     }
 
    
@@ -98,11 +106,16 @@ const SignIn = (props) => {
   return (
     <PageWrapper>
       <LogoHeader />
-      <SignInForm onSubmit={handleSignIn}>
+      
+      <SignInForm>
         <TextInput hover type='text' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
         <TextInput type='text' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />
         <TextInput type='text' placeholder='Student Email' value={studentEmail} onChange={handleStudentEmailChange} required /> <br />
-        <SubmitButton type='submit' value='Submit' className='app-button' />
+        <p>We are temporarily allowing any email to be used: </p>
+        <p>Valid during Summer 2020</p>
+        {/* <SubmitButton type='submit' value='Submit' className='app-button' /> */}
+        <br />
+        <LoopButton redirect={handleSignIn} text={'Submit'}></LoopButton>
       </SignInForm>
     </PageWrapper>
   )

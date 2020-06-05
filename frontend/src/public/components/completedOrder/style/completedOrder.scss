@@ -29,28 +29,15 @@
 
     }
 
-    .submit-place-order button{
-        // border-radius: 4px;
-        // background-color: #211061;
-
-        width: 120px;
-        height: 30px;
-        border-radius: 11px;
-        color: white;
-        font-size: 14px;
-        background-color: #211061;
-        border: none;
-        
-      
-    }
+    
     p{
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
     color: black;
-    line-height: 0px;
-    color: #4D924B;
+   
+    color: rgb(192, 5, 5);
    
     }
     .check-in{
@@ -58,16 +45,10 @@
     }
    
 
-    .order-completed{
-       display: flex;
-       flex-direction: row;
-
-    }
     .completed-msg{
         text-align: center;
         padding-left: 20px;
         padding-top: 25px;
-       
        
     }
     .spacer{

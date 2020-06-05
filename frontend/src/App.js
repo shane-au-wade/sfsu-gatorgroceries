@@ -6,10 +6,12 @@ import Survey from './public/components/survey'
 import PlaceOrder from './public/components/placeOrder'
 import CompletedOrder from './public/components/completedOrder/completedOrder'
 import EditOrder from './public/components/editOrder'
+import ConfirmOrder from './public/components/confirmOrder'
 import Events from './public/components/events'
 import CookieJar from './admin/components/cookie-jar/cookieJar'
 import AdminEvents from './admin/components/events/AdminEvents'
 import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
+import AdminEditEvent from './admin/components/createEvent/AdminEditEvent'
 import AdminPreviewEvent from './admin/components/createEvent/AdminPreviewEvent'
 import AdminCheckin from './admin/components/checkin/AdminCheckin'
 import Receipt from './admin/components/checkin/Receipt'
@@ -33,12 +35,14 @@ const App = () => {
         <Route path='/place-order' component={PlaceOrder} />
         <Route path='/completed-order' component={CompletedOrder} />
         <Route path='/edit-order/:order_id' component={EditOrder} />
+        <Route path='/confirm-order/:order_id' component={ConfirmOrder} />
         <Route path='/admin/cookie-jar' component={CookieJar} />
         <Route path='/admin/login' component={AdminLogin}/>
         <Route path='/admin/request-new-password' component={RequestNewPassword}/>
         <Route path='/admin/forgot-password' component={ForgotPassword}/>
         <Route path='/admin/events' component={AdminEvents} />
         <Route path='/admin/create-event' component={AdminCreateEvent} />
+        <Route path='/admin/edit-event' component={AdminEditEvent} />
         <Route path='/admin/preview-event' component={AdminPreviewEvent} />
         <Route path='/admin/checkin' component={AdminCheckin} />
         <Route path='/admin/receipt' component={Receipt} />

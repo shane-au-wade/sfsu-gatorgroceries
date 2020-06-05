@@ -26,7 +26,7 @@ return (
     <div className='adminAccounts'>
     <AdminHeader selected='Accounts' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
-        <h3 className='text-centered padded'>Users</h3>
+        <h3 className='text-centered padded'>Admins</h3>
         <UserTable users={users} username={sessionStorage.getItem('userName')}></UserTable>
         </div>
     </div>

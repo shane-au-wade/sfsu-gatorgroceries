@@ -27,7 +27,7 @@ const UserTable = (props) => {
                             state: {user_name: props.username}
                             }}>
                     <button>
-                        New 
+                        Create New 
                     </button>
                 </Link>
             </p>  

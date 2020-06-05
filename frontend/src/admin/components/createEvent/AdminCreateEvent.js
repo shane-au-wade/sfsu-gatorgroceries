@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminHeader from '../adminHeader/adminHeader.jsx'
 import './style/Admin-create-event-style.css'
 import addItem from '../../icons/add_circle_outline-24px.svg'
@@ -7,375 +7,492 @@ import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import {Link} from 'react-router-dom';
 import eventServices from '../../services/createEvent';
 
-class AdminCreateEvent extends Component {
+import { makeStyles } from '@material-ui/core/styles';
 
-      constructor(props) {
-        super(props);
-        let initState = {};
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import ListSubheader from '@material-ui/core/ListSubheader';
 
-        console.log('Props in Create-event', props.location.state)
+import Card from '@material-ui/core/Paper';
+import { CardHeader, CardContent, TextField, Checkbox } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 
-        // eventID: id,
-        // name: name,
-        // location: location,
-        // menu: menu,
-        // date: date,
-        // time: time
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-        if(props.location.state.edit)
-        {
-          console.log('this is editing setup')
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-          let tempTimeAr = props.location.state.time.split(' - ');
-          let startTimeAr = tempTimeAr[0].split(' ');
-          let endTimeAr = tempTimeAr[1].split(' ');
-          let newMenu = JSON.parse(JSON.stringify(props.location.state.menu))
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '90vw',
+    maxWidth: 500,
+    position: 'absolute', left: '50%', top: '50%',
+    transform: 'translate(-50%, -50%)',
+    boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
+    background: '#f3f3f3',
+    margin: '40px auto',
+  },
 
-          initState ={
-                      menu:  newMenu,
-                      lineItem: {item: '', qty: ''},
-                      event: {
-                        startDate: props.location.state.date,
-                        startTime: startTimeAr[0], 
-                        startTP: startTimeAr[1],
-                        endTime: endTimeAr[0],
-                        endTP: endTimeAr[1],
-                        name: props.location.state.name,
-                        location: props.location.state.location,
-                        menu: props.location.state.menu,
-                        time_blocks: props.location.state.time_blocks
-                      },
-                      counter: props.location.state.menu.length
-                  }
+  // This card style controls the Card component on which the entire Create Event section is located on.
+  card: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+  },
 
-                  
-        }
-        else
-        {
-        initState ={
-                    menu:  [],
-                    lineItem: {item: '', qty: ''},
-                    event: {
-                      startDate: '',
-                      startTime: '',
-                      startTP: 'PM',
-                      endTime: '',
-                      endTP: 'PM',
-                      name: '',
-                      location: '',
-                      menu: [{}],
-                      time_blocks: ''
-                    },
-                    counter: 0
-                }
-        }
-        
-        this.state = initState;
-        console.log(this.state);
+  // This paper style controls the Paper component on which the item table is located on.
+  paper: {
+    width: '100%'
+  },
+
+  table: {
+    width: 500,
+  },
+
+  // The table container will expand vertically up to a max of 175px, then it will apply scrolling behavior.
+  container: {
+    maxHeight: 175,
+  },
+}))
+
+const AdminCreateEvent = (props) => {
+  const classes = useStyles()
+
+  // The following states will be sent over to the Preview screen once the Preview button is pressed:
+
+  const [eventTitle, setEventTitle] = useState('')
+  const [eventLocation, setEventLocation] = useState('')
+  const [eventDate, setEventDate] = useState('')
+
+  const [concatTime, setConcatTime] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
+  const [timeBlocks, setTimeBlocks] = useState([])
+
+  const [itemName, setItemName] = useState('')
+  const [itemQTY, setItemQTY] = useState('')
+  const [itemList, setItemList] = useState([])
+
+  const [dialogOpen, setDialogOpen] = useState(false)
+
+  // This useEffect will only run once on page load such that it will grab prop history's states if it exists.
+  useEffect(() => {
+    // If the props had existing information already, set them.
+    if(props.location.state.edit === true){
+      setEventTitle(props.location.state.name)
+      setEventLocation(props.location.state.location)
+
+      // The date picker is in yyyy-MM-dd format.
+      let tempDate = new Date(props.location.state.date)
+      let tempDay = tempDate.getUTCDate()
+      let tempMonth = tempDate.getMonth() + 1
+
+      // Prefix with zero if the day and/or month is less than 2 digits to fit Date picker format.
+      if(tempDay < 10){
+        tempDay = "0" + (tempDate.getDay() + 1)
+      }
+      if(tempMonth < 10){
+        tempMonth = "0" + (tempDate.getMonth() + 1)
       }
 
-      componentDidMount() {
-        let updatedState = this.state;
-        updatedState.lineItem.item = document.getElementById('Item');
-        updatedState.lineItem.qty = document.getElementById('Max');
+      tempDate = tempDate.getUTCFullYear() + "-" + tempMonth + "-" + tempDay
+      setEventDate(tempDate)
 
-        if(this.props.location.state.edit) // this is an edit to the event
-        {
-          let formatedDate = (this.state.event.startDate.getMonth() + 1)+ '/' + this.state.event.startDate.getDate() + '/' + this.state.event.startDate.getFullYear();
-            console.log('component did mount: writing values');
-            document.getElementById('eventTitle').value = this.state.event.name;
-            document.getElementById('location').value = this.state.event.location;
-            document.getElementById('startDate').value = formatedDate;
-            document.getElementById('startTime').value = this.state.event.startTime;
-            document.getElementById('startTP').value = this.state.event.startTP;
-            document.getElementById('endTime').value = this.state.event.endTime;
-            document.getElementById('endTP').value = this.state.event.endTP;
-            updatedState.event.menu.push({}); // for setup purposes
-        }
+      // Split the time string by the dash and remove the time designations while also keeping track of which 
+      // time to convert back to military format.
+      let tempTimeWithTimeDesignations = (props.location.state.time).split(" - ")
+      let tempStartTime = ''
+      let tempEndTime = ''
+      let startConvertToMilitary = false
+      let endConvertToMilitary = false
 
-
-        this.setState(updatedState);
+      // Replace each instance of AM or PM with empty string and determine which ones need to be converted to military.
+      if(tempTimeWithTimeDesignations[0].indexOf("AM") !== -1){
+        tempStartTime = tempTimeWithTimeDesignations[0].replace("AM", "")
       }
-      
-      generateTimeBlocks = (obj) => {
-        let startArr =  obj.event.startTime.split(':');
-        let endArr =  obj.event.endTime.split(':');
-        let start = new Date(2020, 0, 1, startArr[0], startArr[1], 0, 0)
-        let end = new Date(2020, 0, 1, endArr[0], endArr[1], 0, 0)
-        let blocks = []
-        let startStr = '';
-        let endStr = ''
-        do
-        { 
-          // extract and save the start time
-          // increment the start 
-          // concat the times and push on blocks
-          startStr = start.getHours() + ':' + start.getMinutes();
-          if(start.getHours() + 1 > 12)
-          {
-            start.setHours(1)
-          }
-          else
-          {
-            start.setHours(start.getHours() + 1);
-          }
-
-          if(start.getHours() === end.getHours() && start.getMinutes() > end.getMinutes())
-          {
-            endStr = start.getHours() + ':' + end.getMinutes();
-          }
-          else
-          {
-             endStr = start.getHours() + ':' + start.getMinutes();
-          }
-
-          blocks.push({block:startStr.padEnd(4,'0') + '-' + endStr.padEnd(4,'0') + ' ' + obj.event.startTP})
-
-        } while (start.getHours() < end.getHours())
-
-        console.log('time blocks', blocks)
-        return blocks;
+      else{
+        tempStartTime = tempTimeWithTimeDesignations[0].replace("PM", "")
+        startConvertToMilitary = true
+      }
+      if(tempTimeWithTimeDesignations[1].indexOf("AM") !== -1){
+        tempEndTime = tempTimeWithTimeDesignations[1].replace("AM", "")
+      }
+      else{
+        tempEndTime = tempTimeWithTimeDesignations[1].replace("PM", "")
+        endConvertToMilitary = true
       }
 
-      handleChange = (evt) => {
-        evt.preventDefault();
-        console.log('EVENT NAME: ', evt.target.name);
-        let updatedState = this.state;
-        if(evt.target.name === 'item') 
-        {
-          updatedState.event.menu[updatedState.counter].item = evt.target.value;
-        }
-        else if(evt.target.name === 'qty')
-        {
-          updatedState.event.menu[updatedState.counter].qty = evt.target.value;
-        }
-        else
-        {
-          updatedState.event[evt.target.name] = evt.target.value;
-        }
+      // Determine which time needs to be converted to military time.
+      let tempStartTimeArray = tempStartTime.split(":")
+      if(startConvertToMilitary){
+        tempStartTimeArray[0] = (parseInt(tempStartTimeArray[0]) + 12).toString()
+      }
 
-        if(updatedState.event.startTime !== '' && updatedState.event.endTime !== '') // if the start and end times are populated
-        {
-          updatedState.event.time_blocks = this.generateTimeBlocks(updatedState);
-          this.setState(updatedState)
+      let tempEndTimeArray = tempEndTime.split(":")
+      if(endConvertToMilitary){
+        tempEndTimeArray[0] = (parseInt(tempEndTimeArray[0]) + 12).toString()
+      }
+
+      // Bring them all together into temp variables to be pushed to their states.
+      tempStartTime = tempStartTimeArray[0] + ":" + tempStartTimeArray[1]
+      tempEndTime = tempEndTimeArray[0] + ":" + tempEndTimeArray[1]
+
+      setStartTime(tempStartTime)
+      setEndTime(tempEndTime)
+
+      setItemList(props.location.state.menu)
+    }
+  }, [])
+
+  //console.log("Passed props: ", props)
+
+  const itemAdd = (e) => {
+    // Prevent the browser from refreshing after adding an item.
+    e.preventDefault()
+
+    // This will make sure that a item doesn't get added if name and/or qty textboxes are empty.
+    if(itemName !== '')
+    {
+      if(itemQTY === '' || itemQTY === '0' || itemQTY === 0){
+        console.log("empty")
+        setItemQTY('1')
+      }
+      // Attach a unique id to the item.
+      const itemLabel = `item-list-label-${itemName}-${itemQTY}`
+
+      // Add the new item to the itemList state and render the component again.
+      setItemList(itemList.concat({ item: itemName, qty: itemQTY, id: itemLabel }))
+    }
+
+    // Clear the item and qty textboxes.
+    clearItemText()
+  }
+
+  const itemDelete = (itemLabel) => {
+    console.log("itemLabel is: ", itemLabel)
+    var itemIndex = -1
+
+    // This line is very important. Make a new reference to the itemList via spread syntax 
+    // such that setItemList will be sure to rerender the list correctly.
+    var tempItemList = [...itemList]
+    
+    // Find the index in which the object's id matches the itemLabel.
+    tempItemList.forEach(function(item, index){
+      if(item.id === itemLabel){
+        itemIndex = index
+      }
+    })
+
+    // If the itemIndex is not -1, take out the element at the itemIndex and set the state to the new item list.
+    if(itemIndex !== -1){
+      tempItemList.splice(itemIndex, 1)
+      setItemList(tempItemList)
+    }
+  }
+
+  // Set the name and qty textboxes states back to empty.
+  const clearItemText = () => {
+    setItemName('')
+    setItemQTY('')
+  }
+
+  // Calculate time blocks and then push user to the preview screen.
+  const calculateTimeBlocks = (e) => {
+    e.preventDefault()
+
+    // Clear the timeBlocks if the user happened to somehow press the Submit button a second time.
+    if(timeBlocks.length > 0){
+      console.log("Length is: ", timeBlocks.length)
+      timeBlocks.splice(0, timeBlocks.length)
+    }
+
+    // Split the start and end times by the colon, seperating them into hours and minutes. Then create the start and end Date objects.
+    let startArr =  startTime.split(':');
+    let endArr =  endTime.split(':');
+
+    // Get individual hours and minutes from start and end arrays.
+    let startHour = startArr[0]
+    let newStartHour = 0
+    let endHour = endArr[0]
+    let startMinutes = startArr[1]
+    let endMinutes = endArr[1]
+
+    // Perform check to see if start and end hours are less than 10. If so, remove the zero in front of them.
+    if(startHour.charAt(0) === '0'){
+      startHour = startHour.substr(1)
+    }
+    if(endHour.charAt(0) === '0'){
+      endHour = endHour.substr(1)
+    }
+
+    // Perform check to see if the end hour is AM or PM.
+    let endTimeDesignation = parseInt(endHour)
+    if(endTimeDesignation > 11){
+      endTimeDesignation = "PM"
+    }
+    else if(endTimeDesignation === 24 && endTimeDesignation < 12){
+      endTimeDesignation = "AM"
+    }
+
+    // Calculate time block size from start to end.
+    let blockSize = Math.abs(endHour - startHour)
+
+    console.log("Block size between start and end is: ", blockSize)
+
+    // Calculate the next hour after the starting hour and set time designations to the start hour and the next hour.
+    let nextHour = parseInt(startHour) + 1
+    let startTimeDesignation = parseInt(startHour)
+    let nextTimeDesignation = nextHour
+
+    if(parseInt(startHour) > 13){
+      newStartHour = Math.abs(startHour - 12)
+    }
+    else{
+      newStartHour = startHour
+    }
+
+    // If the start hour is after 12PM, convert it to standard. Otherwise, keep it the same.
+    if(startTimeDesignation > 13){
+      startTimeDesignation = Math.abs(startTimeDesignation - 12)
+    }
+
+    // If the next hour after the start hour is after 12PM, convert it to standard.
+    if(nextHour > 13){
+      nextHour = Math.abs(nextHour - 12)
+    }
+
+    // If the next hour is after 11:59AM, set timeDesignation to PM. Otherwise, set it to AM.
+    if(parseInt(startHour) > 11){
+      startTimeDesignation = "PM"
+    }
+    else{
+      startTimeDesignation = "AM"
+    }
+    if(nextTimeDesignation > 11){
+      nextTimeDesignation = "PM"
+    }
+    else{
+      nextTimeDesignation = "AM"
+    }
+
+    // Hardcoded to look for 13 to convert to 1 for the very first block to get rid of an annoying bug.
+    if(newStartHour === 13 || newStartHour === '13'){
+      newStartHour = 1
+    }
+    if(nextHour === 13 || nextHour === '13'){
+      nextHour = 1
+    }
+
+    // Push the first time block onto timeBlocks array and move to the for loop for the rest of the time blocks.
+    timeBlocks.push({ block: `${newStartHour}:${startMinutes}${startTimeDesignation} - ${nextHour}:${startMinutes}${nextTimeDesignation}` })
+
+    // For loop through timeBlocks and push a block in specified format. If the end is reached, push the final block
+    // and set the end minutes.
+    for(var i = 1; i < blockSize; i++){
+      // Get the next hour and the hour after it.
+      nextHour = parseInt(startHour) + i
+      let nextNextHour = parseInt(startHour) + i + 1
+
+      // Set timeDesignations to the next hour and the hour after that.
+      let timeDesignations = [nextHour, nextNextHour]
+
+      // Determine the time designations for the next hour and the hour after that.
+      if(timeDesignations[0] > '11'){
+        timeDesignations[0] = "PM"
+      }
+      else{
+        timeDesignations[0] = "AM"
+      }
+      if(timeDesignations[1] > '11'){
+        timeDesignations[1] = "PM"
+      }
+      else{
+        timeDesignations[1] = "AM"
+      }
+
+      // Determine whether or not the next hour and the hour after that need to be converted to standard time.
+      if(nextHour >= 13){
+        nextHour = Math.abs(nextHour - 12)
+      }
+      if(nextNextHour >= 13){
+        nextNextHour = Math.abs(nextNextHour - 12)
+      }
+
+      // If this is not the last element in the timeBlocks, push to timeBlocks another block 
+      // with the next hour and the hour after that in the specified format.
+      if(i + 1 < blockSize){
+        timeBlocks.push({ block: `${nextHour}:${startMinutes}${timeDesignations[0]} - ${nextNextHour}:${startMinutes}${timeDesignations[1]}`})
+      }
+      else{
+        // If this is the last element, determine the final timeDesignation and then push onto timeBlocks the 2nd to last hour and then the end hour.
+        // Perform check to see if the end hour is AM or PM.
+        let timeDesignation = endHour
+        if(timeDesignation > '11'){
+          timeDesignation = "PM"
         }
         else{
-          console.log(updatedState.event)
-          this.setState(updatedState)
+          timeDesignation = "AM"
         }
-         
+
+        // Perform check to see if the end hour needs to be converted to standard time.
+        if(parseInt(endHour) > 13){
+          endHour = Math.abs(endHour - 12)
+        }
+        // This is to make sure the endHour is not set to 13.
+        if(endHour === 13 | endHour === '13'){
+          endHour = 1
+        }
+
+        timeBlocks.push({ block: `${nextHour}:${startMinutes}${timeDesignations[0]} - ${endHour}:${endMinutes}${timeDesignation}`})
       }
-  
-      handleAdd = (evt) => {
-            console.log('handling add')
-            evt.preventDefault();    
+    }
 
-          if( this.state.lineItem.item.value !== '' && this.state.lineItem.qty.value !== '')
-          {
-            let updatedState = this.state;
-           updatedState.menu.push(
-              {item:this.state.lineItem.item.value, qty:this.state.lineItem.qty.value}
-            )
-            updatedState.lineItem.item.value = '';
-            updatedState.lineItem.qty.value = '';
-            updatedState.counter = updatedState.counter + 1;
-            updatedState.event.menu.push({});
-            this.setState(updatedState);
-            console.log('state: ', this.state)
-          }
-        }
-  
-        handleItemRemove = (line) => {
-          console.log('removing item:', line);
-          let updatedState = this.state;
-          updatedState.menu.splice( updatedState.menu.indexOf(line), 1 );
-          this.setState(updatedState);
-            console.log('state: ', this.state)
-        }
+    console.log("Time blocks are: ", timeBlocks)
+    setTimeBlocks(timeBlocks)
 
-        handleForm = (evt) => {
-          evt.preventDefault()
-          // const EventObject = {eventTitle, location,startDate,startTime,endDate,endTime,item,maxQty}
-          
-          // console.log(this.state.event)
-        }
+    // Concat the time into one string for display on the Preview page.
+    let tempConcatTime = `${newStartHour}:${startMinutes}${startTimeDesignation} - ${endHour}:${endMinutes}${endTimeDesignation}`
+    setConcatTime(tempConcatTime)
 
-        handleEventUpdate = () => {
-          console.log('handling event update')
-         let eventData = {
-            id: this.props.location.state.eventID,
-            date: this.state.event.startDate,
-            time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
-            name: this.state.event.name,
-            location: this.state.event.location,
-            menu:this.state.menu,
-            time_blocks: this.state.event.time_blocks,
-            user_name: sessionStorage.getItem('userName')
-          } 
-          //axios call to updateEvent;
-          eventServices.updateEvent(eventData).then(res => {
-            
-          }).catch(err => {
-            console.log('Error in createEvent: UpdateEvent:', err);
-          })
-         
-        }
+    let eventData = {
+      date: eventDate,
+      time: concatTime,
+      name: eventTitle,
+      location: eventLocation,
+      menu: itemList,
+      time_blocks: timeBlocks,
+    } 
 
-        renderButton = () => {
-          let retButton;
-          
-          if(this.props.location.state.edit) // this is an edit to the event
-          {
-            retButton =  
-            <Link to={'/admin/events'}>
-            <button onClickCapture={this.handleEventUpdate}>Update</button>
-            </Link>
-          }
-          else
-          {
-              retButton = <Link to={{
-                pathname: '/admin/preview-event',
-                state: {
-                  date: this.state.event.startDate,
-                  time: this.state.event.startTime + ' ' + this.state.event.startTP + ' - ' + this.state.event.endTime + ' ' + this.state.event.endTP,
-                  name: this.state.event.name,
-                  location: this.state.event.location,
-                  menu:this.state.menu,
-                  time_blocks: this.state.event.time_blocks,
-                } 
-            }} >
-              <button>Preview</button>
-             </Link>
-          }
-    
-          return retButton;
-        }
+    console.log("Items to be pushed to Preview Event page: ", eventData)
 
-  render() { 
-    return (  
-      <div className='AdminCreateEvents'>
-      <AdminHeader selected='Create Event' history={this.props.history}></AdminHeader>
-      <div className='AdminContentArea'>
-      <h3 className='text-centered padded'>Create Event</h3> 
-            <div className='centered-container'>
-              <form  id='eventForm' onChange={this.handleChange} onSubmit={this.handleForm}>
-
-                  <div className='formEntry'>
-                    <label for='eventTitle'>Event Title </label>
-                    <input type='text' name="name" id='eventTitle' autoComplete='off' autoCapitalize='words' autoCorrect='on' required />
-                  </div> 
-
-                  <div className='formEntry'>
-                    <label for='location'>Location</label> 
-                    <input type='text' name="location" id ='location' autoComplete='off' required />
-                  </div>
-                    
-                  <div className='timeSetup '> 
-                      <div>
-                      <label for='startDate'>Date</label>
-                      <input type='text' name="startDate" id='startDate' placeholder='mm/dd/yr' autoComplete='off' required />
-                      </div>
-
-                      <div>
-                        <p>
-                          <label for='startTime'>Start</label>
-                        </p>
-                      
-                        <input type='text' name="startTime" id='startTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='startTP' id='startTP' className='formLocation'>
-                          <option value='PM'>PM</option>
-                          <option value='AM'>AM</option>
-                        </select>
-                        
-                      </div>
-
-                      {/* <div>
-                      <label for='endDate'>End Date</label>
-                      <input type='text' name="endDate" id='endDate' placeholder='mm/dd/yr' autoComplete='off' required />
-                      </div> */}
-
-                      <div>
-                        <p>
-                          <label for='endTime'>End</label>
-                        </p>
-                        <input type='text' name="endTime" id='endTime' placeholder='00:00' autoComplete='off' required />
-                        <select form='eventForm' name='endTP' id='endTP' className='formLocation'>
-                          <option  value='PM'>PM</option>
-                          <option  value='AM'>AM</option>
-                        </select>
-                      </div>
-
-                      
-                  </div>
-                    <div className='itemDivs'>
-                      <div className='itemSetup'>
-                          <div className='items-label'>
-                            <label for='Item'>Item</label>
-                          </div>
-                            <input type='text' name='item' id='Item' autoComplete='off' />
-                      </div>
-
-                     <div className='flexRow'>
-                        <div className='max'>
-                          <div className='items-label'>
-                          <label for='Max'>Max Qty</label>
-                          </div>
-                            <input type='text' name='qty' id='Max'autoComplete='off'/>
-                        </div>
-                        <div className='buttonSetup'>
-                          {/* this code is for the add and image feature */}
-                            {/* <div>
-                              <button>
-                              <img src={addImage} alt="Logo" className='image-size' />
-                              </button>
-                            </div> */}
-
-                            <div className='add-item-button'>
-                              <button type="button" onClickCapture={this.handleAdd}>
-                              <img src={addItem} alt="Logo" className='image-size' />
-                              </button>
-                            </div>
-                        </div>
-
-                      </div>
-                       
-                      </div>
-
-                      <p className='menu'>
-                      <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
-                      Menu
-                      </p>
-                      
-                      <div id='menu'>
-                          <span className='menuHeader'><u>Item</u></span> <span><u>Max Qty</u></span>
-                          {
-                            this.state.menu.map((line) =>  
-                            <div key={line.item} className='menuLine '>
-                                <div className='item'>
-                                    <span>{line.item}</span>
-                                </div> 
-                                <span>{line.qty}</span>
-                                <span> <button className='removeButton'  onClickCapture={() => {this.handleItemRemove(line)} }> <img src={removeItem} alt="remove" className='removeIcon' /> </button>  </span>
-                            </div>
-                            )
-                          }
-                      </div>
-
-                      <div className='preview-publish'>
-
-                        <div>
-                          {this.renderButton()}
-                        </div>
-                        
-                      </div>
-
-              </form>
-            </div>
-       </div>
-  </div>
-      
-    );
+    // Display the Dialog alert.
+    handleClickOpen()
   }
+
+  // Controls Dialog Popup.
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  // This gets called after clicking on the Preview button after it gets unhidden by the timeBlocks algorithm.
+  const eventAlertPopUp = () => {
+    // Now send page information to Preview.
+    props.history.push({
+      pathname: '/admin/preview-event',
+      state: {
+        date: eventDate,
+        time: concatTime,
+        name: eventTitle,
+        location: eventLocation,
+        menu: itemList,
+        time_blocks: timeBlocks,
+      }
+    })
+  }
+
+
+  return (
+    <div style={{overflow: 'hidden'}}>
+      <AdminHeader selected='Create Event' history={props.history}></AdminHeader>
+      <div className='AdminContentArea'>
+        <Card className={classes.root}>
+          <CardHeader title='Create Event' style={{ textAlign: 'center' }}/>
+          <CardContent>
+            <form onSubmit={(e) => calculateTimeBlocks(e)}>
+              <TextField id='event-title' type='text' label='Event Title' value={eventTitle} onChange={e => setEventTitle(e.target.value)} style={{ maxWidth:'80vh', marginRight: '5%' }} required />
+              <TextField id='event-location' type='text' label='Location' value={eventLocation} onChange={e => setEventLocation(e.target.value)} style={{}} required />
+              <TextField id='event-date' type='date' label='Date' value={eventDate} onChange={e => setEventDate(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 250, marginTop: '5%' }} required />
+              
+              <br />
+              <TextField id='event-startTime' type='time' label='Start' value={startTime} onChange={e => setStartTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginTop: '5%' }} required />
+              <TextField id='event-endTime' type='time' label='End' value={endTime} onChange={e => setEndTime(e.target.value)} InputLabelProps={{ shrink: true }} style={{ width: 110, marginLeft: '5%', marginTop: '5%' }} required />
+              <br />
+              
+              <TextField id='event-items' value={itemName} onChange={e => setItemName(e.target.value)} type='text' label='Item' InputLabelProps={{ shrink: true }} style={{ width: 200, marginTop: '5%' }} />
+              <TextField id='event-qty' value={itemQTY} onChange={e => setItemQTY(e.target.value)} type='number' label='QTY' InputProps={{ inputProps: { min: 1 } }} InputLabelProps={{ shrink: true }} style={{ width: 50, marginLeft: '5%', marginTop: '5%' }} />
+              <IconButton variant='contained' id='event-addItem' onClick={e => itemAdd(e)} style={{ marginLeft: '5%', marginTop: '7%' }}><AddShoppingCartIcon /></IconButton>
+
+              <Paper className={classes.paper}>
+                <TableContainer className={classes.container}>
+                  <Table stickyHeader size='small' aria-label="a simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align='left' style={{ minWidth: 50}}>Item</TableCell>
+                        <TableCell align='left' style={{ minWidth: 50}}>QTY</TableCell>
+                        <TableCell align='left' style={{ minWidth: 50}}>Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {itemList.map((item) => {
+                        const itemLabel = `item-list-label-${item.item}-${item.qty}`;
+
+                        return (
+                          <TableRow hover key={itemLabel} style={{borderBottom: "none",}}>
+                            <TableCell align='left'>{item.item}</TableCell>
+                            <TableCell align='left'>{item.qty}</TableCell>
+                            <TableCell align='left'><IconButton aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton></TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+             
+              {/* This List has been commented out as the Table implementation is much better and offers more functionality than List does. */}
+              {/* <List id='item-list'>
+                <ListSubheader component='div' id='item-list-subheader-item'>Menu Item</ListSubheader>
+                {itemList.map((item) => {
+                  const itemLabel = `item-list-label-${item.name}-${item.qty}`
+
+                  return (
+                    <ListItem key={itemLabel}>
+                      <ListItemText primary={`${item.name}`} />
+                      <ListItemText primary={`${item.qty}`}/>
+                      <ListItemSecondaryAction>
+                        <IconButton edge='end' aria-label='delete' onClick={() => {itemDelete(itemLabel)}}><DeleteIcon /></IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  )
+                })}
+              </List> */}
+
+              <Button variant='outlined' id='event-Preview' color='secondary' type='submit' style={{ marginTop: '7%' }}>Preview</Button>
+              <Dialog open={dialogOpen} onClose={handleClose}>
+                <DialogContent>
+                  <DialogContentText id='alert-dialog-content'>
+                    Are you ready to see the Finalize Changes screen?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color='primary'>Go Back</Button>
+                  <Button onClick={eventAlertPopUp} color='primary' autoFocus>Finalize</Button>
+                </DialogActions>
+              </Dialog>
+            
+            </form>
+
+          </CardContent>  
+        </Card>
+      </div>
+    </div>
+  )
 }
- 
+
 export default AdminCreateEvent;

@@ -18,6 +18,13 @@ class Student {
         })
     }
 
+
+    /**
+     * 
+     * @param {.student_id} userBody 
+     * This route is used to check if the user is in the database 
+     */
+
     static firstTimeUser(userBody){
         return new Promise((resolve,reject) => {
             let uuid = uuidv4()
@@ -25,7 +32,7 @@ class Student {
             .then(() => {
                 resolve(false)
             }).catch(e => {
-                    connection.one('select survey_complete from users where email=$1',[userBody.student_email])
+                    connection.one('select survey_complete from users where email=$1',[userBody.student_email.toLowerCase()])
                     .then((result) => {
                         reject(result.survey_complete)
                     }).catch(e => {
@@ -46,7 +53,7 @@ class Student {
 
             Promise.all(queries).then(function(values) {
                 // console.log(values);
-                let resObj = {status: true, id: uuid}
+                let resObj = {status: true, id: uuid, student_email:orderBody.student_id.toLowerCase()}
                 resolve(resObj)
               });
 

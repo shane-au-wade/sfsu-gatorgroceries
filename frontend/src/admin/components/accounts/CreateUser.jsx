@@ -42,6 +42,8 @@ const CreateUser = (props) => {
             <div id='createUser'>
                 <div className='createUserDiv shadow'>
                     <form onChange={handleChange} onSubmit={handleSubmit}>
+                        {/* This blank input is used to make chrome NOT autocomplete email and password  */}
+                    <input type="hidden" value="something"></input>
                         <div>First Name</div>
                         <div>
                             <input name='firstName' type='text' className='bottom-space form-entry' autoComplete='off' required></input>

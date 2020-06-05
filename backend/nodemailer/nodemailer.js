@@ -1,16 +1,35 @@
-"use strict";
-const nodemailer = require("nodemailer");
+
 require('dotenv').config();
-// create reusable transporter object using the default SMTP transport
+let nodemailer = require("nodemailer");
+let aws = require('aws-sdk')
+// now configure the aws object with correct region and SES credentials
+// then we should be golden
+aws.config.update({region: process.env.SMTP_REGION});
+
+/**
+ * Amazon Simple Email Service Transporter 
+ */
+
 let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-            user: process.env.EMAIL, // generated ethereal user
-            pass: process.env.PASS // generated ethereal password
-            },
-    tls:{
-        rejectUnauthorized: false
-    }
+    SES: new aws.SES({
+        apiVersion: '2010-12-01'
+    }),
+    sendingRate: 14
 });
+
+/**
+ * Standard Gmail transported => Foodpantry email
+ */
+
+// let transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//             user: process.env.EMAIL, // sfsu email
+//             pass: process.env.PASS // sfsu email pass
+//             },
+//     tls:{
+//         rejectUnauthorized: false
+//     }
+// });
 
 module.exports = {transporter: transporter}

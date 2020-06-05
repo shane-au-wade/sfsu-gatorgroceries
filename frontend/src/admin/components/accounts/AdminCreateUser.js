@@ -10,7 +10,7 @@ return (
     <div className='adminAccounts'>
     <AdminHeader selected='Accounts' history={props.history}></AdminHeader>
         <div className='AdminContentArea'>
-        <h3 className='text-centered padded'>Create User</h3>
+        <h3 className='text-centered padded'>Create New Admin</h3>
         <CreateUser></CreateUser>
         </div>
     </div>
