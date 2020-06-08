@@ -3,9 +3,9 @@ import React from 'react'
 import Routes from './Routes'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-function App(props) {
+function App() {
   return (
-    <Router props={props}>
+    <Router>
       <Routes/>
     </Router>
   );

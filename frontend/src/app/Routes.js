@@ -1,8 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import HomePage from '../pages/publicHome'
-// import SignIn from './public/components/signIn'
-// import Survey from './public/components/survey'
+import SignIn from '../pages/publicSignIn'
+import Survey from '../pages/publicSurvey'
 // import PlaceOrder from './public/components/placeOrder'
 // import CompletedOrder from './public/components/completedOrder/completedOrder'
 // import EditOrder from './public/components/editOrder'
@@ -24,27 +24,27 @@ import HomePage from '../pages/publicHome'
 
 const Routes = () => (
   <Switch>
-    <Route path='/' component={HomePage} />
-    {/* <Route path='/signin' component={SignIn} />
+    <Route path='/' exact component={HomePage} />
+    <Route path='/signin' component={SignIn} />
     <Route path='/survey' component={Survey} />
-    <Route path='/events' component={Events} />
-    <Route path='/place-order' component={PlaceOrder} />
-    <Route path='/completed-order' component={CompletedOrder} />
-    <Route path='/edit-order/:order_id' component={EditOrder} />
-    <Route path='/confirm-order/:order_id' component={ConfirmOrder} />
-    <Route path='/admin/cookie-jar' component={CookieJar} />
-    <Route path='/admin/login' component={AdminLogin}/>
-    <Route path='/admin/request-new-password' component={RequestNewPassword}/>
-    <Route path='/admin/forgot-password' component={ForgotPassword}/>
-    <Route path='/admin/events' component={AdminEvents} />
-    <Route path='/admin/create-event' component={AdminCreateEvent} />
-    <Route path='/admin/edit-event' component={AdminEditEvent} />
-    <Route path='/admin/preview-event' component={AdminPreviewEvent} />
-    <Route path='/admin/checkin' component={AdminCheckin} />
-    <Route path='/admin/receipt' component={Receipt} />
-    <Route path='/admin/accounts' component={AdminAccounts} />
-    <Route path='/admin/create-user' component={AdminCreateUser} />
-    <Route path='/admin/data' component={AdminData} /> */}
+    {/* <Route path='/events' component={Events} /> */}
+    {/* <Route path='/place-order' component={PlaceOrder} /> */}
+    {/* <Route path='/completed-order' component={CompletedOrder} /> */}
+    {/* <Route path='/edit-order/:order_id' component={EditOrder} /> */}
+    {/* <Route path='/confirm-order/:order_id' component={ConfirmOrder} /> */}
+    {/* <Route path='/admin/cookie-jar' component={CookieJar} /> */}
+    {/* <Route path='/admin/login' component={AdminLogin}/> */}
+    {/* <Route path='/admin/request-new-password' component={RequestNewPassword}/> */}
+    {/* <Route path='/admin/forgot-password' component={ForgotPassword}/> */}
+    {/* <Route path='/admin/events' component={AdminEvents} /> */}
+    {/* <Route path='/admin/create-event' component={AdminCreateEvent} /> */}
+    {/* <Route path='/admin/edit-event' component={AdminEditEvent} /> */}
+    {/* <Route path='/admin/preview-event' component={AdminPreviewEvent} /> */}
+    {/* <Route path='/admin/checkin' component={AdminCheckin} /> */}
+    {/* <Route path='/admin/receipt' component={Receipt} /> */}
+    {/* <Route path='/admin/accounts' component={AdminAccounts} /> */}
+    {/* <Route path='/admin/create-user' component={AdminCreateUser} /> */}
+    {/* <Route path='/admin/data' component={AdminData} /> */}
   </Switch>
 )
 

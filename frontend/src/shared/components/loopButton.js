@@ -20,11 +20,8 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     margin: theme.spacing(1),
     position: 'relative',
-    
   },
-  buttonNormal: {
-    color: 'white'
-  },
+  
   buttonSuccess: {
     backgroundColor: green[500],
     '&:hover': {
@@ -91,10 +88,7 @@ export default function CircularIntegration(props) {
           disabled={loading}
           onClick={handleButtonClick}
         >
-          <p className={classes.buttonNormal}>
-            {props.text}
-          </p>
-          
+        {props.text}  
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
       </div>
