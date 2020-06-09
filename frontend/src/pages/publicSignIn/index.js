@@ -11,12 +11,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     width: '100vw',
     height: '100vh',
-    textAlign: 'center'
+   
   },
   textFieldWrapper: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    textAlign: 'center'
   },
   textField : {
     width: '90%',
@@ -45,6 +46,10 @@ const PublicSignin = (props) => {
     // if(student.student_email.search(/@mail.sfsu.edu/i) !== -1)
     if(student.student_email.search(/@/i) !== -1)
     {
+        // axios query to verify student, 
+        // then use sessionStorage to store the 
+        // the student email for later use
+        // and student first and last name.
 
         props.history.push('/survey')
         // signInServices.verifyStudent(student).then((surveyComplete) => {

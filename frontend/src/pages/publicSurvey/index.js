@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     ['@media screen and (max-width:500px)']: {
         height: '6200px'
     },
-    ['@media screen and (max-width:360px)']: {
+    ['@media screen and (max-width:375px)']: {
         width: '98%',
         height: '6350px'
     },
@@ -87,7 +87,7 @@ const PublicSurvey = (props) => {
    * do not want to dilute the survey even when in production
    */
   const redirect = () =>{
-    //props.history.push('/events', [props.location.state[0]]);
+    props.history.push('/events');
     console.log('Survey Skipped')
   }
 

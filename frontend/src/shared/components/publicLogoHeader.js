@@ -6,6 +6,7 @@ import GGLogo from '../../images/logo.png'
 const useStyles = makeStyles((theme) => ({
   logoWrapper: {
     background: 'rgb(196, 196, 196)', 
+    textAlign: 'center'
   },
   logoImg: {
     height: "117px",

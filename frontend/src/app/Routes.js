@@ -7,7 +7,7 @@ import Survey from '../pages/publicSurvey'
 // import CompletedOrder from './public/components/completedOrder/completedOrder'
 // import EditOrder from './public/components/editOrder'
 // import ConfirmOrder from './public/components/confirmOrder'
-// import Events from './public/components/events'
+import PublicEvents from '../pages/publicEvents'
 // import CookieJar from './admin/components/cookie-jar/cookieJar'
 // import AdminEvents from './admin/components/events/AdminEvents'
 // import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
@@ -27,7 +27,7 @@ const Routes = () => (
     <Route path='/' exact component={HomePage} />
     <Route path='/signin' component={SignIn} />
     <Route path='/survey' component={Survey} />
-    {/* <Route path='/events' component={Events} /> */}
+    <Route path='/events' component={PublicEvents} />
     {/* <Route path='/place-order' component={PlaceOrder} /> */}
     {/* <Route path='/completed-order' component={CompletedOrder} /> */}
     {/* <Route path='/edit-order/:order_id' component={EditOrder} /> */}
