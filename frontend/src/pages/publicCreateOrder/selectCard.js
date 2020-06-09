@@ -2,16 +2,12 @@ import React from 'react'
 import {
     Card, 
     CardContent, 
-    CardActions, 
     Typography, 
     NativeSelect,
     FormControl,
     InputBase
 } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link } from 'react-router-dom';
-
 
 const BootstrapInput = withStyles((theme) => ({
     root: {
@@ -54,11 +50,12 @@ const useStyles = makeStyles((theme) => ({
     width: '400px',
     margin: '0 auto',
     marginTop: '20px',
+    /*eslint-disable */
     ['@media screen and (max-width:500px)']: {
         width: '95%',
        
     },
-   
+    /*eslint-disable */
   },
   margin: {
       margin: '10px'

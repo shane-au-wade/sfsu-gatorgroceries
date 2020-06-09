@@ -1,6 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {Paper, TextField, Button, Typography} from '@material-ui/core';
+import {Paper, TextField, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublicLogoHeader from '../../shared/components/publicLogoHeader'
 import LoopButton from '../../shared/components/loopButton'
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textField : {
     width: '90%',
-    maxWidth: '500px',
+    maxWidth: '400px',
     background: 'rgb(252, 252, 252)', 
     margin: '0 auto',
     marginTop: '10px',
@@ -111,7 +110,8 @@ const PublicSignin = (props) => {
               name={'student_email'}
             />
             <Paper elevation={0}>
-              <Typography component='p' className={classes.signinComment}> We are temporarily allowing any email to be used: Valid during Summer 2020 </Typography>
+              <Typography component='p' className={classes.signinComment}> We are temporarily allowing any email to be used:</Typography>
+              <Typography component='p'>Valid during Summer 2020</Typography>
             </Paper> 
           <LoopButton redirect={handleSignIn} text={'Submit'} ></LoopButton>   
       </Paper>

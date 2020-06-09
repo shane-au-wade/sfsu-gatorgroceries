@@ -18,10 +18,16 @@ const useStyles = makeStyles((theme) => ({
     width: '400px',
     margin: '0 auto',
     marginTop: '20px',
+    /*eslint-disable */
     ['@media screen and (max-width:500px)']: {
         width: '95%',
        
     },
+    /*eslint-disable */
+    cardActionArea: {
+      display: 'flex',
+      flexDirection: 'row'
+    }
    
   },
  
@@ -58,7 +64,8 @@ const PublicEvent = (props) => {
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         </CardContent>
-        <CardActions>
+        <CardActions classes={classes.cardActionArea}>
+          <div style={{width:'60%'}}></div>
           <Link to='/create-order'> 
             <Button variant='contained' color='primary'>Create Order</Button>
           </Link>

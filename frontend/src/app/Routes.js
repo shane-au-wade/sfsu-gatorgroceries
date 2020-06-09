@@ -5,7 +5,7 @@ import SignIn from '../pages/publicSignIn'
 import Survey from '../pages/publicSurvey'
 import PublicEvents from '../pages/publicEvents'
 import PublicCreateOrder from '../pages/publicCreateOrder'
-// import CompletedOrder from './public/components/completedOrder/completedOrder'
+import PublicOrderPlaced from '../pages/publicOrderPlaced'
 // import EditOrder from './public/components/editOrder'
 // import ConfirmOrder from './public/components/confirmOrder'
 
@@ -30,7 +30,7 @@ const Routes = () => (
     <Route path='/survey' component={Survey} />
     <Route path='/events' component={PublicEvents} />
     <Route path='/create-order' component={PublicCreateOrder} />
-    {/* <Route path='/completed-order' component={CompletedOrder} /> */}
+    <Route path='/order-placed' component={PublicOrderPlaced} />
     {/* <Route path='/edit-order/:order_id' component={EditOrder} /> */}
     {/* <Route path='/confirm-order/:order_id' component={ConfirmOrder} /> */}
     {/* <Route path='/admin/cookie-jar' component={CookieJar} /> */}

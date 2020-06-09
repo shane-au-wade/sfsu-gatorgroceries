@@ -1,5 +1,5 @@
 import React from 'react'
-import {Paper, Typography} from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublicLogoHeader from '../../shared/components/publicLogoHeader'
 
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     height: '100%',
   },
+  /*eslint-disable */
   googleFormWrapper: {
     
     width: '90%',
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
         height: '6450px'
     },
   }
+  /*eslint-disable */
   
 }));
 

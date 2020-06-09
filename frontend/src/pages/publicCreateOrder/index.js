@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Typography } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublicLogoHeader from '../../shared/components/publicLogoHeader'
 import LoopButton from '../../shared/components/loopButton'
@@ -17,17 +17,17 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     textAlign: 'center',
     // Media queries to handle multiple screen sizes
-    ['@media screen and (max-width:500px)']: { 
-        // height: '6200px'
-    },
-    ['@media screen and (max-width:360px)']: {
+    // ['@media screen and (max-width:500px)']: { 
+    //     // height: '6200px'
+    // },
+    // ['@media screen and (max-width:360px)']: {
         
-        // height: '6350px'
-    },
-    ['@media screen and (max-width:320px)']: {
-        // width: '98%',
-        // height: '6450px'
-    },
+    //     // height: '6350px'
+    // },
+    // ['@media screen and (max-width:320px)']: {
+    //     // width: '98%',
+    //     // height: '6450px'
+    // },
   }
  
 }));
@@ -36,9 +36,8 @@ const PublicCreateOrder = (props) => {
   const classes = useStyles();
 
   const redirect = () =>{
-    //props.history.push('/events'); // redirect to some page
     console.log('order submitted')
-    return false
+    props.history.push('/order-placed'); // redirect to some page
   }
 
   return (

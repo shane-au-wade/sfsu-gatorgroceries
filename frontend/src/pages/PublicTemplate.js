@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     height: '100%',
     // Media queries to handle multiple screen sizes
-    ['@media screen and (max-width:500px)']: { 
+    /*eslint-disable */
+    ['@media screen and (max-width:500px)']: { // eslint-ignore
         // height: '6200px'
     },
     ['@media screen and (max-width:360px)']: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
         // width: '98%',
         // height: '6450px'
     },
+    /*eslint-disable */
   }
  
 }));
