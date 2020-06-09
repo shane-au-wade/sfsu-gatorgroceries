@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,7 @@ const PublicEvent = (props) => {
             <Typography component='p'>Location</Typography>
             <Typography component='p'>SFSU, Chesar Chavez Building</Typography>
             <br/>
-            <ExpansionPanel>
+            <ExpansionPanel elevation={0}>
                 <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -58,7 +59,9 @@ const PublicEvent = (props) => {
             </ExpansionPanel>
         </CardContent>
         <CardActions>
+          <Link to='/create-order'> 
             <Button variant='contained' color='primary'>Create Order</Button>
+          </Link>
         </CardActions>
     </Card>
   )

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   textField : {
     width: '90%',
     maxWidth: '500px',
-    background: 'rgb(247, 247, 247)', 
+    background: 'rgb(252, 252, 252)', 
     margin: '0 auto',
     marginTop: '10px',
   },

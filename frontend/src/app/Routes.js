@@ -3,11 +3,12 @@ import { Switch, Route } from 'react-router-dom'
 import HomePage from '../pages/publicHome'
 import SignIn from '../pages/publicSignIn'
 import Survey from '../pages/publicSurvey'
-// import PlaceOrder from './public/components/placeOrder'
+import PublicEvents from '../pages/publicEvents'
+import PublicCreateOrder from '../pages/publicCreateOrder'
 // import CompletedOrder from './public/components/completedOrder/completedOrder'
 // import EditOrder from './public/components/editOrder'
 // import ConfirmOrder from './public/components/confirmOrder'
-import PublicEvents from '../pages/publicEvents'
+
 // import CookieJar from './admin/components/cookie-jar/cookieJar'
 // import AdminEvents from './admin/components/events/AdminEvents'
 // import AdminCreateEvent from './admin/components/createEvent/AdminCreateEvent'
@@ -28,7 +29,7 @@ const Routes = () => (
     <Route path='/signin' component={SignIn} />
     <Route path='/survey' component={Survey} />
     <Route path='/events' component={PublicEvents} />
-    {/* <Route path='/place-order' component={PlaceOrder} /> */}
+    <Route path='/create-order' component={PublicCreateOrder} />
     {/* <Route path='/completed-order' component={CompletedOrder} /> */}
     {/* <Route path='/edit-order/:order_id' component={EditOrder} /> */}
     {/* <Route path='/confirm-order/:order_id' component={ConfirmOrder} /> */}
