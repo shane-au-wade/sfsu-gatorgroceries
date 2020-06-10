@@ -65,6 +65,15 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectCard = (props) => {
   const classes = useStyles();
+  console.log('props in card select', props)
+
+  const renderOptions = () => {
+      console.log('props in card select', props)
+      
+          console.log('rendering options')
+        return props.options.map(option => <option value={option}>{option}</option>)
+      
+  }
 
   return (
     <Card classes={{root: classes.root}} elevation={2}>
@@ -72,9 +81,9 @@ const SelectCard = (props) => {
             <Typography variant="h6">{props.message}</Typography>
             <FormControl className={classes.margin}>
                 <NativeSelect input={<BootstrapInput />}>
-                <option>Standard Box</option>
-                <option>test 2</option>
-                <option>test 3</option>
+                    {
+                       renderOptions 
+                    }
                 </NativeSelect>
             </FormControl>
         </CardContent>

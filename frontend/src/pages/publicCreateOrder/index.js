@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublicLogoHeader from '../../shared/components/publicLogoHeader'
@@ -35,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
 const PublicCreateOrder = (props) => {
   const classes = useStyles();
 
+  const [event, setEvent] = useState({})
+
+  useEffect(() => {
+    // console.log('props student events ',props)
+    setEvent(JSON.parse(window.sessionStorage.getItem('event')))
+}, [])
+
+
   const redirect = () =>{
     console.log('order submitted')
     props.history.push('/order-placed'); // redirect to some page
@@ -46,11 +54,11 @@ const PublicCreateOrder = (props) => {
       <Paper className={classes.centerWrapper} elevation={0}> 
         <SelectCard
         message='Choose one from the following options'
-        options={[]}
+        options={event.time_blocks}
         ></SelectCard>  
         <SelectCard
         message='Select a pickup time'
-        options={[]}
+        options={event.menu}
         ></SelectCard>      
         <br/>
          <LoopButton redirect={redirect} text={'Submit'}></LoopButton>

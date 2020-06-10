@@ -7,7 +7,8 @@ import {
     Button,
     ExpansionPanel,
     ExpansionPanelSummary,
-    ExpansionPanelDetails
+    ExpansionPanelDetails,
+    Paper
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -27,7 +28,11 @@ const useStyles = makeStyles((theme) => ({
     cardActionArea: {
       display: 'flex',
       flexDirection: 'row'
-    }
+    },
+    // menuWrapper: {
+    //   display: 'flex',
+    //   flexDirection: 'column'
+    // }
    
   },
  
@@ -36,18 +41,24 @@ const useStyles = makeStyles((theme) => ({
 const PublicEvent = (props) => {
   const classes = useStyles();
 
+  let event = {event_id:props.id, time_blocks: props.time_blocks, menu:props.men}
+
+  const goToCreateOrderPage = () => {
+    props.redirect(event)
+  }
+
   return (
-    <Card classes={{root: classes.root}} elevation={2}>
+    <Card key={props.id} id={props.id} classes={{root: classes.root}} elevation={2}>
         <CardContent className={classes.contentWrapper}>
-            <Typography variant='h6'>June 3</Typography>
-            <Typography variant='h6'>Gator Groceries</Typography>
-            <Typography><hr></hr></Typography>
+            <Typography variant='h6'>{props.date}</Typography>
+            <Typography variant='h6'>{props.name}</Typography>
+            <hr></hr>
             <Typography component='p'>Date and Time</Typography>
-            <Typography component='p'>2020-Jun-3</Typography>
-            <Typography component='p'>11:00AM - 1:00PM</Typography>
+            <Typography component='p'>{props.date}</Typography>
+             <Typography component='p'>{props.time}</Typography>
             <br/>
             <Typography component='p'>Location</Typography>
-            <Typography component='p'>SFSU, Chesar Chavez Building</Typography>
+            <Typography component='p'>{props.location}</Typography>
             <br/>
             <ExpansionPanel elevation={0}>
                 <ExpansionPanelSummary
@@ -57,18 +68,22 @@ const PublicEvent = (props) => {
                 >
                 <Typography >Menu</Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                <Typography>
-                    The menu will go here
-                </Typography>
+                <ExpansionPanelDetails >
+                  <Paper elevation={0}>
+                    {props.menu.map(
+                    line => 
+                            <div key={line.item} className='menuLine '>
+                                    {line.item}           
+                            </div>  
+                    )}
+             
+                  </Paper> 
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         </CardContent>
         <CardActions classes={classes.cardActionArea}>
           <div style={{width:'60%'}}></div>
-          <Link to='/create-order'> 
-            <Button variant='contained' color='primary'>Create Order</Button>
-          </Link>
+            <Button variant='contained' color='primary' onClick={goToCreateOrderPage}>Create Order</Button>
         </CardActions>
     </Card>
   )

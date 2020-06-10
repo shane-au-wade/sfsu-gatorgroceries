@@ -40,8 +40,8 @@ const Events = (props) => {
                     key={event.id}
                     id={event.id}
                     date={event.date}
-                    time={event.time}
                     name={event.name}
+                    time={event.time}
                     location={event.location}
                     menu={event.menu}
                     editIcon='hide'
