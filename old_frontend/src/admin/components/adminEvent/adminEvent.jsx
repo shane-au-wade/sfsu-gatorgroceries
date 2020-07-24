@@ -176,7 +176,6 @@ const AdminEvent = (props) => {
 
         // For Placed Orders
         Axios.post('/admin/getPlacedOrders', data).then(response => {
-            console.log("Placed orders: ", response.data.count)
             setNumPlacedOrders(response.data.count)
         }).catch(error => {
             console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
@@ -184,7 +183,6 @@ const AdminEvent = (props) => {
 
         // For Completed Orders
         Axios.post('/admin/getCompletedOrders', data).then(response => {
-            console.log("Placed orders: ", response.data.count)
             setNumCompletedOrders(response.data.count)
         }).catch(error => {
             console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
