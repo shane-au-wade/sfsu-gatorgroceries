@@ -5,6 +5,7 @@ import searchIcon from '../../icons/search-24px.svg';
 import checkinServices from '../../services/checkin'
 import Order from './order.jsx'
 import Receipt from './Receipt.js'
+import Axios from 'axios';
 
 // import io from 'socket.io-client';
 import socket from '../socket'
@@ -19,7 +20,30 @@ const AdminCheckin = (props) => {
     const [receipt, setReceipt] = useState(<Receipt email='test@test.com' order={[]}></Receipt>);
     const [foundOrder, setFoundOrder] = useState('Order Not Found');
 
+    const [numPlacedOrders, setNumPlacedOrders] = useState(0)
+    const [numCompletedOrders, setNumCompletedOrders] = useState(0)
+
     useEffect(() => {
+        // Below is the code to fetch number of placed and completed orders.
+        const data = {
+            event_id: props.location.state.eventID
+        }
+
+        // For Placed Orders
+        Axios.post('/admin/getPlacedOrders', data).then(response => {
+            setNumPlacedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+
+        // For Completed Orders
+        Axios.post('/admin/getCompletedOrders', data).then(response => {
+            setNumCompletedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+
+
         
         socket.emit('join-room', props.location.state.eventID);
         
@@ -225,6 +249,13 @@ return (
                         {/* <button></button> */}
                     </form>
                 </div>
+
+                {/* Below will contain the code to display total number of placed and completed orders for the Checkin page. */}
+                <div className='number-of-orders-container'>
+                    <p className='numberOrdersHeader'><strong>Placed Orders: {numPlacedOrders}</strong></p>
+                    <p className='numberOrdersHeader'><strong>Completed Orders: {numCompletedOrders}</strong></p>
+                </div>
+
                 <div id='foundOrderLocation'>
                 {renderFoundOrder()}
                 </div>
