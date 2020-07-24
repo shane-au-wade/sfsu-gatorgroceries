@@ -178,12 +178,20 @@ router.post('/logout', function(req, res, next) {
   router.post('/getPlacedOrders', async function (req, res) {
     try{
       var eventID = req.body.event_id
+      var student_id = "" // If passed in data did not include student id, then search all orders.
 
-      console.log("Eventid: ", eventID)
+      var numPlacedOrders = 0
 
-      const numPlacedOrders = await db.admin.getPlacedOrders(eventID)
-
-      console.log("Returned Placed orders: ", numPlacedOrders)
+      if(req.body.student_id !== ""){
+        console.log("\nPassed in student id: ", req.body.student_id)
+        student_id = req.body.student_id // Search all orders belonging to this student.
+        numPlacedOrders = await db.admin.getPlacedOrdersForStudent(eventID, student_id)
+        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numPlacedOrders.count)
+      }
+      else{
+        numPlacedOrders = await db.admin.getPlacedOrders(eventID)
+        console.log("\nEvent id: " + eventID + " | count: " + numPlacedOrders.count)
+      }
 
       res.status(200).send(numPlacedOrders)
     }catch(err){
@@ -192,17 +200,53 @@ router.post('/logout', function(req, res, next) {
     }
   })
 
-  // This route will return the number of "completed" orders.
+  // This route will return the number of "ready" orders.
+  router.post('/getReadyOrders', async function (req, res) {
+    try{
+      var eventID = req.body.event_id
+      var student_id = "" // If passed in data did not include student id, then search all orders.
+
+      var numReadyOrders = 0
+
+      if(req.body.student_id !== ""){
+        student_id = req.body.student_id // Search all orders belonging to this student.
+        numReadyOrders = await db.admin.getReadyOrdersForStudent(eventID, student_id)
+        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numReadyOrders.count)
+      }
+      else{
+        numReadyOrders = await db.admin.getReadyOrders(eventID)
+        console.log("\nEvent id: " + eventID + " | count: " + numReadyOrders.count)
+      }
+
+      res.status(200).send(numReadyOrders)
+    }catch(err){
+      console.log(err)
+      return res.status(500).json({ error: 'Error fetching number of "ready" orders in /getCompletedOrders route for admin.'})
+    }
+  })
+
+  // This route will return the number of "complete" orders.
   router.post('/getCompletedOrders', async function (req, res) {
     try{
       var eventID = req.body.event_id
+      var student_id = "" // If passed in data did not include student id, then search all orders.
 
-      const numCompletedOrders = await db.admin.getCompletedOrders(eventID)
+      var numCompletedOrders = 0
 
+      if(req.body.student_id !== ""){
+        student_id = req.body.student_id // Search all orders belonging to this student.
+        numCompletedOrders = await db.admin.getCompletedOrdersForStudent(eventID, student_id)
+        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numCompletedOrders.count)
+      }
+      else{
+        numCompletedOrders = await db.admin.getCompletedOrders(eventID)
+        console.log("\nEvent id: " + eventID + " | count: " + numCompletedOrders.count)
+      }
+      
       res.status(200).send(numCompletedOrders)
     }catch(err){
       console.log(err)
-      return res.status(500).json({ error: 'Error fetching number of "completed" orders in /getCompletedOrders route for admin.'})
+      return res.status(500).json({ error: 'Error fetching number of "complete" orders in /getCompletedOrders route for admin.'})
     }
   })
 
