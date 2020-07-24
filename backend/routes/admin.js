@@ -174,4 +174,36 @@ router.post('/logout', function(req, res, next) {
      
   });
 
+  // This route will return the number of "placed" orders.
+  router.post('/getPlacedOrders', async function (req, res) {
+    try{
+      var eventID = req.body.event_id
+
+      console.log("Eventid: ", eventID)
+
+      const numPlacedOrders = await db.admin.getPlacedOrders(eventID)
+
+      console.log("Returned Placed orders: ", numPlacedOrders)
+
+      res.status(200).send(numPlacedOrders)
+    }catch(err){
+      console.log(err)
+      return res.status(500).json({ error: 'Error fetching number of "placed" orders in /getPlacedOrders route for admin.'})
+    }
+  })
+
+  // This route will return the number of "completed" orders.
+  router.post('/getCompletedOrders', async function (req, res) {
+    try{
+      var eventID = req.body.event_id
+
+      const numCompletedOrders = await db.admin.getCompletedOrders(eventID)
+
+      res.status(200).send(numCompletedOrders)
+    }catch(err){
+      console.log(err)
+      return res.status(500).json({ error: 'Error fetching number of "completed" orders in /getCompletedOrders route for admin.'})
+    }
+  })
+
 module.exports = router;
