@@ -138,6 +138,46 @@ class admin {
         })
     }
 
+    // This db query will grab number of orders with "placed" status.
+    static getPlacedOrders(event_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select count(status)
+            from orders
+            where event_id = $1
+            and status = 'placed'
+            `
+            connection.one(query, [event_id]).then(data => {
+                resolve(data)
+            }).catch(err => {
+                console.log(err)
+                reject({
+                    error: 'Error fetching number of placed orders from admin getPlacedOrders().'
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "completed" status.
+    static getCompletedOrders(event_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select count(status)
+            from orders
+            where event_id = $1
+            and status = 'complete'
+            `
+            connection.one(query, [event_id]).then(data => {
+                resolve(data)
+            }).catch(err => {
+                console.log(err)
+                reject({
+                    error: 'Error fetching number of completed orders from admin getCompletedOrders().'
+                })
+            })
+        })
+    }
+
 }
 
 module.exports = admin
