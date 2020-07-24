@@ -1,9 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import './style/event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
 import createEventServices from '../../services/createEvent'
+import Axios from 'axios';
+
+
+/*
+
+adminEvent contains sensitive functionality like the ability to edit events and seeing how many
+orders have been placed/completed.
+
+publicEvent does not share this functionality.
+
+*/
+
 
 const AdminEvent = (props) => {
 
@@ -15,6 +27,10 @@ const AdminEvent = (props) => {
     const [menu] = useState(props.menu);
     const [preview] = useState(props.preview)
     const [timeBlocks] = useState(props.time_blocks)
+
+    const [numPlacedOrders, setNumPlacedOrders] = useState(0)
+    const [numCompletedOrders, setNumCompletedOrders] = useState(0)
+
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
 
     const [showMenu, setShowMenu] = useState('no_menu');
@@ -149,6 +165,31 @@ const AdminEvent = (props) => {
             console.error('Error in creating Event: ', err)
         })
     }
+
+
+    // The following block of code will let admins know how many orders have been placed/completed 
+    // for each event using its event ID whenever the page is manually refreshed.
+    useEffect(() => {
+        const data = {
+            event_id: id
+        }
+
+        // For Placed Orders
+        Axios.post('/admin/getPlacedOrders', data).then(response => {
+            console.log("Placed orders: ", response.data.count)
+            setNumPlacedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+
+        // For Completed Orders
+        Axios.post('/admin/getCompletedOrders', data).then(response => {
+            console.log("Placed orders: ", response.data.count)
+            setNumCompletedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+    }, [])
     
     return (
         <div key={id} id={id} className='adminEvent'>
@@ -187,6 +228,14 @@ const AdminEvent = (props) => {
             <br></br>
             <p className='date-header'>Location</p>
             <p className='info'>{location}</p>
+            <br></br>
+            <hr></hr>
+            <br></br>
+            <p className='date-header'>Order Status</p>
+            <p className='info'>Placed Orders: {numPlacedOrders}</p>
+            <p className='info'>Completed Orders: {numCompletedOrders}</p>
+            <br></br>
+            <hr></hr>
             <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
