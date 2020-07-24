@@ -26,7 +26,7 @@ const AdminEvents = (props) => {
 
     const renderEvents = () => {
         let retObj = ''
-        console.log('events: ', typeof(events))
+        //console.log('events: ', typeof(events))
         if(typeof(events) !== 'string' && !events.error)
         {
             retObj = events.map(event => 
