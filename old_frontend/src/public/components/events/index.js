@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import LogoHeader from '../LogoHeader'
-import Event from '../../../admin/components/adminEvent/adminEvent'
+import Event from '../../../admin/components/adminEvent/publicEvent'
 import styled from 'styled-components'
 import eventServices from '../../services/events'
 
