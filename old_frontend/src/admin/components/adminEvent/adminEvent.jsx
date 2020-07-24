@@ -171,7 +171,8 @@ const AdminEvent = (props) => {
     // for each event using its event ID whenever the page is manually refreshed.
     useEffect(() => {
         const data = {
-            event_id: id
+            event_id: id,
+            student_id: ""
         }
 
         // For Placed Orders
