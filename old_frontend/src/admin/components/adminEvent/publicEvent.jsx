@@ -6,6 +6,8 @@ import editIcon from '../../icons/edit-24px.svg';
 import createEventServices from '../../services/createEvent'
 import Axios from 'axios';
 
+import {FormControlLabel, Checkbox} from '@material-ui/core'
+
 
 /*
 
@@ -32,7 +34,12 @@ const AdminEvent = (props) => {
     const [timeBlocks] = useState(props.time_blocks)
 
     const [numPlacedOrders, setNumPlacedOrders] = useState(0)
+    const [numReadyOrders, setNumReadyOrders] = useState(0)
     const [numCompletedOrders, setNumCompletedOrders] = useState(0)
+    const [sumOfOrders, setSumOfOrders] = useState(0)
+
+    const [userCanPlaceOrder, setUserCanPlaceOrder] = useState(true)
+    const [maxOrdersReached, setMaxOrdersReached] = useState(false)
 
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
 
@@ -150,6 +157,16 @@ const AdminEvent = (props) => {
         return button
     }
 
+    const renderButton2 = () => {
+        return(
+            <div>
+                <p className='info'>You already have ordered one item from this Event</p>
+                <br></br>
+                <button type="disabled">Cannot Order</button>
+            </div>
+        )
+    }
+
     const handlePublish = () => {
         console.log('handling publish');
         //axios call to /admin/createEven
@@ -168,6 +185,64 @@ const AdminEvent = (props) => {
             console.error('Error in creating Event: ', err)
         })
     }
+
+    // This useEffect will only run once after each page refresh to check whether or not student has already 0, 1, or 2 orders
+    // for an event already (this includes "placed", "ready", and "complete" statuses). Disable the Order button depending on the result and display information to the student on why it is disabled.
+    // Render the checkbox asking for permission to place one more order for a family member if only 1 order so far.
+    useEffect(() => {
+        const data = {
+            event_id: id,
+            student_id: props.student.student_email
+        }
+
+        // For Placed Orders
+        Axios.post('/admin/getPlacedOrders', data).then(response => {
+            setNumPlacedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
+        })
+
+        // For Ready Orders
+        Axios.post('/admin/getReadyOrders', data).then(response => {
+            setNumReadyOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
+        })
+
+        // For Completed Orders
+        Axios.post('/admin/getCompletedOrders', data).then(response => {
+            setNumCompletedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
+        })
+
+        
+
+    }, [])
+
+    useEffect(() => {
+        // After setting states for placed, ready, and completed orders, perform if statement checks for conditional rendering of checkbox 
+        // and Order button.
+        const sum = numPlacedOrders + numReadyOrders
+        setSumOfOrders(sum)
+        if(sumOfOrders === 1){
+            setUserCanPlaceOrder(false)
+            setMaxOrdersReached(false)
+        }
+        else if(sumOfOrders > 1){
+            setUserCanPlaceOrder(false)
+            setMaxOrdersReached(true)
+        }
+        else{
+            console.log("User has no order with this event.")
+            setUserCanPlaceOrder(true)
+            setMaxOrdersReached(false)
+        }
+    }, [numPlacedOrders, numReadyOrders, numCompletedOrders])
+
+    useEffect(() => {
+        console.log("Can user place an order? ", userCanPlaceOrder)
+    }, [userCanPlaceOrder])
 
     return (
         <div key={id} id={id} className='adminEvent'>
@@ -207,11 +282,24 @@ const AdminEvent = (props) => {
             <p className='date-header'>Location</p>
             <p className='info'>{location}</p>
             <br></br>
+            <p className='date-header'>{props.student.student_email}</p>
+            <p className='info'>Placed: {numPlacedOrders}</p>
+            <p className='info'>Ready: {numReadyOrders}</p>
+            <p className='info'>Complete: {numCompletedOrders}</p>
+            <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
             <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
             Menu
             </p>
+
+            {userCanPlaceOrder && !maxOrdersReached ? 
+                console.log("Good to go!") 
+                :                         
+                <FormControlLabel
+                    control={<Checkbox onChange={(e) => setUserCanPlaceOrder(e.target.checked)} name="order-checkbox" />}
+                    label="I want to place 1 more order for a family member"
+                />}
             
             <div id='menu' className={showMenu}>
                 <span className='menuHeader'><u>Item</u></span> <span><u>Max Qty</u></span>
@@ -230,7 +318,7 @@ const AdminEvent = (props) => {
 
             <p className='text-centered checkin'>
 
-                {renderButton()}
+                {userCanPlaceOrder ? renderButton() : renderButton2()}
                 
             </p>  
     </div>
