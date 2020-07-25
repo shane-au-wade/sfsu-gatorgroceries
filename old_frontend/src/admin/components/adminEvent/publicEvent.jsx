@@ -159,11 +159,11 @@ const AdminEvent = (props) => {
 
     const renderButton2 = () => {
         return(
-            <div>
+            <>
                 <p className='info'>You already have ordered one item from this Event</p>
                 <br></br>
                 <button type="disabled">Cannot Order</button>
-            </div>
+            </>
         )
     }
 
@@ -215,9 +215,6 @@ const AdminEvent = (props) => {
         }).catch(error => {
             console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
         })
-
-        
-
     }, [])
 
     useEffect(() => {
@@ -234,14 +231,12 @@ const AdminEvent = (props) => {
             setMaxOrdersReached(true)
         }
         else{
-            console.log("User has no order with this event.")
             setUserCanPlaceOrder(true)
             setMaxOrdersReached(false)
         }
     }, [numPlacedOrders, numReadyOrders, numCompletedOrders])
 
     useEffect(() => {
-        console.log("Can user place an order? ", userCanPlaceOrder)
     }, [userCanPlaceOrder])
 
     return (
@@ -294,7 +289,7 @@ const AdminEvent = (props) => {
             </p>
 
             {userCanPlaceOrder && !maxOrdersReached ? 
-                console.log("Good to go!") 
+                console.log() 
                 :                         
                 <FormControlLabel
                     control={<Checkbox onChange={(e) => setUserCanPlaceOrder(e.target.checked)} name="order-checkbox" />}
@@ -316,11 +311,9 @@ const AdminEvent = (props) => {
                 }
             </div>
 
-            <p className='text-centered checkin'>
-
+            <div className='text-centered checkin'>
                 {userCanPlaceOrder ? renderButton() : renderButton2()}
-                
-            </p>  
+            </div>  
     </div>
 
 </div>
