@@ -232,11 +232,6 @@ const AdminEvent = (props) => {
             <p className='date-header'>Location</p>
             <p className='info'>{location}</p>
             <br></br>
-            <p className='date-header'>{props.student.student_email}</p>
-            <p className='info'>Placed: {numPlacedOrders}</p>
-            <p className='info'>Ready: {numReadyOrders}</p>
-            <p className='info'>Complete: {numCompletedOrders}</p>
-            <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
             <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
