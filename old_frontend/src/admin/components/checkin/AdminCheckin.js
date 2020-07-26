@@ -77,6 +77,29 @@ const AdminCheckin = (props) => {
 
     }, [])
 
+    // This useEffect will update the number of placed and completed orders every time the page re-renders.
+    useEffect(() => {
+        // Below is the code to fetch number of placed and completed orders.
+        const data = {
+            event_id: props.location.state.eventID,
+            student_id: ""
+        }
+
+        // For Placed Orders
+        Axios.post('/admin/getPlacedOrders', data).then(response => {
+            setNumPlacedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+
+        // For Completed Orders
+        Axios.post('/admin/getCompletedOrders', data).then(response => {
+            setNumCompletedOrders(response.data.count)
+        }).catch(error => {
+            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
+        })
+    })
+
     const processOrders = (foundOrders, timeBlocks) => {
         return new Promise((resolve, reject) => {
             let processedOrders = {}
