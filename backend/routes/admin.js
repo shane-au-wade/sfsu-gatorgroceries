@@ -180,23 +180,25 @@ router.post('/logout', function(req, res, next) {
       var eventID = req.body.event_id
       var student_id = "" // If passed in data did not include student id, then search all orders.
 
-      var numPlacedOrders = 0
+      var numOrders = 0
 
       if(req.body.student_id !== ""){
-        console.log("\nPassed in student id: ", req.body.student_id)
         student_id = req.body.student_id // Search all orders belonging to this student.
-        numPlacedOrders = await db.admin.getPlacedOrdersForStudent(eventID, student_id)
-        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numPlacedOrders.count)
+        numOrders = await db.admin.getPlacedOrdersForStudent(eventID, student_id)
+
+        numOrders = {
+          count: Object.keys(numOrders).length
+        }
       }
       else{
-        numPlacedOrders = await db.admin.getPlacedOrders(eventID)
-        console.log("\nEvent id: " + eventID + " | count: " + numPlacedOrders.count)
+        numOrders = await db.admin.getPlacedOrders(eventID)
       }
 
-      res.status(200).send(numPlacedOrders)
+      res.status(200).send(numOrders)
     }catch(err){
       console.log(err)
-      return res.status(500).json({ error: 'Error fetching number of "placed" orders in /getPlacedOrders route for admin.'})
+      //res.status(500).json({ error: 'Error fetching number of "placed" orders in /getPlacedOrders route for admin.'})
+      res.status(200).send({count: 0})
     }
   })
 
@@ -206,22 +208,25 @@ router.post('/logout', function(req, res, next) {
       var eventID = req.body.event_id
       var student_id = "" // If passed in data did not include student id, then search all orders.
 
-      var numReadyOrders = 0
+      var numOrders = 0
 
       if(req.body.student_id !== ""){
         student_id = req.body.student_id // Search all orders belonging to this student.
-        numReadyOrders = await db.admin.getReadyOrdersForStudent(eventID, student_id)
-        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numReadyOrders.count)
+        numOrders = await db.admin.getReadyOrdersForStudent(eventID, student_id)
+
+        numOrders = {
+          count: Object.keys(numOrders).length
+        }
       }
       else{
-        numReadyOrders = await db.admin.getReadyOrders(eventID)
-        console.log("\nEvent id: " + eventID + " | count: " + numReadyOrders.count)
+        numOrders = await db.admin.getReadyOrders(eventID)
       }
 
-      res.status(200).send(numReadyOrders)
+      res.status(200).send(numOrders)
     }catch(err){
       console.log(err)
-      return res.status(500).json({ error: 'Error fetching number of "ready" orders in /getCompletedOrders route for admin.'})
+      //res.status(500).json({ error: 'Error fetching number of "ready" orders in /getCompletedOrders route for admin.'})
+      res.status(200).send({count: 0})
     }
   })
 
@@ -231,22 +236,25 @@ router.post('/logout', function(req, res, next) {
       var eventID = req.body.event_id
       var student_id = "" // If passed in data did not include student id, then search all orders.
 
-      var numCompletedOrders = 0
+      var numOrders = 0
 
       if(req.body.student_id !== ""){
         student_id = req.body.student_id // Search all orders belonging to this student.
-        numCompletedOrders = await db.admin.getCompletedOrdersForStudent(eventID, student_id)
-        console.log("\nStudent id: " + student_id + " | event id: " + eventID + " | count: " + numCompletedOrders.count)
+        numOrders = await db.admin.getCompletedOrdersForStudent(eventID, student_id)
+
+        numOrders = {
+          count: Object.keys(numOrders).length
+        }
       }
       else{
-        numCompletedOrders = await db.admin.getCompletedOrders(eventID)
-        console.log("\nEvent id: " + eventID + " | count: " + numCompletedOrders.count)
+        numOrders = await db.admin.getCompletedOrders(eventID)
       }
-      
-      res.status(200).send(numCompletedOrders)
+
+      res.status(200).send(numOrders)
     }catch(err){
       console.log(err)
-      return res.status(500).json({ error: 'Error fetching number of "complete" orders in /getCompletedOrders route for admin.'})
+      //res.status(500).json({ error: 'Error fetching number of "complete" orders in /getCompletedOrders route for admin.'})
+      res.status(200).send({count: 0})
     }
   })
 
