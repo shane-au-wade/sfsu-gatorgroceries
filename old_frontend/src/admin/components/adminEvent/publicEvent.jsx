@@ -36,14 +36,16 @@ const AdminEvent = (props) => {
     const [numPlacedOrders, setNumPlacedOrders] = useState(0)
     const [numReadyOrders, setNumReadyOrders] = useState(0)
     const [numCompletedOrders, setNumCompletedOrders] = useState(0)
-    const [sumOfOrders, setSumOfOrders] = useState(0)
-
-    const [userCanPlaceOrder, setUserCanPlaceOrder] = useState(true)
-    const [maxOrdersReached, setMaxOrdersReached] = useState(false)
 
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
 
     const [showMenu, setShowMenu] = useState('no_menu');
+
+    const holdData = {
+        placed: numPlacedOrders,
+        ready: numReadyOrders,
+        complete: numCompletedOrders
+    }
 
     const getMonth = () => {
         let month = ''
@@ -109,62 +111,44 @@ const AdminEvent = (props) => {
         }
     }
 
+    // renderButton will contain the logic to maintain the limits of how many times students can order from an event.
     const renderButton = () => {
-        // console.log('props adminEvent', props)
-        let button = '';
-        if(preview === true)
-        {
-            button = ( 
-                        <button onClickCapture={handlePublish}>
-                            Publish
-                        </button>
-                    )
-        }
-        else if(props.order === true)
-        {
-            button = (
-                    <Link to={{
-                        pathname: '/place-order',
-                        state: {
-                        eventID: id,
-                        menu:menu,
-                        student: props.student,
-                        time_blocks: timeBlocks
-                        } 
-                    }} >
-                        <button>
-                            Order
-                        </button>
-                    </Link>
-                    )
-        }
-        else
-        {
-            button = (
-                    <Link to={{
-                        pathname: '/admin/checkin',
-                        state: {
-                        eventID: id,
-                        time_blocks: timeBlocks
-                        } 
-                    }}>
-                        <button>
-                            Checkin
-                        </button>
-                    </Link>
-                    )
-        }
-        return button
-    }
+        var sum = holdData.placed + holdData.ready + holdData.complete
 
-    const renderButton2 = () => {
-        return(
-            <>
-                <p className='info'>You already have ordered one item from this Event</p>
-                <br></br>
-                <button type="disabled">Cannot Order</button>
-            </>
-        )
+        if(sum === 0){
+            return(<Link to={{
+            pathname: '/place-order', 
+            state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks, 
+                additionalOrder: false}}}>
+                    <button>Order</button>
+                    </Link>)
+        }
+        else if(sum === 1){
+            return(
+                <div>
+                    <p className='info'>You have already reached the max of 1 order for this event. You are allowed to place 1 more order for your family member.</p>
+                    <br></br>
+                    <Link to={{
+                        pathname: '/place-order', 
+                        state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks, 
+                            additionalOrder: true}}}>
+                                <button>Order for Family Member</button>
+                                </Link>
+                </div>
+                )
+        }
+        else if(sum > 1){
+            return(
+                <div>
+                    <p className='info'>Cannot order as you have reached the maximum amount allowed for this event.</p>
+                    <br></br>
+                    <button disabled>Cannot Order</button>
+                </div>
+            )
+        }
+        else{
+            return null
+        }
     }
 
     const handlePublish = () => {
@@ -186,9 +170,6 @@ const AdminEvent = (props) => {
         })
     }
 
-    // This useEffect will only run once after each page refresh to check whether or not student has already 0, 1, or 2 orders
-    // for an event already (this includes "placed", "ready", and "complete" statuses). Disable the Order button depending on the result and display information to the student on why it is disabled.
-    // Render the checkbox asking for permission to place one more order for a family member if only 1 order so far.
     useEffect(() => {
         const data = {
             event_id: id,
@@ -199,67 +180,41 @@ const AdminEvent = (props) => {
         Axios.post('/admin/getPlacedOrders', data).then(response => {
             setNumPlacedOrders(response.data.count)
         }).catch(error => {
-            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
         })
 
         // For Ready Orders
         Axios.post('/admin/getReadyOrders', data).then(response => {
             setNumReadyOrders(response.data.count)
         }).catch(error => {
-            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
         })
 
         // For Completed Orders
         Axios.post('/admin/getCompletedOrders', data).then(response => {
             setNumCompletedOrders(response.data.count)
         }).catch(error => {
-            console.log("Error occurred in adminEvent's useEffect to get num of placed, ready, and completed orders: ", error)
         })
     }, [])
-
-    useEffect(() => {
-        // After setting states for placed, ready, and completed orders, perform if statement checks for conditional rendering of checkbox 
-        // and Order button.
-        const sum = numPlacedOrders + numReadyOrders
-        setSumOfOrders(sum)
-        if(sumOfOrders === 1){
-            setUserCanPlaceOrder(false)
-            setMaxOrdersReached(false)
-        }
-        else if(sumOfOrders > 1){
-            setUserCanPlaceOrder(false)
-            setMaxOrdersReached(true)
-        }
-        else{
-            setUserCanPlaceOrder(true)
-            setMaxOrdersReached(false)
-        }
-    }, [numPlacedOrders, numReadyOrders, numCompletedOrders])
-
-    useEffect(() => {
-    }, [userCanPlaceOrder])
 
     return (
         <div key={id} id={id} className='adminEvent'>
             <div  className='event-div'>
 
-
             <Link to={{
-                        pathname: '/admin/edit-event',
-                        state: {
-                            edit: true,
-                            eventID: id,
-                            name: name,
-                            location: location,
-                            menu: menu,
-                            date: date,
-                            time: time,
-                            time_blocks: timeBlocks
-                        } 
-                    }} >
-                    <button className={'editIcon ' + props.editIcon}>
-                    <img src={editIcon} alt='editIcon'></img>
-                    </button>
+                pathname: '/admin/edit-event',
+                state: {
+                    edit: true,
+                    eventID: id,
+                    name: name,
+                    location: location,
+                    menu: menu,
+                    date: date,
+                    time: time,
+                    time_blocks: timeBlocks
+                    } 
+                }} >
+                <button className={'editIcon ' + props.editIcon}>
+                <img src={editIcon} alt='editIcon'></img>
+                </button>
             </Link>
 
             <div className='date'>
@@ -288,14 +243,6 @@ const AdminEvent = (props) => {
             Menu
             </p>
 
-            {userCanPlaceOrder && !maxOrdersReached ? 
-                console.log() 
-                :                         
-                <FormControlLabel
-                    control={<Checkbox onChange={(e) => setUserCanPlaceOrder(e.target.checked)} name="order-checkbox" />}
-                    label="I want to place 1 more order for a family member"
-                />}
-            
             <div id='menu' className={showMenu}>
                 <span className='menuHeader'><u>Item</u></span> <span><u>Max Qty</u></span>
                 {
@@ -312,8 +259,8 @@ const AdminEvent = (props) => {
             </div>
 
             <div className='text-centered checkin'>
-                {userCanPlaceOrder ? renderButton() : renderButton2()}
-            </div>  
+                {renderButton()}
+            </div>
     </div>
 
 </div>
