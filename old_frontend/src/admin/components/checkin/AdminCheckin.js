@@ -26,7 +26,8 @@ const AdminCheckin = (props) => {
     useEffect(() => {
         // Below is the code to fetch number of placed and completed orders.
         const data = {
-            event_id: props.location.state.eventID
+            event_id: props.location.state.eventID,
+            student_id: ""
         }
 
         // For Placed Orders
