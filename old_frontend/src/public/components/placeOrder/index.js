@@ -9,6 +9,8 @@ const PlaceOrder = (props) => {
 
   const [menu, setMenu] = useState([]);
   const [order, setOrder] = useState([])
+  const [secondOrder, setSecondOrder] = useState([])
+  const [showSecondOrder, setShowSecondOrder] = useState(false)
   const [timeBlocks, setTimeBlocks] = useState([])
   const [timeSelect, updateTimeSelect] = useState('none')
 
@@ -17,6 +19,7 @@ const PlaceOrder = (props) => {
     setMenu(props.location.state.menu)
     setTimeBlocks(props.location.state.time_blocks)
     order.push({'item': props.location.state.menu[0].item, 'qty':1})
+    secondOrder.push({'item': props.location.state.menu[0].item, 'qty':1})
     // @ED these are the time blocks being passed in as a [{block:'1:00-2:00 PM'}]
     console.log('Blocks: ', props.location.state.time_blocks);
   }, [props]); 
@@ -35,6 +38,17 @@ const PlaceOrder = (props) => {
     //console.log('Updated order: ', order)
   }
 
+  const updateSecondOrder = (event) => {
+    // console.log(spinnerState)
+    setSecondOrder([{'item': event.target.value, 'qty':1}])
+    //console.log('Updated order: ', order)
+  }
+
+  const handleCheckBox = (event) => {
+    //console.log('handling checkbox:', event.target.checked)
+    setShowSecondOrder(event.target.checked)
+  }
+
   const redirect = () =>{
         // console.log(order);
         let orderData = {}
@@ -43,14 +57,17 @@ const PlaceOrder = (props) => {
         // lineItems.forEach( lineItem => {
         //   finalOrder.push({item:lineItem[0],qty:lineItem[1]})
         // })
-
+    console.log('order:', order)
+    console.log('second order:', secondOrder)
 
         // console.log('finalOrder: ', finalOrder)
         orderData.student_id = props.location.state.student.student_email;
         orderData.event_id = props.location.state.eventID;
         orderData.order = order;
+        if(showSecondOrder) {
+          orderData.order.push(secondOrder[0])
+        }
         orderData.status = 'placed'
-
 
         //@Ed you need to populate this pickup field with the dropdown menu. 
         orderData.pickup = timeSelect
@@ -88,6 +105,24 @@ const PlaceOrder = (props) => {
     updateTimeSelect(event.target.value)
   }
 
+  const renderSecondOrder = () => {
+    if(showSecondOrder) {
+      return (
+        <>
+        <h3 className='text-centered'>Their Order</h3>
+        <br></br>
+          <div className='time-select'>
+            <select onChange={updateSecondOrder} name='timeSelect'>
+              { menu.map((line) => <option  value={line.item}>{line.item}</option>) }
+            </select>
+          </div> 
+        </>
+      )
+    } else {
+      return <></>
+    }
+  }
+
   return (
     <div className='place-order'>
       <div className='header'>
@@ -105,11 +140,22 @@ const PlaceOrder = (props) => {
             </div> */}
 
             <div className='package-container'>
+              <h3 className='text-centered'>Your Order</h3>
+              <br></br>
               <div className='time-select'>
                 <select onChange={updateOrder} name='timeSelect'>
                   { menu.map((line) => <option  value={line.item}>{line.item}</option>) }
                 </select>
-            </div>
+              </div>
+              <br></br>
+                <h4>
+                 If a family member or friend is coming with you, you can place a order for them now by checking this box ➡️
+                <input className='checkbox' type="checkbox" onChange={handleCheckBox} name="secondOrder" value="Bike"></input>
+                </h4>
+              <br></br>
+              {renderSecondOrder()}
+              
+              
                 
             </div>
       </div>
@@ -132,7 +178,8 @@ const PlaceOrder = (props) => {
              <div className='submit-place-order'>
                 <LoopButton redirect={redirect} text={'Submit'}></LoopButton>
             </div>
-
+            <br/>
+            <br/>
            
       </div>
   )

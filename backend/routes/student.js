@@ -53,12 +53,25 @@ router.post('/place-order', async (req, res, next) => {
   }
 
   try{
-    let dbStatus = await db.student.placeOrder(req.body)
-    msg.html = await htmlGen.generateEmail(req.body, dbStatus)
-    //console.log('msg info', msg)
-    let info = await transporter.sendMail(msg)
-    //console.log("Email status: ", info)
-    res.status(200).send(dbStatus)
+    // Concatenate this order to the existing one. Otherwise, create a new order.
+    if(req.body.additionalOrder){
+      console.log("Student's order will be added to their existing order.")
+      let dbStatus = await db.student.concatenateOrder(req.body)
+      msg.html = await htmlGen.generateEmail(req.body, dbStatus)
+      //console.log('msg info', msg)
+      let info = await transporter.sendMail(msg)
+      //console.log("Email status: ", info)
+      res.status(200).send(dbStatus)
+    }
+    else{
+      console.log("Student's order will be new.")
+      let dbStatus = await db.student.placeOrder(req.body)
+      msg.html = await htmlGen.generateEmail(req.body, dbStatus)
+      //console.log('msg info', msg)
+      let info = await transporter.sendMail(msg)
+      //console.log("Email status: ", info)
+      res.status(200).send(dbStatus)
+    }
   }catch(e){
     res.send("error")
   }

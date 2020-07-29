@@ -138,6 +138,129 @@ class admin {
         })
     }
 
+    // This db query will grab number of orders with "placed" status.
+    static getPlacedOrders(event_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select count(status)
+            from orders
+            where event_id = $1
+            and status = 'placed'
+            `
+            connection.one(query, [event_id]).then(data => {
+                resolve(data)
+            }).catch(err => {
+                console.log(err)
+                reject({
+                    error: 'Error fetching number of "placed" orders from admin getPlacedOrders().'
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "placed" status for student.
+    static getPlacedOrdersForStudent(event_id, student_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select "order"
+            from orders
+            where event_id = $1
+            and status = 'placed'
+            and student_id = $2
+            `
+            connection.one(query, [event_id, student_id]).then(data => {
+                resolve(data.order)
+            }).catch(err => {
+                //console.log(err)
+                reject({
+                    error: `ERROR! There are no "placed" orders from admin getPlacedOrdersForStudent() for student ${student_id}.`
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "ready" status.
+    static getReadyOrders(event_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select count(status)
+            from orders
+            where event_id = $1
+            and status = 'ready'
+            `
+            connection.one(query, [event_id]).then(data => {
+                resolve(data)
+            }).catch(err => {
+                console.log(err)
+                reject({
+                    error: 'Error fetching number of "ready" orders from admin getReadyOrders().'
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "ready" status for student.
+    static getReadyOrdersForStudent(event_id, student_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select "order"
+            from orders
+            where event_id = $1
+            and status = 'ready'
+            and student_id = $2
+            `
+            connection.one(query, [event_id, student_id]).then(data => {
+                resolve(data.order)
+            }).catch(err => {
+                //console.log(err)
+                reject({
+                    error: `ERROR! There are no "ready" orders from admin getReadyOrdersForStudent() for student ${student_id}.`
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "complete" status.
+    static getCompletedOrders(event_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select count(status)
+            from orders
+            where event_id = $1
+            and status = 'complete'
+            `
+            connection.one(query, [event_id]).then(data => {
+                resolve(data)
+            }).catch(err => {
+                console.log(err)
+                reject({
+                    error: 'Error fetching number of "complete" orders from admin getCompletedOrders().'
+                })
+            })
+        })
+    }
+
+    // This db query will grab number of orders with "complete" status for student.
+    static getCompletedOrdersForStudent(event_id, student_id){
+        return new Promise((resolve, reject) => {
+            const query = `
+            select "order"
+            from orders
+            where event_id = $1
+            and status = 'complete'
+            and student_id = $2
+            `
+            connection.one(query, [event_id, student_id]).then(data => {
+                resolve(data.order)
+            }).catch(err => {
+                //console.log(err)
+                reject({
+                    error: `ERROR! There are no "complete" orders from admin getCompletedOrdersForStudent() for student ${student_id}.`
+                })
+            })
+        })
+    }
+
 }
 
 module.exports = admin

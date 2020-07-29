@@ -3,11 +3,16 @@ import {Link} from 'react-router-dom'
 import './style/event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
-import createEventServices from '../../services/createEvent'
-import Axios from 'axios';
+// import createEventServices from '../../services/createEvent'
+// import Axios from 'axios';
+
+// import {FormControlLabel, Checkbox} from '@material-ui/core'
 
 
 /*
+
+This publicEvent.jsx was created to separate the adminEvent page into two seperate versions.
+One for admins and one for the students. 
 
 adminEvent contains sensitive functionality like the ability to edit events and seeing how many
 orders have been placed/completed.
@@ -25,11 +30,7 @@ const AdminEvent = (props) => {
     const [name] = useState(props.name);
     const [location] = useState(props.location);
     const [menu] = useState(props.menu);
-    const [preview] = useState(props.preview)
     const [timeBlocks] = useState(props.time_blocks)
-
-    const [numPlacedOrders, setNumPlacedOrders] = useState(0)
-    const [numCompletedOrders, setNumCompletedOrders] = useState(0)
 
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
 
@@ -99,118 +100,35 @@ const AdminEvent = (props) => {
         }
     }
 
+    // renderButton will contain the logic to maintain the limits of how many times students can order from an event.
     const renderButton = () => {
-        // console.log('props adminEvent', props)
-        let button = '';
-        if(preview === true)
-        {
-            button = ( 
-                        <button onClickCapture={handlePublish}>
-                            Publish
-                        </button>
-                    )
-        }
-        else if(props.order === true)
-        {
-            button = (
-                    <Link to={{
-                        pathname: '/place-order',
-                        state: {
-                        eventID: id,
-                        menu:menu,
-                        student: props.student,
-                        time_blocks: timeBlocks
-                        } 
-                    }} >
-                        <button>
-                            Order
-                        </button>
-                    </Link>
-                    )
-        }
-        else
-        {
-            button = (
-                    <Link to={{
-                        pathname: '/admin/checkin',
-                        state: {
-                        eventID: id,
-                        time_blocks: timeBlocks
-                        } 
-                    }}>
-                        <button>
-                            Checkin
-                        </button>
-                    </Link>
-                    )
-        }
-        return button
+            return(<Link to={{
+            pathname: '/place-order', 
+            state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks}}}>
+                    <button>Order</button>
+                    </Link>)
     }
 
-    const handlePublish = () => {
-        console.log('handling publish');
-        //axios call to /admin/createEven
-        let eventData = {};
-        eventData.date = date;
-        eventData.time = time;
-        eventData.name = name;
-        eventData.location = location;
-        eventData.menu = menu;
-        eventData.time_blocks = timeBlocks;
-        createEventServices.createEvent(eventData).then(() => {
-
-            props.history.push('/admin/events')
-
-        }).catch(err => {
-            console.error('Error in creating Event: ', err)
-        })
-    }
-
-
-    // The following block of code will let admins know how many orders have been placed/completed 
-    // for each event using its event ID whenever the page is manually refreshed.
-    useEffect(() => {
-        const data = {
-            event_id: id,
-            student_id: ""
-        }
-
-        // For Placed Orders
-        Axios.post('/admin/getPlacedOrders', data).then(response => {
-            setNumPlacedOrders(response.data.count)
-        }).catch(error => {
-            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
-        })
-
-        // For Completed Orders
-        Axios.post('/admin/getCompletedOrders', data).then(response => {
-            setNumCompletedOrders(response.data.count)
-        }).catch(error => {
-            console.log("Error occurred in adminEvent's useEffect to get num of placed and completed orders: ", error)
-        })
-    }, [])
-    
     return (
         <div key={id} id={id} className='adminEvent'>
             <div  className='event-div'>
 
-
             <Link to={{
-                        pathname: '/admin/edit-event',
-                        state: {
-                            edit: true,
-                            eventID: id,
-                            name: name,
-                            location: location,
-                            menu: menu,
-                            date: date,
-                            time: time,
-                            time_blocks: timeBlocks
-                        } 
-                    }} >
-                    <button className={'editIcon ' + props.editIcon}>
-                    <img src={editIcon} alt='editIcon'></img>
-                    </button>
+                pathname: '/admin/edit-event',
+                state: {
+                    edit: true,
+                    eventID: id,
+                    name: name,
+                    location: location,
+                    menu: menu,
+                    date: date,
+                    time: time,
+                    time_blocks: timeBlocks
+                    } 
+                }} >
+                <button className={'editIcon ' + props.editIcon}>
+                <img src={editIcon} alt='editIcon'></img>
+                </button>
             </Link>
 
             <div className='date'>
@@ -228,20 +146,12 @@ const AdminEvent = (props) => {
             <p className='date-header'>Location</p>
             <p className='info'>{location}</p>
             <br></br>
-            <hr></hr>
-            <br></br>
-            <p className='date-header'>Order Status</p>
-            <p className='info'>Placed Orders: {numPlacedOrders}</p>
-            <p className='info'>Completed Orders: {numCompletedOrders}</p>
-            <br></br>
-            <hr></hr>
-            <br></br>
 
             <p className='menu' onClickCapture={handleMenuClick}>
             <img src={dropDownIcon} className='dropDownIcon' alt='dropDownIcon'></img>
             Menu
             </p>
-            
+
             <div id='menu' className={showMenu}>
                 <span className='menuHeader'><u>Item</u></span> <span><u>Max Qty</u></span>
                 {
@@ -257,11 +167,9 @@ const AdminEvent = (props) => {
                 }
             </div>
 
-            <p className='text-centered checkin'>
-
+            <div className='text-centered checkin'>
                 {renderButton()}
-                
-            </p>  
+            </div>
     </div>
 
 </div>
