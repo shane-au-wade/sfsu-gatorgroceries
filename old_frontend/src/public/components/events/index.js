@@ -33,7 +33,7 @@ const Events = (props) => {
   return (
     <PageWrapper>
       <LogoHeader />
-      <Title>Events</Title>
+      <Title>Select An Upcoming Event</Title>
       <EventsWrapper>
         {events.map((event) =>  
                     <Event

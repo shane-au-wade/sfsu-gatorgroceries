@@ -115,7 +115,7 @@ const SignIn = (props) => {
         <p>Valid during Summer 2020</p>
         {/* <SubmitButton type='submit' value='Submit' className='app-button' /> */}
         <br />
-        <LoopButton redirect={handleSignIn} text={'Submit'}></LoopButton>
+        <LoopButton redirect={handleSignIn} text={'Start Order Process'}></LoopButton>
       </SignInForm>
     </PageWrapper>
   )
