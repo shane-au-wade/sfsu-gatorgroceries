@@ -35,6 +35,18 @@
   border-radius: 5px;
 }
 
+.place-order .centered-container .package-container .checkbox {
+  position: relative;
+  top: 4px;
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+}
+
+.place-order .centered-container .package-container .package-text {
+  color: red;
+}
+
 .place-order .header {
   display: -webkit-box;
   display: -ms-flexbox;

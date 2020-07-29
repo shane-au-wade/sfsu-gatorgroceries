@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom'
 import './style/event.css'
 import dropDownIcon from '../../icons/arrow_drop_down-24px.svg';
 import editIcon from '../../icons/edit-24px.svg';
-import createEventServices from '../../services/createEvent'
-import Axios from 'axios';
+// import createEventServices from '../../services/createEvent'
+// import Axios from 'axios';
 
-import {FormControlLabel, Checkbox} from '@material-ui/core'
+// import {FormControlLabel, Checkbox} from '@material-ui/core'
 
 
 /*
@@ -30,22 +30,11 @@ const AdminEvent = (props) => {
     const [name] = useState(props.name);
     const [location] = useState(props.location);
     const [menu] = useState(props.menu);
-    const [preview] = useState(props.preview)
     const [timeBlocks] = useState(props.time_blocks)
-
-    const [numPlacedOrders, setNumPlacedOrders] = useState(0)
-    const [numReadyOrders, setNumReadyOrders] = useState(0)
-    const [numCompletedOrders, setNumCompletedOrders] = useState(0)
 
     // console.log(id, '/n', date, '/n' , time, '/n', name, '/n', location, '/n', menu);
 
     const [showMenu, setShowMenu] = useState('no_menu');
-
-    const holdData = {
-        placed: numPlacedOrders,
-        ready: numReadyOrders,
-        complete: numCompletedOrders
-    }
 
     const getMonth = () => {
         let month = ''
@@ -113,87 +102,12 @@ const AdminEvent = (props) => {
 
     // renderButton will contain the logic to maintain the limits of how many times students can order from an event.
     const renderButton = () => {
-        var sum = holdData.placed + holdData.ready + holdData.complete
-
-        if(sum === 0){
             return(<Link to={{
             pathname: '/place-order', 
-            state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks, 
-                additionalOrder: false}}}>
+            state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks}}}>
                     <button>Order</button>
                     </Link>)
-        }
-        else if(sum === 1){
-            return(
-                <div>
-                    <p className='info'>You have already reached the max of 1 order for this event. You are allowed to place 1 more order for your family member.</p>
-                    <br></br>
-                    <Link to={{
-                        pathname: '/place-order', 
-                        state: { eventID: id, menu: menu, student: props.student, time_blocks: timeBlocks, 
-                            additionalOrder: true}}}>
-                                <button>Order for Family Member</button>
-                                </Link>
-                </div>
-                )
-        }
-        else if(sum > 1){
-            return(
-                <div>
-                    <p className='info'>Cannot order as you have reached the maximum amount allowed for this event.</p>
-                    <br></br>
-                    <button disabled>Cannot Order</button>
-                </div>
-            )
-        }
-        else{
-            return null
-        }
     }
-
-    const handlePublish = () => {
-        console.log('handling publish');
-        //axios call to /admin/createEven
-        let eventData = {};
-        eventData.date = date;
-        eventData.time = time;
-        eventData.name = name;
-        eventData.location = location;
-        eventData.menu = menu;
-        eventData.time_blocks = timeBlocks;
-        createEventServices.createEvent(eventData).then(() => {
-
-            props.history.push('/admin/events')
-
-        }).catch(err => {
-            console.error('Error in creating Event: ', err)
-        })
-    }
-
-    useEffect(() => {
-        const data = {
-            event_id: id,
-            student_id: props.student.student_email
-        }
-
-        // For Placed Orders
-        Axios.post('/admin/getPlacedOrders', data).then(response => {
-            setNumPlacedOrders(response.data.count)
-        }).catch(error => {
-        })
-
-        // For Ready Orders
-        Axios.post('/admin/getReadyOrders', data).then(response => {
-            setNumReadyOrders(response.data.count)
-        }).catch(error => {
-        })
-
-        // For Completed Orders
-        Axios.post('/admin/getCompletedOrders', data).then(response => {
-            setNumCompletedOrders(response.data.count)
-        }).catch(error => {
-        })
-    }, [])
 
     return (
         <div key={id} id={id} className='adminEvent'>
