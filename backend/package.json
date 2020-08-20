@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.686.0",
-    "bcrypt": "^3.0.8",
+    "bcrypt": "^5.0.0",
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
