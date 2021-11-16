@@ -17,7 +17,7 @@
     "postinstall": "sequelize db:migrate"
   },
   "dependencies": {
-    "aws-sdk": "^2.686.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt": "^3.0.8",
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
